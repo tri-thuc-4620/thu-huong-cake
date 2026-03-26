@@ -413,7 +413,16 @@
         </div>
     </footer>
 
-            <!-- Login Modal -->
+                <!-- Lightbox -->
+    <div class="lightbox" id="lightbox" onclick="if(event.target===this)closeLightbox()">
+        <button class="lightbox-close" onclick="closeLightbox()"><i class="fas fa-times"></i></button>
+        <button class="lightbox-prev" onclick="prevLightbox()"><i class="fas fa-chevron-left"></i></button>
+        <img class="lightbox-img" id="lightboxImg" src="" alt="">
+        <button class="lightbox-next" onclick="nextLightbox()"><i class="fas fa-chevron-right"></i></button>
+        <div class="lightbox-counter" id="lightboxCounter"></div>
+    </div>
+
+    <!-- Login Modal -->
     <div class="login-overlay" id="loginOverlay" onclick="if(event.target===this)closeLogin()">
         <div class="login-modal">
             <button class="login-close" onclick="closeLogin()"><i class="fas fa-times"></i></button>

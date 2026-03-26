@@ -77,6 +77,61 @@ drawerTabs.forEach(tab => {
     });
 });
 
+// Lightbox Gallery
+let lbImages = [];
+let lbIndex = 0;
+
+function openLightbox(imgSrc) {
+    // Collect all product images on page
+    lbImages = [];
+    document.querySelectorAll('.product-image img').forEach(img => {
+        if (img.src) lbImages.push(img.src);
+    });
+    lbIndex = lbImages.indexOf(imgSrc);
+    if (lbIndex === -1) { lbImages = [imgSrc]; lbIndex = 0; }
+    showLightboxImage();
+    document.getElementById('lightbox').classList.add('active');
+}
+
+function closeLightbox() {
+    document.getElementById('lightbox').classList.remove('active');
+}
+
+function showLightboxImage() {
+    const img = document.getElementById('lightboxImg');
+    img.src = lbImages[lbIndex];
+    document.getElementById('lightboxCounter').textContent = (lbIndex + 1) + ' / ' + lbImages.length;
+}
+
+function nextLightbox() {
+    lbIndex = (lbIndex + 1) % lbImages.length;
+    showLightboxImage();
+}
+
+function prevLightbox() {
+    lbIndex = (lbIndex - 1 + lbImages.length) % lbImages.length;
+    showLightboxImage();
+}
+
+// Keyboard navigation
+document.addEventListener('keydown', (e) => {
+    const lb = document.getElementById('lightbox');
+    if (!lb || !lb.classList.contains('active')) return;
+    if (e.key === 'Escape') closeLightbox();
+    if (e.key === 'ArrowRight') nextLightbox();
+    if (e.key === 'ArrowLeft') prevLightbox();
+});
+
+// Attach quick-view buttons
+document.querySelectorAll('.quick-view').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const card = btn.closest('.product-card') || btn.closest('.product-image');
+        const img = card.querySelector('img');
+        if (img) openLightbox(img.src);
+    });
+});
+
 // Login Modal
 function openLogin() {
     const overlay = document.getElementById('loginOverlay');
