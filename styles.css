@@ -401,14 +401,15 @@ img {
     font-weight: 500;
     color: var(--text);
     position: relative;
+    text-transform: uppercase;
 }
 
 .nav-links a::after {
     content: '';
     position: absolute;
     bottom: -1px;
-    left: 20px;
-    right: 20px;
+    left: 0px;
+    right: 0px;
     height: 3px;
     background: var(--primary);
     border-radius: 3px 3px 0 0;
