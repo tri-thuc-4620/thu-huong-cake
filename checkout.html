@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Thanh Toan Don Hang - Thu Huong Cake</title>
+    <title>Thanh Toán Đơn Hàng - Thu Hường Cake</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
@@ -79,7 +79,7 @@
                 <ul class="nav-links">
                     <li><a href="index.html">Trang chủ</a></li>
                     <li><a href="about.html">Về chúng tôi</a></li>
-                    <li><a href="products.html">Banh sinh nhat</a></li>
+                    <li><a href="products.html">Bánh sinh nhật</a></li>
                     <li><a href="guide.html">Hướng dẫn đặt bánh</a></li>
                     <li><a href="#">Blog</a></li>
                     <li><a href="stores.html">Cửa hàng</a></li>
@@ -102,7 +102,7 @@
             <ul class="drawer-links">
                 <li><a href="index.html">Trang chủ</a></li>
                 <li><a href="about.html">Về chúng tôi</a></li>
-                <li><a href="products.html">Banh sinh nhat</a></li>
+                <li><a href="products.html">Bánh sinh nhật</a></li>
                 <li><a href="guide.html">Hướng dẫn đặt bánh</a></li>
                 <li><a href="#">Blog</a></li>
                 <li><a href="stores.html">Danh sách cửa hàng</a></li>
@@ -123,7 +123,7 @@
     <!-- Checkout Page -->
     <section class="checkout-page">
         <div class="container">
-            <h1 class="checkout-title">Thanh toan don hang</h1>
+            <h1 class="checkout-title">Thanh toán đơn hàng</h1>
 
             <div class="checkout-layout">
 
@@ -133,45 +133,45 @@
                     <!-- Thong tin nguoi dat -->
                     <div class="checkout-card">
                         <h2 class="checkout-card-title">
-                            <i class="fas fa-user-circle"></i> Thong tin nguoi dat
+                            <i class="fas fa-user-circle"></i> Thông tin người đặt
                         </h2>
 
                         <div class="form-row">
                             <div class="form-group">
-                                <label>Ho va ten *</label>
-                                <input type="text" placeholder="Nguyen Van A">
+                                <label>Họ và tên *</label>
+                                <input type="text" placeholder="Nguyễn Văn A">
                             </div>
                             <div class="form-group">
-                                <label>So dien thoai *</label>
+                                <label>Số điện thoại *</label>
                                 <input type="tel" placeholder="0912...">
                             </div>
                         </div>
 
                         <div class="form-group">
-                            <label>Thoi gian nhan banh *</label>
+                            <label>Thời gian nhận bánh *</label>
                             <input type="datetime-local">
                         </div>
 
                         <div class="form-group">
-                            <label>Ghi chu don hang</label>
-                            <textarea rows="3" placeholder="Viet loi chuc len banh, it ngot..."></textarea>
+                            <label>Ghi chú đơn hàng</label>
+                            <textarea rows="3" placeholder="Viết lời chúc lên bánh, ít ngọt..."></textarea>
                         </div>
 
                         <label class="checkbox-label" id="giftToggle">
                             <input type="checkbox" id="giftCheckbox">
                             <i class="fas fa-gift"></i>
-                            <span>Dat banh lam qua tang</span>
+                            <span>Đặt bánh làm quà tặng</span>
                         </label>
 
                         <!-- Form nguoi nhan (an/hien) -->
                         <div class="gift-form" id="giftForm">
                             <div class="form-row">
                                 <div class="form-group">
-                                    <label>Ten nguoi nhan *</label>
-                                    <input type="text" placeholder="Nguyen Van B">
+                                    <label>Tên người nhận *</label>
+                                    <input type="text" placeholder="Nguyễn Văn B">
                                 </div>
                                 <div class="form-group">
-                                    <label>SDT nguoi nhan *</label>
+                                    <label>SĐT người nhận *</label>
                                     <input type="tel" placeholder="0987...">
                                 </div>
                             </div>
@@ -181,17 +181,17 @@
                     <!-- Hinh thuc nhan hang -->
                     <div class="checkout-card">
                         <h2 class="checkout-card-title">
-                            <i class="fas fa-map-marker-alt"></i> Hinh thuc nhan hang
+                            <i class="fas fa-map-marker-alt"></i> Hình thức nhận hàng
                         </h2>
 
                         <div class="delivery-tabs">
                             <button class="delivery-tab active" data-delivery="ship" onclick="switchDelivery('ship', this)">
                                 <i class="fas fa-shipping-fast"></i>
-                                <span>Giao tan noi</span>
+                                <span>Giao tận nơi</span>
                             </button>
                             <button class="delivery-tab" data-delivery="pickup" onclick="switchDelivery('pickup', this)">
                                 <i class="fas fa-store"></i>
-                                <span>Nhan tai cua hang</span>
+                                <span>Nhận tại cửa hàng</span>
                             </button>
                         </div>
 
@@ -199,57 +199,57 @@
                         <div class="delivery-panel active" id="delivery-ship">
                             <div class="form-row">
                                 <div class="form-group">
-                                    <label>Thanh Pho</label>
+                                    <label>Thành Phố</label>
                                     <select>
-                                        <option>Ha Noi</option>
-                                        <option>TP Ho Chi Minh</option>
+                                        <option>Hà Nội</option>
+                                        <option>TP Hồ Chí Minh</option>
                                     </select>
                                 </div>
                                 <div class="form-group">
-                                    <label>Quan/Huyen</label>
+                                    <label>Quận/Huyện</label>
                                     <select>
-                                        <option>Chon Quan/Huyen</option>
-                                        <option>Cau Giay</option>
-                                        <option>Dong Da</option>
-                                        <option>Thanh Xuan</option>
-                                        <option>Ha Dong</option>
-                                        <option>Hai Ba Trung</option>
+                                        <option>Chọn Quận/Huyện</option>
+                                        <option>Cầu Giấy</option>
+                                        <option>Đống Đa</option>
+                                        <option>Thanh Xuân</option>
+                                        <option>Hà Đông</option>
+                                        <option>Hai Bà Trưng</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="form-row">
                                 <div class="form-group">
-                                    <label>Phuong/Xa</label>
+                                    <label>Phường/Xã</label>
                                     <select>
-                                        <option>Chon Phuong/Xa</option>
+                                        <option>Chọn Phường/Xã</option>
                                     </select>
                                 </div>
                                 <div class="form-group">
-                                    <label>Địa chỉ cu the (So nha, ngo...)</label>
-                                    <input type="text" placeholder="So 10, ngach 5...">
+                                    <label>Địa chỉ cụ thể (Số nhà, ngõ...)</label>
+                                    <input type="text" placeholder="Số 10, ngách 5...">
                                 </div>
                             </div>
                         </div>
 
                         <!-- Nhan tai cua hang -->
                         <div class="delivery-panel" id="delivery-pickup">
-                            <p class="pickup-label">Chon cua hang gan ban nhat:</p>
+                            <p class="pickup-label">Chọn cửa hàng gần bạn nhất:</p>
                             <div class="store-list">
                                 <label class="store-option active">
                                     <input type="radio" name="store" checked>
-                                    <span>Co so 11a Dich Vong, Cau Giay, Ha Noi</span>
+                                    <span>Cơ sở 11a Dịch Vọng, Cầu Giấy, Hà Nội</span>
                                 </label>
                                 <label class="store-option">
                                     <input type="radio" name="store">
-                                    <span>Co so 22 Quan Nhan, Thanh Xuan, Ha Noi</span>
+                                    <span>Cơ sở 22 Quan Nhân, Thanh Xuân, Hà Nội</span>
                                 </label>
                                 <label class="store-option">
                                     <input type="radio" name="store">
-                                    <span>Co so 74 Ton That Tung, Dong Da, Ha Noi</span>
+                                    <span>Cơ sở 74 Tôn Thất Tùng, Đống Đa, Hà Nội</span>
                                 </label>
                                 <label class="store-option">
                                     <input type="radio" name="store">
-                                    <span>Co so 102 Nguyen Trai, Quan 1, TP.HCM</span>
+                                    <span>Cơ sở 102 Nguyễn Trãi, Quận 1, TP.HCM</span>
                                 </label>
                             </div>
                         </div>
@@ -260,12 +260,12 @@
                 <!-- Right: Order Summary -->
                 <div class="checkout-summary">
                     <div class="checkout-card summary-card">
-                        <h2 class="checkout-card-title">Don hang cua ban</h2>
+                        <h2 class="checkout-card-title">Đơn hàng của bạn</h2>
 
                         <!-- Cart Item -->
                         <div class="summary-item">
                             <div class="summary-item-img">
-                                <img src="image_san_pham/Banh-kem-mini-mau-hong-dep-nhat-5.jpg" alt="Banh kem">
+                                <img src="image_san_pham/Banh-kem-mini-mau-hong-dep-nhat-5.jpg" alt="Bánh kem">
                             </div>
                             <div class="summary-item-info">
                                 <h4>Bánh Kem Sinh Nhật Dâu Tây Premium</h4>
@@ -278,32 +278,32 @@
 
                         <!-- Totals -->
                         <div class="summary-row">
-                            <span>Tam tinh</span>
+                            <span>Tạm tính</span>
                             <span>450.000d</span>
                         </div>
                         <div class="summary-row">
-                            <span>Phi van chuyen</span>
+                            <span>Phí vận chuyển</span>
                             <span id="shippingFee">30.000d</span>
                         </div>
 
                         <div class="summary-divider"></div>
 
                         <div class="summary-row summary-total">
-                            <span>Tong cong</span>
+                            <span>Tổng cộng</span>
                             <span id="totalPrice">480.000d</span>
                         </div>
 
                         <!-- Phuong thuc thanh toan -->
-                        <h3 class="payment-title">Phuong thuc thanh toan</h3>
+                        <h3 class="payment-title">Phương thức thanh toán</h3>
 
                         <label class="payment-option active">
                             <input type="radio" name="payment" checked>
                             <div class="payment-info">
                                 <div class="payment-name">
                                     <i class="fas fa-university"></i>
-                                    <strong>Chuyen khoan ngan hang</strong>
+                                    <strong>Chuyển khoản ngân hàng</strong>
                                 </div>
-                                <span class="payment-desc">Quet ma QR de thanh toan nhanh chong</span>
+                                <span class="payment-desc">Quét mã QR để thanh toán nhanh chóng</span>
                             </div>
                         </label>
 
@@ -312,15 +312,15 @@
                             <div class="payment-info">
                                 <div class="payment-name">
                                     <i class="fas fa-money-bill-wave"></i>
-                                    <strong>Thanh toan khi nhan hang</strong>
+                                    <strong>Thanh toán khi nhận hàng</strong>
                                 </div>
-                                <span class="payment-desc">Thanh toan tien mat cho shipper</span>
+                                <span class="payment-desc">Thanh toán tiền mặt cho shipper</span>
                             </div>
                         </label>
 
                         <!-- Order Button -->
                         <button class="btn-checkout">
-                            Dat Hang Ngay (<span id="checkoutTotal">480.000d</span>)
+                            Đặt Hàng Ngay (<span id="checkoutTotal">480.000d</span>)
                         </button>
                     </div>
                 </div>
@@ -516,7 +516,7 @@
             const totalEl = document.getElementById('totalPrice');
             const checkoutEl = document.getElementById('checkoutTotal');
             if (type === 'pickup') {
-                feeEl.innerHTML = '<span style="color:#27ae60">Mien phi</span>';
+                feeEl.innerHTML = '<span style="color:#27ae60">Miễn phí</span>';
                 totalEl.textContent = '450.000d';
                 checkoutEl.textContent = '450.000d';
             } else {
