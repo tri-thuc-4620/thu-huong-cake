@@ -16,7 +16,7 @@
     --bg: #ffffff;
     --bg-alt: #fafafa;
     --border: #f0f0f0;
-    --shadow-sm: 0 2px 8px rgba(0,0,0,0.06);
+    --shadow-sm: 0 2px 8px rgb(0 0 0 / 12%);
     --shadow-md: 0 4px 20px rgba(0,0,0,0.08);
     --shadow-lg: 0 8px 40px rgba(0,0,0,0.12);
     --radius: 12px;
@@ -161,6 +161,12 @@ img {
     align-items: center;
     gap: 10px;
     flex-shrink: 0;
+}
+
+.logo-img {
+    height: 50px;
+    width: auto;
+    object-fit: contain;
 }
 
 .logo-icon {
