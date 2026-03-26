@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Set banh cupcake sinh nhat TPHCM - Thu Huong Cake</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- Top Bar -->
+    <div class="top-bar">
+        <div class="container">
+            <div class="top-bar-content">
+                <div class="top-bar-left">
+                    <span><i class="fas fa-phone-alt"></i> Hotline: 0962.849.989</span>
+                    <span><i class="fas fa-clock"></i> 07:00 - 23:00</span>
+                </div>
+                <div class="top-bar-right">
+                    <span><i class="fas fa-envelope"></i> donhang@thuhuongcake.vn</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <button class="hamburger" id="hamburgerBtn" aria-label="Menu">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <a href="index.html" class="logo">
+                    <div class="logo-icon">TH</div>
+                    <div class="logo-text">
+                        <span class="logo-name">THU HUONG</span>
+                        <span class="logo-sub">CAKE</span>
+                    </div>
+                </a>
+                <div class="search-bar">
+                    <input type="text" placeholder="Tim san pham banh sinh nhat...">
+                    <button><i class="fas fa-search"></i></button>
+                </div>
+                <div class="header-actions">
+                    <a href="javascript:void(0)" class="header-action" onclick="alert('Chuc nang dang nhap dang phat trien!')">
+                        <i class="fas fa-user"></i>
+                        <span>Dang nhap</span>
+                    </a>
+                    <a href="checkout.html" class="header-action cart-action">
+                        <i class="fas fa-shopping-bag"></i>
+                        <span class="cart-badge">0</span>
+                        <span>Gio hang</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation -->
+    <nav class="main-nav">
+        <div class="container">
+            <div class="nav-content">
+                <div class="nav-category-btn">
+                    <i class="fas fa-bars"></i>
+                    <span>Danh muc banh sinh nhat</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="index.html">Trang chu</a></li>
+                    <li><a href="about.html">Ve chung toi</a></li>
+                    <li><a href="products.html">Banh sinh nhat</a></li>
+                    <li><a href="about.html">Huong dan dat banh</a></li>
+                    <li><a href="blog.html" class="active">Blog</a></li>
+                    <li><a href="stores.html">Cua hang</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-overlay" id="mobileOverlay"></div>
+    <div class="mobile-drawer" id="mobileDrawer">
+        <button class="drawer-close" id="drawerClose"><i class="fas fa-times"></i></button>
+        <div class="drawer-tabs">
+            <button class="drawer-tab active" data-tab="menu">Menu</button>
+            <button class="drawer-tab" data-tab="category">Danh muc Banh</button>
+        </div>
+        <div class="drawer-panel active" id="panel-menu">
+            <ul class="drawer-links">
+                <li><a href="index.html">Trang chu</a></li>
+                <li><a href="about.html">Ve chung toi</a></li>
+                <li><a href="products.html">Banh sinh nhat</a></li>
+                <li><a href="about.html">Huong dan dat banh</a></li>
+                <li><a href="blog.html" class="active">Blog</a></li>
+                <li><a href="stores.html">Danh sach cua hang</a></li>
+            </ul>
+        </div>
+        <div class="drawer-panel" id="panel-category">
+            <ul class="drawer-links">
+                <li><a href="products.html">Banh Sinh Nhat Mini</a></li>
+                <li><a href="products.html">Banh Sinh Nhat Hoa Qua</a></li>
+                <li><a href="products.html">Banh Bong Lan Trung Muoi</a></li>
+                <li><a href="products.html">Set Banh Lam Qua</a></li>
+                <li><a href="products.html">Banh Sinh Nhat Cho Be</a></li>
+                <li><a href="products.html">Banh Kem Su Kien</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Breadcrumb -->
+    <div class="breadcrumb">
+        <div class="container">
+            <a href="index.html">Trang chu</a>
+            <i class="fas fa-chevron-right"></i>
+            <a href="blog.html">Blog</a>
+            <i class="fas fa-chevron-right"></i>
+            <span>Set banh cupcake sinh nhat TPHCM</span>
+        </div>
+    </div>
+
+    <!-- Blog Detail Page -->
+    <section class="blog-detail-page">
+        <div class="container">
+            <div class="blog-detail-layout">
+
+                <!-- Sidebar -->
+                <aside class="catalog-sidebar">
+                    <div class="sidebar-box">
+                        <h3 class="sidebar-title">Danh Muc San Pham</h3>
+                        <ul class="sidebar-categories">
+                            <li><a href="products.html"><i class="fas fa-chevron-right"></i> Banh Sinh Nhat Mini</a></li>
+                            <li><a href="products.html"><i class="fas fa-chevron-right"></i> Banh Sinh Nhat Hoa Qua</a></li>
+                            <li><a href="products.html"><i class="fas fa-chevron-right"></i> Banh Bong Lan Trung Muoi</a></li>
+                            <li><a href="products.html"><i class="fas fa-chevron-right"></i> Set Banh Lam Qua</a></li>
+                            <li><a href="products.html"><i class="fas fa-chevron-right"></i> Banh Dac Biet ( Signature Cakes )</a></li>
+                            <li><a href="products.html"><i class="fas fa-chevron-right"></i> Banh Sinh Nhat Cho Be</a></li>
+                            <li><a href="products.html"><i class="fas fa-chevron-right"></i> Banh Kem Su Kien</a></li>
+                            <li><a href="products.html"><i class="fas fa-chevron-right"></i> Banh Sinh Nhat Tang</a></li>
+                            <li><a href="products.html"><i class="fas fa-chevron-right"></i> Banh Sinh Nhat Hinh Trai Tim</a></li>
+                            <li><a href="products.html"><i class="fas fa-chevron-right"></i> Banh Sinh Nhat Hoa Kem</a></li>
+                            <li><a href="products.html"><i class="fas fa-chevron-right"></i> Banh Kem Ve Hinh</a></li>
+                            <li><a href="products.html"><i class="fas fa-chevron-right"></i> Banh Kem Tao Hinh</a></li>
+                            <li><a href="products.html"><i class="fas fa-chevron-right"></i> Banh An Nhanh</a></li>
+                            <li><a href="products.html"><i class="fas fa-chevron-right"></i> Banh Sinh Nhat</a></li>
+                            <li><a href="products.html"><i class="fas fa-chevron-right"></i> Banh Kem Ngay Le</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-box sidebar-contact">
+                        <h3 class="sidebar-title">Lien He Dat Banh</h3>
+                        <ul class="sidebar-phones">
+                            <li><span class="phone-label">Co So 1</span> <a href="tel:0982811096">0982811096</a></li>
+                            <li><span class="phone-label">Co So 2</span> <a href="tel:0965688385">0965688385</a></li>
+                            <li><span class="phone-label">Co So 3</span> <a href="tel:0984438898">0984438898</a></li>
+                            <li><span class="phone-label">Co So 4</span> <a href="tel:0988064164">0988064164</a></li>
+                            <li><span class="phone-label">Co So 5</span> <a href="tel:0962711371">0962711371</a></li>
+                            <li><span class="phone-label">Co So 6</span> <a href="tel:0988504514">0988504514</a></li>
+                            <li><span class="phone-label">Co So 7</span> <a href="tel:0963910920">0963910920</a></li>
+                            <li><span class="phone-label">Co So 8</span> <a href="tel:0862089099">0862089099</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-box sidebar-search">
+                        <div class="sidebar-search-input">
+                            <input type="text" placeholder="Tim san pham...">
+                            <button><i class="fas fa-search"></i></button>
+                        </div>
+                    </div>
+
+                    <div class="sidebar-box">
+                        <p class="sidebar-empty">San pham vua xem</p>
+                        <p class="sidebar-empty">Khong co san pham xem gan day</p>
+                        <h3 class="sidebar-title">San Pham Vua Xem</h3>
+                    </div>
+                </aside>
+
+                <!-- Main Content -->
+                <article class="blog-detail-main">
+                    <!-- Title -->
+                    <h1 class="blog-detail-title">Set banh cupcake sinh nhat TPHCM</h1>
+
+                    <!-- Author & Meta -->
+                    <div class="blog-detail-author">
+                        <div class="author-left">
+                            <div class="author-avatar">
+                                <i class="fas fa-user"></i>
+                            </div>
+                            <div>
+                                <span class="author-label">Tac gia:</span>
+                                <strong>Do Phuong</strong><br>
+                                <span class="author-date">Cap nhat: 15:15 - 03/08/2025</span>
+                            </div>
+                        </div>
+                        <div class="author-right">
+                            <span>Danh gia bai dang</span>
+                            <div class="stars">
+                                <i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
+                            </div>
+                            <small>Rate this post</small>
+                        </div>
+                    </div>
+
+                    <!-- Featured Image -->
+                    <div class="blog-detail-img">
+                        <img src="image_san_pham/Banh-kem-viet-quat-tuoi-mat-7.webp" alt="Set banh cupcake sinh nhat TPHCM">
+                        <p class="img-caption">Tiem banh cupcake sinh nhat TPHCM ngon</p>
+                    </div>
+
+                    <!-- Table of Contents -->
+                    <div class="blog-toc">
+                        <div class="toc-header">
+                            <i class="fas fa-list"></i> <strong>Contents</strong>
+                        </div>
+                        <ol class="toc-list">
+                            <li><a href="#mau-set">Mau set banh cupcake sinh nhat TPHCM</a></li>
+                            <li><a href="#bang-gia">Bang gia banh cupcake sinh nhat TPHCM</a></li>
+                            <li><a href="#huong-dan">Huong dan dat banh cupcake TPHCM</a>
+                                <ol>
+                                    <li><a href="#online">Huong dan dat banh online</a></li>
+                                    <li><a href="#truc-tiep">Huong dan dat banh truc tiep</a></li>
+                                </ol>
+                            </li>
+                            <li><a href="#thu-huong">Thu Huong Cake - Tiem banh cupcake ngon tai HCM</a></li>
+                            <li><a href="#phan-hoi">Phan hoi cua khach hang ve dia chi ban banh Cupcake o TPHCM Thu Huong Cake</a></li>
+                        </ol>
+                    </div>
+
+                    <!-- Article Content -->
+                    <div class="blog-detail-content">
+                        <h2 id="mau-set">Mau set banh cupcake sinh nhat TPHCM</h2>
+                        <p>Tai <strong>Thu Huong Cake</strong>, cac <strong>set banh cupcake sinh nhat TPHCM</strong> luon duoc thiet ke da dang tu phong cach de thuong, pastel nhe nhang cho den nhung mau banh sang trong, hien dai phu hop voi moi do tuoi. Du la sinh nhat ban be, nguoi yeu hay nhung bua tiec gia dinh am cung, ban deu co the de dang chon duoc mot set banh sinh nhat cupcake TPHCM that ung y.</p>
+                        <p>Dac biet, tiem luon san sang thiet ke theo yeu cau rieng, tu mau sac, chu de cho den cach trang tri tung chiec <strong>banh cupcake sinh nhat TPHCM</strong> de dam bao set banh cua ban luon doc nhat, khong "dung hang" voi ai.</p>
+
+                        <div class="blog-detail-img">
+                            <img src="image_san_pham/Banh-kem-mini-mau-hong-dep-nhat-5.jpg" alt="Set banh cupcake tone xanh la">
+                            <p class="img-caption">Set banh cupcake tone xanh la</p>
+                        </div>
+
+                        <h2 id="bang-gia">Bang gia banh cupcake sinh nhat TPHCM</h2>
+                        <p>Bang gia cac set banh cupcake tai Thu Huong Cake rat da dang, phu hop voi nhieu phan khuc khach hang. Gia dao dong tu 90.000d den 500.000d tuy theo so luong va kieu trang tri.</p>
+
+                        <div class="blog-detail-img">
+                            <img src="image_san_pham/Banh-bong-lan-kem-trung.jpg" alt="Banh cupcake da dang">
+                        </div>
+
+                        <h2 id="huong-dan">Huong dan dat banh cupcake TPHCM</h2>
+                        <h3 id="online">Huong dan dat banh online</h3>
+                        <p>Khach hang co the dat banh truc tiep tren website thuhuongcake.vn hoac qua cac kenh mang xa hoi cua Thu Huong Cake. Doi ngu tu van se ho tro ban chon mau banh, kich thuoc va thoi gian giao hang phu hop.</p>
+
+                        <h3 id="truc-tiep">Huong dan dat banh truc tiep</h3>
+                        <p>Quy khach co the den truc tiep bat ky co so nao cua Thu Huong Cake de xem mau banh va dat hang. Nhan vien tai cua hang se tu van tan tinh va ho tro ban chon duoc set banh cupcake ung y nhat.</p>
+
+                        <h2 id="thu-huong">Thu Huong Cake - Tiem banh cupcake ngon tai HCM</h2>
+                        <p>Neu ban dang tim kiem mot <strong>set banh cupcake sinh nhat TPHCM</strong> de lam diem nhan cho bua tiec, hay don gian chi muon danh tang nguoi than mot dieu bat ngo nho xinh, <strong>Thu Huong Cake</strong> chinh la dia chi dang de ban tin tuong. Hay de nhung chiec banh de thuong, ngot ngao tu Thu Huong thay ban gui loi chuc yeu thuong trong ngay dac biet nhe!</p>
+
+                        <h2 id="phan-hoi">Phan hoi cua khach hang</h2>
+
+                        <div class="blog-detail-img">
+                            <img src="image_san_pham/Banh-bong-lan-pho-mai-cah-bong.jpg" alt="Feedback khach hang">
+                            <p class="img-caption">Feedback khach hang</p>
+                        </div>
+                    </div>
+
+                    <!-- Share -->
+                    <div class="blog-share">
+                        <a href="#" class="share-btn share-fb" title="Chia se tren Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="share-btn share-x" title="Chia se tren X"><i class="fab fa-x-twitter"></i></a>
+                        <a href="#" class="share-btn share-email" title="Gui email"><i class="fas fa-envelope"></i></a>
+                        <a href="#" class="share-btn share-pinterest" title="Pin"><i class="fab fa-pinterest-p"></i></a>
+                        <a href="#" class="share-btn share-linkedin" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="share-btn share-telegram" title="Telegram"><i class="fab fa-telegram-plane"></i></a>
+                    </div>
+
+                    <!-- Author Box -->
+                    <div class="author-box">
+                        <div class="author-box-avatar">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="author-box-info">
+                            <h4>Do Phuong</h4>
+                            <p>Xin chao, toi la Do Phuong - mot nguoi dam me sang tao noi dung huu ich ve banh kem, banh sinh nhat cho ban doc tren website Thu Huong Cake. Su co gang tim toi va hoc hoi trong mot thoi gian dai, toi da tich luy duoc mot luong kien thuc sau rong ve cach lam banh, nguyen lieu va cac xu huong moi trong nganh banh sinh nhat.</p>
+                            <a href="#" class="author-link">Xem Tac gia <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+
+                    <!-- Related Posts -->
+                    <div class="related-posts">
+                        <h2 class="related-posts-title">Bai Viet Lien Quan</h2>
+                        <div class="related-posts-grid">
+                            <a href="blog-detail.html" class="related-post-card">
+                                <div class="related-post-img">
+                                    <img src="image_san_pham/Banh-bong-lan-trung-muoi-truyen-thong-5.jpg" alt="Tiem banh Tiramisu TPHCM">
+                                </div>
+                                <h4>Tiem banh Tiramisu TPHCM</h4>
+                            </a>
+                            <a href="blog-detail.html" class="related-post-card">
+                                <div class="related-post-img">
+                                    <img src="image_san_pham/download.jpg" alt="Tiem banh sinh nhat quan 8">
+                                </div>
+                                <h4>Tiem banh sinh nhat quan 8</h4>
+                            </a>
+                            <a href="blog-detail.html" class="related-post-card">
+                                <div class="related-post-img">
+                                    <img src="image_san_pham/download.webp" alt="Tiem banh sinh nhat HCM">
+                                </div>
+                                <h4>Tiem banh sinh nhat HCM</h4>
+                            </a>
+                        </div>
+                    </div>
+
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="footer-logo">
+                        <div class="logo-icon">TH</div>
+                        <div class="logo-text">
+                            <span class="logo-name">THU HUONG</span>
+                            <span class="logo-sub">CAKE</span>
+                        </div>
+                    </div>
+                    <ul class="footer-links">
+                        <li><a href="about.html">Gioi thieu</a></li>
+                        <li><a href="about.html">Lien he</a></li>
+                        <li><a href="stores.html">Danh sach cac cua hang</a></li>
+                        <li><a href="about.html">Cau chuyen ve Thu Huong Cake</a></li>
+                        <li><a href="#">Tuyen dung</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Chinh Sach Chung</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">Chinh sach thanh toan</a></li>
+                        <li><a href="#">Chinh sach giao hang</a></li>
+                        <li><a href="#">Chinh sach doi tra va hoan tien</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Ho Tro Khach Hang</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">Hoi dap - FAQs</a></li>
+                        <li><a href="#">Huong dan thanh toan</a></li>
+                        <li><a href="#">Dat hang va thanh toan</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Chi Nhanh Ha Noi</h4>
+                    <p>So 72 Ngo 235 Pho Yen Hoa, Q. Cau Giay, Ha Noi.</p>
+                    <p><strong>Hotline:</strong> 0962.849.989</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>Cong ty TNHH San Xuat va Thuong Mai Thu Huong &bull; DKKD so 0111010237</p>
+            </div>
+        </div>
+    </footer>
+
+    <button class="back-to-top" id="backToTop"><i class="fas fa-chevron-up"></i></button>
+    <script src="script.js"></script>
+</body>
+</html>

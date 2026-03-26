@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thanh Toan Don Hang - Thu Huong Cake</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- Top Bar -->
+    <div class="top-bar">
+        <div class="container">
+            <div class="top-bar-content">
+                <div class="top-bar-left">
+                    <span><i class="fas fa-phone-alt"></i> Hotline: 0962.849.989</span>
+                    <span><i class="fas fa-clock"></i> 07:00 - 23:00</span>
+                </div>
+                <div class="top-bar-right">
+                    <span><i class="fas fa-envelope"></i> donhang@thuhuongcake.vn</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <button class="hamburger" id="hamburgerBtn" aria-label="Menu">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <a href="index.html" class="logo">
+                    <div class="logo-icon">TH</div>
+                    <div class="logo-text">
+                        <span class="logo-name">THU HUONG</span>
+                        <span class="logo-sub">CAKE</span>
+                    </div>
+                </a>
+                <div class="search-bar">
+                    <input type="text" placeholder="Tim san pham banh sinh nhat...">
+                    <button><i class="fas fa-search"></i></button>
+                </div>
+                <div class="header-actions">
+                    <a href="javascript:void(0)" class="header-action" onclick="alert('Chuc nang dang nhap dang phat trien!')">
+                        <i class="fas fa-user"></i>
+                        <span>Dang nhap</span>
+                    </a>
+                    <a href="checkout.html" class="header-action cart-action">
+                        <i class="fas fa-shopping-bag"></i>
+                        <span class="cart-badge">1</span>
+                        <span>Gio hang</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation -->
+    <nav class="main-nav">
+        <div class="container">
+            <div class="nav-content">
+                <div class="nav-category-btn">
+                    <i class="fas fa-bars"></i>
+                    <span>Danh muc banh sinh nhat</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="index.html">Trang chu</a></li>
+                    <li><a href="about.html">Ve chung toi</a></li>
+                    <li><a href="products.html">Banh sinh nhat</a></li>
+                    <li><a href="about.html">Huong dan dat banh</a></li>
+                    <li><a href="#">Blog</a></li>
+                    <li><a href="stores.html">Cua hang</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-overlay" id="mobileOverlay"></div>
+    <div class="mobile-drawer" id="mobileDrawer">
+        <button class="drawer-close" id="drawerClose"><i class="fas fa-times"></i></button>
+        <div class="drawer-tabs">
+            <button class="drawer-tab active" data-tab="menu">Menu</button>
+            <button class="drawer-tab" data-tab="category">Danh muc Banh</button>
+        </div>
+        <div class="drawer-panel active" id="panel-menu">
+            <ul class="drawer-links">
+                <li><a href="index.html">Trang chu</a></li>
+                <li><a href="about.html">Ve chung toi</a></li>
+                <li><a href="products.html">Banh sinh nhat</a></li>
+                <li><a href="about.html">Huong dan dat banh</a></li>
+                <li><a href="#">Blog</a></li>
+                <li><a href="stores.html">Danh sach cua hang</a></li>
+            </ul>
+        </div>
+        <div class="drawer-panel" id="panel-category">
+            <ul class="drawer-links">
+                <li><a href="products.html">Banh Sinh Nhat Mini</a></li>
+                <li><a href="products.html">Banh Sinh Nhat Hoa Qua</a></li>
+                <li><a href="products.html">Banh Bong Lan Trung Muoi</a></li>
+                <li><a href="products.html">Set Banh Lam Qua</a></li>
+                <li><a href="products.html">Banh Sinh Nhat Cho Be</a></li>
+                <li><a href="products.html">Banh Kem Su Kien</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Checkout Page -->
+    <section class="checkout-page">
+        <div class="container">
+            <h1 class="checkout-title">Thanh toan don hang</h1>
+
+            <div class="checkout-layout">
+
+                <!-- Left: Form -->
+                <div class="checkout-form">
+
+                    <!-- Thong tin nguoi dat -->
+                    <div class="checkout-card">
+                        <h2 class="checkout-card-title">
+                            <i class="fas fa-user-circle"></i> Thong tin nguoi dat
+                        </h2>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Ho va ten *</label>
+                                <input type="text" placeholder="Nguyen Van A">
+                            </div>
+                            <div class="form-group">
+                                <label>So dien thoai *</label>
+                                <input type="tel" placeholder="0912...">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Thoi gian nhan banh *</label>
+                            <input type="datetime-local">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Ghi chu don hang</label>
+                            <textarea rows="3" placeholder="Viet loi chuc len banh, it ngot..."></textarea>
+                        </div>
+
+                        <label class="checkbox-label" id="giftToggle">
+                            <input type="checkbox" id="giftCheckbox">
+                            <i class="fas fa-gift"></i>
+                            <span>Dat banh lam qua tang</span>
+                        </label>
+
+                        <!-- Form nguoi nhan (an/hien) -->
+                        <div class="gift-form" id="giftForm">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>Ten nguoi nhan *</label>
+                                    <input type="text" placeholder="Nguyen Van B">
+                                </div>
+                                <div class="form-group">
+                                    <label>SDT nguoi nhan *</label>
+                                    <input type="tel" placeholder="0987...">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Hinh thuc nhan hang -->
+                    <div class="checkout-card">
+                        <h2 class="checkout-card-title">
+                            <i class="fas fa-map-marker-alt"></i> Hinh thuc nhan hang
+                        </h2>
+
+                        <div class="delivery-tabs">
+                            <button class="delivery-tab active" data-delivery="ship" onclick="switchDelivery('ship', this)">
+                                <i class="fas fa-shipping-fast"></i>
+                                <span>Giao tan noi</span>
+                            </button>
+                            <button class="delivery-tab" data-delivery="pickup" onclick="switchDelivery('pickup', this)">
+                                <i class="fas fa-store"></i>
+                                <span>Nhan tai cua hang</span>
+                            </button>
+                        </div>
+
+                        <!-- Giao tan noi -->
+                        <div class="delivery-panel active" id="delivery-ship">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>Thanh Pho</label>
+                                    <select>
+                                        <option>Ha Noi</option>
+                                        <option>TP Ho Chi Minh</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Quan/Huyen</label>
+                                    <select>
+                                        <option>Chon Quan/Huyen</option>
+                                        <option>Cau Giay</option>
+                                        <option>Dong Da</option>
+                                        <option>Thanh Xuan</option>
+                                        <option>Ha Dong</option>
+                                        <option>Hai Ba Trung</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>Phuong/Xa</label>
+                                    <select>
+                                        <option>Chon Phuong/Xa</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Dia chi cu the (So nha, ngo...)</label>
+                                    <input type="text" placeholder="So 10, ngach 5...">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Nhan tai cua hang -->
+                        <div class="delivery-panel" id="delivery-pickup">
+                            <p class="pickup-label">Chon cua hang gan ban nhat:</p>
+                            <div class="store-list">
+                                <label class="store-option active">
+                                    <input type="radio" name="store" checked>
+                                    <span>Co so 11a Dich Vong, Cau Giay, Ha Noi</span>
+                                </label>
+                                <label class="store-option">
+                                    <input type="radio" name="store">
+                                    <span>Co so 22 Quan Nhan, Thanh Xuan, Ha Noi</span>
+                                </label>
+                                <label class="store-option">
+                                    <input type="radio" name="store">
+                                    <span>Co so 74 Ton That Tung, Dong Da, Ha Noi</span>
+                                </label>
+                                <label class="store-option">
+                                    <input type="radio" name="store">
+                                    <span>Co so 102 Nguyen Trai, Quan 1, TP.HCM</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Right: Order Summary -->
+                <div class="checkout-summary">
+                    <div class="checkout-card summary-card">
+                        <h2 class="checkout-card-title">Don hang cua ban</h2>
+
+                        <!-- Cart Item -->
+                        <div class="summary-item">
+                            <div class="summary-item-img">
+                                <img src="image_san_pham/Banh-kem-mini-mau-hong-dep-nhat-5.jpg" alt="Banh kem">
+                            </div>
+                            <div class="summary-item-info">
+                                <h4>Banh Kem Sinh Nhat Dau Tay Premium</h4>
+                                <span class="summary-item-qty">x1</span>
+                            </div>
+                            <span class="summary-item-price">450.000d</span>
+                        </div>
+
+                        <div class="summary-divider"></div>
+
+                        <!-- Totals -->
+                        <div class="summary-row">
+                            <span>Tam tinh</span>
+                            <span>450.000d</span>
+                        </div>
+                        <div class="summary-row">
+                            <span>Phi van chuyen</span>
+                            <span id="shippingFee">30.000d</span>
+                        </div>
+
+                        <div class="summary-divider"></div>
+
+                        <div class="summary-row summary-total">
+                            <span>Tong cong</span>
+                            <span id="totalPrice">480.000d</span>
+                        </div>
+
+                        <!-- Phuong thuc thanh toan -->
+                        <h3 class="payment-title">Phuong thuc thanh toan</h3>
+
+                        <label class="payment-option active">
+                            <input type="radio" name="payment" checked>
+                            <div class="payment-info">
+                                <div class="payment-name">
+                                    <i class="fas fa-university"></i>
+                                    <strong>Chuyen khoan ngan hang</strong>
+                                </div>
+                                <span class="payment-desc">Quet ma QR de thanh toan nhanh chong</span>
+                            </div>
+                        </label>
+
+                        <label class="payment-option">
+                            <input type="radio" name="payment">
+                            <div class="payment-info">
+                                <div class="payment-name">
+                                    <i class="fas fa-money-bill-wave"></i>
+                                    <strong>Thanh toan khi nhan hang</strong>
+                                </div>
+                                <span class="payment-desc">Thanh toan tien mat cho shipper</span>
+                            </div>
+                        </label>
+
+                        <!-- Order Button -->
+                        <button class="btn-checkout">
+                            Dat Hang Ngay (<span id="checkoutTotal">480.000d</span>)
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="footer-logo">
+                        <div class="logo-icon">TH</div>
+                        <div class="logo-text">
+                            <span class="logo-name">THU HUONG</span>
+                            <span class="logo-sub">CAKE</span>
+                        </div>
+                    </div>
+                    <ul class="footer-links">
+                        <li><a href="about.html">Gioi thieu</a></li>
+                        <li><a href="about.html">Lien he</a></li>
+                        <li><a href="stores.html">Danh sach cac cua hang</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Chinh Sach Chung</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">Chinh sach thanh toan</a></li>
+                        <li><a href="#">Chinh sach giao hang</a></li>
+                        <li><a href="#">Chinh sach doi tra va hoan tien</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Ho Tro Khach Hang</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">Hoi dap - FAQs</a></li>
+                        <li><a href="#">Huong dan thanh toan</a></li>
+                        <li><a href="#">Dat hang va thanh toan</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Chi Nhanh Ha Noi</h4>
+                    <p>So 72 Ngo 235 Pho Yen Hoa, Q. Cau Giay, Ha Noi.</p>
+                    <p><strong>Hotline:</strong> 0962.849.989</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>Cong ty TNHH San Xuat va Thuong Mai Thu Huong &bull; DKKD so 0111010237</p>
+            </div>
+        </div>
+    </footer>
+
+    <button class="back-to-top" id="backToTop"><i class="fas fa-chevron-up"></i></button>
+
+    <script src="script.js"></script>
+    <script>
+        // Switch delivery method
+        function switchDelivery(type, btn) {
+            document.querySelectorAll('.delivery-tab').forEach(t => t.classList.remove('active'));
+            btn.classList.add('active');
+            document.querySelectorAll('.delivery-panel').forEach(p => p.classList.remove('active'));
+            document.getElementById('delivery-' + type).classList.add('active');
+
+            // Update shipping fee
+            const feeEl = document.getElementById('shippingFee');
+            const totalEl = document.getElementById('totalPrice');
+            const checkoutEl = document.getElementById('checkoutTotal');
+            if (type === 'pickup') {
+                feeEl.innerHTML = '<span style="color:#27ae60">Mien phi</span>';
+                totalEl.textContent = '450.000d';
+                checkoutEl.textContent = '450.000d';
+            } else {
+                feeEl.textContent = '30.000d';
+                totalEl.textContent = '480.000d';
+                checkoutEl.textContent = '480.000d';
+            }
+        }
+
+        // Payment option toggle
+        document.querySelectorAll('.payment-option').forEach(opt => {
+            opt.addEventListener('click', () => {
+                document.querySelectorAll('.payment-option').forEach(o => o.classList.remove('active'));
+                opt.classList.add('active');
+                opt.querySelector('input').checked = true;
+            });
+        });
+
+        // Store option toggle
+        document.querySelectorAll('.store-option').forEach(opt => {
+            opt.addEventListener('click', () => {
+                document.querySelectorAll('.store-option').forEach(o => o.classList.remove('active'));
+                opt.classList.add('active');
+            });
+        });
+
+        // Gift form toggle
+        document.getElementById('giftCheckbox').addEventListener('change', function() {
+            document.getElementById('giftForm').classList.toggle('active', this.checked);
+        });
+    </script>
+</body>
+</html>

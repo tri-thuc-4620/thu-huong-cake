@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Danh Sach Cua Hang - Thu Huong Cake</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- Top Bar -->
+    <div class="top-bar">
+        <div class="container">
+            <div class="top-bar-content">
+                <div class="top-bar-left">
+                    <span><i class="fas fa-phone-alt"></i> Hotline: 0962.849.989</span>
+                    <span><i class="fas fa-clock"></i> 07:00 - 23:00</span>
+                </div>
+                <div class="top-bar-right">
+                    <span><i class="fas fa-envelope"></i> donhang@thuhuongcake.vn</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <button class="hamburger" id="hamburgerBtn" aria-label="Menu">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <a href="index.html" class="logo">
+                    <div class="logo-icon">TH</div>
+                    <div class="logo-text">
+                        <span class="logo-name">THU HUONG</span>
+                        <span class="logo-sub">CAKE</span>
+                    </div>
+                </a>
+                <div class="search-bar">
+                    <input type="text" placeholder="Tim san pham banh sinh nhat...">
+                    <button><i class="fas fa-search"></i></button>
+                </div>
+                <div class="header-actions">
+                    <a href="javascript:void(0)" class="header-action" onclick="alert('Chuc nang dang nhap dang phat trien!')">
+                        <i class="fas fa-user"></i>
+                        <span>Dang nhap</span>
+                    </a>
+                    <a href="checkout.html" class="header-action cart-action">
+                        <i class="fas fa-shopping-bag"></i>
+                        <span class="cart-badge">0</span>
+                        <span>Gio hang</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation -->
+    <nav class="main-nav">
+        <div class="container">
+            <div class="nav-content">
+                <div class="nav-category-btn">
+                    <i class="fas fa-bars"></i>
+                    <span>Danh muc banh sinh nhat</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="index.html">Trang chu</a></li>
+                    <li><a href="about.html">Ve chung toi</a></li>
+                    <li><a href="products.html">Banh sinh nhat</a></li>
+                    <li><a href="about.html">Huong dan dat banh</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                    <li><a href="stores.html" class="active">Cua hang</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-overlay" id="mobileOverlay"></div>
+    <div class="mobile-drawer" id="mobileDrawer">
+        <button class="drawer-close" id="drawerClose"><i class="fas fa-times"></i></button>
+        <div class="drawer-tabs">
+            <button class="drawer-tab active" data-tab="menu">Menu</button>
+            <button class="drawer-tab" data-tab="category">Danh muc Banh</button>
+        </div>
+        <div class="drawer-panel active" id="panel-menu">
+            <ul class="drawer-links">
+                <li><a href="index.html">Trang chu</a></li>
+                <li><a href="about.html">Ve chung toi</a></li>
+                <li><a href="products.html">Banh sinh nhat</a></li>
+                <li><a href="about.html">Huong dan dat banh</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="stores.html" class="active">Danh sach cua hang</a></li>
+            </ul>
+        </div>
+        <div class="drawer-panel" id="panel-category">
+            <ul class="drawer-links">
+                <li><a href="products.html">Banh Sinh Nhat Mini</a></li>
+                <li><a href="products.html">Banh Sinh Nhat Hoa Qua</a></li>
+                <li><a href="products.html">Banh Bong Lan Trung Muoi</a></li>
+                <li><a href="products.html">Set Banh Lam Qua</a></li>
+                <li><a href="products.html">Banh Sinh Nhat Cho Be</a></li>
+                <li><a href="products.html">Banh Kem Su Kien</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Breadcrumb -->
+    <div class="breadcrumb">
+        <div class="container">
+            <a href="index.html">Trang chu</a>
+            <i class="fas fa-chevron-right"></i>
+            <span>Danh sach cua hang Thu Huong Cake</span>
+        </div>
+    </div>
+
+    <!-- Store Locator -->
+    <section class="stores-page">
+        <div class="container">
+            <div class="stores-layout">
+
+                <!-- Left: Store List -->
+                <div class="stores-sidebar">
+                    <!-- Filter -->
+                    <div class="stores-filter">
+                        <label>Tat ca khu vuc</label>
+                        <select id="storeFilter">
+                            <option>Tat ca</option>
+                            <option>Ha Noi</option>
+                            <option>TP Ho Chi Minh</option>
+                        </select>
+                    </div>
+
+                    <div class="stores-search">
+                        <input type="text" placeholder="Tim kiem cua hang..." id="storeSearch">
+                    </div>
+
+                    <!-- Store Cards -->
+                    <div class="stores-list" id="storesList">
+                        <div class="store-card active" onclick="selectStore(this)">
+                            <h3>CS1: 11A Pho Dich Vong</h3>
+                            <p><i class="fas fa-map-marker-alt"></i> 11A Dich Vong, Cau Giay, Ha Noi</p>
+                            <p class="store-phone">Dien thoai:<br><a href="tel:0982811096">0982.811.096</a></p>
+                        </div>
+
+                        <div class="store-card" onclick="selectStore(this)">
+                            <h3>CS2: 22 Dich Vong</h3>
+                            <p><i class="fas fa-map-marker-alt"></i> 22 Dich Vong, Cau Giay, Ha Noi</p>
+                            <p class="store-phone">Dien thoai:<br><a href="tel:0982811096">0982.811.096</a></p>
+                        </div>
+
+                        <div class="store-card" onclick="selectStore(this)">
+                            <h3>CS3: 22 Quan Nhan</h3>
+                            <p><i class="fas fa-map-marker-alt"></i> 22 Quan Nhan, Trung Hoa, Cau Giay, Ha Noi</p>
+                            <p class="store-phone">Dien thoai:<br><a href="tel:0984438898">0984.438.898</a></p>
+                        </div>
+
+                        <div class="store-card" onclick="selectStore(this)">
+                            <h3>CS4: 72 Chinh Kinh</h3>
+                            <p><i class="fas fa-map-marker-alt"></i> 72 Chinh Kinh, Thanh Xuan, Ha Noi</p>
+                            <p class="store-phone">Dien thoai:<br><a href="tel:0988064164">0988.064.164</a></p>
+                        </div>
+
+                        <div class="store-card" onclick="selectStore(this)">
+                            <h3>CS5: 74 Ton That Tung</h3>
+                            <p><i class="fas fa-map-marker-alt"></i> 74 Ton That Tung, Khuong Thuong, Dong Da, Ha Noi</p>
+                            <p class="store-phone">Dien thoai:<br><a href="tel:0962711371">0962.711.371</a></p>
+                        </div>
+
+                        <div class="store-card" onclick="selectStore(this)">
+                            <h3>CS6: 898 Thuy Khue</h3>
+                            <p><i class="fas fa-map-marker-alt"></i> 898 Thuy Khue, Tay Ho, Ha Noi</p>
+                            <p class="store-phone">Dien thoai:<br><a href="tel:0988504514">0988.504.514</a></p>
+                        </div>
+
+                        <div class="store-card" onclick="selectStore(this)">
+                            <h3>CS7: 67 Truong Dinh</h3>
+                            <p><i class="fas fa-map-marker-alt"></i> 67 Truong Dinh, Hai Ba Trung, Ha Noi</p>
+                            <p class="store-phone">Dien thoai:<br><a href="tel:0963910920">0963.910.920</a></p>
+                        </div>
+
+                        <div class="store-card" onclick="selectStore(this)">
+                            <h3>CS8: 801 Hau Giang</h3>
+                            <p><i class="fas fa-map-marker-alt"></i> 801 Duong Hau Giang, Phuong 11, Quan 6, TP.HCM</p>
+                            <p class="store-phone">Dien thoai:<br><a href="tel:0862089099">0862.089.099</a></p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right: Map -->
+                <div class="stores-map">
+                    <div class="map-placeholder">
+                        <i class="fas fa-map-marked-alt"></i>
+                        <h3>Thu Huong Cake</h3>
+                        <p>11 P. Dich Vong, Dich Vong, Cau Giay, Ha Noi, Vietnam</p>
+                        <span>4.9 <i class="fas fa-star"></i> (630)</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="footer-logo">
+                        <div class="logo-icon">TH</div>
+                        <div class="logo-text">
+                            <span class="logo-name">THU HUONG</span>
+                            <span class="logo-sub">CAKE</span>
+                        </div>
+                    </div>
+                    <ul class="footer-links">
+                        <li><a href="about.html">Gioi thieu</a></li>
+                        <li><a href="about.html">Lien he</a></li>
+                        <li><a href="stores.html">Danh sach cac cua hang</a></li>
+                        <li><a href="about.html">Cau chuyen ve Thu Huong Cake</a></li>
+                        <li><a href="#">Tuyen dung</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Chinh Sach Chung</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">Chinh sach thanh toan</a></li>
+                        <li><a href="#">Chinh sach giao hang</a></li>
+                        <li><a href="#">Chinh sach doi tra va hoan tien</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Ho Tro Khach Hang</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">Hoi dap - FAQs</a></li>
+                        <li><a href="#">Huong dan thanh toan</a></li>
+                        <li><a href="#">Dat hang va thanh toan</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Chi Nhanh Ha Noi</h4>
+                    <p>So 72 Ngo 235 Pho Yen Hoa, Q. Cau Giay, Ha Noi.</p>
+                    <p><strong>Hotline:</strong> 0962.849.989</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>Cong ty TNHH San Xuat va Thuong Mai Thu Huong &bull; DKKD so 0111010237</p>
+            </div>
+        </div>
+    </footer>
+
+    <button class="back-to-top" id="backToTop"><i class="fas fa-chevron-up"></i></button>
+    <script src="script.js"></script>
+    <script>
+        function selectStore(card) {
+            document.querySelectorAll('.store-card').forEach(c => c.classList.remove('active'));
+            card.classList.add('active');
+        }
+
+        // Search filter
+        document.getElementById('storeSearch').addEventListener('input', function() {
+            const q = this.value.toLowerCase();
+            document.querySelectorAll('.store-card').forEach(card => {
+                card.style.display = card.textContent.toLowerCase().includes(q) ? '' : 'none';
+            });
+        });
+    </script>
+</body>
+</html>

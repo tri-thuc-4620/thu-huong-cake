@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Banh Sinh Nhat - Thu Huong Cake</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- Top Bar -->
+    <div class="top-bar">
+        <div class="container">
+            <div class="top-bar-content">
+                <div class="top-bar-left">
+                    <span><i class="fas fa-phone-alt"></i> Hotline: 0962.849.989</span>
+                    <span><i class="fas fa-clock"></i> 07:00 - 23:00</span>
+                </div>
+                <div class="top-bar-right">
+                    <span><i class="fas fa-envelope"></i> donhang@thuhuongcake.vn</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <button class="hamburger" id="hamburgerBtn" aria-label="Menu">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <a href="index.html" class="logo">
+                    <div class="logo-icon">TH</div>
+                    <div class="logo-text">
+                        <span class="logo-name">THU HUONG</span>
+                        <span class="logo-sub">CAKE</span>
+                    </div>
+                </a>
+                <div class="search-bar">
+                    <input type="text" placeholder="Tim san pham banh sinh nhat...">
+                    <button><i class="fas fa-search"></i></button>
+                </div>
+                <div class="header-actions">
+                    <a href="javascript:void(0)" class="header-action" onclick="alert('Chuc nang dang nhap dang phat trien!')">
+                        <i class="fas fa-user"></i>
+                        <span>Dang nhap</span>
+                    </a>
+                    <a href="checkout.html" class="header-action cart-action">
+                        <i class="fas fa-shopping-bag"></i>
+                        <span class="cart-badge">0</span>
+                        <span>Gio hang</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation -->
+    <nav class="main-nav">
+        <div class="container">
+            <div class="nav-content">
+                <div class="nav-category-btn">
+                    <i class="fas fa-bars"></i>
+                    <span>Danh muc banh sinh nhat</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="index.html">Trang chu</a></li>
+                    <li><a href="about.html">Ve chung toi</a></li>
+                    <li><a href="products.html" class="active">Banh sinh nhat</a></li>
+                    <li><a href="about.html">Huong dan dat banh</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                    <li><a href="stores.html">Cua hang</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-overlay" id="mobileOverlay"></div>
+    <div class="mobile-drawer" id="mobileDrawer">
+        <button class="drawer-close" id="drawerClose"><i class="fas fa-times"></i></button>
+        <div class="drawer-tabs">
+            <button class="drawer-tab active" data-tab="menu">Menu</button>
+            <button class="drawer-tab" data-tab="category">Danh muc Banh</button>
+        </div>
+        <div class="drawer-panel active" id="panel-menu">
+            <ul class="drawer-links">
+                <li><a href="index.html">Trang chu</a></li>
+                <li><a href="about.html">Ve chung toi</a></li>
+                <li><a href="products.html" class="active">Banh sinh nhat</a></li>
+                <li><a href="about.html">Huong dan dat banh</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="stores.html">Danh sach cua hang</a></li>
+                <li><a href="javascript:void(0)">Dang nhap / Dang ky</a></li>
+            </ul>
+        </div>
+        <div class="drawer-panel" id="panel-category">
+            <ul class="drawer-links">
+                <li><a href="products.html">Banh Sinh Nhat Mini</a></li>
+                <li><a href="products.html">Banh Sinh Nhat Hoa Qua</a></li>
+                <li><a href="products.html">Banh Bong Lan Trung Muoi</a></li>
+                <li class="has-sub"><a href="products.html">Set Banh Lam Qua <i class="fas fa-chevron-down"></i></a></li>
+                <li class="has-sub"><a href="products.html">Banh Dac Biet ( Signature Cakes ) <i class="fas fa-chevron-down"></i></a></li>
+                <li class="has-sub"><a href="products.html">Banh Sinh Nhat Cho Be <i class="fas fa-chevron-down"></i></a></li>
+                <li class="has-sub"><a href="products.html">Banh Kem Su Kien <i class="fas fa-chevron-down"></i></a></li>
+                <li><a href="products.html">Banh Sinh Nhat Tang</a></li>
+                <li><a href="products.html">Banh Sinh Nhat Hinh Trai Tim</a></li>
+                <li><a href="products.html">Banh Sinh Nhat Hoa Kem</a></li>
+                <li><a href="products.html">Banh Kem Ve Hinh</a></li>
+                <li><a href="products.html">Banh Kem Tao Hinh</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Breadcrumb -->
+    <div class="breadcrumb">
+        <div class="container">
+            <a href="index.html">Trang chu</a>
+            <i class="fas fa-chevron-right"></i>
+            <span>Banh Sinh Nhat</span>
+        </div>
+    </div>
+
+    <!-- Product Page Layout -->
+    <section class="catalog-page">
+        <div class="container">
+            <div class="catalog-layout">
+
+                <!-- Sidebar -->
+                <aside class="catalog-sidebar">
+                    <!-- Danh muc san pham -->
+                    <div class="sidebar-box">
+                        <h3 class="sidebar-title">Danh Muc San Pham</h3>
+                        <ul class="sidebar-categories">
+                            <li><a href="#" class="active"><i class="fas fa-chevron-right"></i> Banh Sinh Nhat Mini</a></li>
+                            <li><a href="products.html"><i class="fas fa-chevron-right"></i> Banh Sinh Nhat Hoa Qua</a></li>
+                            <li><a href="products.html"><i class="fas fa-chevron-right"></i> Banh Bong Lan Trung Muoi</a></li>
+                            <li><a href="products.html"><i class="fas fa-chevron-right"></i> Set Banh Lam Qua</a></li>
+                            <li><a href="products.html"><i class="fas fa-chevron-right"></i> Banh Dac Biet ( Signature Cakes )</a></li>
+                            <li><a href="products.html"><i class="fas fa-chevron-right"></i> Banh Sinh Nhat Cho Be</a></li>
+                            <li><a href="products.html"><i class="fas fa-chevron-right"></i> Banh Kem Su Kien</a></li>
+                            <li><a href="products.html"><i class="fas fa-chevron-right"></i> Banh Sinh Nhat Tang</a></li>
+                            <li><a href="products.html"><i class="fas fa-chevron-right"></i> Banh Sinh Nhat Hinh Trai Tim</a></li>
+                            <li><a href="products.html"><i class="fas fa-chevron-right"></i> Banh Sinh Nhat Hoa Kem</a></li>
+                            <li><a href="products.html"><i class="fas fa-chevron-right"></i> Banh Kem Ve Hinh</a></li>
+                            <li><a href="products.html"><i class="fas fa-chevron-right"></i> Banh Kem Tao Hinh</a></li>
+                            <li><a href="products.html"><i class="fas fa-chevron-right"></i> Banh An Nhanh</a></li>
+                            <li><a href="products.html"><i class="fas fa-chevron-right"></i> Banh Sinh Nhat</a></li>
+                            <li><a href="products.html"><i class="fas fa-chevron-right"></i> Banh Kem Ngay Le</a></li>
+                        </ul>
+                    </div>
+
+                    <!-- Lien he dat banh -->
+                    <div class="sidebar-box sidebar-contact">
+                        <h3 class="sidebar-title">Lien He Dat Banh</h3>
+                        <ul class="sidebar-phones">
+                            <li><span class="phone-label">Co So 1</span> <a href="tel:0982811096">0982811096</a></li>
+                            <li><span class="phone-label">Co So 2</span> <a href="tel:0965688385">0965688385</a></li>
+                            <li><span class="phone-label">Co So 3</span> <a href="tel:0984438898">0984438898</a></li>
+                            <li><span class="phone-label">Co So 4</span> <a href="tel:0988064164">0988064164</a></li>
+                            <li><span class="phone-label">Co So 5</span> <a href="tel:0962711371">0962711371</a></li>
+                            <li><span class="phone-label">Co So 6</span> <a href="tel:0988504514">0988504514</a></li>
+                            <li><span class="phone-label">Co So 7</span> <a href="tel:0963910920">0963910920</a></li>
+                            <li><span class="phone-label">Co So 8</span> <a href="tel:0862089099">0862089099</a></li>
+                        </ul>
+                    </div>
+
+                    <!-- San pham vua xem -->
+                    <div class="sidebar-box">
+                        <h3 class="sidebar-title">San Pham Vua Xem</h3>
+                        <p class="sidebar-empty">Khong co san pham xem gan day</p>
+                    </div>
+                </aside>
+
+                <!-- Main Content -->
+                <div class="catalog-main">
+                    <div class="catalog-header">
+                        <h1>Banh Sinh Nhat</h1>
+                    </div>
+
+                    <!-- Category Intro -->
+                    <div class="catalog-intro">
+                        <p>Sinh nhat la dip dac biet de gui gam nhung loi chuc yeu thuong va tao nen nhieu ky niem dang nho ben canh nguoi than yeu. Va tat nhien, mot chiec <strong>banh sinh nhat dep</strong>, ngon mieng se la diem nhan khong the thieu trong ngay nay. Neu ban dang tim kiem mot mau banh vua an tuong vua phu hop voi tung doi tuong, hay cung <strong>Thu Huong Cake</strong> kham pha nhung mau banh sinh nhat hot nhat 2025 ngay duoi day!</p>
+                        <button class="read-more-toggle">Xem Them <i class="fas fa-chevron-down"></i></button>
+                    </div>
+
+                    <!-- Sort Bar -->
+                    <div class="catalog-sort">
+                        <span>Sap xep theo:</span>
+                        <div class="sort-options">
+                            <button class="sort-btn active"><i class="fas fa-sort-amount-down"></i> Gia giam dan</button>
+                            <button class="sort-btn"><i class="fas fa-sort-amount-up"></i> Gia tang dan</button>
+                            <button class="sort-btn"><i class="fas fa-star"></i> Noi bat</button>
+                            <button class="sort-btn"><i class="fas fa-tags"></i> Giam gia</button>
+                            <button class="sort-btn"><i class="fas fa-fire"></i> Ban chay</button>
+                            <button class="sort-btn"><i class="fas fa-clock"></i> Cu nhat</button>
+                        </div>
+                    </div>
+
+                    <!-- Products Grid -->
+                    <div class="catalog-grid">
+                        <div class="product-card">
+                            <div class="product-image">
+                                <img src="image_san_pham/Banh-bong-lan-trung-muoi-truyen-thong-5.jpg" alt="Banh mix vi trang tri noel">
+                                <div class="product-overlay">
+                                    <button class="quick-view"><i class="fas fa-eye"></i></button>
+                                    <button class="add-cart"><i class="fas fa-shopping-cart"></i></button>
+                                </div>
+                            </div>
+                            <div class="product-info">
+                                <h3>Banh mix vi trang tri noel</h3>
+                                <span class="product-price">180.000 d</span>
+                            </div>
+                        </div>
+                        <div class="product-card">
+                            <div class="product-image">
+                                <img src="image_san_pham/Banh-kem-viet-quat-tuoi-mat-7.webp" alt="Banh kem qua bi ngo">
+                                <div class="product-overlay">
+                                    <button class="quick-view"><i class="fas fa-eye"></i></button>
+                                    <button class="add-cart"><i class="fas fa-shopping-cart"></i></button>
+                                </div>
+                            </div>
+                            <div class="product-info">
+                                <h3>Banh kem qua bi ngo</h3>
+                                <span class="product-price">220.000 d</span>
+                            </div>
+                        </div>
+                        <div class="product-card">
+                            <div class="product-image">
+                                <img src="image_san_pham/Banh-kem-mini-mau-hong-dep-nhat-5.jpg" alt="Banh sinh nhat bua hai huoc">
+                                <div class="product-overlay">
+                                    <button class="quick-view"><i class="fas fa-eye"></i></button>
+                                    <button class="add-cart"><i class="fas fa-shopping-cart"></i></button>
+                                </div>
+                            </div>
+                            <div class="product-info">
+                                <h3>Banh sinh nhat bua hai huoc tang ban than</h3>
+                                <span class="product-price">280.000 d</span>
+                            </div>
+                        </div>
+                        <div class="product-card">
+                            <div class="product-image">
+                                <img src="image_san_pham/Banh-bong-lan-kem-trung.jpg" alt="Banh kem hinh mat gau dep">
+                                <div class="product-overlay">
+                                    <button class="quick-view"><i class="fas fa-eye"></i></button>
+                                    <button class="add-cart"><i class="fas fa-shopping-cart"></i></button>
+                                </div>
+                            </div>
+                            <div class="product-info">
+                                <h3>Banh kem hinh mat gau dep</h3>
+                                <span class="product-price">400.000 d</span>
+                            </div>
+                        </div>
+                        <div class="product-card">
+                            <div class="product-image">
+                                <img src="image_san_pham/Banh-bong-lan-pho-mai-cah-bong.jpg" alt="Banh sinh nhat chu gau">
+                                <div class="product-overlay">
+                                    <button class="quick-view"><i class="fas fa-eye"></i></button>
+                                    <button class="add-cart"><i class="fas fa-shopping-cart"></i></button>
+                                </div>
+                            </div>
+                            <div class="product-info">
+                                <h3>Banh sinh nhat chu gau</h3>
+                                <span class="product-price">400.000 d</span>
+                            </div>
+                        </div>
+                        <div class="product-card">
+                            <div class="product-image">
+                                <img src="image_san_pham/download.jpg" alt="Banh sinh nhat tho hong dang yeu">
+                                <div class="product-overlay">
+                                    <button class="quick-view"><i class="fas fa-eye"></i></button>
+                                    <button class="add-cart"><i class="fas fa-shopping-cart"></i></button>
+                                </div>
+                            </div>
+                            <div class="product-info">
+                                <h3>Banh sinh nhat tho hong dang yeu</h3>
+                                <span class="product-price">280.000 d</span>
+                            </div>
+                        </div>
+                        <div class="product-card">
+                            <div class="product-image">
+                                <img src="image_san_pham/download.webp" alt="Banh kem tone hong tang ban gai">
+                                <div class="product-overlay">
+                                    <button class="quick-view"><i class="fas fa-eye"></i></button>
+                                    <button class="add-cart"><i class="fas fa-shopping-cart"></i></button>
+                                </div>
+                            </div>
+                            <div class="product-info">
+                                <h3>Banh kem tone hong tang ban gai</h3>
+                                <span class="product-price">160.000 d</span>
+                            </div>
+                        </div>
+                        <div class="product-card">
+                            <div class="product-image">
+                                <img src="image_san_pham/Banh-kem-viet-quat-tuoi-mat-7.webp" alt="Banh sinh nhat tang me y nghia">
+                                <div class="product-overlay">
+                                    <button class="quick-view"><i class="fas fa-eye"></i></button>
+                                    <button class="add-cart"><i class="fas fa-shopping-cart"></i></button>
+                                </div>
+                            </div>
+                            <div class="product-info">
+                                <h3>Banh sinh nhat tang me y nghia</h3>
+                                <span class="product-price">160.000 d</span>
+                            </div>
+                        </div>
+                        <div class="product-card">
+                            <div class="product-image">
+                                <img src="image_san_pham/Banh-kem-mini-mau-hong-dep-nhat-5.jpg" alt="Banh sinh nhat mau hong dau">
+                                <div class="product-overlay">
+                                    <button class="quick-view"><i class="fas fa-eye"></i></button>
+                                    <button class="add-cart"><i class="fas fa-shopping-cart"></i></button>
+                                </div>
+                            </div>
+                            <div class="product-info">
+                                <h3>Banh sinh nhat mau hong dau</h3>
+                                <span class="product-price">160.000 d</span>
+                            </div>
+                        </div>
+                        <div class="product-card">
+                            <div class="product-image">
+                                <img src="image_san_pham/Banh-bong-lan-trung-muoi-truyen-thong-5.jpg" alt="Banh kem trung thu doc dao">
+                                <div class="product-overlay">
+                                    <button class="quick-view"><i class="fas fa-eye"></i></button>
+                                    <button class="add-cart"><i class="fas fa-shopping-cart"></i></button>
+                                </div>
+                            </div>
+                            <div class="product-info">
+                                <h3>Banh kem trung thu doc dao</h3>
+                                <span class="product-price">220.000 d</span>
+                            </div>
+                        </div>
+                        <div class="product-card">
+                            <div class="product-image">
+                                <img src="image_san_pham/Banh-bong-lan-kem-trung.jpg" alt="Banh sinh nhat hoa kem ve tay">
+                                <div class="product-overlay">
+                                    <button class="quick-view"><i class="fas fa-eye"></i></button>
+                                    <button class="add-cart"><i class="fas fa-shopping-cart"></i></button>
+                                </div>
+                            </div>
+                            <div class="product-info">
+                                <h3>Banh sinh nhat hoa kem ve tay</h3>
+                                <span class="product-price">270.000 d</span>
+                            </div>
+                        </div>
+                        <div class="product-card">
+                            <div class="product-image">
+                                <img src="image_san_pham/Banh-bong-lan-pho-mai-cah-bong.jpg" alt="Banh kem hoa sen">
+                                <div class="product-overlay">
+                                    <button class="quick-view"><i class="fas fa-eye"></i></button>
+                                    <button class="add-cart"><i class="fas fa-shopping-cart"></i></button>
+                                </div>
+                            </div>
+                            <div class="product-info">
+                                <h3>Banh kem hoa sen</h3>
+                                <span class="product-price">270.000 d</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Pagination -->
+                    <div class="pagination">
+                        <a href="#" class="page-btn active">1</a>
+                        <a href="#" class="page-btn">2</a>
+                        <a href="#" class="page-btn">3</a>
+                        <a href="#" class="page-btn">4</a>
+                        <a href="#" class="page-btn"><i class="fas fa-chevron-right"></i></a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="footer-logo">
+                        <div class="logo-icon">TH</div>
+                        <div class="logo-text">
+                            <span class="logo-name">THU HUONG</span>
+                            <span class="logo-sub">CAKE</span>
+                        </div>
+                    </div>
+                    <ul class="footer-links">
+                        <li><a href="about.html">Gioi thieu</a></li>
+                        <li><a href="about.html">Lien he</a></li>
+                        <li><a href="stores.html">Danh sach cac cua hang</a></li>
+                        <li><a href="about.html">Cau chuyen ve Thu Huong Cake</a></li>
+                        <li><a href="#">Tuyen dung</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Chinh Sach Chung</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">Chinh sach thanh toan</a></li>
+                        <li><a href="#">Chinh sach kiem hang</a></li>
+                        <li><a href="#">Chinh sach bao mat thong tin</a></li>
+                        <li><a href="#">Chinh sach giao hang</a></li>
+                        <li><a href="#">Chinh sach doi tra va hoan tien</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Ho Tro Khach Hang</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">Hoi dap - FAQs</a></li>
+                        <li><a href="#">Huong dan mua banh</a></li>
+                        <li><a href="#">Huong dan thanh toan</a></li>
+                        <li><a href="#">Dat hang va thanh toan</a></li>
+                        <li><a href="#">Khao sat trai nghiem khach hang</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Chi Nhanh Ha Noi</h4>
+                    <p>So 72 Ngo 235 Pho Yen Hoa, P. Yen Hoa, Q. Cau Giay, Ha Noi.</p>
+                    <p><strong>Hotline:</strong> 0962.849.989</p>
+                    <h4 style="margin-top: 20px;">Chi Nhanh HCM</h4>
+                    <p>801 Duong Hau Giang, Phuong 11, Quan 6, TP Ho Chi Minh</p>
+                    <p><strong>Hotline:</strong> 0862089099</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>Cong ty TNHH San Xuat va Thuong Mai Thu Huong &bull; DKKD so 0111010237 &bull; Dia chi: So 72 Ngo 235 Pho Yen Hoa, P. Yen Hoa, Q. Cau Giay, Ha Noi.</p>
+            </div>
+        </div>
+    </footer>
+
+    <button class="back-to-top" id="backToTop">
+        <i class="fas fa-chevron-up"></i>
+    </button>
+
+    <script src="script.js"></script>
+</body>
+</html>

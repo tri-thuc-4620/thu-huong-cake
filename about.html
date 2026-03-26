@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ve Chung Toi - Thu Huong Cake</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- Top Bar -->
+    <div class="top-bar">
+        <div class="container">
+            <div class="top-bar-content">
+                <div class="top-bar-left">
+                    <span><i class="fas fa-phone-alt"></i> Hotline: 0962.849.989</span>
+                    <span><i class="fas fa-clock"></i> 07:00 - 23:00</span>
+                </div>
+                <div class="top-bar-right">
+                    <span><i class="fas fa-envelope"></i> donhang@thuhuongcake.vn</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <button class="hamburger" id="hamburgerBtn" aria-label="Menu">
+                    <i class="fas fa-bars"></i>
+                </button>
+
+                <a href="index.html" class="logo">
+                    <div class="logo-icon">TH</div>
+                    <div class="logo-text">
+                        <span class="logo-name">THU HUONG</span>
+                        <span class="logo-sub">CAKE</span>
+                    </div>
+                </a>
+
+                <div class="search-bar">
+                    <input type="text" placeholder="Tim san pham banh sinh nhat...">
+                    <button><i class="fas fa-search"></i></button>
+                </div>
+
+                <div class="header-actions">
+                    <a href="javascript:void(0)" class="header-action" onclick="alert('Chuc nang dang nhap dang phat trien!')">
+                        <i class="fas fa-user"></i>
+                        <span>Dang nhap</span>
+                    </a>
+                    <a href="checkout.html" class="header-action cart-action">
+                        <i class="fas fa-shopping-bag"></i>
+                        <span class="cart-badge">0</span>
+                        <span>Gio hang</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation -->
+    <nav class="main-nav">
+        <div class="container">
+            <div class="nav-content">
+                <div class="nav-category-btn">
+                    <i class="fas fa-bars"></i>
+                    <span>Danh muc banh sinh nhat</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="index.html">Trang chu</a></li>
+                    <li><a href="about.html" class="active">Ve chung toi</a></li>
+                    <li><a href="products.html">Banh sinh nhat</a></li>
+                    <li><a href="about.html">Huong dan dat banh</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                    <li><a href="stores.html">Cua hang</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu Overlay -->
+    <div class="mobile-overlay" id="mobileOverlay"></div>
+
+    <!-- Mobile Drawer Menu -->
+    <div class="mobile-drawer" id="mobileDrawer">
+        <button class="drawer-close" id="drawerClose"><i class="fas fa-times"></i></button>
+        <div class="drawer-tabs">
+            <button class="drawer-tab active" data-tab="menu">Menu</button>
+            <button class="drawer-tab" data-tab="category">Danh muc Banh</button>
+        </div>
+        <div class="drawer-panel active" id="panel-menu">
+            <ul class="drawer-links">
+                <li><a href="index.html">Trang chu</a></li>
+                <li><a href="about.html" class="active">Ve chung toi</a></li>
+                <li><a href="products.html">Banh sinh nhat</a></li>
+                <li><a href="about.html">Huong dan dat banh</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="stores.html">Danh sach cua hang</a></li>
+                <li><a href="javascript:void(0)">Dang nhap / Dang ky</a></li>
+            </ul>
+        </div>
+        <div class="drawer-panel" id="panel-category">
+            <ul class="drawer-links">
+                <li><a href="products.html">Banh Sinh Nhat Mini</a></li>
+                <li><a href="products.html">Banh Sinh Nhat Hoa Qua</a></li>
+                <li><a href="products.html">Banh Bong Lan Trung Muoi</a></li>
+                <li class="has-sub"><a href="products.html">Set Banh Lam Qua <i class="fas fa-chevron-down"></i></a></li>
+                <li class="has-sub"><a href="products.html">Banh Dac Biet ( Signature Cakes ) <i class="fas fa-chevron-down"></i></a></li>
+                <li class="has-sub"><a href="products.html">Banh Sinh Nhat Cho Be <i class="fas fa-chevron-down"></i></a></li>
+                <li class="has-sub"><a href="products.html">Banh Kem Su Kien <i class="fas fa-chevron-down"></i></a></li>
+                <li><a href="products.html">Banh Sinh Nhat Tang</a></li>
+                <li><a href="products.html">Banh Sinh Nhat Hinh Trai Tim</a></li>
+                <li><a href="products.html">Banh Sinh Nhat Hoa Kem</a></li>
+                <li><a href="products.html">Banh Kem Ve Hinh</a></li>
+                <li><a href="products.html">Banh Kem Tao Hinh</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Breadcrumb -->
+    <div class="breadcrumb">
+        <div class="container">
+            <a href="index.html">Trang chu</a>
+            <i class="fas fa-chevron-right"></i>
+            <span>Ve Chung Toi</span>
+        </div>
+    </div>
+
+    <!-- About Page Content -->
+    <section class="about-page">
+        <div class="container">
+
+            <!-- Page Title -->
+            <div class="about-header">
+                <h1>Ve Cong Ty TNHH San Xuat Va Thuong Mai Thu Huong</h1>
+            </div>
+
+            <!-- Intro -->
+            <div class="about-intro">
+                <p><strong>Thu Huong Cake</strong> la thuong hieu banh sinh nhat Au lau doi tai Ha Noi. Va co le nhung nguoi yeu thich banh ngot, dac biet la banh duoc lam theo phong cach Au thi chac chan khong con xa la.</p>
+                <p>Duoc thanh lap tu nam 2011 tai con pho Dich Vong, Cau Giay, Ha Noi. Trai qua hon 10 nam phat trien, den nay Thu Huong Cake da tro thanh "He thong banh kem uy tin - chat luong" tai Ha Noi va mang den hon 100.000 bua tiec sinh nhat vui ve, dam am va hanh phuc den moi gia dinh Viet.</p>
+                <p>Khac voi hinh thuc kinh doanh cua cac he thong banh kem khac, voi moi co so kinh doanh Thu Huong Cake deu co khu vuc san xuat truc tiep, dieu do giup chat luong banh dat tot nhat, luon kip thoi dap ung nhu cau cua khach hang va mang den nhung chiec banh tuoi moi ngay dam bao tuyet doi ve an toan ve sinh thuc pham.</p>
+            </div>
+
+            <!-- Banner Image Placeholder -->
+            <div class="about-banner">
+                <div class="about-banner-placeholder">
+                    <i class="fas fa-image"></i>
+                    <span>Banner - Banh khong chi de ngam ma con de thuong thuc</span>
+                </div>
+            </div>
+
+            <!-- Thanh Lap -->
+            <div class="about-section">
+                <h2>Thanh Lap</h2>
+                <p>Anh Tran Van Quan sau nhieu nam tiep thu nghe banh truyen thong cua gia dinh va hoc hoi cac dong banh kem hien dai, den 10/10/2021 da chinh thuc tiep quan Thu Huong Cake. Bang kinh nghiem, long dam me va sang tao voi mong muon mang den nhung chiec banh tuyet voi nhat den nguoi Viet, nam 2022 anh da thanh lap Cong ty TNHH San xuat & Thuong mai Thu Huong.</p>
+                <p>Chi sau 1 nam thanh lap, anh Tran Van Quan da dua Cong ty TNHH San xuat & Thuong mai Thu Huong phat trien len mot tam cao moi. Den nay, Thu Huong Cake da tro thanh "He thong banh kem Uy tin - Chat luong" luon nam trong top dau tai Ha Noi va luon duoc khach hang phan hoi vo cung tich cuc ve chat luong san pham cung nhu quy trinh dich vu.</p>
+            </div>
+
+            <!-- Nhiem Vu -->
+            <div class="about-section">
+                <h2>Nhiem Vu</h2>
+                <p>Voi nhung san pham duoc lam tu nguyen lieu ngoai nhap va duoc trang tri bang Socola, decor hien dai va bang hoa qua tuoi tu nhien theo mua, Thu Huong Cake cam ket mang den cho nguoi tieu dung nhung san pham dat chat luong cao nhat nhu mot loi tri an doi voi tinh cam yeu men cua khach hang.</p>
+            </div>
+
+            <!-- Cam Ket Kinh Doanh -->
+            <div class="about-section">
+                <h2>Cam Ket Kinh Doanh</h2>
+                <p>Thu Huong Cake cam ket doi voi khach hang ve san pham banh kem nho xinh, tuoi ngon hoan toan khong chat bao quan, thuc su lanh manh, tot cho suc khoe va phuc vu voi tinh tam tan tam tuyet voi khach hang. Do la nen tang ma Thu Huong Cake ton tai va phat trien ben vung trong hon 10 nam qua.</p>
+            </div>
+
+            <!-- Banner 2 -->
+            <div class="about-banner">
+                <div class="about-banner-placeholder" style="background: linear-gradient(135deg, #667eea, #764ba2);">
+                    <i class="fas fa-birthday-cake"></i>
+                    <span>Banner - Birthday Cake</span>
+                </div>
+            </div>
+
+            <!-- Co Cau To Chuc -->
+            <div class="about-section">
+                <h2>Co Cau To Chuc</h2>
+                <p>Thu Huong Cake la mot he thong doi ngu nhan vien va lanh dao chuyen nghiep, gom CBCNV va nhung nguoi tho da co kinh nghiem lau nam, duoc dao tao bai ban chuyen nghiep. Mo hinh van hanh hoat dong cong ty duoc bo tri theo chieu ngang, lam gia tang su thuan tien trong viec van hanh co may kinh doanh va gia tang su phoi hop thong nhat giua cac bo phan trong cong ty.</p>
+            </div>
+
+            <!-- Chu Trong Phat Trien Con Nguoi -->
+            <div class="about-section">
+                <h2>Chu Trong Phat Trien Con Nguoi</h2>
+                <p>Thu Huong Cake luon coi con nguoi la tai san lon nhat. Do vay, chung toi luon quan tam xay dung doi ngu can bo quan ly va nhan vien chuyen nghiep de phat trien ben vung. Phuc vu khach hang bang dich vu chu dao, tan tam va tan tinh.</p>
+                <p>Tai Thu Huong Cake luon co doi ngu tu van online chu dao va tan tam, tan tinh 24/7. Khach hang co the den truc tiep cac co so de mua hang, hoac dat nhung chiec banh sinh nhat dep online tren cac nen tang mang xa hoi. Du voi bat ky hinh thuc nao cung luon luon co cac ban nhan vien ho tro tu van nhiet tinh, chuyen nghiep.</p>
+            </div>
+
+            <!-- Uy Tin - Chat Luong -->
+            <div class="about-section">
+                <h2>Uy Tin - Chat Luong</h2>
+                <p>Voi phuong cham "Chat luong khang dinh thuong hieu" cung slogan "Banh khong chi de ngam, ma con de thuong thuc", Thu Huong Cake luon dat chat luong san pham len hang dau, mong muon khong chi mang den nhung chiec banh sinh nhat dep mat ma con thom ngon, lam hai long khach hang khi thuong thuc.</p>
+                <p>Trai qua bao nhieu nam hinh thanh va phat trien, lien tuc luu truyen va tiep thu ve chat luong san pham. Khach hang co the thay Thu Huong Cake luon duoc Rating rat cao tren tat ca cac nen tang kinh doanh. Dieu nay cho thay duoc Thu Huong luon dat chat luong san pham len dau va lang nghe y kien khach hang. Giu vung duoc phong do phat trien va dat duoc niem tin tuyet doi voi khach hang.</p>
+            </div>
+
+            <!-- Banner 3 - Phan hoi khach hang -->
+            <div class="about-banner">
+                <div class="about-banner-placeholder" style="background: linear-gradient(135deg, #f093fb, #f5576c);">
+                    <i class="fas fa-comments"></i>
+                    <span>Banner - Phan hoi cua Khach Hang</span>
+                </div>
+            </div>
+
+            <!-- Luon Luon Lang Nghe -->
+            <div class="about-section">
+                <h2>Luon Luon Lang Nghe</h2>
+                <p>Thu Huong Cake luon luon lang nghe nhung y kien dong gop day thien chi de phan dau nang cao chat luong san pham, nang cao nang luc canh tranh va cai thien chat luong dich vu de mang lai nhung gia tri tien ich phu hop voi mong muon va loi ich cua quy khach hang.</p>
+                <p>Quy khach chon lua <strong>Thu Huong Cake</strong>, quy khach hoan toan yen tam va hai long ve dich vu cua chung toi.</p>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-content">
+                <div class="cta-text">
+                    <h2>Thu Huong Cake lang nghe ban!</h2>
+                    <p>Chung toi luon tran trong va mong doi nhan duoc moi y kien dong gop tu khach hang de co the nang cap trai nghiem dich vu va san pham tot hon nua.</p>
+                    <a href="about.html" class="btn btn-white">Dong Gop Y Kien</a>
+                </div>
+                <div class="cta-contact">
+                    <div class="cta-contact-item">
+                        <div class="cta-icon"><i class="fas fa-phone-alt"></i></div>
+                        <div>
+                            <strong>Hotline</strong>
+                            <p>0962.849.989 (07:00 - 23:00)</p>
+                        </div>
+                    </div>
+                    <div class="cta-contact-item">
+                        <div class="cta-icon"><i class="fas fa-envelope"></i></div>
+                        <div>
+                            <strong>Email</strong>
+                            <p>donhang@thuhuongcake.vn</p>
+                        </div>
+                    </div>
+                    <div class="cta-socials">
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="zalo-icon" aria-label="Zalo"><span>Zalo</span></a>
+                        <a href="#" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="footer-logo">
+                        <div class="logo-icon">TH</div>
+                        <div class="logo-text">
+                            <span class="logo-name">THU HUONG</span>
+                            <span class="logo-sub">CAKE</span>
+                        </div>
+                    </div>
+                    <ul class="footer-links">
+                        <li><a href="about.html">Gioi thieu</a></li>
+                        <li><a href="about.html">Lien he</a></li>
+                        <li><a href="stores.html">Danh sach cac cua hang</a></li>
+                        <li><a href="about.html">Cau chuyen ve Thu Huong Cake</a></li>
+                        <li><a href="#">Tuyen dung</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Chinh Sach Chung</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">Chinh sach thanh toan</a></li>
+                        <li><a href="#">Chinh sach kiem hang</a></li>
+                        <li><a href="#">Chinh sach bao mat thong tin</a></li>
+                        <li><a href="#">Chinh sach giao hang</a></li>
+                        <li><a href="#">Chinh sach doi tra va hoan tien</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Ho Tro Khach Hang</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">Hoi dap - FAQs</a></li>
+                        <li><a href="#">Huong dan mua banh</a></li>
+                        <li><a href="#">Huong dan thanh toan</a></li>
+                        <li><a href="#">Dat hang va thanh toan</a></li>
+                        <li><a href="#">Khao sat trai nghiem khach hang</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Chi Nhanh Ha Noi</h4>
+                    <p>So 72 Ngo 235 Pho Yen Hoa, P. Yen Hoa, Q. Cau Giay, Ha Noi.</p>
+                    <p><strong>Hotline:</strong> 0962.849.989</p>
+                    <h4 style="margin-top: 20px;">Chi Nhanh HCM</h4>
+                    <p>801 Duong Hau Giang, Phuong 11, Quan 6, TP Ho Chi Minh</p>
+                    <p><strong>Hotline:</strong> 0862089099</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>Cong ty TNHH San Xuat va Thuong Mai Thu Huong &bull; DKKD so 0111010237 &bull; Dia chi: So 72 Ngo 235 Pho Yen Hoa, P. Yen Hoa, Q. Cau Giay, Ha Noi.</p>
+            </div>
+        </div>
+    </footer>
+
+    <button class="back-to-top" id="backToTop">
+        <i class="fas fa-chevron-up"></i>
+    </button>
+
+    <script src="script.js"></script>
+</body>
+</html>
