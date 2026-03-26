@@ -325,7 +325,7 @@ img {
     position: absolute;
     top: 100%;
     left: 0;
-    width: 280px;
+    width: 100%;
     background: white;
     border-radius: 0 0 var(--radius) var(--radius);
     box-shadow: 0 8px 30px rgba(0,0,0,0.12);
