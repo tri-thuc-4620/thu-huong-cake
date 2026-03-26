@@ -3677,6 +3677,109 @@ body.drawer-open {
     overflow: hidden;
 }
 
+/* ===== Contact Page ===== */
+.contact-intro {
+    text-align: center;
+    margin-bottom: 32px;
+    padding: 28px;
+    background: var(--bg-alt);
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+}
+
+.contact-intro h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--secondary);
+    margin-bottom: 10px;
+    font-style: italic;
+}
+
+.contact-hotline {
+    font-size: 15px;
+    color: var(--primary);
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.contact-hotline strong {
+    font-size: 18px;
+    color: var(--primary-dark);
+}
+
+.contact-form .form-group {
+    margin-bottom: 18px;
+}
+
+.contact-form .form-group label {
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 6px;
+}
+
+.contact-form .form-group input,
+.contact-form .form-group textarea {
+    width: 100%;
+    padding: 12px 14px;
+    border: 2px solid var(--border);
+    border-radius: 8px;
+    font-size: 14px;
+    font-family: inherit;
+    outline: none;
+    transition: var(--transition);
+}
+
+.contact-form .form-group input:focus,
+.contact-form .form-group textarea:focus {
+    border-color: var(--primary-light);
+    box-shadow: 0 0 0 3px rgba(232, 67, 147, 0.08);
+}
+
+.contact-form .form-group textarea {
+    resize: vertical;
+}
+
+.contact-form .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+}
+
+.btn-contact-submit {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 14px 32px;
+    background: linear-gradient(135deg, var(--primary), #c2185b);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: var(--transition);
+    font-family: inherit;
+}
+
+.btn-contact-submit:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(232, 67, 147, 0.35);
+}
+
+@media (max-width: 768px) {
+    .contact-form .form-row {
+        grid-template-columns: 1fr;
+        gap: 0;
+    }
+
+    .contact-intro h2 {
+        font-size: 18px;
+    }
+}
+
 /* ===== Lightbox Gallery ===== */
 .lightbox {
     display: none;
