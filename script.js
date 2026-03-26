@@ -1,3 +1,41 @@
+// Hero Slider
+let heroCurrentSlide = 0;
+let heroAutoPlay;
+
+function heroSlide(dir) {
+    const slides = document.querySelectorAll('.hero-slide');
+    const dots = document.querySelectorAll('.hero-dots .dot');
+    if (!slides.length) return;
+    slides[heroCurrentSlide].classList.remove('active');
+    if (dots[heroCurrentSlide]) dots[heroCurrentSlide].classList.remove('active');
+    heroCurrentSlide = (heroCurrentSlide + dir + slides.length) % slides.length;
+    slides[heroCurrentSlide].classList.add('active');
+    if (dots[heroCurrentSlide]) dots[heroCurrentSlide].classList.add('active');
+}
+
+function heroGoTo(index) {
+    const slides = document.querySelectorAll('.hero-slide');
+    const dots = document.querySelectorAll('.hero-dots .dot');
+    if (!slides.length) return;
+    slides[heroCurrentSlide].classList.remove('active');
+    if (dots[heroCurrentSlide]) dots[heroCurrentSlide].classList.remove('active');
+    heroCurrentSlide = index;
+    slides[heroCurrentSlide].classList.add('active');
+    if (dots[heroCurrentSlide]) dots[heroCurrentSlide].classList.add('active');
+}
+
+// Auto slide every 5s
+if (document.querySelectorAll('.hero-slide').length > 1) {
+    heroAutoPlay = setInterval(() => heroSlide(1), 5000);
+    const heroSection = document.querySelector('.hero');
+    if (heroSection) {
+        heroSection.addEventListener('mouseenter', () => clearInterval(heroAutoPlay));
+        heroSection.addEventListener('mouseleave', () => {
+            heroAutoPlay = setInterval(() => heroSlide(1), 5000);
+        });
+    }
+}
+
 // Back to Top Button
 const backToTop = document.getElementById('backToTop');
 
