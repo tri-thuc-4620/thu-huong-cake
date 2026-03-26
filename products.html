@@ -591,6 +591,33 @@
         </button>
     </div>
 
+    <!-- Floating Contact -->
+    <div class="floating-contact" id="floatingContact">
+        <div class="floating-menu">
+            <a href="#" class="floating-item">
+                <span class="floating-item-label">Messenger</span>
+                <div class="floating-item-icon messenger"><i class="fab fa-facebook-messenger"></i></div>
+            </a>
+            <a href="#" class="floating-item">
+                <span class="floating-item-label">Zalo chat</span>
+                <div class="floating-item-icon zalo">Zalo</div>
+            </a>
+            <a href="tel:0962849989" class="floating-item">
+                <span class="floating-item-label">Gọi 0962849989</span>
+                <div class="floating-item-icon phone"><i class="fas fa-phone-alt"></i></div>
+            </a>
+        </div>
+        <div class="floating-bottom">
+            <button class="floating-toggle" onclick="this.closest('.floating-contact').classList.toggle('open')">
+                <i class="fas fa-comment-dots"></i>
+                <i class="fas fa-times"></i>
+            </button>
+            <button class="floating-top-btn" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+                <i class="fas fa-chevron-up"></i>
+            </button>
+        </div>
+    </div>
+
     <button class="back-to-top" id="backToTop">
         <i class="fas fa-chevron-up"></i>
     </button>
