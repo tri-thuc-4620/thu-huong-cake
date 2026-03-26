@@ -52,7 +52,7 @@
                         <i class="fas fa-user"></i>
                         <span>Dang nhap</span>
                     </a>
-                    <a href="checkout.html" class="header-action cart-action">
+                    <a href="javascript:void(0)" class="header-action cart-action" onclick="openCart()">
                         <i class="fas fa-shopping-bag"></i>
                         <span class="cart-badge">0</span>
                         <span>Gio hang</span>
@@ -382,7 +382,38 @@
         </div>
     </footer>
 
-    <button class="back-to-top" id="backToTop"><i class="fas fa-chevron-up"></i></button>
+        <!-- Cart Drawer -->
+    <div class="cart-overlay" id="cartOverlay" onclick="closeCart()"></div>
+    <div class="cart-drawer" id="cartDrawer">
+        <div class="cart-drawer-header">
+            <h3>Gio Hang</h3>
+            <button class="cart-drawer-close" onclick="closeCart()"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="cart-drawer-count">Ban dang co <strong>1</strong> san pham trong gio hang.</div>
+        <div class="cart-drawer-items">
+            <div class="cart-drawer-item">
+                <div class="cart-item-img">
+                    <img src="image_san_pham/Banh-kem-mini-mau-hong-dep-nhat-5.jpg" alt="Banh kem">
+                </div>
+                <div class="cart-item-info">
+                    <h4>Banh Kem Sinh Nhat Dau Tay Premium</h4>
+                    <p class="cart-item-variant">16cm - Gato Vani Viet Quat</p>
+                    <span class="cart-item-price">450.000d</span> <span class="cart-item-qty">x 1</span>
+                    <br><button class="cart-item-remove">Xoa</button>
+                </div>
+            </div>
+        </div>
+        <div class="cart-drawer-footer">
+            <div class="cart-total-row">
+                <span>Tong tien tam tinh:</span>
+                <span>450.000d</span>
+            </div>
+            <a href="checkout.html" class="btn-cart-checkout">Tien Hanh Dat Hang</a>
+            <a href="products.html" class="cart-detail-link">Xem chi tiet gio hang <i class="fas fa-arrow-right"></i></a>
+        </div>
+    </div>
+
+<button class="back-to-top" id="backToTop"><i class="fas fa-chevron-up"></i></button>
 
     <script src="script.js"></script>
     <script>

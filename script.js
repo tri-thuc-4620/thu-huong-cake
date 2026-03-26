@@ -77,6 +77,27 @@ drawerTabs.forEach(tab => {
     });
 });
 
+// Cart Drawer
+function openCart() {
+    const drawer = document.getElementById('cartDrawer');
+    const overlay = document.getElementById('cartOverlay');
+    if (drawer && overlay) {
+        drawer.classList.add('active');
+        overlay.classList.add('active');
+        document.body.classList.add('drawer-open');
+    }
+}
+
+function closeCart() {
+    const drawer = document.getElementById('cartDrawer');
+    const overlay = document.getElementById('cartOverlay');
+    if (drawer && overlay) {
+        drawer.classList.remove('active');
+        overlay.classList.remove('active');
+        document.body.classList.remove('drawer-open');
+    }
+}
+
 // Product card click -> product detail
 document.querySelectorAll('.product-card').forEach(card => {
     card.style.cursor = 'pointer';
