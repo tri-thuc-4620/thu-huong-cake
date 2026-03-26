@@ -77,6 +77,17 @@ drawerTabs.forEach(tab => {
     });
 });
 
+// Login Modal
+function openLogin() {
+    const overlay = document.getElementById('loginOverlay');
+    if (overlay) overlay.classList.add('active');
+}
+
+function closeLogin() {
+    const overlay = document.getElementById('loginOverlay');
+    if (overlay) overlay.classList.remove('active');
+}
+
 // Cart Drawer
 function openCart() {
     const drawer = document.getElementById('cartDrawer');

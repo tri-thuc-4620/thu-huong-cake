@@ -48,7 +48,7 @@
                     <button><i class="fas fa-search"></i></button>
                 </div>
                 <div class="header-actions">
-                    <a href="javascript:void(0)" class="header-action" onclick="alert('Chuc nang dang nhap dang phat trien!')">
+                    <a href="javascript:void(0)" class="header-action" onclick="openLogin()">
                         <i class="fas fa-user"></i>
                         <span>Đăng nhập</span>
                     </a>
@@ -395,7 +395,35 @@
         </div>
     </footer>
 
-        <!-- Cart Drawer -->
+            <!-- Login Modal -->
+    <div class="login-overlay" id="loginOverlay" onclick="if(event.target===this)closeLogin()">
+        <div class="login-modal">
+            <button class="login-close" onclick="closeLogin()"><i class="fas fa-times"></i></button>
+            <h3>Đăng Nhập</h3>
+            <form class="login-form" onsubmit="event.preventDefault();alert('Đăng nhập thành công!')">
+                <div class="form-group">
+                    <label>Tên tài khoản hoặc địa chỉ email *</label>
+                    <input type="text" placeholder="Adminthuhuongcake" required>
+                </div>
+                <div class="form-group">
+                    <label>Mật khẩu *</label>
+                    <input type="password" placeholder="••••••••••" required>
+                </div>
+                <label class="login-remember">
+                    <input type="checkbox">
+                    Ghi nhớ mật khẩu
+                </label>
+                <button type="submit" class="btn-login">Đăng Nhập</button>
+                <div class="login-footer">
+                    <a href="#">Quên mật khẩu?</a>
+                </div>
+            </form>
+            <div class="login-divider">hoặc</div>
+            <button class="btn-register" onclick="alert('Chức năng đăng ký đang phát triển!')">Đăng Ký Tài Khoản Mới</button>
+        </div>
+    </div>
+
+    <!-- Cart Drawer -->
     <div class="cart-overlay" id="cartOverlay" onclick="closeCart()"></div>
     <div class="cart-drawer" id="cartDrawer">
         <div class="cart-drawer-header">
