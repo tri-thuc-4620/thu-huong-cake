@@ -4,7 +4,23 @@
       "Bash(slide)",
       "Bash(hero)",
       "Bash(ls -lh \"c:\\\\Users\\\\langt\\\\OneDrive\\\\Desktop\\\\giao diện\"/*.html)",
-      "Read(//c/Users/langt/OneDrive/Desktop/giao diện/**)"
+      "Read(//c/Users/langt/OneDrive/Desktop/giao diện/**)",
+      "Bash(node -e \":*)",
+      "Bash(php -v)",
+      "Bash(composer -V)",
+      "Bash(where php:*)",
+      "Bash(where composer:*)",
+      "Bash(where node:*)",
+      "Bash(where mysql:*)",
+      "Bash(\"/c/Users/langt/.config/herd/bin/php.bat\" -v)",
+      "Bash(\"/c/Users/langt/.config/herd/bin/composer.bat\" -V)",
+      "Read(//c/Users/langt/**)",
+      "Bash(\"/c/Users/langt/.config/herd/bin/composer.bat\" create-project:*)",
+      "Bash(\"C:/Users/langt/.config/herd/bin/composer.bat\" create-project:*)",
+      "Bash(\"C:/Users/langt/.config/herd/bin/composer.bat\" require:*)",
+      "Bash(\"C:/Users/langt/.config/herd/bin/php.bat\" \"C:/Users/langt/OneDrive/Desktop/giao diện/admin/artisan\" package:discover --ansi)",
+      "Bash(\"C:/Users/langt/.config/herd/bin/php.bat\" artisan:*)",
+      "Bash(\"C:/Users/langt/.config/herd/bin/composer.bat\" install:*)"
     ]
   }
 }
