@@ -36,10 +36,13 @@ document.querySelectorAll('.product-card, .banner-card, .blog-card').forEach(el 
 // Header shadow on scroll
 const header = document.querySelector('.header');
 window.addEventListener('scroll', () => {
+    const stickyWrapper = document.querySelector('.sticky-wrapper');
     if (window.scrollY > 10) {
         header.style.boxShadow = '0 4px 20px rgba(0,0,0,0.1)';
+        if (stickyWrapper) stickyWrapper.classList.add('scrolled');
     } else {
         header.style.boxShadow = '0 2px 8px rgba(0,0,0,0.06)';
+        if (stickyWrapper) stickyWrapper.classList.remove('scrolled');
     }
 });
 
