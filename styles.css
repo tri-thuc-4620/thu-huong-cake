@@ -3159,9 +3159,38 @@ img {
 
 /* ===== Footer ===== */
 .footer {
-    background: linear-gradient(135deg, var(--primary), #c2185b);
-    color: rgba(255,255,255,0.8);
-    padding: 60px 0 0;
+    background: linear-gradient(160deg, #e84393 0%, #c2185b 50%, #ad1457 100%);
+    color: white;
+    padding: 50px 0 0;
+    position: relative;
+    overflow: hidden;
+}
+
+.footer::before {
+    content: '';
+    position: absolute;
+    top: -100px;
+    right: -100px;
+    width: 300px;
+    height: 300px;
+    background: rgba(255,255,255,0.04);
+    border-radius: 50%;
+}
+
+.footer::after {
+    content: '';
+    position: absolute;
+    bottom: -80px;
+    left: -60px;
+    width: 250px;
+    height: 250px;
+    background: rgba(255,255,255,0.03);
+    border-radius: 50%;
+}
+
+.footer .container {
+    position: relative;
+    z-index: 1;
 }
 
 .footer-grid {
@@ -3174,32 +3203,37 @@ img {
 .footer-logo {
     display: flex;
     align-items: center;
-    gap: 10px;
-    margin-bottom: 20px;
+    gap: 12px;
+    margin-bottom: 24px;
 }
 
 .footer-logo .logo-icon {
-    width: 42px;
-    height: 42px;
-    font-size: 16px;
+    width: 46px;
+    height: 46px;
+    font-size: 17px;
+    background: white;
+    color: var(--primary);
+    border-radius: 12px;
 }
 
 .footer-logo .logo-name {
     color: white;
-    font-size: 16px;
+    font-size: 17px;
 }
 
 .footer-logo .logo-sub {
-    color: rgba(255,255,255,0.5);
+    color: rgba(255,255,255,0.85);
 }
 
 .footer h4 {
     color: white;
-    font-size: 16px;
-    font-weight: 600;
+    font-size: 15px;
+    font-weight: 700;
     margin-bottom: 20px;
     position: relative;
     padding-bottom: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
 
 .footer h4::after {
@@ -3207,10 +3241,11 @@ img {
     position: absolute;
     bottom: 0;
     left: 0;
-    width: 30px;
+    width: 32px;
     height: 3px;
-    background: var(--primary);
+    background: white;
     border-radius: 2px;
+    opacity: 0.6;
 }
 
 .footer-links {
@@ -3218,36 +3253,57 @@ img {
 }
 
 .footer-links li {
-    margin-bottom: 10px;
+    margin-bottom: 11px;
 }
 
 .footer-links a {
     font-size: 14px;
-    color: rgba(255,255,255,0.65);
+    color: rgba(255,255,255,0.9);
+    transition: var(--transition);
+    display: inline-flex;
+    align-items: center;
+    gap: 0;
+}
+
+.footer-links a::before {
+    content: '';
+    display: inline-block;
+    width: 0;
     transition: var(--transition);
 }
 
 .footer-links a:hover {
     color: white;
-    padding-left: 6px;
+}
+
+.footer-links a:hover::before {
+    content: '›';
+    width: 12px;
+    margin-right: 2px;
 }
 
 .footer-col p {
     font-size: 14px;
     line-height: 1.7;
     margin-bottom: 8px;
-    color: rgba(255,255,255,0.65);
+    color: rgba(255,255,255,0.9);
+}
+
+.footer-col p strong {
+    color: white;
 }
 
 .footer-bottom {
-    border-top: 1px solid rgba(255,255,255,0.1);
-    padding: 20px 0;
+    border-top: 1px solid rgba(255,255,255,0.15);
+    padding: 18px 0;
     text-align: center;
+    background: rgba(0,0,0,0.08);
 }
 
 .footer-bottom p {
-    font-size: 13px;
-    color: rgba(255,255,255,0.4);
+    font-size: 12px;
+    color: rgba(255,255,255,0.8);
+    letter-spacing: 0.3px;
 }
 
 /* ===== Hamburger Button (hidden on desktop) ===== */
