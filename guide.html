@@ -183,9 +183,34 @@
                     </div>
 
                     <div class="sidebar-box">
-                        <p class="sidebar-empty">San pham vua xem</p>
-                        <p class="sidebar-empty">Khong co san pham xem gan day</p>
-                        <h3 class="sidebar-title">San Pham Vua Xem</h3>
+                        <h3 class="sidebar-title">Sản Phẩm Vừa Xem</h3>
+                        <div class="recently-item">
+                            <a href="product-detail.html" class="recently-img">
+                                <img src="image_san_pham/Banh-bong-lan-trung-muoi-truyen-thong-5.jpg" alt="Bánh bông lan trứng muối">
+                            </a>
+                            <div class="recently-info">
+                                <a href="product-detail.html">Bánh bông lan trứng muối truyền thống</a>
+                                <span class="product-price">220.000đ</span>
+                            </div>
+                        </div>
+                        <div class="recently-item">
+                            <a href="product-detail.html" class="recently-img">
+                                <img src="image_san_pham/Banh-kem-mini-mau-hong-dep-nhat-5.jpg" alt="Bánh kem mini hồng">
+                            </a>
+                            <div class="recently-info">
+                                <a href="product-detail.html">Bánh kem mini màu hồng đẹp</a>
+                                <span class="product-price">120.000đ</span>
+                            </div>
+                        </div>
+                        <div class="recently-item">
+                            <a href="product-detail.html" class="recently-img">
+                                <img src="image_san_pham/Banh-kem-viet-quat-tuoi-mat-7.webp" alt="Bánh kem việt quất">
+                            </a>
+                            <div class="recently-info">
+                                <a href="product-detail.html">Bánh kem việt quất tươi mát</a>
+                                <span class="product-price">160.000đ</span>
+                            </div>
+                        </div>
                     </div>
                 </aside>
 
@@ -472,7 +497,29 @@
         </div>
     </div>
 
-<button class="back-to-top" id="backToTop"><i class="fas fa-chevron-up"></i></button>
+    <!-- Floating Contact -->
+    <div class="floating-contact" id="floatingContact">
+        <div class="floating-menu">
+            <a href="#" class="floating-item">
+                <div class="floating-item-icon messenger"><i class="fab fa-facebook-messenger"></i></div>
+                <span class="floating-item-label">Messenger</span>
+            </a>
+            <a href="#" class="floating-item">
+                <div class="floating-item-icon zalo">Zalo</div>
+                <span class="floating-item-label">Zalo chat</span>
+            </a>
+            <a href="tel:0962849989" class="floating-item">
+                <div class="floating-item-icon phone"><i class="fas fa-phone-alt"></i></div>
+                <span class="floating-item-label">Gọi 0962849989</span>
+            </a>
+        </div>
+        <button class="floating-toggle" onclick="this.parentElement.classList.toggle('open')">
+            <i class="fas fa-comment-dots"></i>
+            <i class="fas fa-times"></i>
+        </button>
+    </div>
+
+    <button class="back-to-top" id="backToTop"><i class="fas fa-chevron-up"></i></button>
     <script src="script.js"></script>
 </body>
 </html>

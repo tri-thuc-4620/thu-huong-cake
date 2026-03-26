@@ -3677,6 +3677,137 @@ body.drawer-open {
     overflow: hidden;
 }
 
+/* ===== Floating Contact Icons ===== */
+.floating-contact {
+    position: fixed;
+    bottom: 24px;
+    right: 80px;
+    z-index: 998;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0;
+}
+
+.floating-toggle {
+    width: 52px;
+    height: 52px;
+    background: #27ae60;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    font-size: 22px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 15px rgba(39, 174, 96, 0.4);
+    transition: var(--transition);
+    position: relative;
+    z-index: 2;
+}
+
+.floating-toggle:hover {
+    transform: scale(1.08);
+}
+
+.floating-toggle .fa-times {
+    display: none;
+}
+
+.floating-contact.open .floating-toggle .fa-comment-dots { display: none; }
+.floating-contact.open .floating-toggle .fa-times { display: block; }
+
+.floating-menu {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 12px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px);
+    transition: all 0.25s ease;
+}
+
+.floating-contact.open .floating-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.floating-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-direction: row-reverse;
+}
+
+.floating-item-icon {
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    color: white;
+    flex-shrink: 0;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.15);
+    transition: var(--transition);
+}
+
+.floating-item-icon:hover {
+    transform: scale(1.1);
+}
+
+.floating-item-icon.messenger {
+    background: #0084ff;
+}
+
+.floating-item-icon.zalo {
+    background: #0068ff;
+    font-size: 12px;
+    font-weight: 800;
+}
+
+.floating-item-icon.phone {
+    background: #27ae60;
+}
+
+.floating-item-label {
+    background: white;
+    padding: 8px 14px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text);
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    white-space: nowrap;
+}
+
+@media (max-width: 768px) {
+    .floating-contact {
+        right: 16px;
+        bottom: 20px;
+    }
+
+    .floating-toggle {
+        width: 48px;
+        height: 48px;
+        font-size: 20px;
+    }
+
+    .floating-item-label {
+        display: none;
+    }
+
+    .floating-item-icon {
+        width: 42px;
+        height: 42px;
+        font-size: 18px;
+    }
+}
+
 /* ===== Contact Page ===== */
 .contact-intro {
     text-align: center;
