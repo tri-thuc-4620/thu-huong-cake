@@ -43,7 +43,19 @@
       "Bash(node \"C:/Users/langt/Herd/thu-huong-cake/laravel/_write_views.cjs\")",
       "Bash(cp \"c:/Users/langt/Herd/thu-huong-cake/giao diện/images/\"* \"c:/Users/langt/Herd/thu-huong-cake/laravel/public/frontend/images/\")",
       "Bash(cp \"c:/Users/langt/Herd/thu-huong-cake/giao diện/image_san_pham/\"* \"c:/Users/langt/Herd/thu-huong-cake/laravel/public/frontend/image_san_pham/\")",
-      "Bash(git -C \"C:/Users/langt/Herd/thu-huong-cake/laravel\" show HEAD:index.html)"
+      "Bash(git -C \"C:/Users/langt/Herd/thu-huong-cake/laravel\" show HEAD:index.html)",
+      "Bash(rm -f ../thu-huong-cake-deploy.zip)",
+      "Bash(powershell -Command \"Compress-Archive -Path ''./*'' -DestinationPath ''../thu-huong-cake-deploy.zip'' -Force\")",
+      "Bash(rm -f thu-huong-cake-deploy.zip)",
+      "Bash(tar -cf - -C laravel .)",
+      "Bash(powershell -Command \"Add-Type -AssemblyName System.IO.Compression.FileSystem; [System.IO.Compression.ZipFile]::CreateFromDirectory\\(''C:\\\\Users\\\\langt\\\\Herd\\\\thu-huong-cake\\\\laravel'', ''C:\\\\Users\\\\langt\\\\Herd\\\\thu-huong-cake\\\\thu-huong-cake-deploy.zip''\\)\")",
+      "Bash(powershell -Command \"Add-Type -AssemblyName System.IO.Compression.FileSystem; [System.IO.Compression.ZipFile]::CreateFromDirectory\\(''C:\\\\Users\\\\langt\\\\Herd\\\\thu-huong-cake\\\\laravel\\\\vendor'', ''C:\\\\Users\\\\langt\\\\Herd\\\\thu-huong-cake\\\\vendor.zip''\\)\")",
+      "Bash(curl -T \"c:/Users/langt/Herd/thu-huong-cake/vendor.zip\" ftp://ftpupload.net/htdocs/vendor.zip --user \"if0_41488611:pUQAsOTUps\" --ftp-create-dirs)",
+      "Bash(curl -T \"c:/Users/langt/Herd/thu-huong-cake/vendor.zip\" ftp://ftpupload.net/htdocs/vendor.zip --user \"if0_41488611:pUQAsOTUps\" -v)",
+      "Bash(powershell -Command \"Add-Type -AssemblyName System.IO.Compression.FileSystem; [System.IO.Compression.ZipFile]::CreateFromDirectory\\(''C:\\\\Users\\\\langt\\\\Herd\\\\thu-huong-cake\\\\laravel'', ''C:\\\\Users\\\\langt\\\\Herd\\\\thu-huong-cake\\\\thu-huong-cake-full.zip''\\)\")",
+      "Bash(powershell -Command \"Add-Type -AssemblyName System.IO.Compression.FileSystem; $zip = [System.IO.Compression.ZipFile]::OpenRead\\(''C:\\\\Users\\\\langt\\\\Herd\\\\thu-huong-cake\\\\thu-huong-cake-full.zip''\\); $zip.Entries | Where-Object { $_.FullName -like ''vendor/*'' } | Select-Object -First 5 | ForEach-Object { $_.FullName }; $zip.Dispose\\(\\)\")",
+      "Bash(powershell -ExecutionPolicy Bypass -File \"c:/Users/langt/Herd/thu-huong-cake/zip-deploy.ps1\")",
+      "Bash(powershell -Command \"Add-Type -AssemblyName System.IO.Compression.FileSystem; $z = [System.IO.Compression.ZipFile]::OpenRead\\(''C:\\\\Users\\\\langt\\\\Herd\\\\thu-huong-cake\\\\thu-huong-cake-full.zip''\\); $z.Entries | Where-Object { $_.FullName -like ''vendor/*'' } | Select-Object -First 3 | ForEach-Object { $_.FullName }; Write-Host ''vendor entries:'' \\($z.Entries | Where-Object { $_.FullName -like ''vendor/*'' }\\).Count; $z.Dispose\\(\\)\")"
     ],
     "additionalDirectories": [
       "c:\\Users\\langt\\Herd\\thu-huong-cake\\laravel\\database\\migrations"
