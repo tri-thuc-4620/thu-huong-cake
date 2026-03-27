@@ -35,7 +35,8 @@
             height: 100vh;
             position: fixed;
             top: 0; left: 0;
-            background: linear-gradient(180deg, var(--dark) 0%, var(--dark-light) 100%);
+            background: #fff;
+            border-right: 1px solid #f0e4e9;
             z-index: 1040;
             transition: var(--transition);
             display: flex;
@@ -44,17 +45,18 @@
         }
 
         .sidebar-brand {
-            padding: 1.5rem 1.5rem;
+            padding: 1.25rem 1.5rem;
             display: flex;
             align-items: center;
             gap: 12px;
-            border-bottom: 1px solid rgba(255,255,255,0.06);
+            border-bottom: 1px solid #f0e4e9;
             flex-shrink: 0;
+            background: linear-gradient(135deg, var(--pink), var(--pink-light));
         }
 
         .sidebar-brand-icon {
             width: 40px; height: 40px;
-            background: linear-gradient(135deg, var(--pink), var(--pink-light));
+            background: rgba(255,255,255,0.25);
             border-radius: 12px;
             display: flex;
             align-items: center;
@@ -62,6 +64,7 @@
             font-size: 1.2rem;
             color: #fff;
             flex-shrink: 0;
+            backdrop-filter: blur(4px);
         }
 
         .sidebar-brand-text {
@@ -74,7 +77,7 @@
         .sidebar-brand-text small {
             font-weight: 400;
             font-size: 0.7rem;
-            color: rgba(255,255,255,0.4);
+            color: rgba(255,255,255,0.7);
             display: block;
             letter-spacing: 0.5px;
             text-transform: uppercase;
@@ -88,10 +91,10 @@
 
         .sidebar-nav::-webkit-scrollbar { width: 4px; }
         .sidebar-nav::-webkit-scrollbar-track { background: transparent; }
-        .sidebar-nav::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 4px; }
+        .sidebar-nav::-webkit-scrollbar-thumb { background: #f0e4e9; border-radius: 4px; }
 
         .nav-group-label {
-            color: rgba(255,255,255,0.35);
+            color: #c0336e;
             font-size: 0.65rem;
             font-weight: 600;
             text-transform: uppercase;
@@ -100,7 +103,7 @@
         }
 
         .sidebar .nav-link {
-            color: rgba(255,255,255,0.55);
+            color: #64748b;
             padding: 0.55rem 1.5rem;
             font-size: 0.875rem;
             font-weight: 400;
@@ -118,22 +121,27 @@
             text-align: center;
             flex-shrink: 0;
             transition: var(--transition);
+            color: #94a3b8;
         }
 
         .sidebar .nav-link:hover {
-            color: rgba(255,255,255,0.9);
-            background: rgba(255,255,255,0.04);
+            color: var(--pink);
+            background: #fdf2f8;
+        }
+
+        .sidebar .nav-link:hover i {
+            color: var(--pink);
         }
 
         .sidebar .nav-link.active {
-            color: #fff;
-            background: rgba(232, 67, 147, 0.12);
+            color: var(--pink-dark);
+            background: linear-gradient(90deg, #fdf2f8, #fff0f6);
             border-left-color: var(--pink);
-            font-weight: 500;
+            font-weight: 600;
         }
 
         .sidebar .nav-link.active i {
-            color: var(--pink-light);
+            color: var(--pink);
         }
 
         /* === MAIN CONTENT === */
@@ -656,7 +664,12 @@
                         <li><a class="dropdown-item py-2" href="#"><i class="bi bi-person me-2"></i>Ho so</a></li>
                         <li><a class="dropdown-item py-2" href="{{ route('admin.settings.index') }}"><i class="bi bi-gear me-2"></i>Cai dat</a></li>
                         <li><hr class="dropdown-divider"></li>
-                        <li><a class="dropdown-item py-2 text-danger" href="#"><i class="bi bi-box-arrow-right me-2"></i>Dang xuat</a></li>
+                        <li>
+                            <form method="POST" action="{{ route('admin.logout') }}">
+                                @csrf
+                                <button type="submit" class="dropdown-item py-2 text-danger"><i class="bi bi-box-arrow-right me-2"></i>Dang xuat</button>
+                            </form>
+                        </li>
                     </ul>
                 </div>
             </div>

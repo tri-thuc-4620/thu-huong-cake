@@ -2,6 +2,11 @@
 
 use Illuminate\Support\Facades\Route;
 
+// Auth
+Route::get('login', [App\Http\Controllers\Admin\AuthController::class, 'showLogin'])->name('login');
+Route::post('login', [App\Http\Controllers\Admin\AuthController::class, 'login'])->name('login.submit');
+Route::post('logout', [App\Http\Controllers\Admin\AuthController::class, 'logout'])->name('logout');
+
 Route::get('/', [App\Http\Controllers\Admin\DashboardController::class, 'index'])->name('dashboard');
 
 Route::resource('products', App\Http\Controllers\Admin\ProductController::class);
