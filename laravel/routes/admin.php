@@ -11,6 +11,11 @@ Route::get('/', [App\Http\Controllers\Admin\DashboardController::class, 'index']
 
 Route::resource('products', App\Http\Controllers\Admin\ProductController::class);
 Route::resource('categories', App\Http\Controllers\Admin\CategoryController::class);
+Route::resource('attributes', App\Http\Controllers\Admin\AttributeController::class)->except(['show']);
+Route::resource('price-tables', App\Http\Controllers\Admin\PriceTableController::class);
+Route::get('attributes/{attribute}/values', [App\Http\Controllers\Admin\AttributeController::class, 'values'])->name('attributes.values');
+Route::post('attributes/{attribute}/values', [App\Http\Controllers\Admin\AttributeController::class, 'storeValue'])->name('attributes.values.store');
+Route::delete('attributes/{attribute}/values/{value}', [App\Http\Controllers\Admin\AttributeController::class, 'destroyValue'])->name('attributes.values.destroy');
 Route::resource('cake-sizes', App\Http\Controllers\Admin\CakeSizeController::class);
 Route::resource('cake-bases', App\Http\Controllers\Admin\CakeBaseController::class);
 Route::resource('orders', App\Http\Controllers\Admin\OrderController::class);

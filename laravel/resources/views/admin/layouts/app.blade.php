@@ -579,6 +579,12 @@
                 <a class="nav-link {{ request()->routeIs('admin.categories.*') ? 'active' : '' }}" href="{{ route('admin.categories.index') }}">
                     <i class="bi bi-folder2"></i> Danh muc
                 </a>
+                <a class="nav-link {{ request()->routeIs('admin.attributes.*') ? 'active' : '' }}" href="{{ route('admin.attributes.index') }}">
+                    <i class="bi bi-sliders"></i> Thuoc tinh
+                </a>
+                <a class="nav-link {{ request()->routeIs('admin.price-tables.*') ? 'active' : '' }}" href="{{ route('admin.price-tables.index') }}">
+                    <i class="bi bi-table"></i> Bang gia
+                </a>
                 <a class="nav-link {{ request()->routeIs('admin.cake-sizes.*') ? 'active' : '' }}" href="{{ route('admin.cake-sizes.index') }}">
                     <i class="bi bi-rulers"></i> Kich thuoc banh
                 </a>
