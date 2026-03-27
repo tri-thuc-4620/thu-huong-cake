@@ -205,11 +205,3 @@ function closeCart() {
     }
 }
 
-// Product card click -> product detail
-document.querySelectorAll('.product-card').forEach(card => {
-    card.style.cursor = 'pointer';
-    card.addEventListener('click', (e) => {
-        if (e.target.closest('.quick-view') || e.target.closest('.add-cart')) return;
-        window.location.href = 'product-detail.html';
-    });
-});

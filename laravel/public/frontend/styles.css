@@ -691,6 +691,14 @@ img {
     overflow: hidden;
     transition: var(--transition);
     box-shadow: var(--shadow-sm);
+    text-decoration: none;
+    color: inherit;
+    display: block;
+}
+
+a.product-card:hover {
+    text-decoration: none;
+    color: inherit;
 }
 
 .product-card:hover {
@@ -747,7 +755,8 @@ img {
     transform: translateY(0);
 }
 
-.product-overlay button {
+.product-overlay button,
+.product-overlay a {
     width: 40px;
     height: 40px;
     border-radius: 50%;
@@ -760,9 +769,11 @@ img {
     justify-content: center;
     transition: var(--transition);
     font-size: 14px;
+    text-decoration: none;
 }
 
-.product-overlay button:hover {
+.product-overlay button:hover,
+.product-overlay a:hover {
     background: var(--primary);
     color: white;
 }
@@ -4748,7 +4759,8 @@ body.drawer-open {
         padding: 10px;
     }
 
-    .product-overlay button {
+    .product-overlay button,
+    .product-overlay a {
         width: 34px;
         height: 34px;
         font-size: 12px;

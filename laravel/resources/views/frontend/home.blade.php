@@ -98,7 +98,7 @@
                 <a href="/products" class="view-all-btn">Xem toàn bộ <i class="fas fa-arrow-right"></i></a>
             </div>
             <div class="products-grid">
-                <div class="product-card">
+                <a href="/product/1" class="product-card">
                     <div class="product-image">
                         <img src="{{ asset('frontend/image_san_pham/Banh-bong-lan-trung-muoi-truyen-thong-5.jpg') }}" alt="Set quà tặng bánh mix vị">
                         <div class="product-overlay">
@@ -110,8 +110,8 @@
                         <h3>Set quà tặng bánh mix vị</h3>
                         <span class="product-price">90.000 d</span>
                     </div>
-                </div>
-                <div class="product-card">
+                </a>
+                <a href="/product/1" class="product-card">
                     <div class="product-image">
                         <img src="{{ asset('frontend/image_san_pham/Banh-bong-lan-pho-mai-cah-bong.jpg') }}" alt="Set bánh mix vị trái tim">
                         <div class="product-overlay">
@@ -123,8 +123,8 @@
                         <h3>Set bánh mix vị trái tim</h3>
                         <span class="product-price">135.000 d</span>
                     </div>
-                </div>
-                <div class="product-card">
+                </a>
+                <a href="/product/1" class="product-card">
                     <div class="product-image">
                         <img src="{{ asset('frontend/image_san_pham/Banh-bong-lan-kem-trung.jpg') }}" alt="Set bánh mini mix vị">
                         <div class="product-overlay">
@@ -136,8 +136,8 @@
                         <h3>Set bánh mini mix vị</h3>
                         <span class="product-price">300.000 d</span>
                     </div>
-                </div>
-                <div class="product-card">
+                </a>
+                <a href="/product/1" class="product-card">
                     <div class="product-image">
                         <img src="{{ asset('frontend/image_san_pham/download.jpg') }}" alt="Sweet box mix vị trái tim">
                         <div class="product-overlay">
@@ -149,8 +149,8 @@
                         <h3>Sweet box mix vị trái tim</h3>
                         <span class="product-price">135.000 d</span>
                     </div>
-                </div>
-                <div class="product-card">
+                </a>
+                <a href="/product/1" class="product-card">
                     <div class="product-image">
                         <img src="{{ asset('frontend/image_san_pham/download.webp') }}" alt="Sweet box mix vị trái cây">
                         <div class="product-overlay">
@@ -162,8 +162,8 @@
                         <h3>Sweet box mix vị trái cây</h3>
                         <span class="product-price">180.000 d</span>
                     </div>
-                </div>
-                <div class="product-card">
+                </a>
+                <a href="/product/1" class="product-card">
                     <div class="product-image">
                         <img src="{{ asset('frontend/image_san_pham/Banh-bong-lan-trung-muoi-truyen-thong-5.jpg') }}" alt="Set quà tặng bánh mix vị">
                         <div class="product-overlay">
@@ -175,8 +175,8 @@
                         <h3>Set quà tặng bánh mix vị</h3>
                         <span class="product-price">90.000 d</span>
                     </div>
-                </div>
-                <div class="product-card">
+                </a>
+                <a href="/product/1" class="product-card">
                     <div class="product-image">
                         <img src="{{ asset('frontend/image_san_pham/Banh-bong-lan-pho-mai-cah-bong.jpg') }}" alt="Set bánh mix vị trái tim">
                         <div class="product-overlay">
@@ -188,8 +188,8 @@
                         <h3>Set bánh mix vị trái tim</h3>
                         <span class="product-price">135.000 d</span>
                     </div>
-                </div>
-                <div class="product-card">
+                </a>
+                <a href="/product/1" class="product-card">
                     <div class="product-image">
                         <img src="{{ asset('frontend/image_san_pham/Banh-bong-lan-kem-trung.jpg') }}" alt="Set bánh mini mix vị">
                         <div class="product-overlay">
@@ -201,8 +201,8 @@
                         <h3>Set bánh mini mix vị</h3>
                         <span class="product-price">300.000 d</span>
                     </div>
-                </div>
-                <div class="product-card">
+                </a>
+                <a href="/product/1" class="product-card">
                     <div class="product-image">
                         <img src="{{ asset('frontend/image_san_pham/download.jpg') }}" alt="Sweet box mix vị trái tim">
                         <div class="product-overlay">
@@ -214,8 +214,8 @@
                         <h3>Sweet box mix vị trái tim</h3>
                         <span class="product-price">135.000 d</span>
                     </div>
-                </div>
-                <div class="product-card">
+                </a>
+                <a href="/product/1" class="product-card">
                     <div class="product-image">
                         <img src="{{ asset('frontend/image_san_pham/download.webp') }}" alt="Sweet box mix vị trái cây">
                         <div class="product-overlay">
@@ -227,7 +227,7 @@
                         <h3>Sweet box mix vị trái cây</h3>
                         <span class="product-price">180.000 d</span>
                     </div>
-                </div>
+                </a>
             </div>
         </div>
     </section>
@@ -243,7 +243,7 @@
                 <a href="/products" class="view-all-btn">Xem toàn bộ <i class="fas fa-arrow-right"></i></a>
             </div>
             <div class="products-grid">
-                <div class="product-card">
+                <a href="/product/1" class="product-card">
                     <div class="product-image">
                         <img src="{{ asset('frontend/image_san_pham/Banh-kem-viet-quat-tuoi-mat-7.webp') }}" alt="Bánh kem việt quất tươi mát">
                         <span class="product-tag">Hot</span>
@@ -256,8 +256,8 @@
                         <h3>Bánh kem việt quất tươi mát</h3>
                         <span class="product-price">160.000 d</span>
                     </div>
-                </div>
-                <div class="product-card">
+                </a>
+                <a href="/product/1" class="product-card">
                     <div class="product-image">
                         <img src="{{ asset('frontend/image_san_pham/Banh-kem-mini-mau-hong-dep-nhat-5.jpg') }}" alt="Bánh kem mini màu hồng đẹp">
                         <div class="product-overlay">
@@ -269,8 +269,8 @@
                         <h3>Bánh kem mini màu hồng đẹp</h3>
                         <span class="product-price">120.000 d</span>
                     </div>
-                </div>
-                <div class="product-card">
+                </a>
+                <a href="/product/1" class="product-card">
                     <div class="product-image">
                         <img src="{{ asset('frontend/image_san_pham/Banh-bong-lan-kem-trung.jpg') }}" alt="Bánh sinh nhật kem chảy tone hồng">
                         <div class="product-overlay">
@@ -282,8 +282,8 @@
                         <h3>Bánh sinh nhật kem chảy tone hồng</h3>
                         <span class="product-price">160.000 d</span>
                     </div>
-                </div>
-                <div class="product-card">
+                </a>
+                <a href="/product/1" class="product-card">
                     <div class="product-image">
                         <img src="{{ asset('frontend/image_san_pham/download.webp') }}" alt="Bánh kem mini dâu tây">
                         <div class="product-overlay">
@@ -295,8 +295,8 @@
                         <h3>Bánh kem mini dâu tây</h3>
                         <span class="product-price">120.000 d</span>
                     </div>
-                </div>
-                <div class="product-card">
+                </a>
+                <a href="/product/1" class="product-card">
                     <div class="product-image">
                         <img src="{{ asset('frontend/image_san_pham/Banh-bong-lan-pho-mai-cah-bong.jpg') }}" alt="Bánh sinh nhật size nhỏ xinh xắn">
                         <div class="product-overlay">
@@ -308,8 +308,8 @@
                         <h3>Bánh sinh nhật size nhỏ xinh xắn</h3>
                         <span class="product-price">120.000 d</span>
                     </div>
-                </div>
-                <div class="product-card">
+                </a>
+                <a href="/product/1" class="product-card">
                     <div class="product-image">
                         <img src="{{ asset('frontend/image_san_pham/Banh-kem-viet-quat-tuoi-mat-7.webp') }}" alt="Bánh kem việt quất tươi mát">
                         <span class="product-tag">Hot</span>
@@ -322,8 +322,8 @@
                         <h3>Bánh kem việt quất tươi mát</h3>
                         <span class="product-price">160.000 d</span>
                     </div>
-                </div>
-                <div class="product-card">
+                </a>
+                <a href="/product/1" class="product-card">
                     <div class="product-image">
                         <img src="{{ asset('frontend/image_san_pham/Banh-kem-mini-mau-hong-dep-nhat-5.jpg') }}" alt="Bánh kem mini màu hồng đẹp">
                         <div class="product-overlay">
@@ -335,8 +335,8 @@
                         <h3>Bánh kem mini màu hồng đẹp</h3>
                         <span class="product-price">120.000 d</span>
                     </div>
-                </div>
-                <div class="product-card">
+                </a>
+                <a href="/product/1" class="product-card">
                     <div class="product-image">
                         <img src="{{ asset('frontend/image_san_pham/Banh-bong-lan-kem-trung.jpg') }}" alt="Bánh sinh nhật kem chảy tone hồng">
                         <div class="product-overlay">
@@ -348,8 +348,8 @@
                         <h3>Bánh sinh nhật kem chảy tone hồng</h3>
                         <span class="product-price">160.000 d</span>
                     </div>
-                </div>
-                <div class="product-card">
+                </a>
+                <a href="/product/1" class="product-card">
                     <div class="product-image">
                         <img src="{{ asset('frontend/image_san_pham/download.webp') }}" alt="Bánh kem mini dâu tây">
                         <div class="product-overlay">
@@ -361,8 +361,8 @@
                         <h3>Bánh kem mini dâu tây</h3>
                         <span class="product-price">120.000 d</span>
                     </div>
-                </div>
-                <div class="product-card">
+                </a>
+                <a href="/product/1" class="product-card">
                     <div class="product-image">
                         <img src="{{ asset('frontend/image_san_pham/Banh-bong-lan-pho-mai-cah-bong.jpg') }}" alt="Bánh sinh nhật size nhỏ xinh xắn">
                         <div class="product-overlay">
@@ -374,7 +374,7 @@
                         <h3>Bánh sinh nhật size nhỏ xinh xắn</h3>
                         <span class="product-price">120.000 d</span>
                     </div>
-                </div>
+                </a>
             </div>
         </div>
     </section>
@@ -390,7 +390,7 @@
                 <a href="/products" class="view-all-btn">Xem toàn bộ <i class="fas fa-arrow-right"></i></a>
             </div>
             <div class="products-grid">
-                <div class="product-card">
+                <a href="/product/1" class="product-card">
                     <div class="product-image">
                         <img src="{{ asset('frontend/image_san_pham/download.jpg') }}" alt="Bánh sinh nhật cho tiệc liên hoan">
                         <div class="product-overlay">
@@ -402,8 +402,8 @@
                         <h3>Bánh sinh nhật cho tiệc liên hoan</h3>
                         <span class="product-price">500.000 d</span>
                     </div>
-                </div>
-                <div class="product-card">
+                </a>
+                <a href="/product/1" class="product-card">
                     <div class="product-image">
                         <img src="{{ asset('frontend/image_san_pham/Banh-kem-viet-quat-tuoi-mat-7.webp') }}" alt="Bánh kem văn phòng">
                         <div class="product-overlay">
@@ -415,8 +415,8 @@
                         <h3>Bánh kem văn phòng</h3>
                         <span class="product-price">500.000 d</span>
                     </div>
-                </div>
-                <div class="product-card">
+                </a>
+                <a href="/product/1" class="product-card">
                     <div class="product-image">
                         <img src="{{ asset('frontend/image_san_pham/Banh-bong-lan-trung-muoi-truyen-thong-5.jpg') }}" alt="Bánh sinh nhật hình chữ nhật hoa quả">
                         <div class="product-overlay">
@@ -428,8 +428,8 @@
                         <h3>Bánh sinh nhật hình chữ nhật hoa quả</h3>
                         <span class="product-price">500.000 d</span>
                     </div>
-                </div>
-                <div class="product-card">
+                </a>
+                <a href="/product/1" class="product-card">
                     <div class="product-image">
                         <img src="{{ asset('frontend/image_san_pham/Banh-kem-mini-mau-hong-dep-nhat-5.jpg') }}" alt="Bánh sinh nhật vuông hoa kem đẹp">
                         <div class="product-overlay">
@@ -441,8 +441,8 @@
                         <h3>Bánh sinh nhật vuông hoa kem đẹp</h3>
                         <span class="product-price">610.000 d</span>
                     </div>
-                </div>
-                <div class="product-card">
+                </a>
+                <a href="/product/1" class="product-card">
                     <div class="product-image">
                         <img src="{{ asset('frontend/image_san_pham/Banh-bong-lan-kem-trung.jpg') }}" alt="Bánh gato hình vuông trang trí hoa kem">
                         <div class="product-overlay">
@@ -454,8 +454,8 @@
                         <h3>Bánh gato hình vuông trang trí hoa kem</h3>
                         <span class="product-price">1.000.000 d</span>
                     </div>
-                </div>
-                <div class="product-card">
+                </a>
+                <a href="/product/1" class="product-card">
                     <div class="product-image">
                         <img src="{{ asset('frontend/image_san_pham/download.jpg') }}" alt="Bánh sinh nhật cho tiệc liên hoan">
                         <div class="product-overlay">
@@ -467,8 +467,8 @@
                         <h3>Bánh sinh nhật cho tiệc liên hoan</h3>
                         <span class="product-price">500.000 d</span>
                     </div>
-                </div>
-                <div class="product-card">
+                </a>
+                <a href="/product/1" class="product-card">
                     <div class="product-image">
                         <img src="{{ asset('frontend/image_san_pham/Banh-kem-viet-quat-tuoi-mat-7.webp') }}" alt="Bánh kem văn phòng">
                         <div class="product-overlay">
@@ -480,8 +480,8 @@
                         <h3>Bánh kem văn phòng</h3>
                         <span class="product-price">500.000 d</span>
                     </div>
-                </div>
-                <div class="product-card">
+                </a>
+                <a href="/product/1" class="product-card">
                     <div class="product-image">
                         <img src="{{ asset('frontend/image_san_pham/Banh-bong-lan-trung-muoi-truyen-thong-5.jpg') }}" alt="Bánh sinh nhật hình chữ nhật hoa quả">
                         <div class="product-overlay">
@@ -493,8 +493,8 @@
                         <h3>Bánh sinh nhật hình chữ nhật hoa quả</h3>
                         <span class="product-price">500.000 d</span>
                     </div>
-                </div>
-                <div class="product-card">
+                </a>
+                <a href="/product/1" class="product-card">
                     <div class="product-image">
                         <img src="{{ asset('frontend/image_san_pham/Banh-kem-mini-mau-hong-dep-nhat-5.jpg') }}" alt="Bánh sinh nhật vuông hoa kem đẹp">
                         <div class="product-overlay">
@@ -506,8 +506,8 @@
                         <h3>Bánh sinh nhật vuông hoa kem đẹp</h3>
                         <span class="product-price">610.000 d</span>
                     </div>
-                </div>
-                <div class="product-card">
+                </a>
+                <a href="/product/1" class="product-card">
                     <div class="product-image">
                         <img src="{{ asset('frontend/image_san_pham/Banh-bong-lan-kem-trung.jpg') }}" alt="Bánh gato hình vuông trang trí hoa kem">
                         <div class="product-overlay">
@@ -519,7 +519,7 @@
                         <h3>Bánh gato hình vuông trang trí hoa kem</h3>
                         <span class="product-price">1.000.000 d</span>
                     </div>
-                </div>
+                </a>
             </div>
         </div>
     </section>
