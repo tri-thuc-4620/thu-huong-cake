@@ -20,7 +20,30 @@
       "Bash(\"C:/Users/langt/.config/herd/bin/composer.bat\" require:*)",
       "Bash(\"C:/Users/langt/.config/herd/bin/php.bat\" \"C:/Users/langt/OneDrive/Desktop/giao diện/admin/artisan\" package:discover --ansi)",
       "Bash(\"C:/Users/langt/.config/herd/bin/php.bat\" artisan:*)",
-      "Bash(\"C:/Users/langt/.config/herd/bin/composer.bat\" install:*)"
+      "Bash(\"C:/Users/langt/.config/herd/bin/composer.bat\" install:*)",
+      "Bash(composer require:*)",
+      "Bash(where.exe composer:*)",
+      "Bash(where.exe php:*)",
+      "Read(//c/Users/langt/AppData/Roaming/Composer/vendor/**)",
+      "Read(//c/ProgramData/ComposerSetup/**)",
+      "Bash(\"/c/Users/langt/.config/herd/bin/composer.bat\" require:*)",
+      "Bash(\"/c/Users/langt/.config/herd/bin/php.bat\" artisan:*)",
+      "Bash(find c:/Users/langt/Herd/thu-huong-cake/laravel/app/Filament/Resources -name *.php -path */BlogPostResource* -o -name *.php -path */StoreLocationResource* -o -name *.php -path */HeroSlideResource* -o -name *.php -path */BannerResource* -o -name *.php -path */ContactMessageResource* -o -name *.php -path */PageResource*)",
+      "Bash(rm -rf app/Filament)",
+      "Bash(rm -rf resources/views/filament)",
+      "Bash(rm -rf public/js/filament)",
+      "Bash(rm -rf public/css/filament)",
+      "Bash(rm -rf public/fonts/filament)",
+      "Bash(\"/c/Users/langt/.config/herd/bin/composer.bat\" remove:*)",
+      "Bash(\"/c/Users/langt/.config/herd/bin/composer.bat\" dump-autoload:*)",
+      "Bash(\"C:/Users/langt/Herd/thu-huong-cake/laravel/resources/views/admin/dashboard.blade.php\":*)",
+      "Bash(\"C:/Users/langt/Herd/thu-huong-cake/laravel/resources/views/admin/products/index.blade.php\":*)",
+      "Bash(node \"C:/Users/langt/Herd/thu-huong-cake/laravel/_write_views.js\")",
+      "Bash(node -e \"require\\(''fs''\\).writeFileSync\\(''C:/Users/langt/Herd/thu-huong-cake/laravel/_write_views.js'', ''console.log\\(\"\"test\"\"\\)''\\)\")",
+      "Bash(node \"C:/Users/langt/Herd/thu-huong-cake/laravel/_write_views.cjs\")"
+    ],
+    "additionalDirectories": [
+      "c:\\Users\\langt\\Herd\\thu-huong-cake\\laravel\\database\\migrations"
     ]
   }
 }
