@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Danh Sach Cua Hang - Thu Huong Cake</title>
+    <title>Danh Sách Cửa Hàng - Thu Hường Cake</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
@@ -37,11 +37,7 @@
                     <i class="fas fa-bars"></i>
                 </button>
                 <a href="index.html" class="logo">
-                    <div class="logo-icon">TH</div>
-                    <div class="logo-text">
-                        <span class="logo-name">THU HUONG</span>
-                        <span class="logo-sub">CAKE</span>
-                    </div>
+                    <img src="images/logo.png" alt="Thu Hường Cake" class="logo-img">
                 </a>
                 <div class="search-bar">
                     <input type="text" placeholder="Tìm sản phẩm bánh sinh nhật...">
@@ -83,7 +79,7 @@
                 <ul class="nav-links">
                     <li><a href="index.html">Trang chủ</a></li>
                     <li><a href="about.html">Về chúng tôi</a></li>
-                    <li><a href="products.html">Banh sinh nhat</a></li>
+                    <li><a href="products.html">Bánh sinh nhật</a></li>
                     <li><a href="guide.html">Hướng dẫn đặt bánh</a></li>
                     <li><a href="blog.html">Blog</a></li>
                     <li><a href="stores.html" class="active">Cửa hàng</a></li>
@@ -106,7 +102,7 @@
             <ul class="drawer-links">
                 <li><a href="index.html">Trang chủ</a></li>
                 <li><a href="about.html">Về chúng tôi</a></li>
-                <li><a href="products.html">Banh sinh nhat</a></li>
+                <li><a href="products.html">Bánh sinh nhật</a></li>
                 <li><a href="guide.html">Hướng dẫn đặt bánh</a></li>
                 <li><a href="blog.html">Blog</a></li>
                 <li><a href="stores.html" class="active">Danh sách cửa hàng</a></li>
@@ -129,7 +125,7 @@
         <div class="container">
             <a href="index.html">Trang chủ</a>
             <i class="fas fa-chevron-right"></i>
-            <span>Danh sách cửa hàng Thu Huong Cake</span>
+            <span>Danh sách cửa hàng Thu Hường Cake</span>
         </div>
     </div>
 
@@ -142,66 +138,66 @@
                 <div class="stores-sidebar">
                     <!-- Filter -->
                     <div class="stores-filter">
-                        <label>Tat ca khu vuc</label>
+                        <label>Tất cả khu vực</label>
                         <select id="storeFilter">
-                            <option>Tat ca</option>
-                            <option>Ha Noi</option>
-                            <option>TP Ho Chi Minh</option>
+                            <option>Tất cả</option>
+                            <option>Hà Nội</option>
+                            <option>TP Hồ Chí Minh</option>
                         </select>
                     </div>
 
                     <div class="stores-search">
-                        <input type="text" placeholder="Tim kiem cua hang..." id="storeSearch">
+                        <input type="text" placeholder="Tìm kiếm cửa hàng..." id="storeSearch">
                     </div>
 
                     <!-- Store Cards -->
                     <div class="stores-list" id="storesList">
                         <div class="store-card active" onclick="selectStore(this)">
-                            <h3>CS1: 11A Pho Dich Vong</h3>
-                            <p><i class="fas fa-map-marker-alt"></i> 11A Dich Vong, Cau Giay, Ha Noi</p>
-                            <p class="store-phone">Dien thoai:<br><a href="tel:0982811096">0982.811.096</a></p>
+                            <h3>CS1: 11A Phố Dịch Vọng</h3>
+                            <p><i class="fas fa-map-marker-alt"></i> 11A Dịch Vọng, Cầu Giấy, Hà Nội</p>
+                            <p class="store-phone">Điện thoại:<br><a href="tel:0982811096">0982.811.096</a></p>
                         </div>
 
                         <div class="store-card" onclick="selectStore(this)">
-                            <h3>CS2: 22 Dich Vong</h3>
-                            <p><i class="fas fa-map-marker-alt"></i> 22 Dich Vong, Cau Giay, Ha Noi</p>
-                            <p class="store-phone">Dien thoai:<br><a href="tel:0982811096">0982.811.096</a></p>
+                            <h3>CS2: 22 Dịch Vọng</h3>
+                            <p><i class="fas fa-map-marker-alt"></i> 22 Dịch Vọng, Cầu Giấy, Hà Nội</p>
+                            <p class="store-phone">Điện thoại:<br><a href="tel:0982811096">0982.811.096</a></p>
                         </div>
 
                         <div class="store-card" onclick="selectStore(this)">
-                            <h3>CS3: 22 Quan Nhan</h3>
-                            <p><i class="fas fa-map-marker-alt"></i> 22 Quan Nhan, Trung Hoa, Cau Giay, Ha Noi</p>
-                            <p class="store-phone">Dien thoai:<br><a href="tel:0984438898">0984.438.898</a></p>
+                            <h3>CS3: 22 Quan Nhân</h3>
+                            <p><i class="fas fa-map-marker-alt"></i> 22 Quan Nhân, Trung Hòa, Cầu Giấy, Hà Nội</p>
+                            <p class="store-phone">Điện thoại:<br><a href="tel:0984438898">0984.438.898</a></p>
                         </div>
 
                         <div class="store-card" onclick="selectStore(this)">
-                            <h3>CS4: 72 Chinh Kinh</h3>
-                            <p><i class="fas fa-map-marker-alt"></i> 72 Chinh Kinh, Thanh Xuan, Ha Noi</p>
-                            <p class="store-phone">Dien thoai:<br><a href="tel:0988064164">0988.064.164</a></p>
+                            <h3>CS4: 72 Chính Kinh</h3>
+                            <p><i class="fas fa-map-marker-alt"></i> 72 Chính Kinh, Thanh Xuân, Hà Nội</p>
+                            <p class="store-phone">Điện thoại:<br><a href="tel:0988064164">0988.064.164</a></p>
                         </div>
 
                         <div class="store-card" onclick="selectStore(this)">
-                            <h3>CS5: 74 Ton That Tung</h3>
-                            <p><i class="fas fa-map-marker-alt"></i> 74 Ton That Tung, Khuong Thuong, Dong Da, Ha Noi</p>
-                            <p class="store-phone">Dien thoai:<br><a href="tel:0962711371">0962.711.371</a></p>
+                            <h3>CS5: 74 Tôn Thất Tùng</h3>
+                            <p><i class="fas fa-map-marker-alt"></i> 74 Tôn Thất Tùng, Khương Thượng, Đống Đa, Hà Nội</p>
+                            <p class="store-phone">Điện thoại:<br><a href="tel:0962711371">0962.711.371</a></p>
                         </div>
 
                         <div class="store-card" onclick="selectStore(this)">
-                            <h3>CS6: 898 Thuy Khue</h3>
-                            <p><i class="fas fa-map-marker-alt"></i> 898 Thuy Khue, Tay Ho, Ha Noi</p>
-                            <p class="store-phone">Dien thoai:<br><a href="tel:0988504514">0988.504.514</a></p>
+                            <h3>CS6: 898 Thụy Khuê</h3>
+                            <p><i class="fas fa-map-marker-alt"></i> 898 Thụy Khuê, Tây Hồ, Hà Nội</p>
+                            <p class="store-phone">Điện thoại:<br><a href="tel:0988504514">0988.504.514</a></p>
                         </div>
 
                         <div class="store-card" onclick="selectStore(this)">
-                            <h3>CS7: 67 Truong Dinh</h3>
-                            <p><i class="fas fa-map-marker-alt"></i> 67 Truong Dinh, Hai Ba Trung, Ha Noi</p>
-                            <p class="store-phone">Dien thoai:<br><a href="tel:0963910920">0963.910.920</a></p>
+                            <h3>CS7: 67 Trương Định</h3>
+                            <p><i class="fas fa-map-marker-alt"></i> 67 Trương Định, Hai Bà Trưng, Hà Nội</p>
+                            <p class="store-phone">Điện thoại:<br><a href="tel:0963910920">0963.910.920</a></p>
                         </div>
 
                         <div class="store-card" onclick="selectStore(this)">
-                            <h3>CS8: 801 Hau Giang</h3>
-                            <p><i class="fas fa-map-marker-alt"></i> 801 Duong Hau Giang, Phuong 11, Quan 6, TP.HCM</p>
-                            <p class="store-phone">Dien thoai:<br><a href="tel:0862089099">0862.089.099</a></p>
+                            <h3>CS8: 801 Hậu Giang</h3>
+                            <p><i class="fas fa-map-marker-alt"></i> 801 Đường Hậu Giang, Phường 11, Quận 6, TP.HCM</p>
+                            <p class="store-phone">Điện thoại:<br><a href="tel:0862089099">0862.089.099</a></p>
                         </div>
                     </div>
                 </div>
@@ -210,8 +206,8 @@
                 <div class="stores-map">
                     <div class="map-placeholder">
                         <i class="fas fa-map-marked-alt"></i>
-                        <h3>Thu Huong Cake</h3>
-                        <p>11 P. Dich Vong, Dich Vong, Cau Giay, Ha Noi, Vietnam</p>
+                        <h3>Thu Hường Cake</h3>
+                        <p>11 P. Dịch Vọng, Dịch Vọng, Cầu Giấy, Hà Nội, Vietnam</p>
                         <span>4.9 <i class="fas fa-star"></i> (630)</span>
                     </div>
                 </div>
@@ -256,11 +252,7 @@
             <div class="footer-grid">
                 <div class="footer-col">
                     <div class="footer-logo">
-                        <div class="logo-icon">TH</div>
-                        <div class="logo-text">
-                            <span class="logo-name">THU HUONG</span>
-                            <span class="logo-sub">CAKE</span>
-                        </div>
+                        <img src="images/logo.png" alt="Thu Hường Cake" class="logo-img">
                     </div>
                     <ul class="footer-links">
                         <li><a href="about.html">Giới thiệu</a></li>

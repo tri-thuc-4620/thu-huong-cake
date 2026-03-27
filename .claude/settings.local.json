@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(slide)",
+      "Bash(hero)",
+      "Bash(ls -lh \"c:\\\\Users\\\\langt\\\\OneDrive\\\\Desktop\\\\giao diện\"/*.html)",
+      "Read(//c/Users/langt/OneDrive/Desktop/giao diện/**)"
+    ]
+  }
+}

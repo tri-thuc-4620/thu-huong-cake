@@ -38,11 +38,7 @@
                 </button>
 
                 <a href="index.html" class="logo">
-                    <div class="logo-icon">TH</div>
-                    <div class="logo-text">
-                        <span class="logo-name">THU HUONG</span>
-                        <span class="logo-sub">CAKE</span>
-                    </div>
+                    <img src="images/logo.png" alt="Thu Hường Cake" class="logo-img">
                 </a>
 
                 <div class="search-bar">
@@ -86,7 +82,7 @@
                 <ul class="nav-links">
                     <li><a href="index.html" class="active">Trang chủ</a></li>
                     <li><a href="about.html">Về chúng tôi</a></li>
-                    <li><a href="products.html">Banh sinh nhat</a></li>
+                    <li><a href="products.html">Bánh sinh nhật</a></li>
                     <li><a href="guide.html">Hướng dẫn đặt bánh</a></li>
                     <li><a href="blog.html">Blog</a></li>
                     <li><a href="stores.html">Cửa hàng</a></li>
@@ -113,7 +109,7 @@
             <ul class="drawer-links">
                 <li><a href="index.html" class="active">Trang chủ</a></li>
                 <li><a href="about.html">Về chúng tôi</a></li>
-                <li><a href="products.html">Banh sinh nhat</a></li>
+                <li><a href="products.html">Bánh sinh nhật</a></li>
                 <li><a href="guide.html">Hướng dẫn đặt bánh</a></li>
                 <li><a href="blog.html">Blog</a></li>
                 <li><a href="stores.html">Danh sách cửa hàng</a></li>
@@ -147,14 +143,14 @@
         </div>
     </div>
 
-    <!-- Hero Section -->
+    <!-- Hero Slider -->
     <section class="hero">
-        <div class="hero-slider">
+        <div class="hero-slider" id="heroSlider">
             <div class="hero-slide active">
                 <div class="container">
                     <div class="hero-content">
                         <div class="hero-text">
-                            <span class="hero-badge">Thu Huong Cake</span>
+                            <span class="hero-badge">Thu Hường Cake</span>
                             <h1>Bánh Sinh Nhật<br><span>Tươi Ngon Mỗi Ngày</span></h1>
                             <p>Mang đến những chiếc bánh tươi ngon, đẹp mắt, được làm từ nguyên liệu tươi sạch, giao hàng nhanh trong 1 giờ.</p>
                             <div class="hero-buttons">
@@ -163,19 +159,54 @@
                             </div>
                         </div>
                         <div class="hero-image">
-                            <div class="hero-image-placeholder">
-                                <i class="fas fa-birthday-cake"></i>
-                                <span>Hero Image</span>
+                            <img src="image_san_pham/Banh-kem-viet-quat-tuoi-mat-7.webp" alt="Bánh kem việt quất" class="hero-img">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-slide">
+                <div class="container">
+                    <div class="hero-content">
+                        <div class="hero-text">
+                            <span class="hero-badge">Đặc Biệt</span>
+                            <h1>Set Bánh Làm Quà<br><span>Ngọt Ngào Yêu Thương</span></h1>
+                            <p>Những set bánh xinh xắn, được đóng hộp tinh tế, hoàn hảo để làm quà tặng cho người thân yêu.</p>
+                            <div class="hero-buttons">
+                                <a href="products.html" class="btn btn-primary">Xem Ngay</a>
+                                <a href="guide.html" class="btn btn-outline">Hướng Dẫn Đặt</a>
                             </div>
+                        </div>
+                        <div class="hero-image">
+                            <img src="image_san_pham/Banh-kem-mini-mau-hong-dep-nhat-5.jpg" alt="Bánh kem mini hồng" class="hero-img">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-slide">
+                <div class="container">
+                    <div class="hero-content">
+                        <div class="hero-text">
+                            <span class="hero-badge">Freeship 3km</span>
+                            <h1>Giao Hàng<br><span>Nhanh Trong 1 Giờ</span></h1>
+                            <p>Ship hỏa tốc trong vòng 1 giờ, freeship 3km cho đơn hàng từ 300K. Đặt bánh dễ dàng, nhận bánh tận nơi.</p>
+                            <div class="hero-buttons">
+                                <a href="products.html" class="btn btn-primary">Đặt Bánh Ngay</a>
+                                <a href="stores.html" class="btn btn-outline">Tìm Cửa Hàng</a>
+                            </div>
+                        </div>
+                        <div class="hero-image">
+                            <img src="image_san_pham/Banh-bong-lan-kem-trung.jpg" alt="Bánh bông lan kem trứng" class="hero-img">
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="hero-dots">
-            <span class="dot active"></span>
-            <span class="dot"></span>
-            <span class="dot"></span>
+        <button class="hero-prev" onclick="heroSlide(-1)"><i class="fas fa-chevron-left"></i></button>
+        <button class="hero-next" onclick="heroSlide(1)"><i class="fas fa-chevron-right"></i></button>
+        <div class="hero-dots" id="heroDots">
+            <span class="dot active" onclick="heroGoTo(0)"></span>
+            <span class="dot" onclick="heroGoTo(1)"></span>
+            <span class="dot" onclick="heroGoTo(2)"></span>
         </div>
     </section>
 
@@ -731,11 +762,7 @@
             <div class="footer-grid">
                 <div class="footer-col">
                     <div class="footer-logo">
-                        <div class="logo-icon">TH</div>
-                        <div class="logo-text">
-                            <span class="logo-name">THU HUONG</span>
-                            <span class="logo-sub">CAKE</span>
-                        </div>
+                        <img src="images/logo.png" alt="Thu Hường Cake" class="logo-img">
                     </div>
                     <ul class="footer-links">
                         <li><a href="about.html">Giới thiệu</a></li>
