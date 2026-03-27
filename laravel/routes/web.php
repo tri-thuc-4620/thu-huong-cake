@@ -3,7 +3,7 @@
 use App\Http\Controllers\Frontend\PageController;
 use Illuminate\Support\Facades\Route;
 
-// Frontend routes
+// Frontend routes (public)
 Route::get('/', [PageController::class, 'home'])->name('home');
 Route::get('/products', [PageController::class, 'products'])->name('products');
 Route::get('/product/{id}', [PageController::class, 'productDetail'])->name('product.detail');
@@ -15,4 +15,12 @@ Route::get('/blog/{id}', [PageController::class, 'blogDetail'])->name('blog.deta
 Route::get('/checkout', [PageController::class, 'checkout'])->name('checkout');
 Route::get('/guide', [PageController::class, 'guide'])->name('guide');
 
+// Customer dashboard (after login)
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware('auth')->name('dashboard');
+
+require __DIR__.'/auth.php';
+
+// Admin routes
 Route::prefix('admin')->name('admin.')->group(base_path('routes/admin.php'));

@@ -585,12 +585,6 @@
                 <a class="nav-link {{ request()->routeIs('admin.price-tables.*') ? 'active' : '' }}" href="{{ route('admin.price-tables.index') }}">
                     <i class="bi bi-table"></i> Bang gia
                 </a>
-                <a class="nav-link {{ request()->routeIs('admin.cake-sizes.*') ? 'active' : '' }}" href="{{ route('admin.cake-sizes.index') }}">
-                    <i class="bi bi-rulers"></i> Kich thuoc banh
-                </a>
-                <a class="nav-link {{ request()->routeIs('admin.cake-bases.*') ? 'active' : '' }}" href="{{ route('admin.cake-bases.index') }}">
-                    <i class="bi bi-layers"></i> Cot banh
-                </a>
 
                 <div class="nav-group-label">Don hang</div>
                 <a class="nav-link {{ request()->routeIs('admin.orders.*') ? 'active' : '' }}" href="{{ route('admin.orders.index') }}">
@@ -671,7 +665,7 @@
                         <li><a class="dropdown-item py-2" href="{{ route('admin.settings.index') }}"><i class="bi bi-gear me-2"></i>Cai dat</a></li>
                         <li><hr class="dropdown-divider"></li>
                         <li>
-                            <form method="POST" action="{{ route('admin.logout') }}">
+                            <form method="POST" action="{{ route('logout') }}">
                                 @csrf
                                 <button type="submit" class="dropdown-item py-2 text-danger"><i class="bi bi-box-arrow-right me-2"></i>Dang xuat</button>
                             </form>
