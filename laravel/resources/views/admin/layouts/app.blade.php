@@ -622,6 +622,9 @@
                 </a>
 
                 <div class="nav-group-label">He thong</div>
+                <a class="nav-link {{ request()->routeIs('admin.roles.*') ? 'active' : '' }}" href="{{ route('admin.roles.index') }}">
+                    <i class="bi bi-shield-lock"></i> Phan quyen
+                </a>
                 <a class="nav-link {{ request()->routeIs('admin.settings.*') ? 'active' : '' }}" href="{{ route('admin.settings.index') }}">
                     <i class="bi bi-gear"></i> Cai dat
                 </a>

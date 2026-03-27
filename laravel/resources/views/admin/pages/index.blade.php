@@ -5,7 +5,7 @@
 @section('content')
 <div class="d-flex justify-content-between align-items-center mb-4">
     <h4 class="mb-0">Trang tinh</h4>
-    <a href="{{ route('admin.pages.create') }}" class="btn btn-primary">
+    <a href="{{ route('admin.pages.create') }}" class="btn btn-pink">
         <i class="bi bi-plus-lg"></i> Them trang
     </a>
 </div>
@@ -39,8 +39,10 @@
                         <td><span class="badge bg-success">Da dang</span></td>
                         <td>25/03/2026</td>
                         <td class="text-end">
-                            <a href="#" class="btn btn-sm btn-outline-primary"><i class="bi bi-pencil"></i></a>
-                            <button class="btn btn-sm btn-outline-danger"><i class="bi bi-trash"></i></button>
+                            <div class="d-flex gap-1 justify-content-end">
+                                <a href="{{ route('admin.pages.edit', 1) }}" class="action-btn edit" title="Sua"><i class="bi bi-pencil"></i></a>
+                                <button class="action-btn delete" title="Xoa"><i class="bi bi-trash"></i></button>
+                            </div>
                         </td>
                     </tr>
                     <tr>
@@ -50,8 +52,10 @@
                         <td><span class="badge bg-success">Da dang</span></td>
                         <td>20/03/2026</td>
                         <td class="text-end">
-                            <a href="#" class="btn btn-sm btn-outline-primary"><i class="bi bi-pencil"></i></a>
-                            <button class="btn btn-sm btn-outline-danger"><i class="bi bi-trash"></i></button>
+                            <div class="d-flex gap-1 justify-content-end">
+                                <a href="{{ route('admin.pages.edit', 2) }}" class="action-btn edit" title="Sua"><i class="bi bi-pencil"></i></a>
+                                <button class="action-btn delete" title="Xoa"><i class="bi bi-trash"></i></button>
+                            </div>
                         </td>
                     </tr>
                     <tr>
@@ -61,8 +65,10 @@
                         <td><span class="badge bg-secondary">Nhap</span></td>
                         <td>18/03/2026</td>
                         <td class="text-end">
-                            <a href="#" class="btn btn-sm btn-outline-primary"><i class="bi bi-pencil"></i></a>
-                            <button class="btn btn-sm btn-outline-danger"><i class="bi bi-trash"></i></button>
+                            <div class="d-flex gap-1 justify-content-end">
+                                <a href="{{ route('admin.pages.edit', 3) }}" class="action-btn edit" title="Sua"><i class="bi bi-pencil"></i></a>
+                                <button class="action-btn delete" title="Xoa"><i class="bi bi-trash"></i></button>
+                            </div>
                         </td>
                     </tr>
                 </tbody>

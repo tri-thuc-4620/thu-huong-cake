@@ -5,7 +5,7 @@
 @section('content')
 <div class="d-flex justify-content-between align-items-center mb-4">
     <h4 class="mb-0">Danh muc blog</h4>
-    <a href="{{ route('admin.blog-categories.create') }}" class="btn btn-primary">
+    <a href="{{ route('admin.blog-categories.create') }}" class="btn btn-pink">
         <i class="bi bi-plus-lg"></i> Them danh muc
     </a>
 </div>
@@ -41,8 +41,10 @@
                         <td><span class="badge bg-success">Hien thi</span></td>
                         <td>1</td>
                         <td class="text-end">
-                            <a href="#" class="btn btn-sm btn-outline-primary"><i class="bi bi-pencil"></i></a>
-                            <button class="btn btn-sm btn-outline-danger"><i class="bi bi-trash"></i></button>
+                            <div class="d-flex gap-1 justify-content-end">
+                                <a href="{{ route('admin.blog-categories.edit', 1) }}" class="action-btn edit" title="Sua"><i class="bi bi-pencil"></i></a>
+                                <button class="action-btn delete" title="Xoa"><i class="bi bi-trash"></i></button>
+                            </div>
                         </td>
                     </tr>
                     <tr>
@@ -53,8 +55,10 @@
                         <td><span class="badge bg-success">Hien thi</span></td>
                         <td>2</td>
                         <td class="text-end">
-                            <a href="#" class="btn btn-sm btn-outline-primary"><i class="bi bi-pencil"></i></a>
-                            <button class="btn btn-sm btn-outline-danger"><i class="bi bi-trash"></i></button>
+                            <div class="d-flex gap-1 justify-content-end">
+                                <a href="{{ route('admin.blog-categories.edit', 2) }}" class="action-btn edit" title="Sua"><i class="bi bi-pencil"></i></a>
+                                <button class="action-btn delete" title="Xoa"><i class="bi bi-trash"></i></button>
+                            </div>
                         </td>
                     </tr>
                     <tr>
@@ -65,8 +69,10 @@
                         <td><span class="badge bg-success">Hien thi</span></td>
                         <td>3</td>
                         <td class="text-end">
-                            <a href="#" class="btn btn-sm btn-outline-primary"><i class="bi bi-pencil"></i></a>
-                            <button class="btn btn-sm btn-outline-danger"><i class="bi bi-trash"></i></button>
+                            <div class="d-flex gap-1 justify-content-end">
+                                <a href="{{ route('admin.blog-categories.edit', 3) }}" class="action-btn edit" title="Sua"><i class="bi bi-pencil"></i></a>
+                                <button class="action-btn delete" title="Xoa"><i class="bi bi-trash"></i></button>
+                            </div>
                         </td>
                     </tr>
                     <tr>
@@ -77,8 +83,10 @@
                         <td><span class="badge bg-success">Hien thi</span></td>
                         <td>4</td>
                         <td class="text-end">
-                            <a href="#" class="btn btn-sm btn-outline-primary"><i class="bi bi-pencil"></i></a>
-                            <button class="btn btn-sm btn-outline-danger"><i class="bi bi-trash"></i></button>
+                            <div class="d-flex gap-1 justify-content-end">
+                                <a href="{{ route('admin.blog-categories.edit', 4) }}" class="action-btn edit" title="Sua"><i class="bi bi-pencil"></i></a>
+                                <button class="action-btn delete" title="Xoa"><i class="bi bi-trash"></i></button>
+                            </div>
                         </td>
                     </tr>
                     <tr>
@@ -89,8 +97,10 @@
                         <td><span class="badge bg-secondary">An</span></td>
                         <td>5</td>
                         <td class="text-end">
-                            <a href="#" class="btn btn-sm btn-outline-primary"><i class="bi bi-pencil"></i></a>
-                            <button class="btn btn-sm btn-outline-danger"><i class="bi bi-trash"></i></button>
+                            <div class="d-flex gap-1 justify-content-end">
+                                <a href="{{ route('admin.blog-categories.edit', 5) }}" class="action-btn edit" title="Sua"><i class="bi bi-pencil"></i></a>
+                                <button class="action-btn delete" title="Xoa"><i class="bi bi-trash"></i></button>
+                            </div>
                         </td>
                     </tr>
                 </tbody>

@@ -38,8 +38,10 @@
                         <td><span class="badge bg-success">Da doc</span></td>
                         <td>27/03/2026</td>
                         <td class="text-end">
-                            <a href="#" class="btn btn-sm btn-outline-info"><i class="bi bi-eye"></i></a>
-                            <a href="#" class="btn btn-sm btn-outline-primary"><i class="bi bi-pencil"></i></a>
+                            <div class="d-flex gap-1 justify-content-end">
+                                <a href="{{ route('admin.contact-messages.show', 1) }}" class="action-btn view" title="Xem"><i class="bi bi-eye"></i></a>
+                                <a href="{{ route('admin.contact-messages.edit', 1) }}" class="action-btn edit" title="Sua"><i class="bi bi-pencil"></i></a>
+                            </div>
                         </td>
                     </tr>
                     <tr>
@@ -50,8 +52,10 @@
                         <td><span class="badge bg-warning text-dark">Chua doc</span></td>
                         <td>26/03/2026</td>
                         <td class="text-end">
-                            <a href="#" class="btn btn-sm btn-outline-info"><i class="bi bi-eye"></i></a>
-                            <a href="#" class="btn btn-sm btn-outline-primary"><i class="bi bi-pencil"></i></a>
+                            <div class="d-flex gap-1 justify-content-end">
+                                <a href="{{ route('admin.contact-messages.show', 2) }}" class="action-btn view" title="Xem"><i class="bi bi-eye"></i></a>
+                                <a href="{{ route('admin.contact-messages.edit', 2) }}" class="action-btn edit" title="Sua"><i class="bi bi-pencil"></i></a>
+                            </div>
                         </td>
                     </tr>
                     <tr>
@@ -62,8 +66,10 @@
                         <td><span class="badge bg-success">Da doc</span></td>
                         <td>25/03/2026</td>
                         <td class="text-end">
-                            <a href="#" class="btn btn-sm btn-outline-info"><i class="bi bi-eye"></i></a>
-                            <a href="#" class="btn btn-sm btn-outline-primary"><i class="bi bi-pencil"></i></a>
+                            <div class="d-flex gap-1 justify-content-end">
+                                <a href="{{ route('admin.contact-messages.show', 3) }}" class="action-btn view" title="Xem"><i class="bi bi-eye"></i></a>
+                                <a href="{{ route('admin.contact-messages.edit', 3) }}" class="action-btn edit" title="Sua"><i class="bi bi-pencil"></i></a>
+                            </div>
                         </td>
                     </tr>
                     <tr>
@@ -74,8 +80,10 @@
                         <td><span class="badge bg-warning text-dark">Chua doc</span></td>
                         <td>24/03/2026</td>
                         <td class="text-end">
-                            <a href="#" class="btn btn-sm btn-outline-info"><i class="bi bi-eye"></i></a>
-                            <a href="#" class="btn btn-sm btn-outline-primary"><i class="bi bi-pencil"></i></a>
+                            <div class="d-flex gap-1 justify-content-end">
+                                <a href="{{ route('admin.contact-messages.show', 4) }}" class="action-btn view" title="Xem"><i class="bi bi-eye"></i></a>
+                                <a href="{{ route('admin.contact-messages.edit', 4) }}" class="action-btn edit" title="Sua"><i class="bi bi-pencil"></i></a>
+                            </div>
                         </td>
                     </tr>
                     <tr>
@@ -86,8 +94,10 @@
                         <td><span class="badge bg-warning text-dark">Chua doc</span></td>
                         <td>23/03/2026</td>
                         <td class="text-end">
-                            <a href="#" class="btn btn-sm btn-outline-info"><i class="bi bi-eye"></i></a>
-                            <a href="#" class="btn btn-sm btn-outline-primary"><i class="bi bi-pencil"></i></a>
+                            <div class="d-flex gap-1 justify-content-end">
+                                <a href="{{ route('admin.contact-messages.show', 5) }}" class="action-btn view" title="Xem"><i class="bi bi-eye"></i></a>
+                                <a href="{{ route('admin.contact-messages.edit', 5) }}" class="action-btn edit" title="Sua"><i class="bi bi-pencil"></i></a>
+                            </div>
                         </td>
                     </tr>
                 </tbody>

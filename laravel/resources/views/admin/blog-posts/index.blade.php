@@ -5,7 +5,7 @@
 @section('content')
 <div class="d-flex justify-content-between align-items-center mb-4">
     <h4 class="mb-0">Bai viet</h4>
-    <a href="{{ route('admin.blog-posts.create') }}" class="btn btn-primary">
+    <a href="{{ route('admin.blog-posts.create') }}" class="btn btn-pink">
         <i class="bi bi-plus-lg"></i> Them bai viet
     </a>
 </div>
@@ -43,8 +43,10 @@
                         <td>1,250</td>
                         <td>20/03/2026</td>
                         <td class="text-end">
-                            <a href="#" class="btn btn-sm btn-outline-primary"><i class="bi bi-pencil"></i></a>
-                            <button class="btn btn-sm btn-outline-danger"><i class="bi bi-trash"></i></button>
+                            <div class="d-flex gap-1 justify-content-end">
+                                <a href="{{ route('admin.blog-posts.edit', 1) }}" class="action-btn edit" title="Sua"><i class="bi bi-pencil"></i></a>
+                                <button class="action-btn delete" title="Xoa"><i class="bi bi-trash"></i></button>
+                            </div>
                         </td>
                     </tr>
                     <tr>
@@ -56,8 +58,10 @@
                         <td>980</td>
                         <td>18/03/2026</td>
                         <td class="text-end">
-                            <a href="#" class="btn btn-sm btn-outline-primary"><i class="bi bi-pencil"></i></a>
-                            <button class="btn btn-sm btn-outline-danger"><i class="bi bi-trash"></i></button>
+                            <div class="d-flex gap-1 justify-content-end">
+                                <a href="{{ route('admin.blog-posts.edit', 2) }}" class="action-btn edit" title="Sua"><i class="bi bi-pencil"></i></a>
+                                <button class="action-btn delete" title="Xoa"><i class="bi bi-trash"></i></button>
+                            </div>
                         </td>
                     </tr>
                     <tr>
@@ -69,8 +73,10 @@
                         <td>750</td>
                         <td>15/03/2026</td>
                         <td class="text-end">
-                            <a href="#" class="btn btn-sm btn-outline-primary"><i class="bi bi-pencil"></i></a>
-                            <button class="btn btn-sm btn-outline-danger"><i class="bi bi-trash"></i></button>
+                            <div class="d-flex gap-1 justify-content-end">
+                                <a href="{{ route('admin.blog-posts.edit', 3) }}" class="action-btn edit" title="Sua"><i class="bi bi-pencil"></i></a>
+                                <button class="action-btn delete" title="Xoa"><i class="bi bi-trash"></i></button>
+                            </div>
                         </td>
                     </tr>
                     <tr>
@@ -82,8 +88,10 @@
                         <td>0</td>
                         <td>--</td>
                         <td class="text-end">
-                            <a href="#" class="btn btn-sm btn-outline-primary"><i class="bi bi-pencil"></i></a>
-                            <button class="btn btn-sm btn-outline-danger"><i class="bi bi-trash"></i></button>
+                            <div class="d-flex gap-1 justify-content-end">
+                                <a href="{{ route('admin.blog-posts.edit', 4) }}" class="action-btn edit" title="Sua"><i class="bi bi-pencil"></i></a>
+                                <button class="action-btn delete" title="Xoa"><i class="bi bi-trash"></i></button>
+                            </div>
                         </td>
                     </tr>
                     <tr>
@@ -95,8 +103,10 @@
                         <td>2,100</td>
                         <td>10/03/2026</td>
                         <td class="text-end">
-                            <a href="#" class="btn btn-sm btn-outline-primary"><i class="bi bi-pencil"></i></a>
-                            <button class="btn btn-sm btn-outline-danger"><i class="bi bi-trash"></i></button>
+                            <div class="d-flex gap-1 justify-content-end">
+                                <a href="{{ route('admin.blog-posts.edit', 5) }}" class="action-btn edit" title="Sua"><i class="bi bi-pencil"></i></a>
+                                <button class="action-btn delete" title="Xoa"><i class="bi bi-trash"></i></button>
+                            </div>
                         </td>
                     </tr>
                 </tbody>

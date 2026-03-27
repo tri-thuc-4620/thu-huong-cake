@@ -23,6 +23,7 @@ Route::resource('pages', App\Http\Controllers\Admin\PageController::class);
 Route::resource('store-locations', App\Http\Controllers\Admin\StoreLocationController::class);
 Route::resource('contact-messages', App\Http\Controllers\Admin\ContactMessageController::class)->only(['index', 'show', 'edit', 'update']);
 Route::resource('callback-requests', App\Http\Controllers\Admin\CallbackRequestController::class)->only(['index', 'show', 'edit', 'update']);
+Route::resource('roles', App\Http\Controllers\Admin\RoleController::class)->except(['show']);
 Route::get('settings', [App\Http\Controllers\Admin\SettingController::class, 'index'])->name('settings.index');
 Route::post('settings', [App\Http\Controllers\Admin\SettingController::class, 'update'])->name('settings.update');
 

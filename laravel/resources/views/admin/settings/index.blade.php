@@ -177,7 +177,7 @@
     </div>
 
     <div class="text-end mt-4">
-        <button type="submit" class="btn btn-primary">
+        <button type="submit" class="btn btn-pink">
             <i class="bi bi-check-lg"></i> Luu cai dat
         </button>
     </div>

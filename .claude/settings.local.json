@@ -69,7 +69,8 @@
       "Bash(rm -f tests/Feature/ProfileTest.php)",
       "Bash(rm -rf app/Http/Requests/)",
       "Bash(rm -f app/View/Components/*.php)",
-      "Bash(rm -rf resources/views/layouts/)"
+      "Bash(rm -rf resources/views/layouts/)",
+      "Bash(ssh -p 2023 -o StrictHostKeyChecking=no -o ConnectTimeout=10 root@103.20.96.134 \"echo ''Connected OK'' && ls /\")"
     ],
     "additionalDirectories": [
       "c:\\Users\\langt\\Herd\\thu-huong-cake\\laravel\\database\\migrations"
