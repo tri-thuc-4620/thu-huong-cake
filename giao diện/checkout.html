@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thanh Toán Đơn Hàng - Thu Hường Cake</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- Top Bar -->
+    <div class="top-bar">
+        <div class="container">
+            <div class="top-bar-content">
+                <div class="top-bar-left">
+                    <span><i class="fas fa-phone-alt"></i> Hotline: 0962.849.989</span>
+                    <span><i class="fas fa-clock"></i> 07:00 - 23:00</span>
+                </div>
+                <div class="top-bar-right">
+                    <span><i class="fas fa-envelope"></i> donhang@thuhuongcake.vn</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sticky Header + Nav -->
+    <div class="sticky-wrapper">
+
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <button class="hamburger" id="hamburgerBtn" aria-label="Menu">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <a href="index.html" class="logo">
+                    <img src="images/logo.png" alt="Thu Hường Cake" class="logo-img">
+                </a>
+                <div class="search-bar">
+                    <input type="text" placeholder="Tìm sản phẩm bánh sinh nhật...">
+                    <button><i class="fas fa-search"></i></button>
+                </div>
+                <div class="header-actions">
+                    <a href="javascript:void(0)" class="header-action" onclick="openLogin()">
+                        <i class="fas fa-user"></i>
+                        <span>Đăng nhập</span>
+                    </a>
+                    <a href="javascript:void(0)" class="header-action cart-action" onclick="openCart()">
+                        <i class="fas fa-shopping-bag"></i>
+                        <span class="cart-badge">1</span>
+                        <span>Giỏ hàng</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation -->
+    <nav class="main-nav">
+        <div class="container">
+            <div class="nav-content">
+                <div class="nav-category-wrapper">
+                    <div class="nav-category-btn">
+                        <i class="fas fa-bars"></i>
+                        <span>Danh mục bánh sinh nhật</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="nav-category-dropdown">
+                        <a href="products.html">Bánh Sinh Nhật Mini</a>
+                        <a href="products.html">Bánh Sinh Nhật Hoa Quả</a>
+                        <a href="products.html">Bánh Bông Lan Trứng Muối</a>
+                        <a href="products.html">Set Bánh Làm Quà</a>
+                        <a href="products.html">Bánh Đặc Biệt ( Signature Cakes )</a>
+                    </div>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="index.html">Trang chủ</a></li>
+                    <li><a href="about.html">Về chúng tôi</a></li>
+                    <li><a href="products.html">Bánh sinh nhật</a></li>
+                    <li><a href="guide.html">Hướng dẫn đặt bánh</a></li>
+                    <li><a href="#">Blog</a></li>
+                    <li><a href="stores.html">Cửa hàng</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    </div><!-- /sticky-wrapper -->
+
+    <!-- Mobile Menu -->
+    <div class="mobile-overlay" id="mobileOverlay"></div>
+    <div class="mobile-drawer" id="mobileDrawer">
+        <button class="drawer-close" id="drawerClose"><i class="fas fa-times"></i></button>
+        <div class="drawer-tabs">
+            <button class="drawer-tab active" data-tab="menu">Menu</button>
+            <button class="drawer-tab" data-tab="category">Danh mục Bánh</button>
+        </div>
+        <div class="drawer-panel active" id="panel-menu">
+            <ul class="drawer-links">
+                <li><a href="index.html">Trang chủ</a></li>
+                <li><a href="about.html">Về chúng tôi</a></li>
+                <li><a href="products.html">Bánh sinh nhật</a></li>
+                <li><a href="guide.html">Hướng dẫn đặt bánh</a></li>
+                <li><a href="#">Blog</a></li>
+                <li><a href="stores.html">Danh sách cửa hàng</a></li>
+            </ul>
+        </div>
+        <div class="drawer-panel" id="panel-category">
+            <ul class="drawer-links">
+                <li><a href="products.html">Bánh Sinh Nhật Mini</a></li>
+                <li><a href="products.html">Bánh Sinh Nhật Hoa Quả</a></li>
+                <li><a href="products.html">Bánh Bông Lan Trứng Muối</a></li>
+                <li><a href="products.html">Set Bánh Làm Quà</a></li>
+                <li><a href="products.html">Bánh Sinh Nhật Cho Bé</a></li>
+                <li><a href="products.html">Bánh Kem Sự Kiện</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Checkout Page -->
+    <section class="checkout-page">
+        <div class="container">
+            <h1 class="checkout-title">Thanh toán đơn hàng</h1>
+
+            <div class="checkout-layout">
+
+                <!-- Left: Form -->
+                <div class="checkout-form">
+
+                    <!-- Thong tin nguoi dat -->
+                    <div class="checkout-card">
+                        <h2 class="checkout-card-title">
+                            <i class="fas fa-user-circle"></i> Thông tin người đặt
+                        </h2>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Họ và tên *</label>
+                                <input type="text" placeholder="Nguyễn Văn A">
+                            </div>
+                            <div class="form-group">
+                                <label>Số điện thoại *</label>
+                                <input type="tel" placeholder="0912...">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Thời gian nhận bánh *</label>
+                            <input type="datetime-local">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Ghi chú đơn hàng</label>
+                            <textarea rows="3" placeholder="Viết lời chúc lên bánh, ít ngọt..."></textarea>
+                        </div>
+
+                        <label class="checkbox-label" id="giftToggle">
+                            <input type="checkbox" id="giftCheckbox">
+                            <i class="fas fa-gift"></i>
+                            <span>Đặt bánh làm quà tặng</span>
+                        </label>
+
+                        <!-- Form nguoi nhan (an/hien) -->
+                        <div class="gift-form" id="giftForm">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>Tên người nhận *</label>
+                                    <input type="text" placeholder="Nguyễn Văn B">
+                                </div>
+                                <div class="form-group">
+                                    <label>SĐT người nhận *</label>
+                                    <input type="tel" placeholder="0987...">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Hinh thuc nhan hang -->
+                    <div class="checkout-card">
+                        <h2 class="checkout-card-title">
+                            <i class="fas fa-map-marker-alt"></i> Hình thức nhận hàng
+                        </h2>
+
+                        <div class="delivery-tabs">
+                            <button class="delivery-tab active" data-delivery="ship" onclick="switchDelivery('ship', this)">
+                                <i class="fas fa-shipping-fast"></i>
+                                <span>Giao tận nơi</span>
+                            </button>
+                            <button class="delivery-tab" data-delivery="pickup" onclick="switchDelivery('pickup', this)">
+                                <i class="fas fa-store"></i>
+                                <span>Nhận tại cửa hàng</span>
+                            </button>
+                        </div>
+
+                        <!-- Giao tan noi -->
+                        <div class="delivery-panel active" id="delivery-ship">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>Thành Phố</label>
+                                    <select>
+                                        <option>Hà Nội</option>
+                                        <option>TP Hồ Chí Minh</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Quận/Huyện</label>
+                                    <select>
+                                        <option>Chọn Quận/Huyện</option>
+                                        <option>Cầu Giấy</option>
+                                        <option>Đống Đa</option>
+                                        <option>Thanh Xuân</option>
+                                        <option>Hà Đông</option>
+                                        <option>Hai Bà Trưng</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>Phường/Xã</label>
+                                    <select>
+                                        <option>Chọn Phường/Xã</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Địa chỉ cụ thể (Số nhà, ngõ...)</label>
+                                    <input type="text" placeholder="Số 10, ngách 5...">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Nhan tai cua hang -->
+                        <div class="delivery-panel" id="delivery-pickup">
+                            <p class="pickup-label">Chọn cửa hàng gần bạn nhất:</p>
+                            <div class="store-list">
+                                <label class="store-option active">
+                                    <input type="radio" name="store" checked>
+                                    <span>Cơ sở 11a Dịch Vọng, Cầu Giấy, Hà Nội</span>
+                                </label>
+                                <label class="store-option">
+                                    <input type="radio" name="store">
+                                    <span>Cơ sở 22 Quan Nhân, Thanh Xuân, Hà Nội</span>
+                                </label>
+                                <label class="store-option">
+                                    <input type="radio" name="store">
+                                    <span>Cơ sở 74 Tôn Thất Tùng, Đống Đa, Hà Nội</span>
+                                </label>
+                                <label class="store-option">
+                                    <input type="radio" name="store">
+                                    <span>Cơ sở 102 Nguyễn Trãi, Quận 1, TP.HCM</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Right: Order Summary -->
+                <div class="checkout-summary">
+                    <div class="checkout-card summary-card">
+                        <h2 class="checkout-card-title">Đơn hàng của bạn</h2>
+
+                        <!-- Cart Item -->
+                        <div class="summary-item">
+                            <div class="summary-item-img">
+                                <img src="image_san_pham/Banh-kem-mini-mau-hong-dep-nhat-5.jpg" alt="Bánh kem">
+                            </div>
+                            <div class="summary-item-info">
+                                <h4>Bánh Kem Sinh Nhật Dâu Tây Premium</h4>
+                                <span class="summary-item-qty">x1</span>
+                            </div>
+                            <span class="summary-item-price">450.000d</span>
+                        </div>
+
+                        <div class="summary-divider"></div>
+
+                        <!-- Totals -->
+                        <div class="summary-row">
+                            <span>Tạm tính</span>
+                            <span>450.000d</span>
+                        </div>
+                        <div class="summary-row">
+                            <span>Phí vận chuyển</span>
+                            <span id="shippingFee">30.000d</span>
+                        </div>
+
+                        <div class="summary-divider"></div>
+
+                        <div class="summary-row summary-total">
+                            <span>Tổng cộng</span>
+                            <span id="totalPrice">480.000d</span>
+                        </div>
+
+                        <!-- Phuong thuc thanh toan -->
+                        <h3 class="payment-title">Phương thức thanh toán</h3>
+
+                        <label class="payment-option active">
+                            <input type="radio" name="payment" checked>
+                            <div class="payment-info">
+                                <div class="payment-name">
+                                    <i class="fas fa-university"></i>
+                                    <strong>Chuyển khoản ngân hàng</strong>
+                                </div>
+                                <span class="payment-desc">Quét mã QR để thanh toán nhanh chóng</span>
+                            </div>
+                        </label>
+
+                        <label class="payment-option">
+                            <input type="radio" name="payment">
+                            <div class="payment-info">
+                                <div class="payment-name">
+                                    <i class="fas fa-money-bill-wave"></i>
+                                    <strong>Thanh toán khi nhận hàng</strong>
+                                </div>
+                                <span class="payment-desc">Thanh toán tiền mặt cho shipper</span>
+                            </div>
+                        </label>
+
+                        <!-- Order Button -->
+                        <button class="btn-checkout">
+                            Đặt Hàng Ngay (<span id="checkoutTotal">480.000d</span>)
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="cta-content">
+                <div class="cta-text">
+                    <h2>Thu Hường Cake lắng nghe bạn!</h2>
+                    <p>Chúng tôi luôn trân trọng và mong đợi nhận được mọi ý kiến đóng góp từ khách hàng để có thể nâng cấp trải nghiệm dịch vụ và sản phẩm tốt hơn nữa.</p>
+                    <a href="contact.html" class="btn btn-white">Đóng Góp Ý Kiến</a>
+                </div>
+                <div class="cta-contact">
+                    <div class="cta-contact-item">
+                        <div class="cta-icon"><i class="fas fa-phone-alt"></i></div>
+                        <div>
+                            <strong>Hotline</strong>
+                            <p>0962.849.989 (07:00 - 23:00)</p>
+                        </div>
+                    </div>
+                    <div class="cta-contact-item">
+                        <div class="cta-icon"><i class="fas fa-envelope"></i></div>
+                        <div>
+                            <strong>Email</strong>
+                            <p>donhang@thuhuongcake.vn</p>
+                        </div>
+                    </div>
+                    <div class="cta-socials">
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="zalo-icon" aria-label="Zalo"><span>Zalo</span></a>
+                        <a href="#" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="footer-logo">
+                        <img src="images/logo.png" alt="Thu Hường Cake" class="logo-img">
+                    </div>
+                    <ul class="footer-links">
+                        <li><a href="about.html">Giới thiệu</a></li>
+                        <li><a href="contact.html">Liên hệ</a></li>
+                        <li><a href="stores.html">Danh sách các cửa hàng</a></li>
+                        <li><a href="about.html">Câu chuyện về Thu Hường Cake</a></li>
+                        <li><a href="#">Tuyển dụng</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Chính Sách Chung</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">Chính sách thanh toán</a></li>
+                        <li><a href="#">Chính sách kiểm hàng</a></li>
+                        <li><a href="#">Chính sách bảo mật thông tin</a></li>
+                        <li><a href="#">Chính sách giao hàng</a></li>
+                        <li><a href="#">Chính sách đổi trả và hoàn tiền</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Hỗ Trợ Khách Hàng</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">Hỏi đáp - FAQs</a></li>
+                        <li><a href="guide.html">Hướng dẫn mua bánh</a></li>
+                        <li><a href="#">Hướng dẫn thanh toán</a></li>
+                        <li><a href="#">Đặt hàng và thanh toán</a></li>
+                        <li><a href="#">Khảo sát trải nghiệm khách hàng</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Chi Nhánh Hà Nội</h4>
+                    <p>Số 72 Ngõ 235 Phố Yên Hòa, P. Yên Hòa, Q. Cầu Giấy, Hà Nội.</p>
+                    <p><strong>Hotline:</strong> 0962.849.989</p>
+                    <h4 style="margin-top: 20px;">Chi Nhánh HCM</h4>
+                    <p>801 Đường Hậu Giang, Phường 11, Quận 6, TP Hồ Chí Minh</p>
+                    <p><strong>Hotline:</strong> 0862089099</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>Công ty TNHH Sản Xuất và Thương Mại Thu Hường &bull; ĐKKD số 0111010237 &bull; Địa chỉ: Số 72 Ngõ 235 Phố Yên Hòa, P. Yên Hòa, Q. Cầu Giấy, Hà Nội.</p>
+            </div>
+        </div>
+    </footer>
+
+                <!-- Lightbox -->
+    <div class="lightbox" id="lightbox" onclick="if(event.target===this)closeLightbox()">
+        <button class="lightbox-close" onclick="closeLightbox()"><i class="fas fa-times"></i></button>
+        <button class="lightbox-prev" onclick="prevLightbox()"><i class="fas fa-chevron-left"></i></button>
+        <img class="lightbox-img" id="lightboxImg" src="" alt="">
+        <button class="lightbox-next" onclick="nextLightbox()"><i class="fas fa-chevron-right"></i></button>
+        <div class="lightbox-counter" id="lightboxCounter"></div>
+    </div>
+
+    <!-- Login Modal -->
+    <div class="login-overlay" id="loginOverlay" onclick="if(event.target===this)closeLogin()">
+        <div class="login-modal">
+            <button class="login-close" onclick="closeLogin()"><i class="fas fa-times"></i></button>
+            <h3>Đăng Nhập</h3>
+            <form class="login-form" onsubmit="event.preventDefault();alert('Đăng nhập thành công!')">
+                <div class="form-group">
+                    <label>Tên tài khoản hoặc địa chỉ email *</label>
+                    <input type="text" placeholder="Adminthuhuongcake" required>
+                </div>
+                <div class="form-group">
+                    <label>Mật khẩu *</label>
+                    <input type="password" placeholder="••••••••••" required>
+                </div>
+                <label class="login-remember">
+                    <input type="checkbox">
+                    Ghi nhớ mật khẩu
+                </label>
+                <button type="submit" class="btn-login">Đăng Nhập</button>
+                <div class="login-footer">
+                    <a href="#">Quên mật khẩu?</a>
+                </div>
+            </form>
+            <div class="login-divider">hoặc</div>
+            <button class="btn-register" onclick="alert('Chức năng đăng ký đang phát triển!')">Đăng Ký Tài Khoản Mới</button>
+        </div>
+    </div>
+
+    <!-- Cart Drawer -->
+    <div class="cart-overlay" id="cartOverlay" onclick="closeCart()"></div>
+    <div class="cart-drawer" id="cartDrawer">
+        <div class="cart-drawer-header">
+            <h3>Giỏ Hàng</h3>
+            <button class="cart-drawer-close" onclick="closeCart()"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="cart-drawer-count">Bạn đang có <strong>1</strong> sản phẩm trong giỏ hàng.</div>
+        <div class="cart-drawer-items">
+            <div class="cart-drawer-item">
+                <div class="cart-item-img">
+                    <img src="image_san_pham/Banh-kem-mini-mau-hong-dep-nhat-5.jpg" alt="Banh kem">
+                </div>
+                <div class="cart-item-info">
+                    <h4>Bánh Kem Sinh Nhật Dâu Tây Premium</h4>
+                    <p class="cart-item-variant">16cm - Gato Vani Viet Quat</p>
+                    <span class="cart-item-price">450.000d</span> <span class="cart-item-qty">x 1</span>
+                    <br><button class="cart-item-remove">Xóa</button>
+                </div>
+            </div>
+        </div>
+        <div class="cart-drawer-footer">
+            <div class="cart-total-row">
+                <span>Tổng tiền tạm tính:</span>
+                <span>450.000d</span>
+            </div>
+            <a href="checkout.html" class="btn-cart-checkout">Tiến Hành Đặt Hàng</a>
+            <a href="products.html" class="cart-detail-link">Xem chi tiết giỏ hàng <i class="fas fa-arrow-right"></i></a>
+        </div>
+    </div>
+
+    <!-- Floating Contact -->
+    <div class="floating-contact" id="floatingContact">
+        <div class="floating-menu">
+            <a href="#" class="floating-item">
+                <div class="floating-item-icon messenger"><i class="fab fa-facebook-messenger"></i></div>
+                <span class="floating-item-label">Messenger</span>
+            </a>
+            <a href="#" class="floating-item">
+                <div class="floating-item-icon zalo">Zalo</div>
+                <span class="floating-item-label">Zalo chat</span>
+            </a>
+            <a href="tel:0962849989" class="floating-item">
+                <div class="floating-item-icon phone"><i class="fas fa-phone-alt"></i></div>
+                <span class="floating-item-label">Gọi 0962849989</span>
+            </a>
+        </div>
+        <button class="floating-toggle" onclick="this.parentElement.classList.toggle('open')">
+            <i class="fas fa-comment-dots"></i>
+            <i class="fas fa-times"></i>
+        </button>
+    </div>
+
+    <button class="back-to-top" id="backToTop"><i class="fas fa-chevron-up"></i></button>
+
+    <script src="script.js"></script>
+    <script>
+        // Switch delivery method
+        function switchDelivery(type, btn) {
+            document.querySelectorAll('.delivery-tab').forEach(t => t.classList.remove('active'));
+            btn.classList.add('active');
+            document.querySelectorAll('.delivery-panel').forEach(p => p.classList.remove('active'));
+            document.getElementById('delivery-' + type).classList.add('active');
+
+            // Update shipping fee
+            const feeEl = document.getElementById('shippingFee');
+            const totalEl = document.getElementById('totalPrice');
+            const checkoutEl = document.getElementById('checkoutTotal');
+            if (type === 'pickup') {
+                feeEl.innerHTML = '<span style="color:#27ae60">Miễn phí</span>';
+                totalEl.textContent = '450.000d';
+                checkoutEl.textContent = '450.000d';
+            } else {
+                feeEl.textContent = '30.000d';
+                totalEl.textContent = '480.000d';
+                checkoutEl.textContent = '480.000d';
+            }
+        }
+
+        // Payment option toggle
+        document.querySelectorAll('.payment-option').forEach(opt => {
+            opt.addEventListener('click', () => {
+                document.querySelectorAll('.payment-option').forEach(o => o.classList.remove('active'));
+                opt.classList.add('active');
+                opt.querySelector('input').checked = true;
+            });
+        });
+
+        // Store option toggle
+        document.querySelectorAll('.store-option').forEach(opt => {
+            opt.addEventListener('click', () => {
+                document.querySelectorAll('.store-option').forEach(o => o.classList.remove('active'));
+                opt.classList.add('active');
+            });
+        });
+
+        // Gift form toggle
+        document.getElementById('giftCheckbox').addEventListener('change', function() {
+            document.getElementById('giftForm').classList.toggle('active', this.checked);
+        });
+    </script>
+</body>
+</html>

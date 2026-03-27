@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Về Chúng Tôi - Thu Hường Cake</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- Top Bar -->
+    <div class="top-bar">
+        <div class="container">
+            <div class="top-bar-content">
+                <div class="top-bar-left">
+                    <span><i class="fas fa-phone-alt"></i> Hotline: 0962.849.989</span>
+                    <span><i class="fas fa-clock"></i> 07:00 - 23:00</span>
+                </div>
+                <div class="top-bar-right">
+                    <span><i class="fas fa-envelope"></i> donhang@thuhuongcake.vn</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sticky Header + Nav -->
+    <div class="sticky-wrapper">
+
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <button class="hamburger" id="hamburgerBtn" aria-label="Menu">
+                    <i class="fas fa-bars"></i>
+                </button>
+
+                <a href="index.html" class="logo">
+                    <img src="images/logo.png" alt="Thu Hường Cake" class="logo-img">
+                </a>
+
+                <div class="search-bar">
+                    <input type="text" placeholder="Tìm sản phẩm bánh sinh nhật...">
+                    <button><i class="fas fa-search"></i></button>
+                </div>
+
+                <div class="header-actions">
+                    <a href="javascript:void(0)" class="header-action" onclick="openLogin()">
+                        <i class="fas fa-user"></i>
+                        <span>Đăng nhập</span>
+                    </a>
+                    <a href="javascript:void(0)" class="header-action cart-action" onclick="openCart()">
+                        <i class="fas fa-shopping-bag"></i>
+                        <span class="cart-badge">0</span>
+                        <span>Giỏ hàng</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation -->
+    <nav class="main-nav">
+        <div class="container">
+            <div class="nav-content">
+                <div class="nav-category-wrapper">
+                    <div class="nav-category-btn">
+                        <i class="fas fa-bars"></i>
+                        <span>Danh mục bánh sinh nhật</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="nav-category-dropdown">
+                        <a href="products.html">Bánh Sinh Nhật Mini</a>
+                        <a href="products.html">Bánh Sinh Nhật Hoa Quả</a>
+                        <a href="products.html">Bánh Bông Lan Trứng Muối</a>
+                        <a href="products.html">Set Bánh Làm Quà</a>
+                        <a href="products.html">Bánh Đặc Biệt ( Signature Cakes )</a>
+                    </div>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="index.html">Trang chủ</a></li>
+                    <li><a href="about.html" class="active">Về chúng tôi</a></li>
+                    <li><a href="products.html">Bánh sinh nhật</a></li>
+                    <li><a href="guide.html">Hướng dẫn đặt bánh</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                    <li><a href="stores.html">Cửa hàng</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    </div><!-- /sticky-wrapper -->
+
+    <!-- Mobile Menu Overlay -->
+    <div class="mobile-overlay" id="mobileOverlay"></div>
+
+    <!-- Mobile Drawer Menu -->
+    <div class="mobile-drawer" id="mobileDrawer">
+        <button class="drawer-close" id="drawerClose"><i class="fas fa-times"></i></button>
+        <div class="drawer-tabs">
+            <button class="drawer-tab active" data-tab="menu">Menu</button>
+            <button class="drawer-tab" data-tab="category">Danh mục Bánh</button>
+        </div>
+        <div class="drawer-panel active" id="panel-menu">
+            <ul class="drawer-links">
+                <li><a href="index.html">Trang chủ</a></li>
+                <li><a href="about.html" class="active">Về chúng tôi</a></li>
+                <li><a href="products.html">Bánh sinh nhật</a></li>
+                <li><a href="guide.html">Hướng dẫn đặt bánh</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="stores.html">Danh sách cửa hàng</a></li>
+                <li><a href="javascript:void(0)">Đăng nhập / Đăng ký</a></li>
+            </ul>
+        </div>
+        <div class="drawer-panel" id="panel-category">
+            <ul class="drawer-links">
+                <li><a href="products.html">Bánh Sinh Nhật Mini</a></li>
+                <li><a href="products.html">Bánh Sinh Nhật Hoa Quả</a></li>
+                <li><a href="products.html">Bánh Bông Lan Trứng Muối</a></li>
+                <li class="has-sub"><a href="products.html">Set Bánh Làm Quà <i class="fas fa-chevron-down"></i></a></li>
+                <li class="has-sub"><a href="products.html">Bánh Đặc Biệt ( Signature Cakes ) <i class="fas fa-chevron-down"></i></a></li>
+                <li class="has-sub"><a href="products.html">Bánh Sinh Nhật Cho Bé <i class="fas fa-chevron-down"></i></a></li>
+                <li class="has-sub"><a href="products.html">Bánh Kem Sự Kiện <i class="fas fa-chevron-down"></i></a></li>
+                <li><a href="products.html">Bánh Sinh Nhật Tầng</a></li>
+                <li><a href="products.html">Bánh Sinh Nhật Hình Trái Tim</a></li>
+                <li><a href="products.html">Bánh Sinh Nhật Hoa Kem</a></li>
+                <li><a href="products.html">Bánh Kem Vẽ Hình</a></li>
+                <li><a href="products.html">Bánh Kem Tạo Hình</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Breadcrumb -->
+    <div class="breadcrumb">
+        <div class="container">
+            <a href="index.html">Trang chủ</a>
+            <i class="fas fa-chevron-right"></i>
+            <span>Về Chúng Tôi</span>
+        </div>
+    </div>
+
+    <!-- About Page Content -->
+    <section class="about-page">
+        <div class="container">
+
+            <!-- Page Title -->
+            <div class="about-header">
+                <h1>Về Công Ty TNHH Sản Xuất Và Thương Mại Thu Hường</h1>
+            </div>
+
+            <!-- Intro -->
+            <div class="about-intro">
+                <p><strong>Thu Hường Cake</strong> là thương hiệu bánh sinh nhật Âu lâu đời tại Hà Nội. Và có lẽ những người yêu thích bánh ngọt, đặc biệt là bánh được làm theo phong cách Âu thì chắc chắn không còn xa lạ.</p>
+                <p>Được thành lập từ năm 2011 tại con phố Dịch Vọng, Cầu Giấy, Hà Nội. Trải qua hơn 10 năm phát triển, đến nay Thu Hường Cake đã trở thành "Hệ thống bánh kem uy tín - chất lượng" tại Hà Nội và mang đến hơn 100.000 bữa tiệc sinh nhật vui vẻ, đầm ấm và hạnh phúc đến mọi gia đình Việt.</p>
+                <p>Khác với hình thức kinh doanh của các hệ thống bánh kem khác, với mỗi cơ sở kinh doanh Thu Hường Cake đều có khu vực sản xuất trực tiếp, điều đó giúp chất lượng bánh đạt tốt nhất, luôn kịp thời đáp ứng nhu cầu của khách hàng và mang đến những chiếc bánh tươi mới ngày đảm bảo tuyệt đối về an toàn vệ sinh thực phẩm.</p>
+            </div>
+
+            <!-- Banner Image Placeholder -->
+            <div class="about-banner">
+                <div class="about-banner-placeholder">
+                    <i class="fas fa-image"></i>
+                    <span>Banner - Bánh không chỉ để ngắm mà còn để thưởng thức</span>
+                </div>
+            </div>
+
+            <!-- Thanh Lap -->
+            <div class="about-section">
+                <h2>Thành Lập</h2>
+                <p>Anh Trần Văn Quân sau nhiều năm tiếp thu nghề bánh truyền thống của gia đình và học hỏi các dòng bánh kem hiện đại, đến 10/10/2021 đã chính thức tiếp quản Thu Hường Cake. Bằng kinh nghiệm, lòng đam mê và sáng tạo với mong muốn mang đến những chiếc bánh tuyệt vời nhất đến người Việt, năm 2022 anh đã thành lập Công ty TNHH Sản xuất &amp; Thương mại Thu Hường.</p>
+                <p>Chỉ sau 1 năm thành lập, anh Trần Văn Quân đã đưa Công ty TNHH Sản xuất &amp; Thương mại Thu Hường phát triển lên một tầm cao mới. Đến nay, Thu Hường Cake đã trở thành "Hệ thống bánh kem Uy tín - Chất lượng" luôn nằm trong top đầu tại Hà Nội và luôn được khách hàng phản hồi vô cùng tích cực về chất lượng sản phẩm cũng như quy trình dịch vụ.</p>
+            </div>
+
+            <!-- Nhiem Vu -->
+            <div class="about-section">
+                <h2>Nhiệm Vụ</h2>
+                <p>Với những sản phẩm được làm từ nguyên liệu ngoại nhập và được trang trí bằng Socola, decor hiện đại và bằng hoa quả tươi tự nhiên theo mùa, Thu Hường Cake cam kết mang đến cho người tiêu dùng những sản phẩm đạt chất lượng cao nhất như một lời tri ân đối với tình cảm yêu mến của khách hàng.</p>
+            </div>
+
+            <!-- Cam Ket Kinh Doanh -->
+            <div class="about-section">
+                <h2>Cam Kết Kinh Doanh</h2>
+                <p>Thu Hường Cake cam kết đối với khách hàng về sản phẩm bánh kem nhỏ xinh, tươi ngon hoàn toàn không chất bảo quản, thực sự lành mạnh, tốt cho sức khỏe và phục vụ với tình tâm tận tâm tuyệt vời khách hàng. Đó là nền tảng mà Thu Hường Cake tồn tại và phát triển bền vững trong hơn 10 năm qua.</p>
+            </div>
+
+            <!-- Banner 2 -->
+            <div class="about-banner">
+                <div class="about-banner-placeholder" style="background: linear-gradient(135deg, #667eea, #764ba2);">
+                    <i class="fas fa-birthday-cake"></i>
+                    <span>Banner - Birthday Cake</span>
+                </div>
+            </div>
+
+            <!-- Co Cau To Chuc -->
+            <div class="about-section">
+                <h2>Cơ Cấu Tổ Chức</h2>
+                <p>Thu Hường Cake là một hệ thống đội ngũ nhân viên và lãnh đạo chuyên nghiệp, gồm CBCNV và những người thợ đã có kinh nghiệm lâu năm, được đào tạo bài bản chuyên nghiệp. Mô hình vận hành hoạt động công ty được bố trí theo chiều ngang, làm gia tăng sự thuận tiện trong việc vận hành cỗ máy kinh doanh và gia tăng sự phối hợp thống nhất giữa các bộ phận trong công ty.</p>
+            </div>
+
+            <!-- Chu Trong Phat Trien Con Nguoi -->
+            <div class="about-section">
+                <h2>Chú Trọng Phát Triển Con Người</h2>
+                <p>Thu Hường Cake luôn coi con người là tài sản lớn nhất. Do vậy, chúng tôi luôn quan tâm xây dựng đội ngũ cán bộ quản lý và nhân viên chuyên nghiệp để phát triển bền vững. Phục vụ khách hàng bằng dịch vụ chu đáo, tận tâm và tận tình.</p>
+                <p>Tại Thu Hường Cake luôn có đội ngũ tư vấn online chu đáo và tận tâm, tận tình 24/7. Khách hàng có thể đến trực tiếp các cơ sở để mua hàng, hoặc đặt những chiếc bánh sinh nhật đẹp online trên các nền tảng mạng xã hội. Dù với bất kỳ hình thức nào cũng luôn luôn có các bạn nhân viên hỗ trợ tư vấn nhiệt tình, chuyên nghiệp.</p>
+            </div>
+
+            <!-- Uy Tin - Chat Luong -->
+            <div class="about-section">
+                <h2>Uy Tín - Chất Lượng</h2>
+                <p>Với phương châm "Chất lượng khẳng định thương hiệu" cùng slogan "Bánh không chỉ để ngắm, mà còn để thưởng thức", Thu Hường Cake luôn đặt chất lượng sản phẩm lên hàng đầu, mong muốn không chỉ mang đến những chiếc bánh sinh nhật đẹp mắt mà còn thơm ngon, làm hài lòng khách hàng khi thưởng thức.</p>
+                <p>Trải qua bao nhiêu năm hình thành và phát triển, liên tục lưu truyền và tiếp thu về chất lượng sản phẩm. Khách hàng có thể thấy Thu Hường Cake luôn được Rating rất cao trên tất cả các nền tảng kinh doanh. Điều này cho thấy được Thu Hường luôn đặt chất lượng sản phẩm lên đầu và lắng nghe ý kiến khách hàng. Giữ vững được phong độ phát triển và đạt được niềm tin tuyệt đối với khách hàng.</p>
+            </div>
+
+            <!-- Banner 3 - Phan hoi khach hang -->
+            <div class="about-banner">
+                <div class="about-banner-placeholder" style="background: linear-gradient(135deg, #f093fb, #f5576c);">
+                    <i class="fas fa-comments"></i>
+                    <span>Banner - Phản hồi của Khách Hàng</span>
+                </div>
+            </div>
+
+            <!-- Luon Luon Lang Nghe -->
+            <div class="about-section">
+                <h2>Luôn Luôn Lắng Nghe</h2>
+                <p>Thu Hường Cake luôn luôn lắng nghe những ý kiến đóng góp đầy thiện chí để phấn đấu nâng cao chất lượng sản phẩm, nâng cao năng lực cạnh tranh và cải thiện chất lượng dịch vụ để mang lại những giá trị tiện ích phù hợp với mong muốn và lợi ích của quý khách hàng.</p>
+                <p>Quý khách chọn lựa <strong>Thu Hường Cake</strong>, quý khách hoàn toàn yên tâm và hài lòng về dịch vụ của chúng tôi.</p>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="cta-content">
+                <div class="cta-text">
+                    <h2>Thu Hường Cake lắng nghe bạn!</h2>
+                    <p>Chúng tôi luôn trân trọng và mong đợi nhận được mọi ý kiến đóng góp từ khách hàng để có thể nâng cấp trải nghiệm dịch vụ và sản phẩm tốt hơn nữa.</p>
+                    <a href="contact.html" class="btn btn-white">Đóng Góp Ý Kiến</a>
+                </div>
+                <div class="cta-contact">
+                    <div class="cta-contact-item">
+                        <div class="cta-icon"><i class="fas fa-phone-alt"></i></div>
+                        <div>
+                            <strong>Hotline</strong>
+                            <p>0962.849.989 (07:00 - 23:00)</p>
+                        </div>
+                    </div>
+                    <div class="cta-contact-item">
+                        <div class="cta-icon"><i class="fas fa-envelope"></i></div>
+                        <div>
+                            <strong>Email</strong>
+                            <p>donhang@thuhuongcake.vn</p>
+                        </div>
+                    </div>
+                    <div class="cta-socials">
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="zalo-icon" aria-label="Zalo"><span>Zalo</span></a>
+                        <a href="#" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="footer-logo">
+                        <img src="images/logo.png" alt="Thu Hường Cake" class="logo-img">
+                    </div>
+                    <ul class="footer-links">
+                        <li><a href="about.html">Giới thiệu</a></li>
+                        <li><a href="contact.html">Liên hệ</a></li>
+                        <li><a href="stores.html">Danh sách các cửa hàng</a></li>
+                        <li><a href="about.html">Câu chuyện về Thu Hường Cake</a></li>
+                        <li><a href="#">Tuyển dụng</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Chính Sách Chung</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">Chính sách thanh toán</a></li>
+                        <li><a href="#">Chính sách kiểm hàng</a></li>
+                        <li><a href="#">Chính sách bảo mật thông tin</a></li>
+                        <li><a href="#">Chính sách giao hàng</a></li>
+                        <li><a href="#">Chính sách đổi trả và hoàn tiền</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Hỗ Trợ Khách Hàng</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">Hỏi đáp - FAQs</a></li>
+                        <li><a href="guide.html">Hướng dẫn mua bánh</a></li>
+                        <li><a href="#">Hướng dẫn thanh toán</a></li>
+                        <li><a href="#">Đặt hàng và thanh toán</a></li>
+                        <li><a href="#">Khảo sát trải nghiệm khách hàng</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Chi Nhánh Hà Nội</h4>
+                    <p>Số 72 Ngõ 235 Phố Yên Hòa, P. Yên Hòa, Q. Cầu Giấy, Hà Nội.</p>
+                    <p><strong>Hotline:</strong> 0962.849.989</p>
+                    <h4 style="margin-top: 20px;">Chi Nhánh HCM</h4>
+                    <p>801 Đường Hậu Giang, Phường 11, Quận 6, TP Hồ Chí Minh</p>
+                    <p><strong>Hotline:</strong> 0862089099</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>Công ty TNHH Sản Xuất và Thương Mại Thu Hường &bull; ĐKKD số 0111010237 &bull; Địa chỉ: Số 72 Ngõ 235 Phố Yên Hòa, P. Yên Hòa, Q. Cầu Giấy, Hà Nội.</p>
+            </div>
+        </div>
+    </footer>
+
+                <!-- Lightbox -->
+    <div class="lightbox" id="lightbox" onclick="if(event.target===this)closeLightbox()">
+        <button class="lightbox-close" onclick="closeLightbox()"><i class="fas fa-times"></i></button>
+        <button class="lightbox-prev" onclick="prevLightbox()"><i class="fas fa-chevron-left"></i></button>
+        <img class="lightbox-img" id="lightboxImg" src="" alt="">
+        <button class="lightbox-next" onclick="nextLightbox()"><i class="fas fa-chevron-right"></i></button>
+        <div class="lightbox-counter" id="lightboxCounter"></div>
+    </div>
+
+    <!-- Login Modal -->
+    <div class="login-overlay" id="loginOverlay" onclick="if(event.target===this)closeLogin()">
+        <div class="login-modal">
+            <button class="login-close" onclick="closeLogin()"><i class="fas fa-times"></i></button>
+            <h3>Đăng Nhập</h3>
+            <form class="login-form" onsubmit="event.preventDefault();alert('Đăng nhập thành công!')">
+                <div class="form-group">
+                    <label>Tên tài khoản hoặc địa chỉ email *</label>
+                    <input type="text" placeholder="Adminthuhuongcake" required>
+                </div>
+                <div class="form-group">
+                    <label>Mật khẩu *</label>
+                    <input type="password" placeholder="••••••••••" required>
+                </div>
+                <label class="login-remember">
+                    <input type="checkbox">
+                    Ghi nhớ mật khẩu
+                </label>
+                <button type="submit" class="btn-login">Đăng Nhập</button>
+                <div class="login-footer">
+                    <a href="#">Quên mật khẩu?</a>
+                </div>
+            </form>
+            <div class="login-divider">hoặc</div>
+            <button class="btn-register" onclick="alert('Chức năng đăng ký đang phát triển!')">Đăng Ký Tài Khoản Mới</button>
+        </div>
+    </div>
+
+    <!-- Cart Drawer -->
+    <div class="cart-overlay" id="cartOverlay" onclick="closeCart()"></div>
+    <div class="cart-drawer" id="cartDrawer">
+        <div class="cart-drawer-header">
+            <h3>Giỏ Hàng</h3>
+            <button class="cart-drawer-close" onclick="closeCart()"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="cart-drawer-count">Bạn đang có <strong>1</strong> sản phẩm trong giỏ hàng.</div>
+        <div class="cart-drawer-items">
+            <div class="cart-drawer-item">
+                <div class="cart-item-img">
+                    <img src="image_san_pham/Banh-kem-mini-mau-hong-dep-nhat-5.jpg" alt="Bánh kem">
+                </div>
+                <div class="cart-item-info">
+                    <h4>Bánh Kem Sinh Nhật Dâu Tây Premium</h4>
+                    <p class="cart-item-variant">16cm - Gato Vani Viet Quat</p>
+                    <span class="cart-item-price">450.000d</span> <span class="cart-item-qty">x 1</span>
+                    <br><button class="cart-item-remove">Xóa</button>
+                </div>
+            </div>
+        </div>
+        <div class="cart-drawer-footer">
+            <div class="cart-total-row">
+                <span>Tổng tiền tạm tính:</span>
+                <span>450.000d</span>
+            </div>
+            <a href="checkout.html" class="btn-cart-checkout">Tiến Hành Đặt Hàng</a>
+            <a href="products.html" class="cart-detail-link">Xem chi tiết giỏ hàng <i class="fas fa-arrow-right"></i></a>
+        </div>
+    </div>
+
+    <!-- Floating Contact -->
+    <div class="floating-contact" id="floatingContact">
+        <div class="floating-menu">
+            <a href="#" class="floating-item">
+                <div class="floating-item-icon messenger"><i class="fab fa-facebook-messenger"></i></div>
+                <span class="floating-item-label">Messenger</span>
+            </a>
+            <a href="#" class="floating-item">
+                <div class="floating-item-icon zalo">Zalo</div>
+                <span class="floating-item-label">Zalo chat</span>
+            </a>
+            <a href="tel:0962849989" class="floating-item">
+                <div class="floating-item-icon phone"><i class="fas fa-phone-alt"></i></div>
+                <span class="floating-item-label">Gọi 0962849989</span>
+            </a>
+        </div>
+        <button class="floating-toggle" onclick="this.parentElement.classList.toggle('open')">
+            <i class="fas fa-comment-dots"></i>
+            <i class="fas fa-times"></i>
+        </button>
+    </div>
+
+    <button class="back-to-top" id="backToTop">
+        <i class="fas fa-chevron-up"></i>
+    </button>
+
+    <script src="script.js"></script>
+</body>
+</html>
