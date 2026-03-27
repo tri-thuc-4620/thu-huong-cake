@@ -621,35 +621,8 @@
                 </div>
             </div>
 
-            {{-- 6. SEO --}}
-            <div class="card mb-4">
-                <div class="card-header"><h6 class="mb-0"><i class="bi bi-search me-2 text-muted"></i>SEO</h6></div>
-                <div class="card-body">
-                    {{-- Google Preview --}}
-                    <div class="mb-4" style="background:#f8fafc;border-radius:10px;padding:1rem;border:1px solid #e2e8f0">
-                        <div style="font-size:0.7rem;color:#94a3b8;margin-bottom:4px">Xem truoc tren Google:</div>
-                        <div style="font-size:1rem;color:#1a0dab;font-weight:500" id="seoPreviewTitle">Banh kem dau tay Premium - Thu Huong Cake</div>
-                        <div style="font-size:0.8rem;color:#006621" id="seoPreviewUrl">thuhuongcake.wuaze.com/san-pham/<strong>ten-san-pham</strong></div>
-                        <div style="font-size:0.8rem;color:#545454" id="seoPreviewDesc">Banh kem dau tay tuoi ngon, lam tu nguyen lieu sach, giao hang nhanh trong 1 gio...</div>
-                    </div>
-
-                    <div class="mb-3">
-                        <label class="form-label" style="font-size:0.85rem">Tu khoa chinh</label>
-                        <input type="text" class="form-control form-control-sm" name="focus_keyword" placeholder="Nhap tu khoa chinh...">
-                        <div class="form-text">0 / 100</div>
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label" style="font-size:0.85rem">Meta Title</label>
-                        <input type="text" class="form-control form-control-sm" name="meta_title" placeholder="Tieu de hien thi tren Google">
-                        <div class="form-text">0 / 60 ky tu</div>
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label" style="font-size:0.85rem">Meta Description</label>
-                        <textarea class="form-control form-control-sm" name="meta_description" rows="2" placeholder="Mo ta hien thi tren Google"></textarea>
-                        <div class="form-text">0 / 160 ky tu</div>
-                    </div>
-                </div>
-            </div>
+            {{-- 6. SEO Analyzer --}}
+            @include('admin.partials.seo-analyzer')
 
         </div>
 
@@ -899,16 +872,6 @@
 @endpush
 
 @push('scripts')
-<script>
-function toggleProductType() {
-    const type = document.getElementById('productType').value;
-    // Future: toggle variation-related sections based on product type
-}
-
-// Manage stock toggle
-document.getElementById('manageStock')?.addEventListener('change', function() {
-    // Future: show/hide stock quantity field
-});
-</script>
+<script src="{{ asset('js/seo-analyzer.js') }}"></script>
 @endpush
 @endsection
