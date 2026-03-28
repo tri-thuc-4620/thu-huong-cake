@@ -127,6 +127,10 @@
                         <input class="form-check-input" type="checkbox" id="show_in_menu" name="show_in_menu" value="1" {{ old('show_in_menu', $category->show_in_menu) ? 'checked' : '' }}>
                         <label class="form-check-label" for="show_in_menu">Hien thi trong menu</label>
                     </div>
+                    <div class="form-check form-switch mb-3">
+                        <input class="form-check-input" type="checkbox" id="show_on_home" name="show_on_home" value="1" {{ old('show_on_home', $category->show_on_home) ? 'checked' : '' }}>
+                        <label class="form-check-label" for="show_on_home">Hien thi tren trang chu</label>
+                    </div>
                 </div>
             </div>
 

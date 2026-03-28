@@ -235,6 +235,53 @@
     </section>
     @endif
 
+    <!-- Danh muc hien thi trang chu -->
+    @if(isset($homeCategories))
+    @foreach($homeCategories as $homeCat)
+    @if($homeCat->homeProducts && $homeCat->homeProducts->count() > 0)
+    <section class="products-section {{ $loop->even ? 'alt-bg' : '' }}">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-title-group">
+                    <span class="section-label">{{ $homeCat->parent?->name ?? 'Danh muc' }}</span>
+                    <h2 class="section-title">{{ $homeCat->name }}</h2>
+                </div>
+                <a href="{{ route('products', ['category' => $homeCat->slug]) }}" class="view-all-btn">Xem toan bo <i class="fas fa-arrow-right"></i></a>
+            </div>
+            <div class="products-grid">
+                @foreach($homeCat->homeProducts as $product)
+                <a href="{{ route('product.detail', $product->id) }}" class="product-card">
+                    <div class="product-image">
+                        @if($product->primaryImage)
+                            <img src="{{ Storage::url($product->primaryImage->image) }}" alt="{{ $product->name }}">
+                        @else
+                            <img src="{{ asset('frontend/image_san_pham/Banh-kem-viet-quat-tuoi-mat-7.webp') }}" alt="{{ $product->name }}">
+                        @endif
+                        @if($product->is_hot)<span class="product-tag">Hot</span>@endif
+                        @if($product->is_new)<span class="product-tag" style="background:#10b981">Moi</span>@endif
+                        <div class="product-overlay">
+                            <button class="quick-view"><i class="fas fa-eye"></i></button>
+                            <button class="add-cart"><i class="fas fa-shopping-cart"></i></button>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <h3>{{ $product->name }}</h3>
+                        @if($product->sale_price)
+                            <span class="product-price" style="text-decoration:line-through;color:#999;font-size:12px">{{ number_format($product->price) }} d</span>
+                            <span class="product-price">{{ number_format($product->sale_price) }} d</span>
+                        @else
+                            <span class="product-price">{{ number_format($product->price) }} d</span>
+                        @endif
+                    </div>
+                </a>
+                @endforeach
+            </div>
+        </div>
+    </section>
+    @endif
+    @endforeach
+    @endif
+
     <!-- Blog / Tin Tuc -->
     @if($blogPosts && $blogPosts->count() > 0)
     <section class="blog-section">

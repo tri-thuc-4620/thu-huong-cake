@@ -52,6 +52,7 @@
                     <th>So SP</th>
                     <th>Hien thi</th>
                     <th>Menu</th>
+                    <th>Trang chu</th>
                     <th>Thu tu</th>
                     <th style="width:100px"></th>
                 </tr>
@@ -93,6 +94,13 @@
                     </td>
                     <td>
                         @if($category->show_in_menu)
+                            <i class="bi bi-check-circle-fill text-success"></i>
+                        @else
+                            <i class="bi bi-x-circle-fill text-muted"></i>
+                        @endif
+                    </td>
+                    <td>
+                        @if($category->show_on_home)
                             <i class="bi bi-check-circle-fill text-success"></i>
                         @else
                             <i class="bi bi-x-circle-fill text-muted"></i>

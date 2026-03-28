@@ -28,7 +28,7 @@ class CacheController extends Controller
         $keys = [
             'home_slides', 'home_banners', 'menu_categories',
             'home_featured', 'home_hot', 'home_new', 'home_latest',
-            'home_blog', 'all_stores',
+            'home_blog', 'home_categories', 'all_stores',
         ];
 
         foreach ($keys as $key) {

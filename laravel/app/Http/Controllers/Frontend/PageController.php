@@ -56,10 +56,24 @@ class PageController extends Controller
             BlogPost::where('is_published', true)->latest('published_at')->take(3)->get()
         );
 
+        // Danh muc hien thi trang chu (tick show_on_home)
+        $homeCategories = Cache::remember('home_categories', 1800, fn() =>
+            Category::where('show_on_home', true)->where('is_visible', true)
+                ->orderBy('sort_order')->get()
+                ->map(function ($cat) {
+                    $cat->homeProducts = Product::with('primaryImage')
+                        ->where('is_visible', true)
+                        ->where('category_id', $cat->id)
+                        ->orderBy('sort_order')
+                        ->take(10)->get();
+                    return $cat;
+                })
+        );
+
         return view('frontend.home', compact(
             'slides', 'banners', 'categories',
             'featuredProducts', 'hotProducts', 'newProducts', 'latestProducts',
-            'blogPosts'
+            'homeCategories', 'blogPosts'
         ));
     }
 
