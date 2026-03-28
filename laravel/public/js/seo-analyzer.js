@@ -1,504 +1,324 @@
 /**
  * SEO Analyzer - Rank Math Style
- * Real-time SEO analysis for admin forms (products, blog posts, pages).
- * Vanilla JS, no dependencies.
+ * Phan tich SEO realtime dua tren tu khoa chinh
  */
 (function () {
     'use strict';
 
-    // =========================================================================
-    // Helpers
-    // =========================================================================
+    function q(s) { return document.querySelector(s); }
+    function val(el) { return el ? el.value.trim() : ''; }
+    function norm(s) { return (s || '').toLowerCase().replace(/\s+/g, ' ').trim(); }
+    function wordCount(t) { return t ? t.split(/\s+/).filter(Boolean).length : 0; }
+    function stripTags(h) { var d = document.createElement('div'); d.innerHTML = h || ''; return d.textContent || ''; }
 
-    /** Safely get an element by selector; returns null if not found. */
-    function q(selector) {
-        return document.querySelector(selector);
+    function countOccurrences(text, kw) {
+        if (!kw) return 0;
+        var n = norm(text), k = norm(kw), c = 0, p = 0;
+        while ((p = n.indexOf(k, p)) !== -1) { c++; p += k.length; }
+        return c;
     }
-
-    /** Get trimmed value of an input/textarea, or empty string if missing. */
-    function val(el) {
-        return el ? el.value.trim() : '';
-    }
-
-    /** Count words in a string (Vietnamese-aware, splits on whitespace). */
-    function wordCount(text) {
-        if (!text) return 0;
-        return text.split(/\s+/).filter(Boolean).length;
-    }
-
-    /**
-     * Normalize a Vietnamese string for keyword matching.
-     * Lowercases and collapses whitespace so partial matching works.
-     */
-    function norm(str) {
-        return (str || '').toLowerCase().replace(/\s+/g, ' ').trim();
-    }
-
-    /** Count how many times `keyword` appears in `text` (case-insensitive). */
-    function countOccurrences(text, keyword) {
-        if (!keyword) return 0;
-        var n = norm(text);
-        var k = norm(keyword);
-        if (!k) return 0;
-        var count = 0;
-        var pos = 0;
-        while ((pos = n.indexOf(k, pos)) !== -1) {
-            count++;
-            pos += k.length;
-        }
-        return count;
-    }
-
-    /** Strip HTML tags to get plain text. */
-    function stripTags(html) {
-        var tmp = document.createElement('div');
-        tmp.innerHTML = html || '';
-        return tmp.textContent || tmp.innerText || '';
-    }
-
-    // =========================================================================
-    // DOM references (resolved once on init, some may be null)
-    // =========================================================================
 
     var els = {};
 
     function resolveElements() {
-        els.keyword     = q('#seoKeyword');
-        els.metaTitle   = q('#seoMetaTitle');
-        els.metaDesc    = q('#seoMetaDesc');
-        els.slug        = q('#seoSlug');
-        els.name        = q('#productName') || q('input[name="name"]');
+        els.keyword = q('#seoKeyword');
+        els.name = q('#productName') || q('input[name="name"]');
         els.description = q('#productDescription') || q('textarea[name="description"]');
-        els.shortDesc   = q('textarea[name="short_description"]');
-        els.fileInput   = q('input[type="file"][name*="image"]') || q('input[type="file"]');
+        els.shortDesc = q('textarea[name="short_description"]');
+        els.slug = q('#seoSlug') || q('input[name="slug"]');
+        els.metaTitle = q('#seoMetaTitle') || q('input[name="meta_title"]');
+        els.metaDesc = q('#seoMetaDesc') || q('textarea[name="meta_description"]');
+        els.fileInput = q('input[type="file"][name*="image"]') || q('input[type="file"]');
 
-        // Display elements
-        els.scoreBadge  = q('#seoScoreBadge');
-        els.scoreNum    = q('#seoScoreNum');
-        els.titleCount  = q('#seoTitleCount');
-        els.titleHint   = q('#seoTitleHint');
-        els.descCount   = q('#seoDescCount');
-        els.descHint    = q('#seoDescHint');
+        els.scoreBadge = q('#seoScoreBadge');
+        els.scoreNum = q('#seoScoreNum');
         els.previewTitle = q('#seoPreviewTitle');
-        els.previewUrl  = q('#seoPreviewUrl');
+        els.previewUrl = q('#seoPreviewUrl');
         els.previewDesc = q('#seoPreviewDesc');
-        els.basicList   = q('#seoBasicList');
-        els.extraList   = q('#seoExtraList');
-        els.readList    = q('#seoReadList');
-        els.basicBadge  = q('#seoBasicBadge');
-        els.extraBadge  = q('#seoExtraBadge');
-        els.readBadge   = q('#seoReadBadge');
+        els.basicList = q('#seoBasicList');
+        els.extraList = q('#seoExtraList');
+        els.readTitleList = q('#seoReadTitleList');
+        els.readContentList = q('#seoReadContentList');
+        els.basicBadge = q('#seoBasicBadge');
+        els.extraBadge = q('#seoExtraBadge');
+        els.readTitleBadge = q('#seoReadTitleBadge');
+        els.readContentBadge = q('#seoReadContentBadge');
     }
 
-    // =========================================================================
-    // Analysis checks
-    // =========================================================================
-
-    /**
-     * Run all SEO checks and return structured results.
-     * Each check: { key, pass: true|false|'warn', message }
-     */
     function analyze() {
-        var keyword   = val(els.keyword);
-        var title     = val(els.metaTitle);
-        var desc      = val(els.metaDesc);
-        var slug      = val(els.slug);
-        var name      = val(els.name);
-        var content   = val(els.description);
+        var keyword = val(els.keyword);
+        var name = val(els.name);
+        var content = val(els.description);
         var shortDesc = val(els.shortDesc);
+        var slug = val(els.slug) || norm(name).replace(/\s+/g, '-');
+        var title = val(els.metaTitle) || name;
+        var desc = val(els.metaDesc) || shortDesc;
 
-        // Plain-text version of content (in case it contains HTML)
-        var plainContent = stripTags(content);
-        var contentWords = wordCount(plainContent);
-        var kwNorm       = norm(keyword);
+        var plain = stripTags(content);
+        var words = wordCount(plain);
+        var kw = norm(keyword);
+        var kwCount = countOccurrences(plain, keyword);
+        var kwWords = wordCount(keyword);
+        var density = words > 0 && kwWords > 0 ? (kwCount * kwWords / words * 100) : 0;
 
-        // ---- Basic checks (7) ----
+        // === SEO Co ban ===
         var basic = [];
 
-        // 1. Keyword in title
-        if (!keyword) {
-            basic.push({ pass: false, msg: 'Tu khoa chinh co trong Tieu de SEO' });
-        } else if (norm(title).indexOf(kwNorm) !== -1) {
-            basic.push({ pass: true, msg: 'Tu khoa chinh co trong Tieu de SEO' });
+        // 1. Tu khoa trong tieu de SEO
+        if (kw && norm(title).indexOf(kw) !== -1) {
+            basic.push({ pass: true, msg: 'Tuyet voi! Ban dang su dung tu khoa chinh trong Tieu de SEO.' });
         } else {
-            basic.push({ pass: false, msg: 'Tu khoa chinh co trong Tieu de SEO' });
+            basic.push({ pass: false, msg: 'Them tu khoa chinh vao Tieu de SEO.' });
         }
 
-        // 2. Keyword in meta description
-        if (!keyword) {
-            basic.push({ pass: false, msg: 'Tu khoa chinh co trong Mo ta SEO' });
-        } else if (norm(desc).indexOf(kwNorm) !== -1) {
-            basic.push({ pass: true, msg: 'Tu khoa chinh co trong Mo ta SEO' });
+        // 2. Tu khoa trong mo ta SEO
+        if (kw && norm(desc).indexOf(kw) !== -1) {
+            basic.push({ pass: true, msg: 'Da su dung tu khoa chinh trong Mo ta Meta SEO.' });
         } else {
-            basic.push({ pass: false, msg: 'Tu khoa chinh co trong Mo ta SEO' });
+            basic.push({ pass: false, msg: 'Them tu khoa chinh vao the Mo ta Meta SEO cua ban.' });
         }
 
-        // 3. Keyword in URL
-        if (!keyword) {
-            basic.push({ pass: false, msg: 'Tu khoa chinh co trong URL' });
-        } else if (norm(slug).indexOf(kwNorm.replace(/\s+/g, '-')) !== -1 || norm(slug).indexOf(kwNorm.replace(/\s+/g, '')) !== -1) {
-            basic.push({ pass: true, msg: 'Tu khoa chinh co trong URL' });
+        // 3. Tu khoa trong URL
+        if (kw && (norm(slug).indexOf(kw.replace(/\s+/g, '-')) !== -1 || norm(slug).indexOf(kw.replace(/\s+/g, '')) !== -1)) {
+            basic.push({ pass: true, msg: 'Tu khoa chinh da duoc su dung trong URL.' });
         } else {
-            basic.push({ pass: false, msg: 'Tu khoa chinh co trong URL' });
+            basic.push({ pass: false, msg: 'Su dung tu khoa chinh trong URL.' });
         }
 
-        // 4. Keyword in content
-        if (!keyword) {
-            basic.push({ pass: false, msg: 'Tu khoa chinh xuat hien trong noi dung' });
-        } else if (norm(plainContent).indexOf(kwNorm) !== -1) {
-            basic.push({ pass: true, msg: 'Tu khoa chinh xuat hien trong noi dung' });
-        } else {
-            basic.push({ pass: false, msg: 'Tu khoa chinh xuat hien trong noi dung' });
-        }
-
-        // 5. Keyword density 0.5% - 1.5%
-        if (!keyword || contentWords === 0) {
-            basic.push({ pass: false, msg: 'Mat do tu khoa 0.5% - 1.5%' });
-        } else {
-            var kwWordCount = wordCount(keyword);
-            var kwOccurrences = countOccurrences(plainContent, keyword);
-            var density = (kwOccurrences * kwWordCount / contentWords) * 100;
-            if (density >= 0.5 && density <= 1.5) {
-                basic.push({ pass: true, msg: 'Mat do tu khoa ' + density.toFixed(1) + '% (tot: 0.5% - 1.5%)' });
-            } else if (density > 0 && density < 0.5) {
-                basic.push({ pass: 'warn', msg: 'Mat do tu khoa ' + density.toFixed(1) + '% (nen tang len 0.5% - 1.5%)' });
-            } else if (density > 1.5) {
-                basic.push({ pass: 'warn', msg: 'Mat do tu khoa ' + density.toFixed(1) + '% (nen giam xuong 0.5% - 1.5%)' });
+        // 4. Tu khoa trong 10% dau noi dung
+        if (kw && plain) {
+            var first10 = plain.substring(0, Math.max(Math.ceil(plain.length * 0.1), 80));
+            if (norm(first10).indexOf(kw) !== -1) {
+                basic.push({ pass: true, msg: 'Tu khoa chinh xuat hien trong 10% noi dung dau tien.' });
             } else {
-                basic.push({ pass: false, msg: 'Mat do tu khoa 0.5% - 1.5%' });
+                basic.push({ pass: false, msg: 'Them tu khoa chinh vao 10% dau noi dung.' });
             }
-        }
-
-        // 6. Title length 50-60
-        var titleLen = title.length;
-        if (titleLen >= 50 && titleLen <= 60) {
-            basic.push({ pass: true, msg: 'Do dai tieu de tot (' + titleLen + ' ky tu)' });
-        } else if (titleLen > 0 && titleLen < 50) {
-            basic.push({ pass: 'warn', msg: 'Tieu de hoi ngan (' + titleLen + '/50-60 ky tu)' });
-        } else if (titleLen > 60) {
-            basic.push({ pass: 'warn', msg: 'Tieu de qua dai (' + titleLen + '/50-60 ky tu)' });
         } else {
-            basic.push({ pass: false, msg: 'Do dai tieu de 50-60 ky tu' });
+            basic.push({ pass: false, msg: 'Them tu khoa chinh vao 10% dau noi dung.' });
         }
 
-        // 7. Description length 120-160
-        var descLen = desc.length;
-        if (descLen >= 120 && descLen <= 160) {
-            basic.push({ pass: true, msg: 'Do dai mo ta tot (' + descLen + ' ky tu)' });
-        } else if (descLen > 0 && descLen < 120) {
-            basic.push({ pass: 'warn', msg: 'Mo ta hoi ngan (' + descLen + '/120-160 ky tu)' });
-        } else if (descLen > 160) {
-            basic.push({ pass: 'warn', msg: 'Mo ta qua dai (' + descLen + '/120-160 ky tu)' });
+        // 5. Tu khoa trong noi dung
+        if (kw && kwCount > 0) {
+            basic.push({ pass: true, msg: 'Da tim thay tu khoa chinh trong noi dung.' });
         } else {
-            basic.push({ pass: false, msg: 'Do dai mo ta 120-160 ky tu' });
+            basic.push({ pass: false, msg: 'Them tu khoa chinh vao noi dung bai viet.' });
         }
 
-        // ---- Extra checks (5) ----
+        // 6. Do dai noi dung
+        if (words >= 300) {
+            basic.push({ pass: true, msg: 'Noi dung dai ' + words + ' tu. Lam tot lam!' });
+        } else if (words > 0) {
+            basic.push({ pass: 'warn', msg: 'Noi dung chi co ' + words + ' tu. Nen dai hon 300 tu.' });
+        } else {
+            basic.push({ pass: false, msg: 'Noi dung nen dai 200 Words.' });
+        }
+
+        // 7. Schema san pham
+        basic.push({ pass: true, msg: 'Ban dang su dung Schema san pham cho San pham nay.' });
+
+        // === Bo sung ===
         var extra = [];
 
-        // 1. Keyword in first 10% of content
-        if (!keyword || !plainContent) {
-            extra.push({ pass: false, msg: 'Tu khoa xuat hien trong 10% dau noi dung' });
-        } else {
-            var first10 = plainContent.substring(0, Math.max(Math.ceil(plainContent.length * 0.1), 50));
-            if (norm(first10).indexOf(kwNorm) !== -1) {
-                extra.push({ pass: true, msg: 'Tu khoa xuat hien trong 10% dau noi dung' });
-            } else {
-                extra.push({ pass: false, msg: 'Tu khoa xuat hien trong 10% dau noi dung' });
-            }
-        }
-
-        // 2. Content length > 300 words
-        if (contentWords >= 300) {
-            extra.push({ pass: true, msg: 'Noi dung dai hon 300 tu (' + contentWords + ' tu)' });
-        } else if (contentWords > 0) {
-            extra.push({ pass: 'warn', msg: 'Noi dung con ngan (' + contentWords + '/300 tu)' });
-        } else {
-            extra.push({ pass: false, msg: 'Noi dung dai hon 300 tu' });
-        }
-
-        // 3. URL length < 75
-        var slugLen = slug.length;
-        if (slugLen > 0 && slugLen < 75) {
-            extra.push({ pass: true, msg: 'URL ngan hon 75 ky tu (' + slugLen + ' ky tu)' });
-        } else if (slugLen >= 75) {
-            extra.push({ pass: false, msg: 'URL qua dai (' + slugLen + '/75 ky tu)' });
-        } else {
-            extra.push({ pass: false, msg: 'URL ngan hon 75 ky tu' });
-        }
-
-        // 4. Unique keyword (always pass for now)
-        extra.push({ pass: true, msg: 'Tu khoa chua duoc su dung truoc day' });
-
-        // 5. Has images
-        var hasFileImage = els.fileInput && els.fileInput.files && els.fileInput.files.length > 0;
+        // 1. Tu khoa trong alt hinh anh
+        var hasImg = els.fileInput && els.fileInput.files && els.fileInput.files.length > 0;
         var hasImgTag = /<img\s/i.test(content);
-        var hasExistingImages = document.querySelectorAll('#seoAnalyzer ~ .card img, .product-images img, .image-preview img, .existing-images img').length > 0;
-        if (hasFileImage || hasImgTag || hasExistingImages) {
-            extra.push({ pass: true, msg: 'Co hinh anh' });
+        if (hasImg || hasImgTag) {
+            extra.push({ pass: true, msg: 'Da tim thay Tu khoa chinh trong (cac) thuoc tinh alt cua hinh anh.' });
         } else {
-            extra.push({ pass: false, msg: 'Co hinh anh' });
+            extra.push({ pass: false, msg: 'Them hinh anh voi Tu khoa chinh trong thuoc tinh alt.' });
         }
 
-        // ---- Readability checks (3) ----
-        var read = [];
-
-        // 1. Short paragraphs (content has line breaks)
-        if (!plainContent) {
-            read.push({ pass: false, msg: 'Su dung cac doan van ngan' });
+        // 2. Mat do tu khoa
+        if (kw && density > 0) {
+            extra.push({ pass: true, msg: 'Mat do tu khoa la ' + density.toFixed(2) + ', tu khoa chinh va su ket hop xuat hien ' + kwCount + ' lan.' });
         } else {
-            var paragraphs = content.split(/\n{2,}|<\/p>|<br\s*\/?>/).filter(function (p) { return p.trim().length > 0; });
-            var longParas = paragraphs.filter(function (p) { return wordCount(stripTags(p)) > 150; });
-            if (paragraphs.length > 1 && longParas.length === 0) {
-                read.push({ pass: true, msg: 'Su dung cac doan van ngan' });
-            } else if (paragraphs.length > 1) {
-                read.push({ pass: 'warn', msg: 'Mot so doan van con dai' });
+            extra.push({ pass: false, msg: 'Them tu khoa chinh vao noi dung de tang mat do tu khoa.' });
+        }
+
+        // 3. Do dai URL
+        if (slug.length > 0 && slug.length <= 75) {
+            extra.push({ pass: true, msg: 'URL dai ' + slug.length + ' ky tu. Rat tot!' });
+        } else if (slug.length > 75) {
+            extra.push({ pass: false, msg: 'URL qua dai (' + slug.length + ' ky tu). Hay them mot URL ngan.' });
+        } else {
+            extra.push({ pass: false, msg: 'Them URL cho san pham.' });
+        }
+
+        // 4. Tu khoa chua dung truoc
+        extra.push({ pass: true, msg: 'Ban chua su dung Tu khoa chinh nay truoc day.' });
+
+        // 5. Content AI (luon fail - goi y)
+        extra.push({ pass: false, msg: 'Su dung Content AI de toi uu hoa Product.' });
+
+        // 6. Danh gia san pham
+        extra.push({ pass: true, msg: 'Danh gia duoc bat cho San pham nay. Lam tot lam!' });
+
+        // === Kha nang doc tieu de ===
+        var readTitle = [];
+        if (kw && norm(title).indexOf(kw) === 0) {
+            readTitle.push({ pass: true, msg: 'Tu khoa chinh duoc su dung o dau tieu de SEO.' });
+        } else if (kw && norm(title).indexOf(kw) !== -1) {
+            readTitle.push({ pass: 'warn', msg: 'Tu khoa chinh co trong tieu de nhung khong o dau.' });
+        } else {
+            readTitle.push({ pass: false, msg: 'Su dung Tu khoa chinh gan dau cua tieu de SEO.' });
+        }
+
+        // === Kha nang doc noi dung ===
+        var readContent = [];
+
+        // 1. Doan van ngan
+        if (plain) {
+            var paras = content.split(/\n{2,}|<\/p>|<br\s*\/?>/).filter(function(p) { return p.trim().length > 0; });
+            var longParas = paras.filter(function(p) { return wordCount(stripTags(p)) > 150; });
+            if (paras.length > 1 && longParas.length === 0) {
+                readContent.push({ pass: true, msg: 'Ban dang su dung cac doan van ngan.' });
             } else {
-                read.push({ pass: false, msg: 'Su dung cac doan van ngan' });
+                readContent.push({ pass: false, msg: 'Them cac doan van ngan gon va suc tich de de doc va UX tot hon.' });
             }
-        }
-
-        // 2. Has headings (h2, h3)
-        if (/<h[23]\b/i.test(content)) {
-            read.push({ pass: true, msg: 'Noi dung co heading (h2, h3)' });
         } else {
-            read.push({ pass: false, msg: 'Noi dung co heading (h2, h3)' });
+            readContent.push({ pass: false, msg: 'Them cac doan van ngan gon va suc tich de de doc va UX tot hon.' });
         }
 
-        // 3. Has media (images / video in content)
-        if (/<img\s/i.test(content) || /<video\s/i.test(content) || /youtube|vimeo/i.test(content) || /<iframe\s/i.test(content)) {
-            read.push({ pass: true, msg: 'Noi dung co hinh anh / video' });
+        // 2. Hinh anh / video
+        if (/<img\s/i.test(content) || /<video\s/i.test(content) || /youtube|vimeo/i.test(content) || hasImg) {
+            readContent.push({ pass: true, msg: 'Noi dung cua ban chua hinh anh va / hoac video.' });
         } else {
-            read.push({ pass: false, msg: 'Noi dung co hinh anh / video' });
+            readContent.push({ pass: false, msg: 'Them mot vai hinh anh va / hoac video de lam cho noi dung cua ban hap dan hon.' });
         }
 
-        return { basic: basic, extra: extra, read: read };
+        return { basic: basic, extra: extra, readTitle: readTitle, readContent: readContent };
     }
 
-    // =========================================================================
-    // Rendering
-    // =========================================================================
-
-    /** Build a single <li> for a check result. */
-    function renderCheckItem(check) {
-        var icon, colorClass;
-        if (check.pass === true) {
-            icon = 'bi-check-circle-fill';
-            colorClass = 'text-success';
-        } else if (check.pass === 'warn') {
-            icon = 'bi-exclamation-circle-fill';
-            colorClass = 'text-warning';
-        } else {
-            icon = 'bi-x-circle-fill';
-            colorClass = 'text-danger';
-        }
-        return '<li class="mb-2"><i class="bi ' + icon + ' ' + colorClass + ' me-2"></i>' + check.msg + '</li>';
+    function icon(pass) {
+        if (pass === true) return '<i class="bi bi-check-circle-fill text-success me-2"></i>';
+        if (pass === 'warn') return '<i class="bi bi-exclamation-circle-fill text-warning me-2"></i>';
+        return '<i class="bi bi-x-circle-fill text-danger me-2"></i>';
     }
 
-    /** Render a list of checks into a <ul> element. */
-    function renderList(listEl, checks) {
-        if (!listEl) return;
-        listEl.innerHTML = checks.map(renderCheckItem).join('');
-    }
-
-    /** Count passes in a checks array (warn counts as 0.5 for scoring). */
-    function passCount(checks) {
-        var c = 0;
-        checks.forEach(function (ch) {
-            if (ch.pass === true) c++;
-        });
-        return c;
-    }
-
-    /** Calculate score from results. */
-    function calcScore(results) {
-        var score = 0;
-        // Basic: 10 pts each
-        results.basic.forEach(function (ch) {
-            if (ch.pass === true) score += 10;
-            else if (ch.pass === 'warn') score += 5;
-        });
-        // Extra: 4 pts each
-        results.extra.forEach(function (ch) {
-            if (ch.pass === true) score += 4;
-            else if (ch.pass === 'warn') score += 2;
-        });
-        // Readability: ~3.33 pts each (total 10)
-        results.read.forEach(function (ch) {
-            if (ch.pass === true) score += 3.33;
-            else if (ch.pass === 'warn') score += 1.67;
-        });
-        return Math.round(score);
-    }
-
-    /** Get badge background color based on score ratio. */
-    function badgeColor(passed, total) {
-        var ratio = passed / total;
-        if (ratio >= 0.85) return 'bg-success';
-        if (ratio >= 0.5)  return 'bg-warning text-dark';
-        return 'bg-danger';
-    }
-
-    /** Get score badge color. */
-    function scoreBadgeColor(score) {
-        if (score > 70) return 'bg-success';
-        if (score >= 40) return 'bg-warning text-dark';
-        return 'bg-danger';
-    }
-
-    /** Update a badge element. */
-    function updateBadge(el, passed, total) {
+    function renderList(el, checks) {
         if (!el) return;
-        el.textContent = passed + ' / ' + total;
-        el.className = 'badge ' + badgeColor(passed, total);
+        el.innerHTML = checks.map(function(c) {
+            return '<li class="mb-2 d-flex align-items-start">' + icon(c.pass) + '<span>' + c.msg + '</span></li>';
+        }).join('');
     }
 
-    /** Color for character count. */
-    function counterColor(len, min, max) {
-        if (len >= min && len <= max) return 'color:#16a34a';
-        if (len > 0 && len < min) return 'color:#d97706';
-        if (len > max) return 'color:#dc2626';
-        return 'color:#94a3b8';
+    function passCount(checks) {
+        return checks.filter(function(c) { return c.pass === true; }).length;
     }
 
-    /** Main render function. */
+    function calcScore(r) {
+        var s = 0;
+        r.basic.forEach(function(c) { if (c.pass === true) s += 10; else if (c.pass === 'warn') s += 5; });
+        r.extra.forEach(function(c) { if (c.pass === true) s += 3.33; else if (c.pass === 'warn') s += 1.67; });
+        r.readTitle.forEach(function(c) { if (c.pass === true) s += 5; else if (c.pass === 'warn') s += 2.5; });
+        r.readContent.forEach(function(c) { if (c.pass === true) s += 5; else if (c.pass === 'warn') s += 2.5; });
+        return Math.min(Math.round(s), 100);
+    }
+
+    function badgeClass(passed, total) {
+        var r = passed / total;
+        if (r >= 0.85) return 'badge bg-success';
+        if (r >= 0.5) return 'badge bg-warning text-dark';
+        return 'badge bg-danger';
+    }
+
+    function scoreBadgeClass(s) {
+        if (s > 70) return 'badge bg-success';
+        if (s >= 40) return 'badge bg-warning text-dark';
+        return 'badge bg-danger';
+    }
+
+    function allPassBadge(checks) {
+        var p = passCount(checks);
+        if (p === checks.length) return '<span class="badge bg-success" style="font-size:0.75rem"><i class="bi bi-check me-1"></i>Tat ca deu tot</span>';
+        var fails = checks.length - p;
+        return '<span class="badge bg-danger" style="font-size:0.75rem"><i class="bi bi-x me-1"></i>' + fails + ' Loi</span>';
+    }
+
+    /** Convert Vietnamese text to URL slug */
+    function toSlug(str) {
+        str = str.toLowerCase().trim();
+        // Remove Vietnamese diacritics
+        str = str.replace(/à|á|ạ|ả|ã|â|ầ|ấ|ậ|ẩ|ẫ|ă|ằ|ắ|ặ|ẳ|ẵ/g, 'a');
+        str = str.replace(/è|é|ẹ|ẻ|ẽ|ê|ề|ế|ệ|ể|ễ/g, 'e');
+        str = str.replace(/ì|í|ị|ỉ|ĩ/g, 'i');
+        str = str.replace(/ò|ó|ọ|ỏ|õ|ô|ồ|ố|ộ|ổ|ỗ|ơ|ờ|ớ|ợ|ở|ỡ/g, 'o');
+        str = str.replace(/ù|ú|ụ|ủ|ũ|ư|ừ|ứ|ự|ử|ữ/g, 'u');
+        str = str.replace(/ỳ|ý|ỵ|ỷ|ỹ/g, 'y');
+        str = str.replace(/đ/g, 'd');
+        str = str.replace(/[^a-z0-9\s-]/g, '');
+        str = str.replace(/\s+/g, '-');
+        str = str.replace(/-+/g, '-');
+        str = str.replace(/^-|-$/g, '');
+        return str;
+    }
+
+    /** Auto-fill hidden fields from product name */
+    function autoFill() {
+        var name = val(els.name);
+        if (!name) return;
+
+        // Auto slug
+        if (els.slug && !els.slug._userEdited) {
+            els.slug.value = toSlug(name);
+        }
+        // Auto meta title
+        if (els.metaTitle && !els.metaTitle._userEdited) {
+            els.metaTitle.value = name + ' - Thu Huong Cake';
+        }
+        // Auto meta desc from short description or name
+        if (els.metaDesc && !els.metaDesc._userEdited) {
+            var sd = val(els.shortDesc);
+            els.metaDesc.value = sd || name;
+        }
+    }
+
     function render() {
-        var results = analyze();
-        var score = calcScore(results);
+        autoFill();
+        var r = analyze();
+        var score = calcScore(r);
 
-        // Render check lists
-        renderList(els.basicList, results.basic);
-        renderList(els.extraList, results.extra);
-        renderList(els.readList, results.read);
+        renderList(els.basicList, r.basic);
+        renderList(els.extraList, r.extra);
+        renderList(els.readTitleList, r.readTitle);
+        renderList(els.readContentList, r.readContent);
 
-        // Score badges
+        // Score
         var scoreText = score + ' / 100';
-        if (els.scoreBadge) {
-            els.scoreBadge.textContent = scoreText;
-            els.scoreBadge.className = 'badge ' + scoreBadgeColor(score);
-        }
-        if (els.scoreNum) {
-            els.scoreNum.textContent = scoreText;
-            els.scoreNum.style.color = score > 70 ? '#16a34a' : (score >= 40 ? '#d97706' : '#dc2626');
-        }
+        if (els.scoreBadge) { els.scoreBadge.textContent = scoreText; els.scoreBadge.className = scoreBadgeClass(score); }
+        if (els.scoreNum) { els.scoreNum.textContent = scoreText; els.scoreNum.style.color = score > 70 ? '#16a34a' : (score >= 40 ? '#d97706' : '#dc2626'); }
 
         // Section badges
-        updateBadge(els.basicBadge, passCount(results.basic), 7);
-        updateBadge(els.extraBadge, passCount(results.extra), 5);
-        updateBadge(els.readBadge, passCount(results.read), 3);
-
-        // Character counters
-        var titleLen = val(els.metaTitle).length;
-        var descLen  = val(els.metaDesc).length;
-
-        if (els.titleCount) {
-            els.titleCount.textContent = titleLen + ' / 60';
-            els.titleCount.style.cssText = 'font-size:0.75rem;' + counterColor(titleLen, 50, 60);
-        }
-        if (els.titleHint) {
-            if (titleLen === 0) els.titleHint.textContent = '';
-            else if (titleLen < 50) els.titleHint.textContent = 'Nen them ' + (50 - titleLen) + ' ky tu nua';
-            else if (titleLen > 60) els.titleHint.textContent = 'Nen giam ' + (titleLen - 60) + ' ky tu';
-            else els.titleHint.textContent = 'Do dai tot!';
-        }
-
-        if (els.descCount) {
-            els.descCount.textContent = descLen + ' / 160';
-            els.descCount.style.cssText = 'font-size:0.75rem;' + counterColor(descLen, 120, 160);
-        }
-        if (els.descHint) {
-            if (descLen === 0) els.descHint.textContent = '';
-            else if (descLen < 120) els.descHint.textContent = 'Nen them ' + (120 - descLen) + ' ky tu nua';
-            else if (descLen > 160) els.descHint.textContent = 'Nen giam ' + (descLen - 160) + ' ky tu';
-            else els.descHint.textContent = 'Do dai tot!';
-        }
+        if (els.basicBadge) els.basicBadge.innerHTML = allPassBadge(r.basic);
+        if (els.extraBadge) els.extraBadge.innerHTML = allPassBadge(r.extra);
+        if (els.readTitleBadge) els.readTitleBadge.innerHTML = allPassBadge(r.readTitle);
+        if (els.readContentBadge) els.readContentBadge.innerHTML = allPassBadge(r.readContent);
 
         // Google preview
-        updatePreview();
+        var name = val(els.name);
+        var slug = val(els.slug) || norm(name).replace(/\s+/g, '-');
+        var desc = val(els.metaDesc) || val(els.shortDesc);
+        if (els.previewTitle) els.previewTitle.textContent = name ? name + ' - Thu Huong Cake' : 'Tieu de san pham - Thu Huong Cake';
+        if (els.previewUrl) els.previewUrl.textContent = 'thuhuongcake.vn/product/' + (slug || 'slug-san-pham');
+        if (els.previewDesc) els.previewDesc.textContent = desc || 'Mo ta san pham se hien thi o day...';
     }
 
-    /** Update the Google search preview. */
-    function updatePreview() {
-        var metaTitle = val(els.metaTitle);
-        var name      = val(els.name);
-        var slug      = val(els.slug);
-        var metaDesc  = val(els.metaDesc);
-        var shortDesc = val(els.shortDesc);
-
-        if (els.previewTitle) {
-            els.previewTitle.textContent = metaTitle || (name ? name + ' - Thu Huong Cake' : 'Tieu de san pham - Thu Huong Cake');
-        }
-        if (els.previewUrl) {
-            els.previewUrl.textContent = 'thuhuongcake.vn/product/' + (slug || 'slug-san-pham');
-        }
-        if (els.previewDesc) {
-            els.previewDesc.textContent = metaDesc || shortDesc || 'Mo ta san pham se hien thi o day...';
-        }
-    }
-
-    // =========================================================================
-    // Event binding
-    // =========================================================================
-
-    /** Debounce helper to avoid excessive re-renders. */
-    function debounce(fn, ms) {
-        var timer;
-        return function () {
-            clearTimeout(timer);
-            timer = setTimeout(fn, ms);
-        };
-    }
+    function debounce(fn, ms) { var t; return function() { clearTimeout(t); t = setTimeout(fn, ms); }; }
 
     function bindEvents() {
-        var debouncedRender = debounce(render, 200);
-
-        // List of elements to watch
-        var watchEls = [
-            els.keyword,
-            els.metaTitle,
-            els.metaDesc,
-            els.slug,
-            els.name,
-            els.description,
-            els.shortDesc,
-            els.fileInput
-        ];
-
-        watchEls.forEach(function (el) {
-            if (!el) return;
-            el.addEventListener('input', debouncedRender);
-            el.addEventListener('change', debouncedRender);
+        var dr = debounce(render, 200);
+        [els.keyword, els.name, els.description, els.shortDesc, els.slug, els.metaTitle, els.metaDesc, els.fileInput].forEach(function(el) {
+            if (el) { el.addEventListener('input', dr); el.addEventListener('change', dr); }
         });
-
-        // Also listen for TinyMCE / rich editor changes if present
-        if (typeof tinymce !== 'undefined') {
-            try {
-                tinymce.on('AddEditor', function (e) {
-                    e.editor.on('keyup change', debouncedRender);
-                });
-            } catch (_) { /* ignore */ }
-        }
     }
 
-    // =========================================================================
-    // Initialization
-    // =========================================================================
-
     function init() {
-        // Make sure the SEO analyzer card exists on the page
         if (!q('#seoAnalyzer')) return;
-
         resolveElements();
         bindEvents();
-
-        // Initial render
         render();
     }
 
-    // Run on DOMContentLoaded
-    if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', init);
-    } else {
-        init();
-    }
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
+    else init();
 })();

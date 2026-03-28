@@ -22,47 +22,18 @@
             <div style="font-size:0.8rem;color:#545454" id="seoPreviewDesc">Mo ta san pham se hien thi o day...</div>
         </div>
 
-        {{-- Meta Title --}}
-        <div class="mb-3">
-            <label class="form-label" style="font-size:0.85rem">Meta Title</label>
-            <input type="text" class="form-control form-control-sm" id="seoMetaTitle" name="meta_title" placeholder="Tieu de SEO (50-60 ky tu)">
-            <div class="d-flex justify-content-between mt-1">
-                <small class="text-muted" id="seoTitleHint"></small>
-                <small id="seoTitleCount" style="font-size:0.75rem">0 / 60</small>
-            </div>
-        </div>
-
-        {{-- Meta Description --}}
-        <div class="mb-3">
-            <label class="form-label" style="font-size:0.85rem">Meta Description</label>
-            <textarea class="form-control form-control-sm" id="seoMetaDesc" name="meta_description" rows="2" placeholder="Mo ta SEO (120-160 ky tu)"></textarea>
-            <div class="d-flex justify-content-between mt-1">
-                <small class="text-muted" id="seoDescHint"></small>
-                <small id="seoDescCount" style="font-size:0.75rem">0 / 160</small>
-            </div>
-        </div>
-
-        {{-- Slug --}}
-        <div class="mb-3">
-            <label class="form-label" style="font-size:0.85rem">URL Slug</label>
-            <div class="input-group input-group-sm">
-                <span class="input-group-text" style="font-size:0.8rem">thuhuongcake.vn/product/</span>
-                <input type="text" class="form-control" id="seoSlug" name="slug" placeholder="slug-san-pham">
-            </div>
-        </div>
-
-        {{-- SEO Analysis Sections (collapsible) --}}
+        <input type="hidden" id="seoMetaTitle" name="meta_title">
+        <input type="hidden" id="seoMetaDesc" name="meta_description">
+        <input type="hidden" id="seoSlug" name="slug">
 
         {{-- SEO Co ban --}}
         <div class="mb-2">
             <div class="d-flex justify-content-between align-items-center py-2" style="cursor:pointer" data-bs-toggle="collapse" data-bs-target="#seoBasicSection">
                 <strong style="font-size:0.85rem">SEO co ban</strong>
-                <span class="badge" id="seoBasicBadge">0 / 7</span>
+                <span id="seoBasicBadge"></span>
             </div>
             <div class="collapse show" id="seoBasicSection">
-                <ul class="list-unstyled mb-0" id="seoBasicList" style="font-size:0.82rem">
-                    <!-- JS will populate -->
-                </ul>
+                <ul class="list-unstyled mb-0" id="seoBasicList" style="font-size:0.82rem"></ul>
             </div>
         </div>
 
@@ -72,27 +43,36 @@
         <div class="mb-2">
             <div class="d-flex justify-content-between align-items-center py-2" style="cursor:pointer" data-bs-toggle="collapse" data-bs-target="#seoExtraSection">
                 <strong style="font-size:0.85rem">Bo sung</strong>
-                <span class="badge" id="seoExtraBadge">0 / 5</span>
+                <span id="seoExtraBadge"></span>
             </div>
             <div class="collapse show" id="seoExtraSection">
-                <ul class="list-unstyled mb-0" id="seoExtraList" style="font-size:0.82rem">
-                    <!-- JS will populate -->
-                </ul>
+                <ul class="list-unstyled mb-0" id="seoExtraList" style="font-size:0.82rem"></ul>
             </div>
         </div>
 
         <hr style="border-color:#f0e4e9">
 
-        {{-- Kha nang doc --}}
-        <div class="mb-0">
-            <div class="d-flex justify-content-between align-items-center py-2" style="cursor:pointer" data-bs-toggle="collapse" data-bs-target="#seoReadSection">
-                <strong style="font-size:0.85rem">Kha nang doc</strong>
-                <span class="badge" id="seoReadBadge">0 / 3</span>
+        {{-- Kha nang doc tieu de --}}
+        <div class="mb-2">
+            <div class="d-flex justify-content-between align-items-center py-2" style="cursor:pointer" data-bs-toggle="collapse" data-bs-target="#seoReadTitleSection">
+                <strong style="font-size:0.85rem">Kha nang doc tieu de</strong>
+                <span id="seoReadTitleBadge"></span>
             </div>
-            <div class="collapse show" id="seoReadSection">
-                <ul class="list-unstyled mb-0" id="seoReadList" style="font-size:0.82rem">
-                    <!-- JS will populate -->
-                </ul>
+            <div class="collapse show" id="seoReadTitleSection">
+                <ul class="list-unstyled mb-0" id="seoReadTitleList" style="font-size:0.82rem"></ul>
+            </div>
+        </div>
+
+        <hr style="border-color:#f0e4e9">
+
+        {{-- Kha nang doc noi dung --}}
+        <div class="mb-0">
+            <div class="d-flex justify-content-between align-items-center py-2" style="cursor:pointer" data-bs-toggle="collapse" data-bs-target="#seoReadContentSection">
+                <strong style="font-size:0.85rem">Kha nang doc noi dung</strong>
+                <span id="seoReadContentBadge"></span>
+            </div>
+            <div class="collapse show" id="seoReadContentSection">
+                <ul class="list-unstyled mb-0" id="seoReadContentList" style="font-size:0.82rem"></ul>
             </div>
         </div>
     </div>

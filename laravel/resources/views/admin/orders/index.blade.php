@@ -113,10 +113,14 @@
 
 {{-- Table --}}
 <div class="card table-card mt-3">
+    <div class="card-header d-flex justify-content-between align-items-center">
+        <span style="font-size:0.85rem"><strong>1,234</strong> don hang</span>
+    </div>
     <div class="table-responsive">
         <table class="table">
             <thead>
                 <tr>
+                    <th style="width:40px"><input type="checkbox" class="form-check-input"></th>
                     <th>Ma don</th>
                     <th>Khach hang</th>
                     <th>Tong tien</th>
@@ -130,6 +134,7 @@
             </thead>
             <tbody>
                 <tr>
+                    <td><input type="checkbox" class="form-check-input"></td>
                     <td><span style="font-weight:600">#THC-0034</span></td>
                     <td>
                         <div style="font-weight:500">Nguyen Van A</div>
@@ -149,6 +154,7 @@
                     </td>
                 </tr>
                 <tr>
+                    <td><input type="checkbox" class="form-check-input"></td>
                     <td><span style="font-weight:600">#THC-0033</span></td>
                     <td>
                         <div style="font-weight:500">Tran Thi B</div>
@@ -168,6 +174,7 @@
                     </td>
                 </tr>
                 <tr>
+                    <td><input type="checkbox" class="form-check-input"></td>
                     <td><span style="font-weight:600">#THC-0032</span></td>
                     <td>
                         <div style="font-weight:500">Le Van C</div>
@@ -187,6 +194,7 @@
                     </td>
                 </tr>
                 <tr>
+                    <td><input type="checkbox" class="form-check-input"></td>
                     <td><span style="font-weight:600">#THC-0031</span></td>
                     <td>
                         <div style="font-weight:500">Pham Thi D</div>
@@ -206,6 +214,7 @@
                     </td>
                 </tr>
                 <tr>
+                    <td><input type="checkbox" class="form-check-input"></td>
                     <td><span style="font-weight:600">#THC-0030</span></td>
                     <td>
                         <div style="font-weight:500">Hoang Van E</div>
