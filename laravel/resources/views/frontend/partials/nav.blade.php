@@ -1,3 +1,7 @@
+@php
+    $navCategories = App\Models\Category::where('show_in_menu', true)->whereNull('parent_id')->orderBy('sort_order')->get();
+@endphp
+
 <!-- Navigation -->
 <nav class="main-nav">
     <div class="container">
@@ -9,11 +13,9 @@
                     <i class="fas fa-chevron-down"></i>
                 </div>
                 <div class="nav-category-dropdown">
-                    <a href="#">Bánh Sinh Nhật Mini</a>
-                    <a href="#">Bánh Sinh Nhật Hoa Quả</a>
-                    <a href="#">Bánh Bông Lan Trứng Muối</a>
-                    <a href="#">Set Bánh Làm Quà</a>
-                    <a href="#">Bánh Đặc Biệt ( Signature Cakes )</a>
+                    @foreach($navCategories as $cat)
+                        <a href="{{ route('products', ['category' => $cat->slug]) }}">{{ $cat->name }}</a>
+                    @endforeach
                 </div>
             </div>
             <ul class="nav-links">

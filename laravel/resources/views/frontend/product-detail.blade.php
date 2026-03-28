@@ -1,6 +1,7 @@
+@use('Illuminate\Support\Facades\Storage')
 @extends('frontend.layouts.app')
 
-@section('title', 'Bánh kem quả bí ngô - Thu Hường Cake')
+@section('title', $product->meta_title ?? $product->name . ' - Thu Hường Cake')
 
 @section('content')
     <!-- Breadcrumb -->
@@ -8,9 +9,11 @@
         <div class="container">
             <a href="/">Trang chủ</a>
             <i class="fas fa-chevron-right"></i>
-            <a href="/products">Bánh Sinh Nhật</a>
+            @if($product->category)
+            <a href="{{ route('products', ['category' => $product->category->id]) }}">{{ $product->category->name }}</a>
             <i class="fas fa-chevron-right"></i>
-            <span>Bánh kem quả bí ngô</span>
+            @endif
+            <span>{{ $product->name }}</span>
         </div>
     </div>
 
@@ -22,70 +25,83 @@
                 <!-- Left: Images -->
                 <div class="detail-gallery">
                     <div class="gallery-main">
-                        <img src="{{ asset('frontend/image_san_pham/Banh-kem-viet-quat-tuoi-mat-7.webp') }}" alt="Bánh kem quả bí ngô" id="mainImage">
+                        @if($product->primaryImage)
+                        <img src="{{ Storage::url($product->primaryImage->image) }}" alt="{{ $product->name }}" id="mainImage">
+                        @elseif($product->images->count() > 0)
+                        <img src="{{ Storage::url($product->images->first()->image) }}" alt="{{ $product->name }}" id="mainImage">
+                        @else
+                        <img src="{{ asset('frontend/image_san_pham/Banh-kem-viet-quat-tuoi-mat-7.webp') }}" alt="{{ $product->name }}" id="mainImage">
+                        @endif
                     </div>
+                    @if($product->images->count() > 0)
                     <div class="gallery-thumbs">
-                        <button class="thumb active" onclick="changeImage(this, '{{ asset('frontend/image_san_pham/Banh-kem-viet-quat-tuoi-mat-7.webp') }}')">
-                            <img src="{{ asset('frontend/image_san_pham/Banh-kem-viet-quat-tuoi-mat-7.webp') }}" alt="Thumb 1">
+                        @foreach($product->images as $index => $image)
+                        <button class="thumb {{ $index === 0 ? 'active' : '' }}" onclick="changeImage(this, '{{ Storage::url($image->image) }}')">
+                            <img src="{{ Storage::url($image->image) }}" alt="{{ $image->alt_text ?? $product->name }}">
                         </button>
-                        <button class="thumb" onclick="changeImage(this, '{{ asset('frontend/image_san_pham/Banh-kem-mini-mau-hong-dep-nhat-5.jpg') }}')">
-                            <img src="{{ asset('frontend/image_san_pham/Banh-kem-mini-mau-hong-dep-nhat-5.jpg') }}" alt="Thumb 2">
-                        </button>
-                        <button class="thumb" onclick="changeImage(this, '{{ asset('frontend/image_san_pham/Banh-bong-lan-kem-trung.jpg') }}')">
-                            <img src="{{ asset('frontend/image_san_pham/Banh-bong-lan-kem-trung.jpg') }}" alt="Thumb 3">
-                        </button>
+                        @endforeach
                     </div>
+                    @endif
 
                     <!-- San pham vua xem -->
                     <div class="sidebar-box detail-recently">
                         <h3 class="sidebar-title">Sản Phẩm Vừa Xem</h3>
-                        <div class="recently-item">
-                            <a href="#" class="recently-img">
-                                <img src="{{ asset('frontend/image_san_pham/Banh-bong-lan-trung-muoi-truyen-thong-5.jpg') }}" alt="Bánh trứng muối">
-                            </a>
-                            <div class="recently-info">
-                                <a href="#">Bánh trứng muối trang trí kem tươi</a>
-                                <span class="product-price">220.000 d</span>
-                            </div>
-                        </div>
+                        <p style="color:#999;font-size:13px;padding:10px 0">Chưa có sản phẩm nào</p>
                     </div>
                 </div>
 
                 <!-- Right: Info -->
                 <div class="detail-info">
-                    <h1 class="detail-name">Bánh kem quả bí ngô</h1>
+                    <h1 class="detail-name">{{ $product->name }}</h1>
 
                     <div class="detail-meta">
-                        <span><i class="fas fa-eye"></i> Lượt xem: <strong>1688</strong></span>
+                        <span><i class="fas fa-eye"></i> Lượt xem: <strong>{{ number_format($product->views ?? 0) }}</strong></span>
                         <span><i class="fas fa-heart"></i> Yêu thích: <span class="stars"><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i></span></span>
-                        <span>Trạng thái: <strong class="text-green">Còn bánh</strong></span>
+                        <span>Trạng thái: <strong class="text-green">{{ $product->stock_status === 'in_stock' ? 'Còn bánh' : 'Hết bánh' }}</strong></span>
                     </div>
 
                     <div class="detail-price">
-                        Giá: <span>220.000 d</span>
+                        @if($product->sale_price)
+                        Giá: <span style="text-decoration:line-through;color:#999;font-size:16px;margin-right:8px">{{ number_format($product->price) }} đ</span>
+                        <span>{{ number_format($product->sale_price) }} đ</span>
+                        @else
+                        Giá: <span>{{ number_format($product->price) }} đ</span>
+                        @endif
                     </div>
 
-                    <p class="detail-desc">Bánh kem quả bí ngô độc đáo mang đậm sắc màu lễ hội tháng 10 mang đến cảm giác vui nhộn nhưng vẫn giữ nét mà mị của Halloween.</p>
+                    @if($product->short_description)
+                    <p class="detail-desc">{{ $product->short_description }}</p>
+                    @endif
 
-                    <!-- Kich thuoc -->
-                    <div class="detail-option">
-                        <label>Kích thước:</label>
-                        <div class="option-buttons">
-                            <button class="option-btn active">16cm</button>
-                            <button class="option-btn">18cm</button>
+                    <!-- Variations -->
+                    @if($product->type === 'variable' && $product->variations->count() > 0)
+                        @php
+                            // Group attribute values by attribute name
+                            $attributeGroups = collect();
+                            foreach($product->variations as $variation) {
+                                foreach($variation->attributeValues as $attrVal) {
+                                    $attrName = $attrVal->attribute->name;
+                                    if (!$attributeGroups->has($attrName)) {
+                                        $attributeGroups[$attrName] = collect();
+                                    }
+                                    if (!$attributeGroups[$attrName]->contains('id', $attrVal->id)) {
+                                        $attributeGroups[$attrName]->push($attrVal);
+                                    }
+                                }
+                            }
+                        @endphp
+
+                        @foreach($attributeGroups as $attrName => $values)
+                        <div class="detail-option">
+                            <label>{{ $attrName }}:</label>
+                            <div class="option-buttons">
+                                @foreach($values->sortBy('sort_order') as $index => $val)
+                                <button class="option-btn {{ $index === 0 ? 'active' : '' }}" data-attribute="{{ $attrName }}" data-value="{{ $val->id }}">{{ $val->name }}</button>
+                                @endforeach
+                            </div>
                         </div>
-                    </div>
-
-                    <!-- Cot banh -->
-                    <div class="detail-option">
-                        <label>Cốt bánh:</label>
-                        <div class="option-buttons">
-                            <button class="option-btn active">Gato Vani Nhân Việt Quất</button>
-                            <button class="option-btn">Gato Red Velvet</button>
-                            <button class="option-btn">Gato Socola</button>
-                            <button class="option-btn">Gato Trà Xanh</button>
-                        </div>
-                    </div>
+                        @endforeach
+                    @endif
 
                     <!-- So luong -->
                     <div class="detail-quantity">
@@ -125,85 +141,54 @@
                     <button class="desc-tab">Đánh Giá</button>
                 </div>
                 <div class="desc-content">
+                    @if($product->description)
+                    <div class="product-description-content">
+                        {!! $product->description !!}
+                    </div>
+                    @else
                     <div class="desc-image-placeholder">
                         <i class="fas fa-image"></i>
                         <span>Hình ảnh mô tả sản phẩm</span>
                     </div>
+                    @endif
                     <button class="read-more-toggle">Xem Them <i class="fas fa-chevron-down"></i></button>
                 </div>
             </div>
 
             <!-- San pham lien quan -->
+            @if($relatedProducts && $relatedProducts->count() > 0)
             <div class="related-products">
                 <h2 class="section-title">Sản Phẩm Liên Quan</h2>
                 <div class="products-grid">
-                    <div class="product-card">
+                    @foreach($relatedProducts as $rp)
+                    <a href="{{ route('product.detail', $rp->id) }}" class="product-card">
                         <div class="product-image">
-                            <img src="{{ asset('frontend/image_san_pham/Banh-bong-lan-trung-muoi-truyen-thong-5.jpg') }}" alt="Bánh mix vị trang trí noel">
+                            @if($rp->primaryImage)
+                                <img src="{{ Storage::url($rp->primaryImage->image) }}" alt="{{ $rp->name }}">
+                            @else
+                                <img src="{{ asset('frontend/image_san_pham/Banh-kem-viet-quat-tuoi-mat-7.webp') }}" alt="{{ $rp->name }}">
+                            @endif
+                            @if($rp->is_hot)<span class="product-tag">Hot</span>@endif
+                            @if($rp->is_new)<span class="product-tag" style="background:#10b981">Mới</span>@endif
                             <div class="product-overlay">
                                 <button class="quick-view"><i class="fas fa-eye"></i></button>
                                 <button class="add-cart"><i class="fas fa-shopping-cart"></i></button>
                             </div>
                         </div>
                         <div class="product-info">
-                            <h3>Bánh mix vị trang trí noel</h3>
-                            <span class="product-price">180.000 d</span>
+                            <h3>{{ $rp->name }}</h3>
+                            @if($rp->sale_price)
+                                <span class="product-price" style="text-decoration:line-through;color:#999;font-size:12px">{{ number_format($rp->price) }} đ</span>
+                                <span class="product-price">{{ number_format($rp->sale_price) }} đ</span>
+                            @else
+                                <span class="product-price">{{ number_format($rp->price) }} đ</span>
+                            @endif
                         </div>
-                    </div>
-                    <div class="product-card">
-                        <div class="product-image">
-                            <img src="{{ asset('frontend/image_san_pham/Banh-bong-lan-pho-mai-cah-bong.jpg') }}" alt="Bánh sinh nhật chú gấu">
-                            <div class="product-overlay">
-                                <button class="quick-view"><i class="fas fa-eye"></i></button>
-                                <button class="add-cart"><i class="fas fa-shopping-cart"></i></button>
-                            </div>
-                        </div>
-                        <div class="product-info">
-                            <h3>Bánh sinh nhật chú gấu</h3>
-                            <span class="product-price">400.000 d</span>
-                        </div>
-                    </div>
-                    <div class="product-card">
-                        <div class="product-image">
-                            <img src="{{ asset('frontend/image_san_pham/download.jpg') }}" alt="Bánh sinh nhật thỏ hồng">
-                            <div class="product-overlay">
-                                <button class="quick-view"><i class="fas fa-eye"></i></button>
-                                <button class="add-cart"><i class="fas fa-shopping-cart"></i></button>
-                            </div>
-                        </div>
-                        <div class="product-info">
-                            <h3>Bánh sinh nhật thỏ hồng đáng yêu</h3>
-                            <span class="product-price">280.000 d</span>
-                        </div>
-                    </div>
-                    <div class="product-card">
-                        <div class="product-image">
-                            <img src="{{ asset('frontend/image_san_pham/download.webp') }}" alt="Bánh kem tone hồng">
-                            <div class="product-overlay">
-                                <button class="quick-view"><i class="fas fa-eye"></i></button>
-                                <button class="add-cart"><i class="fas fa-shopping-cart"></i></button>
-                            </div>
-                        </div>
-                        <div class="product-info">
-                            <h3>Bánh kem tone hồng tặng bạn gái</h3>
-                            <span class="product-price">160.000 d</span>
-                        </div>
-                    </div>
-                    <div class="product-card">
-                        <div class="product-image">
-                            <img src="{{ asset('frontend/image_san_pham/Banh-kem-mini-mau-hong-dep-nhat-5.jpg') }}" alt="Bánh kem mini hồng">
-                            <div class="product-overlay">
-                                <button class="quick-view"><i class="fas fa-eye"></i></button>
-                                <button class="add-cart"><i class="fas fa-shopping-cart"></i></button>
-                            </div>
-                        </div>
-                        <div class="product-info">
-                            <h3>Bánh kem mini màu hồng đẹp</h3>
-                            <span class="product-price">120.000 d</span>
-                        </div>
-                    </div>
+                    </a>
+                    @endforeach
                 </div>
             </div>
+            @endif
 
         </div>
     </section>

@@ -118,22 +118,14 @@
                         <div class="delivery-panel" id="delivery-pickup">
                             <p class="pickup-label">Chọn cửa hàng gần bạn nhất:</p>
                             <div class="store-list">
-                                <label class="store-option active">
-                                    <input type="radio" name="store" checked>
-                                    <span>Cơ sở 11a Dịch Vọng, Cầu Giấy, Hà Nội</span>
-                                </label>
-                                <label class="store-option">
-                                    <input type="radio" name="store">
-                                    <span>Cơ sở 22 Quan Nhân, Thanh Xuân, Hà Nội</span>
-                                </label>
-                                <label class="store-option">
-                                    <input type="radio" name="store">
-                                    <span>Cơ sở 74 Tôn Thất Tùng, Đống Đa, Hà Nội</span>
-                                </label>
-                                <label class="store-option">
-                                    <input type="radio" name="store">
-                                    <span>Cơ sở 102 Nguyễn Trãi, Quận 1, TP.HCM</span>
-                                </label>
+                                @forelse($stores as $store)
+                                    <label class="store-option {{ $loop->first ? 'active' : '' }}">
+                                        <input type="radio" name="store" value="{{ $store->id }}" {{ $loop->first ? 'checked' : '' }}>
+                                        <span>{{ $store->name }} - {{ $store->address }}{{ $store->city ? ', ' . $store->city : '' }}</span>
+                                    </label>
+                                @empty
+                                    <p>Chưa có cửa hàng nào.</p>
+                                @endforelse
                             </div>
                         </div>
                     </div>

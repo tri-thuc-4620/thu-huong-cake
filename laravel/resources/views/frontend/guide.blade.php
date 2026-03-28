@@ -22,35 +22,18 @@
                     <div class="sidebar-box">
                         <h3 class="sidebar-title">Danh Mục Sản Phẩm</h3>
                         <ul class="sidebar-categories">
-                            <li><a href="/products"><i class="fas fa-chevron-right"></i> Bánh Sinh Nhật Mini</a></li>
-                            <li><a href="/products"><i class="fas fa-chevron-right"></i> Bánh Sinh Nhật Hoa Quả</a></li>
-                            <li><a href="/products"><i class="fas fa-chevron-right"></i> Bánh Bông Lan Trứng Muối</a></li>
-                            <li><a href="/products"><i class="fas fa-chevron-right"></i> Set Bánh Làm Quà</a></li>
-                            <li><a href="/products"><i class="fas fa-chevron-right"></i> Bánh Đặc Biệt ( Signature Cakes )</a></li>
-                            <li><a href="/products"><i class="fas fa-chevron-right"></i> Bánh Sinh Nhật Cho Bé</a></li>
-                            <li><a href="/products"><i class="fas fa-chevron-right"></i> Bánh Kem Sự Kiện</a></li>
-                            <li><a href="/products"><i class="fas fa-chevron-right"></i> Bánh Sinh Nhật Tầng</a></li>
-                            <li><a href="/products"><i class="fas fa-chevron-right"></i> Bánh Sinh Nhật Hình Trái Tim</a></li>
-                            <li><a href="/products"><i class="fas fa-chevron-right"></i> Bánh Sinh Nhật Hoa Kem</a></li>
-                            <li><a href="/products"><i class="fas fa-chevron-right"></i> Bánh Kem Vẽ Hình</a></li>
-                            <li><a href="/products"><i class="fas fa-chevron-right"></i> Bánh Kem Tạo Hình</a></li>
-                            <li><a href="/products"><i class="fas fa-chevron-right"></i> Bánh Ăn Nhanh</a></li>
-                            <li><a href="/products"><i class="fas fa-chevron-right"></i> Bánh Sinh Nhật</a></li>
-                            <li><a href="/products"><i class="fas fa-chevron-right"></i> Bánh Kem Ngày Lễ</a></li>
+                            @foreach($categories as $cat)
+                                <li><a href="{{ route('products', ['category' => $cat->slug]) }}"><i class="fas fa-chevron-right"></i> {{ $cat->name }}</a></li>
+                            @endforeach
                         </ul>
                     </div>
 
                     <div class="sidebar-box sidebar-contact">
                         <h3 class="sidebar-title">Liên Hệ Đặt Bánh</h3>
                         <ul class="sidebar-phones">
-                            <li><span class="phone-label">Cơ Sở 1</span> <a href="tel:0982811096">0982811096</a></li>
-                            <li><span class="phone-label">Cơ Sở 2</span> <a href="tel:0965688385">0965688385</a></li>
-                            <li><span class="phone-label">Cơ Sở 3</span> <a href="tel:0984438898">0984438898</a></li>
-                            <li><span class="phone-label">Cơ Sở 4</span> <a href="tel:0988064164">0988064164</a></li>
-                            <li><span class="phone-label">Cơ Sở 5</span> <a href="tel:0962711371">0962711371</a></li>
-                            <li><span class="phone-label">Cơ Sở 6</span> <a href="tel:0988504514">0988504514</a></li>
-                            <li><span class="phone-label">Cơ Sở 7</span> <a href="tel:0963910920">0963910920</a></li>
-                            <li><span class="phone-label">Cơ Sở 8</span> <a href="tel:0862089099">0862089099</a></li>
+                            @foreach($stores as $store)
+                                <li><span class="phone-label">{{ $store->short_name ?? $store->name }}</span> <a href="tel:{{ preg_replace('/[^0-9]/', '', $store->phone) }}">{{ $store->phone }}</a></li>
+                            @endforeach
                         </ul>
                     </div>
 
@@ -58,37 +41,6 @@
                         <div class="sidebar-search-input">
                             <input type="text" placeholder="Tìm sản phẩm...">
                             <button><i class="fas fa-search"></i></button>
-                        </div>
-                    </div>
-
-                    <div class="sidebar-box">
-                        <h3 class="sidebar-title">Sản Phẩm Vừa Xem</h3>
-                        <div class="recently-item">
-                            <a href="/product/1" class="recently-img">
-                                <img src="{{ asset('frontend/image_san_pham/Banh-bong-lan-trung-muoi-truyen-thong-5.jpg') }}" alt="Bánh bông lan trứng muối">
-                            </a>
-                            <div class="recently-info">
-                                <a href="/product/1">Bánh bông lan trứng muối truyền thống</a>
-                                <span class="product-price">220.000đ</span>
-                            </div>
-                        </div>
-                        <div class="recently-item">
-                            <a href="/product/1" class="recently-img">
-                                <img src="{{ asset('frontend/image_san_pham/Banh-kem-mini-mau-hong-dep-nhat-5.jpg') }}" alt="Bánh kem mini hồng">
-                            </a>
-                            <div class="recently-info">
-                                <a href="/product/1">Bánh kem mini màu hồng đẹp</a>
-                                <span class="product-price">120.000đ</span>
-                            </div>
-                        </div>
-                        <div class="recently-item">
-                            <a href="/product/1" class="recently-img">
-                                <img src="{{ asset('frontend/image_san_pham/Banh-kem-viet-quat-tuoi-mat-7.webp') }}" alt="Bánh kem việt quất">
-                            </a>
-                            <div class="recently-info">
-                                <a href="/product/1">Bánh kem việt quất tươi mát</a>
-                                <span class="product-price">160.000đ</span>
-                            </div>
                         </div>
                     </div>
                 </aside>

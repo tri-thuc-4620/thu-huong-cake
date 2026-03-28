@@ -1,3 +1,4 @@
+@use('Illuminate\Support\Facades\Storage')
 @extends('frontend.layouts.app')
 
 @section('title', 'Bánh Sinh Nhật - Thu Hường Cake')
@@ -8,7 +9,7 @@
         <div class="container">
             <a href="/">Trang chủ</a>
             <i class="fas fa-chevron-right"></i>
-            <span>Bánh Sinh Nhật</span>
+            <span>Sản phẩm</span>
         </div>
     </div>
 
@@ -23,21 +24,16 @@
                     <div class="sidebar-box">
                         <h3 class="sidebar-title">Danh Mục Sản Phẩm</h3>
                         <ul class="sidebar-categories">
-                            <li><a href="#" class="active"><i class="fas fa-chevron-right"></i> Bánh Sinh Nhật Mini</a></li>
-                            <li><a href="/products"><i class="fas fa-chevron-right"></i> Bánh Sinh Nhật Hoa Quả</a></li>
-                            <li><a href="/products"><i class="fas fa-chevron-right"></i> Bánh Bông Lan Trứng Muối</a></li>
-                            <li><a href="/products"><i class="fas fa-chevron-right"></i> Set Bánh Làm Quà</a></li>
-                            <li><a href="/products"><i class="fas fa-chevron-right"></i> Bánh Đặc Biệt ( Signature Cakes )</a></li>
-                            <li><a href="/products"><i class="fas fa-chevron-right"></i> Bánh Sinh Nhật Cho Bé</a></li>
-                            <li><a href="/products"><i class="fas fa-chevron-right"></i> Bánh Kem Sự Kiện</a></li>
-                            <li><a href="/products"><i class="fas fa-chevron-right"></i> Bánh Sinh Nhật Tầng</a></li>
-                            <li><a href="/products"><i class="fas fa-chevron-right"></i> Bánh Sinh Nhật Hình Trái Tim</a></li>
-                            <li><a href="/products"><i class="fas fa-chevron-right"></i> Bánh Sinh Nhật Hoa Kem</a></li>
-                            <li><a href="/products"><i class="fas fa-chevron-right"></i> Bánh Kem Vẽ Hình</a></li>
-                            <li><a href="/products"><i class="fas fa-chevron-right"></i> Bánh Kem Tạo Hình</a></li>
-                            <li><a href="/products"><i class="fas fa-chevron-right"></i> Bánh Ăn Nhanh</a></li>
-                            <li><a href="/products"><i class="fas fa-chevron-right"></i> Bánh Sinh Nhật</a></li>
-                            <li><a href="/products"><i class="fas fa-chevron-right"></i> Bánh Kem Ngày Lễ</a></li>
+                            @foreach($categories as $cat)
+                            <li>
+                                <a href="{{ route('products', ['category' => $cat->id]) }}" class="{{ request('category') == $cat->id ? 'active' : '' }}">
+                                    <i class="fas fa-chevron-right"></i> {{ $cat->name }}
+                                    @if($cat->products_count > 0)
+                                    <span class="cat-count">({{ $cat->products_count }})</span>
+                                    @endif
+                                </a>
+                            </li>
+                            @endforeach
                         </ul>
                     </div>
 
@@ -45,54 +41,25 @@
                     <div class="sidebar-box sidebar-contact">
                         <h3 class="sidebar-title">Liên Hệ Đặt Bánh</h3>
                         <ul class="sidebar-phones">
+                            @forelse($stores as $store)
+                            <li><span class="phone-label">{{ $store->short_name ?? $store->name }}</span> <a href="tel:{{ $store->phone }}">{{ $store->phone }}</a></li>
+                            @empty
                             <li><span class="phone-label">Cơ Sở 1</span> <a href="tel:0982811096">0982811096</a></li>
-                            <li><span class="phone-label">Cơ Sở 2</span> <a href="tel:0965688385">0965688385</a></li>
-                            <li><span class="phone-label">Cơ Sở 3</span> <a href="tel:0984438898">0984438898</a></li>
-                            <li><span class="phone-label">Cơ Sở 4</span> <a href="tel:0988064164">0988064164</a></li>
-                            <li><span class="phone-label">Cơ Sở 5</span> <a href="tel:0962711371">0962711371</a></li>
-                            <li><span class="phone-label">Cơ Sở 6</span> <a href="tel:0988504514">0988504514</a></li>
-                            <li><span class="phone-label">Cơ Sở 7</span> <a href="tel:0963910920">0963910920</a></li>
-                            <li><span class="phone-label">Cơ Sở 8</span> <a href="tel:0862089099">0862089099</a></li>
+                            @endforelse
                         </ul>
                     </div>
 
                     <!-- San pham vua xem -->
                     <div class="sidebar-box">
                         <h3 class="sidebar-title">Sản Phẩm Vừa Xem</h3>
-                        <div class="recently-item">
-                            <a href="/product/1" class="recently-img">
-                                <img src="{{ asset('frontend/image_san_pham/Banh-bong-lan-trung-muoi-truyen-thong-5.jpg') }}" alt="Bánh bông lan trứng muối">
-                            </a>
-                            <div class="recently-info">
-                                <a href="/product/1">Bánh bông lan trứng muối truyền thống</a>
-                                <span class="product-price">220.000đ</span>
-                            </div>
-                        </div>
-                        <div class="recently-item">
-                            <a href="/product/1" class="recently-img">
-                                <img src="{{ asset('frontend/image_san_pham/Banh-kem-mini-mau-hong-dep-nhat-5.jpg') }}" alt="Bánh kem mini hồng">
-                            </a>
-                            <div class="recently-info">
-                                <a href="/product/1">Bánh kem mini màu hồng đẹp</a>
-                                <span class="product-price">120.000đ</span>
-                            </div>
-                        </div>
-                        <div class="recently-item">
-                            <a href="/product/1" class="recently-img">
-                                <img src="{{ asset('frontend/image_san_pham/Banh-kem-viet-quat-tuoi-mat-7.webp') }}" alt="Bánh kem việt quất">
-                            </a>
-                            <div class="recently-info">
-                                <a href="/product/1">Bánh kem việt quất tươi mát</a>
-                                <span class="product-price">160.000đ</span>
-                            </div>
-                        </div>
+                        <p style="color:#999;font-size:13px;padding:10px 0">Chưa có sản phẩm nào</p>
                     </div>
                 </aside>
 
                 <!-- Main Content -->
                 <div class="catalog-main">
                     <div class="catalog-header">
-                        <h1>Bánh Sinh Nhật</h1>
+                        <h1>{{ $categories->firstWhere('id', request('category'))?->name ?? 'Tất cả sản phẩm' }}</h1>
                     </div>
 
                     <!-- Category Intro -->
@@ -105,183 +72,74 @@
                     <div class="catalog-sort">
                         <span>Sắp xếp theo:</span>
                         <div class="sort-options">
-                            <button class="sort-btn active"><i class="fas fa-sort-amount-down"></i> Giá giảm dần</button>
-                            <button class="sort-btn"><i class="fas fa-sort-amount-up"></i> Giá tăng dần</button>
-                            <button class="sort-btn"><i class="fas fa-star"></i> Nổi bật</button>
-                            <button class="sort-btn"><i class="fas fa-tags"></i> Giảm giá</button>
-                            <button class="sort-btn"><i class="fas fa-fire"></i> Bán chạy</button>
-                            <button class="sort-btn"><i class="fas fa-clock"></i> Cũ nhất</button>
+                            <a href="{{ route('products', array_merge(request()->except('sort', 'page'), ['sort' => 'price_desc'])) }}" class="sort-btn {{ request('sort') === 'price_desc' ? 'active' : (request('sort') === null ? 'active' : '') }}"><i class="fas fa-sort-amount-down"></i> Giá giảm dần</a>
+                            <a href="{{ route('products', array_merge(request()->except('sort', 'page'), ['sort' => 'price_asc'])) }}" class="sort-btn {{ request('sort') === 'price_asc' ? 'active' : '' }}"><i class="fas fa-sort-amount-up"></i> Giá tăng dần</a>
+                            <a href="{{ route('products', array_merge(request()->except('sort', 'page'), ['sort' => 'featured'])) }}" class="sort-btn {{ request('sort') === 'featured' ? 'active' : '' }}"><i class="fas fa-star"></i> Nổi bật</a>
+                            <a href="{{ route('products', array_merge(request()->except('sort', 'page'), ['sort' => 'sale'])) }}" class="sort-btn {{ request('sort') === 'sale' ? 'active' : '' }}"><i class="fas fa-tags"></i> Giảm giá</a>
+                            <a href="{{ route('products', array_merge(request()->except('sort', 'page'), ['sort' => 'hot'])) }}" class="sort-btn {{ request('sort') === 'hot' ? 'active' : '' }}"><i class="fas fa-fire"></i> Bán chạy</a>
+                            <a href="{{ route('products', array_merge(request()->except('sort', 'page'), ['sort' => 'oldest'])) }}" class="sort-btn {{ request('sort') === 'oldest' ? 'active' : '' }}"><i class="fas fa-clock"></i> Cũ nhất</a>
                         </div>
                     </div>
 
                     <!-- Products Grid -->
                     <div class="catalog-grid">
-                        <a href="/product/1" class="product-card">
+                        @forelse($products as $product)
+                        <a href="{{ route('product.detail', $product->id) }}" class="product-card">
                             <div class="product-image">
-                                <img src="{{ asset('frontend/image_san_pham/Banh-bong-lan-trung-muoi-truyen-thong-5.jpg') }}" alt="Bánh mix vị trang trí noel">
+                                @if($product->primaryImage)
+                                    <img src="{{ Storage::url($product->primaryImage->image) }}" alt="{{ $product->name }}">
+                                @else
+                                    <img src="{{ asset('frontend/image_san_pham/Banh-kem-viet-quat-tuoi-mat-7.webp') }}" alt="{{ $product->name }}">
+                                @endif
+                                @if($product->is_hot)<span class="product-tag">Hot</span>@endif
+                                @if($product->is_new)<span class="product-tag" style="background:#10b981">Mới</span>@endif
                                 <div class="product-overlay">
                                     <button class="quick-view"><i class="fas fa-eye"></i></button>
                                     <button class="add-cart"><i class="fas fa-shopping-cart"></i></button>
                                 </div>
                             </div>
                             <div class="product-info">
-                                <h3>Bánh mix vị trang trí noel</h3>
-                                <span class="product-price">180.000 d</span>
+                                <h3>{{ $product->name }}</h3>
+                                @if($product->sale_price)
+                                    <span class="product-price" style="text-decoration:line-through;color:#999;font-size:12px">{{ number_format($product->price) }} đ</span>
+                                    <span class="product-price">{{ number_format($product->sale_price) }} đ</span>
+                                @else
+                                    <span class="product-price">{{ number_format($product->price) }} đ</span>
+                                @endif
                             </div>
                         </a>
-                        <a href="/product/1" class="product-card">
-                            <div class="product-image">
-                                <img src="{{ asset('frontend/image_san_pham/Banh-kem-viet-quat-tuoi-mat-7.webp') }}" alt="Bánh kem quả bí ngô">
-                                <div class="product-overlay">
-                                    <button class="quick-view"><i class="fas fa-eye"></i></button>
-                                    <button class="add-cart"><i class="fas fa-shopping-cart"></i></button>
-                                </div>
-                            </div>
-                            <div class="product-info">
-                                <h3>Bánh kem quả bí ngô</h3>
-                                <span class="product-price">220.000 d</span>
-                            </div>
-                        </a>
-                        <a href="/product/1" class="product-card">
-                            <div class="product-image">
-                                <img src="{{ asset('frontend/image_san_pham/Banh-kem-mini-mau-hong-dep-nhat-5.jpg') }}" alt="Bánh sinh nhật bựa hài hước tặng bạn thân">
-                                <div class="product-overlay">
-                                    <button class="quick-view"><i class="fas fa-eye"></i></button>
-                                    <button class="add-cart"><i class="fas fa-shopping-cart"></i></button>
-                                </div>
-                            </div>
-                            <div class="product-info">
-                                <h3>Bánh sinh nhật bựa hài hước tặng bạn thân</h3>
-                                <span class="product-price">280.000 d</span>
-                            </div>
-                        </a>
-                        <a href="/product/1" class="product-card">
-                            <div class="product-image">
-                                <img src="{{ asset('frontend/image_san_pham/Banh-bong-lan-kem-trung.jpg') }}" alt="Bánh kem hình mặt gấu đẹp">
-                                <div class="product-overlay">
-                                    <button class="quick-view"><i class="fas fa-eye"></i></button>
-                                    <button class="add-cart"><i class="fas fa-shopping-cart"></i></button>
-                                </div>
-                            </div>
-                            <div class="product-info">
-                                <h3>Bánh kem hình mặt gấu đẹp</h3>
-                                <span class="product-price">400.000 d</span>
-                            </div>
-                        </a>
-                        <a href="/product/1" class="product-card">
-                            <div class="product-image">
-                                <img src="{{ asset('frontend/image_san_pham/Banh-bong-lan-pho-mai-cah-bong.jpg') }}" alt="Bánh sinh nhật chú gấu">
-                                <div class="product-overlay">
-                                    <button class="quick-view"><i class="fas fa-eye"></i></button>
-                                    <button class="add-cart"><i class="fas fa-shopping-cart"></i></button>
-                                </div>
-                            </div>
-                            <div class="product-info">
-                                <h3>Bánh sinh nhật chú gấu</h3>
-                                <span class="product-price">400.000 d</span>
-                            </div>
-                        </a>
-                        <a href="/product/1" class="product-card">
-                            <div class="product-image">
-                                <img src="{{ asset('frontend/image_san_pham/download.jpg') }}" alt="Bánh sinh nhật thỏ hồng đáng yêu">
-                                <div class="product-overlay">
-                                    <button class="quick-view"><i class="fas fa-eye"></i></button>
-                                    <button class="add-cart"><i class="fas fa-shopping-cart"></i></button>
-                                </div>
-                            </div>
-                            <div class="product-info">
-                                <h3>Bánh sinh nhật thỏ hồng đáng yêu</h3>
-                                <span class="product-price">280.000 d</span>
-                            </div>
-                        </a>
-                        <a href="/product/1" class="product-card">
-                            <div class="product-image">
-                                <img src="{{ asset('frontend/image_san_pham/download.webp') }}" alt="Bánh kem tone hồng tặng bạn gái">
-                                <div class="product-overlay">
-                                    <button class="quick-view"><i class="fas fa-eye"></i></button>
-                                    <button class="add-cart"><i class="fas fa-shopping-cart"></i></button>
-                                </div>
-                            </div>
-                            <div class="product-info">
-                                <h3>Bánh kem tone hồng tặng bạn gái</h3>
-                                <span class="product-price">160.000 d</span>
-                            </div>
-                        </a>
-                        <a href="/product/1" class="product-card">
-                            <div class="product-image">
-                                <img src="{{ asset('frontend/image_san_pham/Banh-kem-viet-quat-tuoi-mat-7.webp') }}" alt="Bánh sinh nhật tặng mẹ ý nghĩa">
-                                <div class="product-overlay">
-                                    <button class="quick-view"><i class="fas fa-eye"></i></button>
-                                    <button class="add-cart"><i class="fas fa-shopping-cart"></i></button>
-                                </div>
-                            </div>
-                            <div class="product-info">
-                                <h3>Bánh sinh nhật tặng mẹ ý nghĩa</h3>
-                                <span class="product-price">160.000 d</span>
-                            </div>
-                        </a>
-                        <a href="/product/1" class="product-card">
-                            <div class="product-image">
-                                <img src="{{ asset('frontend/image_san_pham/Banh-kem-mini-mau-hong-dep-nhat-5.jpg') }}" alt="Bánh sinh nhật màu hồng dâu">
-                                <div class="product-overlay">
-                                    <button class="quick-view"><i class="fas fa-eye"></i></button>
-                                    <button class="add-cart"><i class="fas fa-shopping-cart"></i></button>
-                                </div>
-                            </div>
-                            <div class="product-info">
-                                <h3>Bánh sinh nhật màu hồng dâu</h3>
-                                <span class="product-price">160.000 d</span>
-                            </div>
-                        </a>
-                        <a href="/product/1" class="product-card">
-                            <div class="product-image">
-                                <img src="{{ asset('frontend/image_san_pham/Banh-bong-lan-trung-muoi-truyen-thong-5.jpg') }}" alt="Bánh kem trung thu độc đáo">
-                                <div class="product-overlay">
-                                    <button class="quick-view"><i class="fas fa-eye"></i></button>
-                                    <button class="add-cart"><i class="fas fa-shopping-cart"></i></button>
-                                </div>
-                            </div>
-                            <div class="product-info">
-                                <h3>Bánh kem trung thu độc đáo</h3>
-                                <span class="product-price">220.000 d</span>
-                            </div>
-                        </a>
-                        <a href="/product/1" class="product-card">
-                            <div class="product-image">
-                                <img src="{{ asset('frontend/image_san_pham/Banh-bong-lan-kem-trung.jpg') }}" alt="Bánh sinh nhật hoa kem vẽ tay">
-                                <div class="product-overlay">
-                                    <button class="quick-view"><i class="fas fa-eye"></i></button>
-                                    <button class="add-cart"><i class="fas fa-shopping-cart"></i></button>
-                                </div>
-                            </div>
-                            <div class="product-info">
-                                <h3>Bánh sinh nhật hoa kem vẽ tay</h3>
-                                <span class="product-price">270.000 d</span>
-                            </div>
-                        </a>
-                        <a href="/product/1" class="product-card">
-                            <div class="product-image">
-                                <img src="{{ asset('frontend/image_san_pham/Banh-bong-lan-pho-mai-cah-bong.jpg') }}" alt="Bánh kem hoa sen">
-                                <div class="product-overlay">
-                                    <button class="quick-view"><i class="fas fa-eye"></i></button>
-                                    <button class="add-cart"><i class="fas fa-shopping-cart"></i></button>
-                                </div>
-                            </div>
-                            <div class="product-info">
-                                <h3>Bánh kem hoa sen</h3>
-                                <span class="product-price">270.000 d</span>
-                            </div>
-                        </a>
+                        @empty
+                        <div style="grid-column: 1/-1; text-align:center; padding:40px 0; color:#999">
+                            <i class="fas fa-box-open" style="font-size:48px;margin-bottom:16px;display:block"></i>
+                            <p>Chưa có sản phẩm nào trong danh mục này.</p>
+                        </div>
+                        @endforelse
                     </div>
 
                     <!-- Pagination -->
+                    @if($products->hasPages())
                     <div class="pagination">
-                        <a href="#" class="page-btn active">1</a>
-                        <a href="#" class="page-btn">2</a>
-                        <a href="#" class="page-btn">3</a>
-                        <a href="#" class="page-btn">4</a>
-                        <a href="#" class="page-btn"><i class="fas fa-chevron-right"></i></a>
+                        @if($products->onFirstPage())
+                            <span class="page-btn" style="opacity:0.5"><i class="fas fa-chevron-left"></i></span>
+                        @else
+                            <a href="{{ $products->withQueryString()->previousPageUrl() }}" class="page-btn"><i class="fas fa-chevron-left"></i></a>
+                        @endif
+
+                        @foreach($products->withQueryString()->getUrlRange(1, $products->lastPage()) as $page => $url)
+                            @if($page == $products->currentPage())
+                                <a href="{{ $url }}" class="page-btn active">{{ $page }}</a>
+                            @else
+                                <a href="{{ $url }}" class="page-btn">{{ $page }}</a>
+                            @endif
+                        @endforeach
+
+                        @if($products->hasMorePages())
+                            <a href="{{ $products->withQueryString()->nextPageUrl() }}" class="page-btn"><i class="fas fa-chevron-right"></i></a>
+                        @else
+                            <span class="page-btn" style="opacity:0.5"><i class="fas fa-chevron-right"></i></span>
+                        @endif
                     </div>
+                    @endif
                 </div>
 
             </div>

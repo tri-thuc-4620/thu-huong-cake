@@ -1,3 +1,4 @@
+@use('Illuminate\Support\Facades\Storage')
 @extends('frontend.layouts.app')
 
 @section('title', 'Thu Hường Cake - Bánh Sinh Nhật Đẹp & Ngon')
@@ -6,6 +7,34 @@
     <!-- Hero Slider -->
     <section class="hero">
         <div class="hero-slider" id="heroSlider">
+            @forelse($slides as $index => $slide)
+            <div class="hero-slide {{ $index === 0 ? 'active' : '' }}">
+                <div class="container">
+                    <div class="hero-content">
+                        <div class="hero-text">
+                            <span class="hero-badge">{{ $slide->badge_text ?? 'Thu Hường Cake' }}</span>
+                            <h1>{{ $slide->title_line_1 }}<br><span>{{ $slide->title_line_2 }}</span></h1>
+                            <p>{{ $slide->description }}</p>
+                            <div class="hero-buttons">
+                                @if($slide->button_1_text)
+                                <a href="{{ $slide->button_1_url ?? '/products' }}" class="btn btn-primary">{{ $slide->button_1_text }}</a>
+                                @endif
+                                @if($slide->button_2_text)
+                                <a href="{{ $slide->button_2_url ?? '/products' }}" class="btn btn-outline">{{ $slide->button_2_text }}</a>
+                                @endif
+                            </div>
+                        </div>
+                        <div class="hero-image">
+                            @if($slide->image)
+                            <img src="{{ Storage::url($slide->image) }}" alt="{{ $slide->title_line_1 }}" class="hero-img">
+                            @else
+                            <img src="{{ asset('frontend/image_san_pham/Banh-kem-viet-quat-tuoi-mat-7.webp') }}" alt="{{ $slide->title_line_1 }}" class="hero-img">
+                            @endif
+                        </div>
+                    </div>
+                </div>
+            </div>
+            @empty
             <div class="hero-slide active">
                 <div class="container">
                     <div class="hero-content">
@@ -24,53 +53,39 @@
                     </div>
                 </div>
             </div>
-            <div class="hero-slide">
-                <div class="container">
-                    <div class="hero-content">
-                        <div class="hero-text">
-                            <span class="hero-badge">Đặc Biệt</span>
-                            <h1>Set Bánh Làm Quà<br><span>Ngọt Ngào Yêu Thương</span></h1>
-                            <p>Những set bánh xinh xắn, được đóng hộp tinh tế, hoàn hảo để làm quà tặng cho người thân yêu.</p>
-                            <div class="hero-buttons">
-                                <a href="/products" class="btn btn-primary">Xem Ngay</a>
-                                <a href="/guide" class="btn btn-outline">Hướng Dẫn Đặt</a>
-                            </div>
-                        </div>
-                        <div class="hero-image">
-                            <img src="{{ asset('frontend/image_san_pham/Banh-kem-mini-mau-hong-dep-nhat-5.jpg') }}" alt="Bánh kem mini hồng" class="hero-img">
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="hero-slide">
-                <div class="container">
-                    <div class="hero-content">
-                        <div class="hero-text">
-                            <span class="hero-badge">Freeship 3km</span>
-                            <h1>Giao Hàng<br><span>Nhanh Trong 1 Giờ</span></h1>
-                            <p>Ship hỏa tốc trong vòng 1 giờ, freeship 3km cho đơn hàng từ 300K. Đặt bánh dễ dàng, nhận bánh tận nơi.</p>
-                            <div class="hero-buttons">
-                                <a href="/products" class="btn btn-primary">Đặt Bánh Ngay</a>
-                                <a href="/stores" class="btn btn-outline">Tìm Cửa Hàng</a>
-                            </div>
-                        </div>
-                        <div class="hero-image">
-                            <img src="{{ asset('frontend/image_san_pham/Banh-bong-lan-kem-trung.jpg') }}" alt="Bánh bông lan kem trứng" class="hero-img">
-                        </div>
-                    </div>
-                </div>
-            </div>
+            @endforelse
         </div>
         <button class="hero-prev" onclick="heroSlide(-1)"><i class="fas fa-chevron-left"></i></button>
         <button class="hero-next" onclick="heroSlide(1)"><i class="fas fa-chevron-right"></i></button>
         <div class="hero-dots" id="heroDots">
-            <span class="dot active" onclick="heroGoTo(0)"></span>
-            <span class="dot" onclick="heroGoTo(1)"></span>
-            <span class="dot" onclick="heroGoTo(2)"></span>
+            @if($slides->count() > 0)
+                @foreach($slides as $index => $slide)
+                <span class="dot {{ $index === 0 ? 'active' : '' }}" onclick="heroGoTo({{ $index }})"></span>
+                @endforeach
+            @else
+                <span class="dot active" onclick="heroGoTo(0)"></span>
+            @endif
         </div>
     </section>
 
     <!-- Feature Banners -->
+    @if($banners->count() > 0)
+    <section class="feature-banners">
+        <div class="container">
+            <div class="banners-grid">
+                @foreach($banners as $banner)
+                <a href="{{ $banner->url ?? '/products' }}" class="banner-card">
+                    @if($banner->image)
+                    <img src="{{ Storage::url($banner->image) }}" alt="{{ $banner->title }}">
+                    @else
+                    <img src="{{ asset('frontend/images/web2-01.webp') }}" alt="{{ $banner->title }}">
+                    @endif
+                </a>
+                @endforeach
+            </div>
+        </div>
+    </section>
+    @else
     <section class="feature-banners">
         <div class="container">
             <div class="banners-grid">
@@ -86,445 +101,142 @@
             </div>
         </div>
     </section>
+    @endif
 
-    <!-- Set Banh Lam Qua -->
+    <!-- San pham moi -->
+    @php
+        $newProductsList = ($newProducts && $newProducts->count() > 0) ? $newProducts : $latestProducts;
+    @endphp
+    @if($newProductsList && $newProductsList->count() > 0)
     <section class="products-section">
         <div class="container">
             <div class="section-header">
                 <div class="section-title-group">
-                    <span class="section-label">Bộ Sưu Tập</span>
-                    <h2 class="section-title">Set Bánh Làm Quà</h2>
+                    <span class="section-label">Mới Nhất</span>
+                    <h2 class="section-title">Sản Phẩm Mới</h2>
                 </div>
-                <a href="/products" class="view-all-btn">Xem toàn bộ <i class="fas fa-arrow-right"></i></a>
+                <a href="{{ route('products') }}" class="view-all-btn">Xem toàn bộ <i class="fas fa-arrow-right"></i></a>
             </div>
             <div class="products-grid">
-                <a href="/product/1" class="product-card">
+                @foreach($newProductsList as $product)
+                <a href="{{ route('product.detail', $product->id) }}" class="product-card">
                     <div class="product-image">
-                        <img src="{{ asset('frontend/image_san_pham/Banh-bong-lan-trung-muoi-truyen-thong-5.jpg') }}" alt="Set quà tặng bánh mix vị">
+                        @if($product->primaryImage)
+                            <img src="{{ Storage::url($product->primaryImage->image) }}" alt="{{ $product->name }}">
+                        @else
+                            <img src="{{ asset('frontend/image_san_pham/Banh-kem-viet-quat-tuoi-mat-7.webp') }}" alt="{{ $product->name }}">
+                        @endif
+                        @if($product->is_hot)<span class="product-tag">Hot</span>@endif
+                        @if($product->is_new)<span class="product-tag" style="background:#10b981">Mới</span>@endif
                         <div class="product-overlay">
                             <button class="quick-view"><i class="fas fa-eye"></i></button>
                             <button class="add-cart"><i class="fas fa-shopping-cart"></i></button>
                         </div>
                     </div>
                     <div class="product-info">
-                        <h3>Set quà tặng bánh mix vị</h3>
-                        <span class="product-price">90.000 d</span>
+                        <h3>{{ $product->name }}</h3>
+                        @if($product->sale_price)
+                            <span class="product-price" style="text-decoration:line-through;color:#999;font-size:12px">{{ number_format($product->price) }} đ</span>
+                            <span class="product-price">{{ number_format($product->sale_price) }} đ</span>
+                        @else
+                            <span class="product-price">{{ number_format($product->price) }} đ</span>
+                        @endif
                     </div>
                 </a>
-                <a href="/product/1" class="product-card">
-                    <div class="product-image">
-                        <img src="{{ asset('frontend/image_san_pham/Banh-bong-lan-pho-mai-cah-bong.jpg') }}" alt="Set bánh mix vị trái tim">
-                        <div class="product-overlay">
-                            <button class="quick-view"><i class="fas fa-eye"></i></button>
-                            <button class="add-cart"><i class="fas fa-shopping-cart"></i></button>
-                        </div>
-                    </div>
-                    <div class="product-info">
-                        <h3>Set bánh mix vị trái tim</h3>
-                        <span class="product-price">135.000 d</span>
-                    </div>
-                </a>
-                <a href="/product/1" class="product-card">
-                    <div class="product-image">
-                        <img src="{{ asset('frontend/image_san_pham/Banh-bong-lan-kem-trung.jpg') }}" alt="Set bánh mini mix vị">
-                        <div class="product-overlay">
-                            <button class="quick-view"><i class="fas fa-eye"></i></button>
-                            <button class="add-cart"><i class="fas fa-shopping-cart"></i></button>
-                        </div>
-                    </div>
-                    <div class="product-info">
-                        <h3>Set bánh mini mix vị</h3>
-                        <span class="product-price">300.000 d</span>
-                    </div>
-                </a>
-                <a href="/product/1" class="product-card">
-                    <div class="product-image">
-                        <img src="{{ asset('frontend/image_san_pham/download.jpg') }}" alt="Sweet box mix vị trái tim">
-                        <div class="product-overlay">
-                            <button class="quick-view"><i class="fas fa-eye"></i></button>
-                            <button class="add-cart"><i class="fas fa-shopping-cart"></i></button>
-                        </div>
-                    </div>
-                    <div class="product-info">
-                        <h3>Sweet box mix vị trái tim</h3>
-                        <span class="product-price">135.000 d</span>
-                    </div>
-                </a>
-                <a href="/product/1" class="product-card">
-                    <div class="product-image">
-                        <img src="{{ asset('frontend/image_san_pham/download.webp') }}" alt="Sweet box mix vị trái cây">
-                        <div class="product-overlay">
-                            <button class="quick-view"><i class="fas fa-eye"></i></button>
-                            <button class="add-cart"><i class="fas fa-shopping-cart"></i></button>
-                        </div>
-                    </div>
-                    <div class="product-info">
-                        <h3>Sweet box mix vị trái cây</h3>
-                        <span class="product-price">180.000 d</span>
-                    </div>
-                </a>
-                <a href="/product/1" class="product-card">
-                    <div class="product-image">
-                        <img src="{{ asset('frontend/image_san_pham/Banh-bong-lan-trung-muoi-truyen-thong-5.jpg') }}" alt="Set quà tặng bánh mix vị">
-                        <div class="product-overlay">
-                            <button class="quick-view"><i class="fas fa-eye"></i></button>
-                            <button class="add-cart"><i class="fas fa-shopping-cart"></i></button>
-                        </div>
-                    </div>
-                    <div class="product-info">
-                        <h3>Set quà tặng bánh mix vị</h3>
-                        <span class="product-price">90.000 d</span>
-                    </div>
-                </a>
-                <a href="/product/1" class="product-card">
-                    <div class="product-image">
-                        <img src="{{ asset('frontend/image_san_pham/Banh-bong-lan-pho-mai-cah-bong.jpg') }}" alt="Set bánh mix vị trái tim">
-                        <div class="product-overlay">
-                            <button class="quick-view"><i class="fas fa-eye"></i></button>
-                            <button class="add-cart"><i class="fas fa-shopping-cart"></i></button>
-                        </div>
-                    </div>
-                    <div class="product-info">
-                        <h3>Set bánh mix vị trái tim</h3>
-                        <span class="product-price">135.000 d</span>
-                    </div>
-                </a>
-                <a href="/product/1" class="product-card">
-                    <div class="product-image">
-                        <img src="{{ asset('frontend/image_san_pham/Banh-bong-lan-kem-trung.jpg') }}" alt="Set bánh mini mix vị">
-                        <div class="product-overlay">
-                            <button class="quick-view"><i class="fas fa-eye"></i></button>
-                            <button class="add-cart"><i class="fas fa-shopping-cart"></i></button>
-                        </div>
-                    </div>
-                    <div class="product-info">
-                        <h3>Set bánh mini mix vị</h3>
-                        <span class="product-price">300.000 d</span>
-                    </div>
-                </a>
-                <a href="/product/1" class="product-card">
-                    <div class="product-image">
-                        <img src="{{ asset('frontend/image_san_pham/download.jpg') }}" alt="Sweet box mix vị trái tim">
-                        <div class="product-overlay">
-                            <button class="quick-view"><i class="fas fa-eye"></i></button>
-                            <button class="add-cart"><i class="fas fa-shopping-cart"></i></button>
-                        </div>
-                    </div>
-                    <div class="product-info">
-                        <h3>Sweet box mix vị trái tim</h3>
-                        <span class="product-price">135.000 d</span>
-                    </div>
-                </a>
-                <a href="/product/1" class="product-card">
-                    <div class="product-image">
-                        <img src="{{ asset('frontend/image_san_pham/download.webp') }}" alt="Sweet box mix vị trái cây">
-                        <div class="product-overlay">
-                            <button class="quick-view"><i class="fas fa-eye"></i></button>
-                            <button class="add-cart"><i class="fas fa-shopping-cart"></i></button>
-                        </div>
-                    </div>
-                    <div class="product-info">
-                        <h3>Sweet box mix vị trái cây</h3>
-                        <span class="product-price">180.000 d</span>
-                    </div>
-                </a>
+                @endforeach
             </div>
         </div>
     </section>
+    @endif
 
-    <!-- Banh Sinh Nhat Mini -->
+    <!-- San pham Hot -->
+    @if($hotProducts && $hotProducts->count() > 0)
     <section class="products-section alt-bg">
         <div class="container">
             <div class="section-header">
                 <div class="section-title-group">
-                    <span class="section-label">Nhỏ Xinh</span>
-                    <h2 class="section-title">Bánh Sinh Nhật Mini</h2>
+                    <span class="section-label">Bán Chạy</span>
+                    <h2 class="section-title">Sản Phẩm Hot</h2>
                 </div>
-                <a href="/products" class="view-all-btn">Xem toàn bộ <i class="fas fa-arrow-right"></i></a>
+                <a href="{{ route('products') }}" class="view-all-btn">Xem toàn bộ <i class="fas fa-arrow-right"></i></a>
             </div>
             <div class="products-grid">
-                <a href="/product/1" class="product-card">
+                @foreach($hotProducts as $product)
+                <a href="{{ route('product.detail', $product->id) }}" class="product-card">
                     <div class="product-image">
-                        <img src="{{ asset('frontend/image_san_pham/Banh-kem-viet-quat-tuoi-mat-7.webp') }}" alt="Bánh kem việt quất tươi mát">
-                        <span class="product-tag">Hot</span>
+                        @if($product->primaryImage)
+                            <img src="{{ Storage::url($product->primaryImage->image) }}" alt="{{ $product->name }}">
+                        @else
+                            <img src="{{ asset('frontend/image_san_pham/Banh-kem-viet-quat-tuoi-mat-7.webp') }}" alt="{{ $product->name }}">
+                        @endif
+                        @if($product->is_hot)<span class="product-tag">Hot</span>@endif
+                        @if($product->is_new)<span class="product-tag" style="background:#10b981">Mới</span>@endif
                         <div class="product-overlay">
                             <button class="quick-view"><i class="fas fa-eye"></i></button>
                             <button class="add-cart"><i class="fas fa-shopping-cart"></i></button>
                         </div>
                     </div>
                     <div class="product-info">
-                        <h3>Bánh kem việt quất tươi mát</h3>
-                        <span class="product-price">160.000 d</span>
+                        <h3>{{ $product->name }}</h3>
+                        @if($product->sale_price)
+                            <span class="product-price" style="text-decoration:line-through;color:#999;font-size:12px">{{ number_format($product->price) }} đ</span>
+                            <span class="product-price">{{ number_format($product->sale_price) }} đ</span>
+                        @else
+                            <span class="product-price">{{ number_format($product->price) }} đ</span>
+                        @endif
                     </div>
                 </a>
-                <a href="/product/1" class="product-card">
-                    <div class="product-image">
-                        <img src="{{ asset('frontend/image_san_pham/Banh-kem-mini-mau-hong-dep-nhat-5.jpg') }}" alt="Bánh kem mini màu hồng đẹp">
-                        <div class="product-overlay">
-                            <button class="quick-view"><i class="fas fa-eye"></i></button>
-                            <button class="add-cart"><i class="fas fa-shopping-cart"></i></button>
-                        </div>
-                    </div>
-                    <div class="product-info">
-                        <h3>Bánh kem mini màu hồng đẹp</h3>
-                        <span class="product-price">120.000 d</span>
-                    </div>
-                </a>
-                <a href="/product/1" class="product-card">
-                    <div class="product-image">
-                        <img src="{{ asset('frontend/image_san_pham/Banh-bong-lan-kem-trung.jpg') }}" alt="Bánh sinh nhật kem chảy tone hồng">
-                        <div class="product-overlay">
-                            <button class="quick-view"><i class="fas fa-eye"></i></button>
-                            <button class="add-cart"><i class="fas fa-shopping-cart"></i></button>
-                        </div>
-                    </div>
-                    <div class="product-info">
-                        <h3>Bánh sinh nhật kem chảy tone hồng</h3>
-                        <span class="product-price">160.000 d</span>
-                    </div>
-                </a>
-                <a href="/product/1" class="product-card">
-                    <div class="product-image">
-                        <img src="{{ asset('frontend/image_san_pham/download.webp') }}" alt="Bánh kem mini dâu tây">
-                        <div class="product-overlay">
-                            <button class="quick-view"><i class="fas fa-eye"></i></button>
-                            <button class="add-cart"><i class="fas fa-shopping-cart"></i></button>
-                        </div>
-                    </div>
-                    <div class="product-info">
-                        <h3>Bánh kem mini dâu tây</h3>
-                        <span class="product-price">120.000 d</span>
-                    </div>
-                </a>
-                <a href="/product/1" class="product-card">
-                    <div class="product-image">
-                        <img src="{{ asset('frontend/image_san_pham/Banh-bong-lan-pho-mai-cah-bong.jpg') }}" alt="Bánh sinh nhật size nhỏ xinh xắn">
-                        <div class="product-overlay">
-                            <button class="quick-view"><i class="fas fa-eye"></i></button>
-                            <button class="add-cart"><i class="fas fa-shopping-cart"></i></button>
-                        </div>
-                    </div>
-                    <div class="product-info">
-                        <h3>Bánh sinh nhật size nhỏ xinh xắn</h3>
-                        <span class="product-price">120.000 d</span>
-                    </div>
-                </a>
-                <a href="/product/1" class="product-card">
-                    <div class="product-image">
-                        <img src="{{ asset('frontend/image_san_pham/Banh-kem-viet-quat-tuoi-mat-7.webp') }}" alt="Bánh kem việt quất tươi mát">
-                        <span class="product-tag">Hot</span>
-                        <div class="product-overlay">
-                            <button class="quick-view"><i class="fas fa-eye"></i></button>
-                            <button class="add-cart"><i class="fas fa-shopping-cart"></i></button>
-                        </div>
-                    </div>
-                    <div class="product-info">
-                        <h3>Bánh kem việt quất tươi mát</h3>
-                        <span class="product-price">160.000 d</span>
-                    </div>
-                </a>
-                <a href="/product/1" class="product-card">
-                    <div class="product-image">
-                        <img src="{{ asset('frontend/image_san_pham/Banh-kem-mini-mau-hong-dep-nhat-5.jpg') }}" alt="Bánh kem mini màu hồng đẹp">
-                        <div class="product-overlay">
-                            <button class="quick-view"><i class="fas fa-eye"></i></button>
-                            <button class="add-cart"><i class="fas fa-shopping-cart"></i></button>
-                        </div>
-                    </div>
-                    <div class="product-info">
-                        <h3>Bánh kem mini màu hồng đẹp</h3>
-                        <span class="product-price">120.000 d</span>
-                    </div>
-                </a>
-                <a href="/product/1" class="product-card">
-                    <div class="product-image">
-                        <img src="{{ asset('frontend/image_san_pham/Banh-bong-lan-kem-trung.jpg') }}" alt="Bánh sinh nhật kem chảy tone hồng">
-                        <div class="product-overlay">
-                            <button class="quick-view"><i class="fas fa-eye"></i></button>
-                            <button class="add-cart"><i class="fas fa-shopping-cart"></i></button>
-                        </div>
-                    </div>
-                    <div class="product-info">
-                        <h3>Bánh sinh nhật kem chảy tone hồng</h3>
-                        <span class="product-price">160.000 d</span>
-                    </div>
-                </a>
-                <a href="/product/1" class="product-card">
-                    <div class="product-image">
-                        <img src="{{ asset('frontend/image_san_pham/download.webp') }}" alt="Bánh kem mini dâu tây">
-                        <div class="product-overlay">
-                            <button class="quick-view"><i class="fas fa-eye"></i></button>
-                            <button class="add-cart"><i class="fas fa-shopping-cart"></i></button>
-                        </div>
-                    </div>
-                    <div class="product-info">
-                        <h3>Bánh kem mini dâu tây</h3>
-                        <span class="product-price">120.000 d</span>
-                    </div>
-                </a>
-                <a href="/product/1" class="product-card">
-                    <div class="product-image">
-                        <img src="{{ asset('frontend/image_san_pham/Banh-bong-lan-pho-mai-cah-bong.jpg') }}" alt="Bánh sinh nhật size nhỏ xinh xắn">
-                        <div class="product-overlay">
-                            <button class="quick-view"><i class="fas fa-eye"></i></button>
-                            <button class="add-cart"><i class="fas fa-shopping-cart"></i></button>
-                        </div>
-                    </div>
-                    <div class="product-info">
-                        <h3>Bánh sinh nhật size nhỏ xinh xắn</h3>
-                        <span class="product-price">120.000 d</span>
-                    </div>
-                </a>
+                @endforeach
             </div>
         </div>
     </section>
+    @endif
 
-    <!-- Banh Sinh Nhat Lon -->
+    <!-- San pham noi bat -->
+    @if($featuredProducts && $featuredProducts->count() > 0)
     <section class="products-section">
         <div class="container">
             <div class="section-header">
                 <div class="section-title-group">
                     <span class="section-label">Đặc Biệt</span>
-                    <h2 class="section-title">Bánh Sinh Nhật</h2>
+                    <h2 class="section-title">Sản Phẩm Nổi Bật</h2>
                 </div>
-                <a href="/products" class="view-all-btn">Xem toàn bộ <i class="fas fa-arrow-right"></i></a>
+                <a href="{{ route('products') }}" class="view-all-btn">Xem toàn bộ <i class="fas fa-arrow-right"></i></a>
             </div>
             <div class="products-grid">
-                <a href="/product/1" class="product-card">
+                @foreach($featuredProducts as $product)
+                <a href="{{ route('product.detail', $product->id) }}" class="product-card">
                     <div class="product-image">
-                        <img src="{{ asset('frontend/image_san_pham/download.jpg') }}" alt="Bánh sinh nhật cho tiệc liên hoan">
+                        @if($product->primaryImage)
+                            <img src="{{ Storage::url($product->primaryImage->image) }}" alt="{{ $product->name }}">
+                        @else
+                            <img src="{{ asset('frontend/image_san_pham/Banh-kem-viet-quat-tuoi-mat-7.webp') }}" alt="{{ $product->name }}">
+                        @endif
+                        @if($product->is_hot)<span class="product-tag">Hot</span>@endif
+                        @if($product->is_new)<span class="product-tag" style="background:#10b981">Mới</span>@endif
                         <div class="product-overlay">
                             <button class="quick-view"><i class="fas fa-eye"></i></button>
                             <button class="add-cart"><i class="fas fa-shopping-cart"></i></button>
                         </div>
                     </div>
                     <div class="product-info">
-                        <h3>Bánh sinh nhật cho tiệc liên hoan</h3>
-                        <span class="product-price">500.000 d</span>
+                        <h3>{{ $product->name }}</h3>
+                        @if($product->sale_price)
+                            <span class="product-price" style="text-decoration:line-through;color:#999;font-size:12px">{{ number_format($product->price) }} đ</span>
+                            <span class="product-price">{{ number_format($product->sale_price) }} đ</span>
+                        @else
+                            <span class="product-price">{{ number_format($product->price) }} đ</span>
+                        @endif
                     </div>
                 </a>
-                <a href="/product/1" class="product-card">
-                    <div class="product-image">
-                        <img src="{{ asset('frontend/image_san_pham/Banh-kem-viet-quat-tuoi-mat-7.webp') }}" alt="Bánh kem văn phòng">
-                        <div class="product-overlay">
-                            <button class="quick-view"><i class="fas fa-eye"></i></button>
-                            <button class="add-cart"><i class="fas fa-shopping-cart"></i></button>
-                        </div>
-                    </div>
-                    <div class="product-info">
-                        <h3>Bánh kem văn phòng</h3>
-                        <span class="product-price">500.000 d</span>
-                    </div>
-                </a>
-                <a href="/product/1" class="product-card">
-                    <div class="product-image">
-                        <img src="{{ asset('frontend/image_san_pham/Banh-bong-lan-trung-muoi-truyen-thong-5.jpg') }}" alt="Bánh sinh nhật hình chữ nhật hoa quả">
-                        <div class="product-overlay">
-                            <button class="quick-view"><i class="fas fa-eye"></i></button>
-                            <button class="add-cart"><i class="fas fa-shopping-cart"></i></button>
-                        </div>
-                    </div>
-                    <div class="product-info">
-                        <h3>Bánh sinh nhật hình chữ nhật hoa quả</h3>
-                        <span class="product-price">500.000 d</span>
-                    </div>
-                </a>
-                <a href="/product/1" class="product-card">
-                    <div class="product-image">
-                        <img src="{{ asset('frontend/image_san_pham/Banh-kem-mini-mau-hong-dep-nhat-5.jpg') }}" alt="Bánh sinh nhật vuông hoa kem đẹp">
-                        <div class="product-overlay">
-                            <button class="quick-view"><i class="fas fa-eye"></i></button>
-                            <button class="add-cart"><i class="fas fa-shopping-cart"></i></button>
-                        </div>
-                    </div>
-                    <div class="product-info">
-                        <h3>Bánh sinh nhật vuông hoa kem đẹp</h3>
-                        <span class="product-price">610.000 d</span>
-                    </div>
-                </a>
-                <a href="/product/1" class="product-card">
-                    <div class="product-image">
-                        <img src="{{ asset('frontend/image_san_pham/Banh-bong-lan-kem-trung.jpg') }}" alt="Bánh gato hình vuông trang trí hoa kem">
-                        <div class="product-overlay">
-                            <button class="quick-view"><i class="fas fa-eye"></i></button>
-                            <button class="add-cart"><i class="fas fa-shopping-cart"></i></button>
-                        </div>
-                    </div>
-                    <div class="product-info">
-                        <h3>Bánh gato hình vuông trang trí hoa kem</h3>
-                        <span class="product-price">1.000.000 d</span>
-                    </div>
-                </a>
-                <a href="/product/1" class="product-card">
-                    <div class="product-image">
-                        <img src="{{ asset('frontend/image_san_pham/download.jpg') }}" alt="Bánh sinh nhật cho tiệc liên hoan">
-                        <div class="product-overlay">
-                            <button class="quick-view"><i class="fas fa-eye"></i></button>
-                            <button class="add-cart"><i class="fas fa-shopping-cart"></i></button>
-                        </div>
-                    </div>
-                    <div class="product-info">
-                        <h3>Bánh sinh nhật cho tiệc liên hoan</h3>
-                        <span class="product-price">500.000 d</span>
-                    </div>
-                </a>
-                <a href="/product/1" class="product-card">
-                    <div class="product-image">
-                        <img src="{{ asset('frontend/image_san_pham/Banh-kem-viet-quat-tuoi-mat-7.webp') }}" alt="Bánh kem văn phòng">
-                        <div class="product-overlay">
-                            <button class="quick-view"><i class="fas fa-eye"></i></button>
-                            <button class="add-cart"><i class="fas fa-shopping-cart"></i></button>
-                        </div>
-                    </div>
-                    <div class="product-info">
-                        <h3>Bánh kem văn phòng</h3>
-                        <span class="product-price">500.000 d</span>
-                    </div>
-                </a>
-                <a href="/product/1" class="product-card">
-                    <div class="product-image">
-                        <img src="{{ asset('frontend/image_san_pham/Banh-bong-lan-trung-muoi-truyen-thong-5.jpg') }}" alt="Bánh sinh nhật hình chữ nhật hoa quả">
-                        <div class="product-overlay">
-                            <button class="quick-view"><i class="fas fa-eye"></i></button>
-                            <button class="add-cart"><i class="fas fa-shopping-cart"></i></button>
-                        </div>
-                    </div>
-                    <div class="product-info">
-                        <h3>Bánh sinh nhật hình chữ nhật hoa quả</h3>
-                        <span class="product-price">500.000 d</span>
-                    </div>
-                </a>
-                <a href="/product/1" class="product-card">
-                    <div class="product-image">
-                        <img src="{{ asset('frontend/image_san_pham/Banh-kem-mini-mau-hong-dep-nhat-5.jpg') }}" alt="Bánh sinh nhật vuông hoa kem đẹp">
-                        <div class="product-overlay">
-                            <button class="quick-view"><i class="fas fa-eye"></i></button>
-                            <button class="add-cart"><i class="fas fa-shopping-cart"></i></button>
-                        </div>
-                    </div>
-                    <div class="product-info">
-                        <h3>Bánh sinh nhật vuông hoa kem đẹp</h3>
-                        <span class="product-price">610.000 d</span>
-                    </div>
-                </a>
-                <a href="/product/1" class="product-card">
-                    <div class="product-image">
-                        <img src="{{ asset('frontend/image_san_pham/Banh-bong-lan-kem-trung.jpg') }}" alt="Bánh gato hình vuông trang trí hoa kem">
-                        <div class="product-overlay">
-                            <button class="quick-view"><i class="fas fa-eye"></i></button>
-                            <button class="add-cart"><i class="fas fa-shopping-cart"></i></button>
-                        </div>
-                    </div>
-                    <div class="product-info">
-                        <h3>Bánh gato hình vuông trang trí hoa kem</h3>
-                        <span class="product-price">1.000.000 d</span>
-                    </div>
-                </a>
+                @endforeach
             </div>
         </div>
     </section>
+    @endif
 
     <!-- Blog / Tin Tuc -->
+    @if($blogPosts && $blogPosts->count() > 0)
     <section class="blog-section">
         <div class="container">
             <div class="section-header center">
@@ -534,55 +246,30 @@
                 </div>
             </div>
             <div class="blog-grid">
-                <div class="blog-card featured">
+                @foreach($blogPosts as $index => $post)
+                <div class="blog-card {{ $index === 0 ? 'featured' : '' }}">
                     <div class="blog-image">
+                        @if($post->featured_image)
+                        <img src="{{ Storage::url($post->featured_image) }}" alt="{{ $post->title }}">
+                        @else
                         <div class="blog-image-placeholder">
                             <i class="fas fa-newspaper"></i>
                         </div>
+                        @endif
                     </div>
                     <div class="blog-content">
                         <div class="blog-meta">
-                            <span><i class="fas fa-calendar"></i> 03-08-2025</span>
-                            <span><i class="fas fa-eye"></i> 1840</span>
+                            <span><i class="fas fa-calendar"></i> {{ $post->published_at ? $post->published_at->format('d-m-Y') : '' }}</span>
+                            <span><i class="fas fa-eye"></i> {{ $post->views ?? 0 }}</span>
                         </div>
-                        <h3>Set bánh cupcake sinh nhật TPHCM</h3>
-                        <p>Có bao giờ bạn cảm thấy bánh sinh nhật truyền thống đã trở nên quá...</p>
-                        <a href="/blog/1" class="read-more">Đọc thêm <i class="fas fa-arrow-right"></i></a>
+                        <h3>{{ $post->title }}</h3>
+                        <p>{{ Str::limit($post->excerpt, 100) }}</p>
+                        <a href="{{ route('blog.detail', $post->id) }}" class="read-more">Đọc thêm <i class="fas fa-arrow-right"></i></a>
                     </div>
                 </div>
-                <div class="blog-card">
-                    <div class="blog-image">
-                        <div class="blog-image-placeholder">
-                            <i class="fas fa-newspaper"></i>
-                        </div>
-                    </div>
-                    <div class="blog-content">
-                        <div class="blog-meta">
-                            <span><i class="fas fa-calendar"></i> 31-07-2025</span>
-                            <span><i class="fas fa-eye"></i> 1769</span>
-                        </div>
-                        <h3>Tiệm bánh Tiramisu TPHCM</h3>
-                        <p>Có những chiếc bánh chỉ đơn giản là để ăn cho "thỏa cơn thèm"...</p>
-                        <a href="/blog/1" class="read-more">Đọc thêm <i class="fas fa-arrow-right"></i></a>
-                    </div>
-                </div>
-                <div class="blog-card">
-                    <div class="blog-image">
-                        <div class="blog-image-placeholder">
-                            <i class="fas fa-newspaper"></i>
-                        </div>
-                    </div>
-                    <div class="blog-content">
-                        <div class="blog-meta">
-                            <span><i class="fas fa-calendar"></i> 29-07-2025</span>
-                            <span><i class="fas fa-eye"></i> 1769</span>
-                        </div>
-                        <h3>Tiệm bánh sinh nhật quận 8</h3>
-                        <p>Sinh nhật là ngày đặc biệt, dù đơn giản hay linh đình, ai cũng mong...</p>
-                        <a href="/blog/1" class="read-more">Đọc thêm <i class="fas fa-arrow-right"></i></a>
-                    </div>
-                </div>
+                @endforeach
             </div>
         </div>
     </section>
+    @endif
 @endsection

@@ -22,35 +22,18 @@
                     <div class="sidebar-box">
                         <h3 class="sidebar-title">Danh Mục Sản Phẩm</h3>
                         <ul class="sidebar-categories">
-                            <li><a href="/products"><i class="fas fa-chevron-right"></i> Bánh Sinh Nhật Mini</a></li>
-                            <li><a href="/products"><i class="fas fa-chevron-right"></i> Bánh Sinh Nhật Hoa Quả</a></li>
-                            <li><a href="/products"><i class="fas fa-chevron-right"></i> Bánh Bông Lan Trứng Muối</a></li>
-                            <li><a href="/products"><i class="fas fa-chevron-right"></i> Set Bánh Làm Quà</a></li>
-                            <li><a href="/products"><i class="fas fa-chevron-right"></i> Bánh Đặc Biệt ( Signature Cakes )</a></li>
-                            <li><a href="/products"><i class="fas fa-chevron-right"></i> Bánh Sinh Nhật Cho Bé</a></li>
-                            <li><a href="/products"><i class="fas fa-chevron-right"></i> Bánh Kem Sự Kiện</a></li>
-                            <li><a href="/products"><i class="fas fa-chevron-right"></i> Bánh Sinh Nhật Tầng</a></li>
-                            <li><a href="/products"><i class="fas fa-chevron-right"></i> Bánh Sinh Nhật Hình Trái Tim</a></li>
-                            <li><a href="/products"><i class="fas fa-chevron-right"></i> Bánh Sinh Nhật Hoa Kem</a></li>
-                            <li><a href="/products"><i class="fas fa-chevron-right"></i> Bánh Kem Vẽ Hình</a></li>
-                            <li><a href="/products"><i class="fas fa-chevron-right"></i> Bánh Kem Tạo Hình</a></li>
-                            <li><a href="/products"><i class="fas fa-chevron-right"></i> Bánh Ăn Nhanh</a></li>
-                            <li><a href="/products"><i class="fas fa-chevron-right"></i> Bánh Sinh Nhật</a></li>
-                            <li><a href="/products"><i class="fas fa-chevron-right"></i> Bánh Kem Ngày Lễ</a></li>
+                            @foreach($categories as $cat)
+                                <li><a href="{{ route('products', ['category' => $cat->slug]) }}"><i class="fas fa-chevron-right"></i> {{ $cat->name }}</a></li>
+                            @endforeach
                         </ul>
                     </div>
 
                     <div class="sidebar-box sidebar-contact">
                         <h3 class="sidebar-title">Liên Hệ Đặt Bánh</h3>
                         <ul class="sidebar-phones">
-                            <li><span class="phone-label">Cơ Sở 1</span> <a href="tel:0982811096">0982811096</a></li>
-                            <li><span class="phone-label">Cơ Sở 2</span> <a href="tel:0965688385">0965688385</a></li>
-                            <li><span class="phone-label">Cơ Sở 3</span> <a href="tel:0984438898">0984438898</a></li>
-                            <li><span class="phone-label">Cơ Sở 4</span> <a href="tel:0988064164">0988064164</a></li>
-                            <li><span class="phone-label">Cơ Sở 5</span> <a href="tel:0962711371">0962711371</a></li>
-                            <li><span class="phone-label">Cơ Sở 6</span> <a href="tel:0988504514">0988504514</a></li>
-                            <li><span class="phone-label">Cơ Sở 7</span> <a href="tel:0963910920">0963910920</a></li>
-                            <li><span class="phone-label">Cơ Sở 8</span> <a href="tel:0862089099">0862089099</a></li>
+                            @foreach($stores as $store)
+                                <li><span class="phone-label">{{ $store->short_name ?? $store->name }}</span> <a href="tel:{{ preg_replace('/[^0-9]/', '', $store->phone) }}">{{ $store->phone }}</a></li>
+                            @endforeach
                         </ul>
                     </div>
                 </aside>
@@ -64,37 +47,51 @@
                         <p class="contact-hotline">Để được hỗ trợ trực tiếp Hotline <strong>0962.849.989</strong></p>
                     </div>
 
-                    <form class="contact-form" onsubmit="event.preventDefault();alert('Gửi liên hệ thành công! Chúng tôi sẽ phản hồi sớm nhất.')">
+                    @if(session('success'))
+                        <div class="alert alert-success" style="background:#d4edda;color:#155724;padding:12px 16px;border-radius:6px;margin-bottom:20px;">
+                            {{ session('success') }}
+                        </div>
+                    @endif
+
+                    <form class="contact-form" action="{{ route('contact.submit') }}" method="POST">
+                        @csrf
+
                         <div class="form-row">
                             <div class="form-group">
                                 <label>Họ tên (*)</label>
-                                <input type="text" required placeholder="Nhập họ tên">
+                                <input type="text" name="name" required placeholder="Nhập họ tên" value="{{ old('name') }}">
+                                @error('name') <span class="text-danger" style="color:#e74c3c;font-size:13px;">{{ $message }}</span> @enderror
                             </div>
                             <div class="form-group">
                                 <label>Đơn vị</label>
-                                <input type="text" placeholder="Tên công ty, tổ chức...">
+                                <input type="text" name="company" placeholder="Tên công ty, tổ chức..." value="{{ old('company') }}">
+                                @error('company') <span class="text-danger" style="color:#e74c3c;font-size:13px;">{{ $message }}</span> @enderror
                             </div>
                         </div>
 
                         <div class="form-group">
                             <label>Địa chỉ</label>
-                            <input type="text" placeholder="Nhập địa chỉ">
+                            <input type="text" name="address" placeholder="Nhập địa chỉ" value="{{ old('address') }}">
+                            @error('address') <span class="text-danger" style="color:#e74c3c;font-size:13px;">{{ $message }}</span> @enderror
                         </div>
 
                         <div class="form-row">
                             <div class="form-group">
                                 <label>Điện thoại (*)</label>
-                                <input type="tel" required placeholder="Nhập số điện thoại">
+                                <input type="tel" name="phone" required placeholder="Nhập số điện thoại" value="{{ old('phone') }}">
+                                @error('phone') <span class="text-danger" style="color:#e74c3c;font-size:13px;">{{ $message }}</span> @enderror
                             </div>
                             <div class="form-group">
                                 <label>Email</label>
-                                <input type="email" placeholder="Nhập email">
+                                <input type="email" name="email" placeholder="Nhập email" value="{{ old('email') }}">
+                                @error('email') <span class="text-danger" style="color:#e74c3c;font-size:13px;">{{ $message }}</span> @enderror
                             </div>
                         </div>
 
                         <div class="form-group">
                             <label>Lời nhắn (*)</label>
-                            <textarea rows="5" required placeholder="Nhập nội dung liên hệ, góp ý..."></textarea>
+                            <textarea rows="5" name="message" required placeholder="Nhập nội dung liên hệ, góp ý...">{{ old('message') }}</textarea>
+                            @error('message') <span class="text-danger" style="color:#e74c3c;font-size:13px;">{{ $message }}</span> @enderror
                         </div>
 
                         <button type="submit" class="btn-contact-submit">
