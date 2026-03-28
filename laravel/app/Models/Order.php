@@ -8,45 +8,36 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Order extends Model
 {
-    protected $table = 'orders';
-
     protected $fillable = [
-        'order_number',
-        'customer_name',
-        'customer_phone',
-        'customer_email',
-        'delivery_type',
-        'delivery_address',
-        'pickup_store_id',
-        'delivery_date',
-        'delivery_time',
-        'note',
-        'gift_recipient_name',
-        'gift_recipient_phone',
-        'subtotal',
-        'shipping_fee',
-        'discount',
-        'total',
-        'payment_method',
-        'status',
-        'cancel_reason',
-        'admin_note',
+        'order_number', 'user_id',
+        'customer_name', 'customer_phone', 'customer_email',
+        'delivery_type', 'delivery_address', 'pickup_store_id',
+        'delivery_date', 'delivery_time',
+        'note', 'gift_recipient_name', 'gift_recipient_phone',
+        'subtotal', 'shipping_fee', 'discount', 'total',
+        'payment_method', 'status',
+        'cancel_reason', 'admin_note',
     ];
 
     protected $casts = [
-        'delivery_type' => 'string',
+        'subtotal'      => 'decimal:0',
+        'shipping_fee'  => 'decimal:0',
+        'discount'      => 'decimal:0',
+        'total'         => 'decimal:0',
         'delivery_date' => 'date',
-        'subtotal' => 'decimal:2',
-        'shipping_fee' => 'decimal:2',
-        'discount' => 'decimal:2',
-        'total' => 'decimal:2',
-        'payment_method' => 'string',
-        'status' => 'string',
+        'delivery_time' => 'string',
     ];
+
+    /* ── Relations ─────────────────────────────────── */
 
     public function items(): HasMany
     {
         return $this->hasMany(OrderItem::class);
+    }
+
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
     }
 
     public function pickupStore(): BelongsTo

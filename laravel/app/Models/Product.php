@@ -6,48 +6,43 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Product extends Model
 {
-    protected $table = 'products';
-
     protected $fillable = [
-        'name',
-        'slug',
-        'sku',
-        'category_id',
-        'price',
-        'sale_price',
-        'stock_quantity',
-        'stock_status',
-        'short_description',
-        'description',
-        'is_visible',
-        'is_featured',
-        'is_hot',
-        'is_new',
-        'sort_order',
-        'views',
-        'meta_title',
-        'meta_description',
+        'name', 'slug', 'sku', 'category_id', 'variation_set_id', 'type',
+        'price', 'sale_price', 'sale_start', 'sale_end',
+        'stock_quantity', 'stock_status', 'manage_stock', 'low_stock_threshold',
+        'weight', 'prep_time', 'advance_order',
+        'short_description', 'description',
+        'is_visible', 'is_featured', 'is_hot', 'is_new',
+        'sort_order', 'views',
+        'focus_keyword', 'meta_title', 'meta_description',
     ];
 
     protected $casts = [
-        'price' => 'decimal:2',
-        'sale_price' => 'decimal:2',
-        'stock_quantity' => 'integer',
-        'stock_status' => 'string',
-        'is_visible' => 'boolean',
-        'is_featured' => 'boolean',
-        'is_hot' => 'boolean',
-        'is_new' => 'boolean',
-        'sort_order' => 'integer',
-        'views' => 'integer',
+        'price'        => 'decimal:0',
+        'sale_price'   => 'decimal:0',
+        'manage_stock' => 'boolean',
+        'is_visible'   => 'boolean',
+        'is_featured'  => 'boolean',
+        'is_hot'       => 'boolean',
+        'is_new'       => 'boolean',
+        'sale_start'   => 'date',
+        'sale_end'     => 'date',
     ];
+
+    /* ── Relations ─────────────────────────────────── */
 
     public function category(): BelongsTo
     {
         return $this->belongsTo(Category::class);
+    }
+
+    public function variationSet(): BelongsTo
+    {
+        return $this->belongsTo(VariationSet::class);
     }
 
     public function images(): HasMany
@@ -55,13 +50,18 @@ class Product extends Model
         return $this->hasMany(ProductImage::class);
     }
 
-    public function cakeSizes(): BelongsToMany
+    public function variations(): HasMany
     {
-        return $this->belongsToMany(CakeSize::class, 'product_cake_size')->withPivot('price');
+        return $this->hasMany(ProductVariation::class);
     }
 
-    public function cakeBases(): BelongsToMany
+    public function tags(): BelongsToMany
     {
-        return $this->belongsToMany(CakeBase::class, 'product_cake_base')->withPivot('surcharge');
+        return $this->belongsToMany(ProductTag::class, 'product_tag', 'product_id', 'tag_id');
+    }
+
+    public function primaryImage(): HasOne
+    {
+        return $this->hasOne(ProductImage::class)->where('is_primary', true);
     }
 }

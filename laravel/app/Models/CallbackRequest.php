@@ -6,14 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class CallbackRequest extends Model
 {
-    protected $table = 'callback_requests';
-
     protected $fillable = [
-        'name',
-        'phone',
-        'note',
-        'is_handled',
-        'handled_at',
+        'name', 'phone', 'note', 'is_handled', 'handled_at',
     ];
 
     protected $casts = [

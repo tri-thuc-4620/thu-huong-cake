@@ -6,16 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class ContactMessage extends Model
 {
-    protected $table = 'contact_messages';
-
     protected $fillable = [
-        'name',
-        'phone',
-        'email',
-        'content',
-        'is_read',
-        'admin_reply',
-        'read_at',
+        'name', 'phone', 'email', 'content',
+        'is_read', 'admin_reply', 'read_at',
     ];
 
     protected $casts = [

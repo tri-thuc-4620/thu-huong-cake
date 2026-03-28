@@ -7,28 +7,19 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class BlogPost extends Model
 {
-    protected $table = 'blog_posts';
-
     protected $fillable = [
-        'title',
-        'slug',
-        'blog_category_id',
-        'author_id',
-        'featured_image',
-        'excerpt',
-        'content',
-        'is_published',
-        'published_at',
-        'meta_title',
-        'meta_description',
-        'views',
+        'title', 'slug', 'blog_category_id', 'author_id',
+        'featured_image', 'excerpt', 'content',
+        'is_published', 'published_at', 'views',
+        'meta_title', 'meta_description',
     ];
 
     protected $casts = [
         'is_published' => 'boolean',
         'published_at' => 'datetime',
-        'views' => 'integer',
     ];
+
+    /* ── Relations ─────────────────────────────────── */
 
     public function category(): BelongsTo
     {

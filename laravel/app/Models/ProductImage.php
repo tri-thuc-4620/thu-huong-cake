@@ -7,20 +7,15 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class ProductImage extends Model
 {
-    protected $table = 'product_images';
-
     protected $fillable = [
-        'product_id',
-        'image',
-        'alt_text',
-        'is_primary',
-        'sort_order',
+        'product_id', 'image', 'alt_text', 'is_primary', 'sort_order',
     ];
 
     protected $casts = [
         'is_primary' => 'boolean',
-        'sort_order' => 'integer',
     ];
+
+    /* ── Relations ─────────────────────────────────── */
 
     public function product(): BelongsTo
     {

@@ -5,20 +5,20 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class BlogCategory extends Model
+class Attribute extends Model
 {
     protected $fillable = [
-        'name', 'slug', 'description', 'sort_order', 'is_visible',
+        'name', 'slug', 'display_type', 'sort_order', 'is_filterable',
     ];
 
     protected $casts = [
-        'is_visible' => 'boolean',
+        'is_filterable' => 'boolean',
     ];
 
     /* ── Relations ─────────────────────────────────── */
 
-    public function posts(): HasMany
+    public function values(): HasMany
     {
-        return $this->hasMany(BlogPost::class);
+        return $this->hasMany(AttributeValue::class);
     }
 }

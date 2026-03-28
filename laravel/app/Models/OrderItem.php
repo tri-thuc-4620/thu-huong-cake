@@ -7,24 +7,18 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class OrderItem extends Model
 {
-    protected $table = 'order_items';
-
     protected $fillable = [
-        'order_id',
-        'product_id',
-        'product_name',
-        'cake_size',
-        'cake_base',
-        'quantity',
-        'unit_price',
-        'total_price',
+        'order_id', 'product_id', 'product_variation_id',
+        'product_name', 'variation_label',
+        'quantity', 'unit_price', 'total_price',
     ];
 
     protected $casts = [
-        'quantity' => 'integer',
-        'unit_price' => 'decimal:2',
-        'total_price' => 'decimal:2',
+        'unit_price'  => 'decimal:0',
+        'total_price' => 'decimal:0',
     ];
+
+    /* ── Relations ─────────────────────────────────── */
 
     public function order(): BelongsTo
     {
@@ -34,5 +28,10 @@ class OrderItem extends Model
     public function product(): BelongsTo
     {
         return $this->belongsTo(Product::class);
+    }
+
+    public function productVariation(): BelongsTo
+    {
+        return $this->belongsTo(ProductVariation::class);
     }
 }
