@@ -1,3 +1,4 @@
+@use('Illuminate\Support\Facades\Storage')
 @extends('admin.layouts.app')
 
 @section('title', 'Chi tiet san pham')
@@ -7,7 +8,7 @@
 <div class="d-flex justify-content-between align-items-center mb-4">
     <h4 class="mb-0">Chi tiet san pham</h4>
     <div class="d-flex gap-2">
-        <a href="{{ route('admin.products.edit', $product->id ?? 1) }}" class="btn btn-primary">
+        <a href="{{ route('admin.products.edit', $product->id) }}" class="btn btn-primary">
             <i class="bi bi-pencil"></i> Chinh sua
         </a>
         <a href="{{ route('admin.products.index') }}" class="btn btn-outline-secondary">
@@ -28,19 +29,19 @@
                 <div class="row g-3">
                     <div class="col-md-6">
                         <label class="form-label text-muted small">Ten san pham</label>
-                        <p class="fw-bold mb-0">{{ $product->name ?? 'Banh kem dau tay' }}</p>
+                        <p class="fw-bold mb-0">{{ $product->name }}</p>
                     </div>
                     <div class="col-md-6">
                         <label class="form-label text-muted small">Slug</label>
-                        <p class="mb-0"><code>{{ $product->slug ?? 'banh-kem-dau-tay' }}</code></p>
+                        <p class="mb-0"><code>{{ $product->slug }}</code></p>
                     </div>
                     <div class="col-md-6">
                         <label class="form-label text-muted small">Danh muc</label>
-                        <p class="mb-0">Banh kem</p>
+                        <p class="mb-0">{{ $product->category?->name ?? '—' }}</p>
                     </div>
                     <div class="col-md-6">
                         <label class="form-label text-muted small">Ma SKU</label>
-                        <p class="mb-0">BK-001</p>
+                        <p class="mb-0">{{ $product->sku ?? '—' }}</p>
                     </div>
                 </div>
             </div>
@@ -53,9 +54,9 @@
             </div>
             <div class="card-body">
                 <label class="form-label text-muted small">Mo ta ngan</label>
-                <p>{{ $product->short_description ?? 'Banh kem dau tay tuoi ngon, lop kem beo ngay' }}</p>
+                <p>{{ $product->short_description ?? '—' }}</p>
                 <label class="form-label text-muted small">Mo ta chi tiet</label>
-                <p class="mb-0">{{ $product->description ?? 'Banh kem dau tay duoc lam tu nguyen lieu tuoi ngon nhat. Lop banh bong lan mem min ket hop voi kem tuoi va dau tay tuoi. Thich hop cho cac buoi tiec sinh nhat, ky niem.' }}</p>
+                <p class="mb-0">{!! nl2br(e($product->description ?? '—')) !!}</p>
             </div>
         </div>
 
@@ -65,34 +66,27 @@
                 <h6 class="mb-0"><i class="bi bi-sliders"></i> Tuy chon banh</h6>
             </div>
             <div class="card-body">
-                <h6 class="text-muted small">Kich thuoc & Gia</h6>
-                <table class="table table-bordered table-sm mb-4">
+                @if($product->variations->count())
+                <h6 class="text-muted small">Bien the san pham</h6>
+                <table class="table table-bordered table-sm mb-0">
                     <thead class="table-light">
                         <tr>
-                            <th>Kich thuoc</th>
+                            <th>Bien the</th>
                             <th>Gia</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr><td>16cm</td><td>350,000 &#273;</td></tr>
-                        <tr><td>20cm</td><td>450,000 &#273;</td></tr>
-                        <tr><td>24cm</td><td>580,000 &#273;</td></tr>
-                    </tbody>
-                </table>
-
-                <h6 class="text-muted small">Cot banh & Phu phi</h6>
-                <table class="table table-bordered table-sm mb-0">
-                    <thead class="table-light">
+                        @foreach($product->variations as $variation)
                         <tr>
-                            <th>Loai cot banh</th>
-                            <th>Phu phi</th>
+                            <td>{{ $variation->name ?? $variation->label ?? '—' }}</td>
+                            <td>{{ number_format($variation->price ?? 0) }} &#273;</td>
                         </tr>
-                    </thead>
-                    <tbody>
-                        <tr><td>1 tang</td><td>0 &#273;</td></tr>
-                        <tr><td>2 tang</td><td>150,000 &#273;</td></tr>
+                        @endforeach
                     </tbody>
                 </table>
+                @else
+                <p class="text-muted mb-0">Chua co tuy chon bien the nao</p>
+                @endif
             </div>
         </div>
 
@@ -103,9 +97,12 @@
             </div>
             <div class="card-body">
                 <div class="d-flex flex-wrap gap-3">
-                    <img src="https://placehold.co/200x200/FFE4E1/333?text=Anh+1" class="rounded border" width="200" height="200">
-                    <img src="https://placehold.co/200x200/FFE4E1/333?text=Anh+2" class="rounded border" width="200" height="200">
-                    <img src="https://placehold.co/200x200/FFE4E1/333?text=Anh+3" class="rounded border" width="200" height="200">
+                    @forelse($product->images as $image)
+                        <img src="{{ Storage::url($image->image) }}" class="rounded border" width="200" height="200" style="object-fit:cover">
+                    @empty
+                        <img src="https://placehold.co/200x200/fff0f6/e84393?text=🎂" class="rounded border" width="200" height="200">
+                        <p class="text-muted align-self-center ms-3">Chua co hinh anh nao</p>
+                    @endforelse
                 </div>
             </div>
         </div>
@@ -121,19 +118,42 @@
             <div class="card-body">
                 <div class="mb-3">
                     <label class="form-label text-muted small">Gia ban</label>
-                    <p class="fs-5 fw-bold text-primary mb-0">350,000 &#273;</p>
+                    <p class="fs-5 fw-bold text-primary mb-0">{{ number_format($product->price) }} &#273;</p>
                 </div>
                 <div class="mb-3">
                     <label class="form-label text-muted small">Gia khuyen mai</label>
-                    <p class="fs-5 fw-bold text-danger mb-0">300,000 &#273;</p>
+                    <p class="fs-5 fw-bold text-danger mb-0">
+                        @if($product->sale_price)
+                            {{ number_format($product->sale_price) }} &#273;
+                        @else
+                            —
+                        @endif
+                    </p>
                 </div>
                 <div class="mb-3">
                     <label class="form-label text-muted small">So luong ton kho</label>
-                    <p class="mb-0">50</p>
+                    <p class="mb-0">{{ $product->stock_quantity ?? '—' }}</p>
                 </div>
                 <div>
                     <label class="form-label text-muted small">Trang thai kho</label>
-                    <p class="mb-0"><span class="badge bg-success">Con hang</span></p>
+                    <p class="mb-0">
+                        @switch($product->stock_status)
+                            @case('in_stock')
+                                <span class="badge bg-success">Con hang</span>
+                                @break
+                            @case('out_of_stock')
+                                <span class="badge bg-danger">Het hang</span>
+                                @break
+                            @case('low_stock')
+                                <span class="badge bg-warning">Sap het hang</span>
+                                @break
+                            @case('pre_order')
+                                <span class="badge bg-info">Dat truoc</span>
+                                @break
+                            @default
+                                <span class="badge bg-secondary">{{ $product->stock_status }}</span>
+                        @endswitch
+                    </p>
                 </div>
             </div>
         </div>
@@ -146,27 +166,27 @@
             <div class="card-body">
                 <div class="d-flex justify-content-between mb-2">
                     <span class="text-muted">Hien thi</span>
-                    <span class="badge bg-success">Co</span>
+                    <span class="badge {{ $product->is_visible ? 'bg-success' : 'bg-secondary' }}">{{ $product->is_visible ? 'Co' : 'Khong' }}</span>
                 </div>
                 <div class="d-flex justify-content-between mb-2">
                     <span class="text-muted">Noi bat</span>
-                    <span class="badge bg-secondary">Khong</span>
+                    <span class="badge {{ $product->is_featured ? 'bg-success' : 'bg-secondary' }}">{{ $product->is_featured ? 'Co' : 'Khong' }}</span>
                 </div>
                 <div class="d-flex justify-content-between mb-2">
                     <span class="text-muted">Hot</span>
-                    <span class="badge bg-danger">Co</span>
+                    <span class="badge {{ $product->is_hot ? 'bg-danger' : 'bg-secondary' }}">{{ $product->is_hot ? 'Co' : 'Khong' }}</span>
                 </div>
                 <div class="d-flex justify-content-between mb-2">
                     <span class="text-muted">Moi</span>
-                    <span class="badge bg-secondary">Khong</span>
+                    <span class="badge {{ $product->is_new ? 'bg-info' : 'bg-secondary' }}">{{ $product->is_new ? 'Co' : 'Khong' }}</span>
                 </div>
                 <div class="d-flex justify-content-between mb-2">
                     <span class="text-muted">Thu tu</span>
-                    <span>0</span>
+                    <span>{{ $product->sort_order ?? 0 }}</span>
                 </div>
                 <div class="d-flex justify-content-between">
                     <span class="text-muted">Luot xem</span>
-                    <span>1,245</span>
+                    <span>{{ number_format($product->views ?? 0) }}</span>
                 </div>
             </div>
         </div>
@@ -179,11 +199,11 @@
             <div class="card-body">
                 <div class="mb-3">
                     <label class="form-label text-muted small">Meta Title</label>
-                    <p class="mb-0">Banh kem dau tay - Thu Huong Cake</p>
+                    <p class="mb-0">{{ $product->meta_title ?? '—' }}</p>
                 </div>
                 <div>
                     <label class="form-label text-muted small">Meta Description</label>
-                    <p class="mb-0">Banh kem dau tay tuoi ngon tai Thu Huong Cake</p>
+                    <p class="mb-0">{{ $product->meta_description ?? '—' }}</p>
                 </div>
             </div>
         </div>
@@ -196,11 +216,11 @@
             <div class="card-body">
                 <div class="d-flex justify-content-between mb-2">
                     <span class="text-muted small">Ngay tao</span>
-                    <span class="small">20/03/2026 10:30</span>
+                    <span class="small">{{ $product->created_at?->format('d/m/Y H:i') ?? '—' }}</span>
                 </div>
                 <div class="d-flex justify-content-between">
                     <span class="text-muted small">Cap nhat</span>
-                    <span class="small">25/03/2026 14:15</span>
+                    <span class="small">{{ $product->updated_at?->format('d/m/Y H:i') ?? '—' }}</span>
                 </div>
             </div>
         </div>

@@ -36,10 +36,17 @@
     <button class="btn btn-soft btn-sm"><i class="bi bi-arrow-counterclockwise me-1"></i> Xoa loc</button>
 </div>
 
+@if(session('success'))
+    <div class="alert alert-success alert-dismissible fade show mt-3">
+        {{ session('success') }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+@endif
+
 {{-- Table --}}
 <div class="card table-card mt-3">
     <div class="card-header d-flex justify-content-between align-items-center">
-        <span style="font-size:0.85rem"><strong>3</strong> trang tinh</span>
+        <span style="font-size:0.85rem"><strong>{{ $pages->total() }}</strong> trang tinh</span>
     </div>
     <div class="table-responsive">
         <table class="table">
@@ -55,68 +62,45 @@
                 </tr>
             </thead>
             <tbody>
+                @forelse($pages as $page)
                 <tr>
                     <td><input type="checkbox" class="form-check-input"></td>
                     <td>
-                        <a href="{{ route('admin.pages.edit', 1) }}" style="font-weight:600;color:#0f172a;text-decoration:none">Gioi thieu</a>
+                        <a href="{{ route('admin.pages.edit', $page) }}" style="font-weight:600;color:#0f172a;text-decoration:none">{{ $page->title }}</a>
                     </td>
-                    <td><span class="text-muted" style="font-size:0.8rem">gioi-thieu</span></td>
-                    <td><span class="badge badge-soft-info">Mac dinh</span></td>
-                    <td><i class="bi bi-check-circle-fill text-success"></i></td>
-                    <td class="text-muted" style="font-size:0.8rem">25/03/2026</td>
+                    <td><span class="text-muted" style="font-size:0.8rem">{{ $page->slug }}</span></td>
+                    <td><span class="badge badge-soft-info">{{ $page->layout ?? 'default' }}</span></td>
+                    <td>
+                        @if($page->is_published)
+                            <i class="bi bi-check-circle-fill text-success"></i>
+                        @else
+                            <i class="bi bi-x-circle-fill text-muted"></i>
+                        @endif
+                    </td>
+                    <td class="text-muted" style="font-size:0.8rem">{{ $page->updated_at->format('d/m/Y') }}</td>
                     <td>
                         <div class="d-flex gap-1">
-                            <a href="{{ route('admin.pages.edit', 1) }}" class="action-btn edit" title="Sua"><i class="bi bi-pencil"></i></a>
-                            <button class="action-btn delete" title="Xoa"><i class="bi bi-trash"></i></button>
+                            <a href="{{ route('admin.pages.edit', $page) }}" class="action-btn edit" title="Sua"><i class="bi bi-pencil"></i></a>
+                            <form action="{{ route('admin.pages.destroy', $page) }}" method="POST" onsubmit="return confirm('Ban co chac chan muon xoa?')">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="action-btn delete" title="Xoa"><i class="bi bi-trash"></i></button>
+                            </form>
                         </div>
                     </td>
                 </tr>
+                @empty
                 <tr>
-                    <td><input type="checkbox" class="form-check-input"></td>
-                    <td>
-                        <a href="{{ route('admin.pages.edit', 2) }}" style="font-weight:600;color:#0f172a;text-decoration:none">Chinh sach bao hanh</a>
-                    </td>
-                    <td><span class="text-muted" style="font-size:0.8rem">chinh-sach-bao-hanh</span></td>
-                    <td><span class="badge badge-soft-pink">Co sidebar</span></td>
-                    <td><i class="bi bi-check-circle-fill text-success"></i></td>
-                    <td class="text-muted" style="font-size:0.8rem">20/03/2026</td>
-                    <td>
-                        <div class="d-flex gap-1">
-                            <a href="{{ route('admin.pages.edit', 2) }}" class="action-btn edit" title="Sua"><i class="bi bi-pencil"></i></a>
-                            <button class="action-btn delete" title="Xoa"><i class="bi bi-trash"></i></button>
-                        </div>
-                    </td>
+                    <td colspan="7" class="text-center text-muted py-4">Chua co trang nao.</td>
                 </tr>
-                <tr>
-                    <td><input type="checkbox" class="form-check-input"></td>
-                    <td>
-                        <a href="{{ route('admin.pages.edit', 3) }}" style="font-weight:600;color:#0f172a;text-decoration:none">Huong dan dat hang</a>
-                    </td>
-                    <td><span class="text-muted" style="font-size:0.8rem">huong-dan-dat-hang</span></td>
-                    <td><span class="badge badge-soft-warning">Toan trang</span></td>
-                    <td><i class="bi bi-x-circle-fill text-muted"></i></td>
-                    <td class="text-muted" style="font-size:0.8rem">18/03/2026</td>
-                    <td>
-                        <div class="d-flex gap-1">
-                            <a href="{{ route('admin.pages.edit', 3) }}" class="action-btn edit" title="Sua"><i class="bi bi-pencil"></i></a>
-                            <button class="action-btn delete" title="Xoa"><i class="bi bi-trash"></i></button>
-                        </div>
-                    </td>
-                </tr>
+                @endforelse
             </tbody>
         </table>
     </div>
 </div>
 
 {{-- Pagination --}}
-<div class="d-flex justify-content-between align-items-center mt-3">
-    <span class="text-muted" style="font-size:0.85rem">Hien thi <strong>1-3</strong> / <strong>3</strong> trang tinh</span>
-    <nav>
-        <ul class="pagination pagination-sm mb-0">
-            <li class="page-item disabled"><a class="page-link" href="#">&laquo;</a></li>
-            <li class="page-item active"><a class="page-link" href="#">1</a></li>
-            <li class="page-item disabled"><a class="page-link" href="#">&raquo;</a></li>
-        </ul>
-    </nav>
+<div class="d-flex justify-content-center mt-3">
+    {{ $pages->links('pagination::bootstrap-5') }}
 </div>
 @endsection

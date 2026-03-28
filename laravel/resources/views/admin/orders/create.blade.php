@@ -64,12 +64,15 @@
                         </div>
                         <div class="col-md-6">
                             <label class="form-label">Cua hang</label>
-                            <select class="form-select" name="store_location_id">
+                            <select class="form-select @error('store_location_id') is-invalid @enderror" name="store_location_id">
                                 <option value="">-- Chon cua hang --</option>
-                                <option value="1">Thu Huong Cake - Quan 1</option>
-                                <option value="2">Thu Huong Cake - Quan 3</option>
-                                <option value="3">Thu Huong Cake - Binh Thanh</option>
+                                @foreach($stores as $store)
+                                    <option value="{{ $store->id }}" {{ old('store_location_id') == $store->id ? 'selected' : '' }}>{{ $store->name }}</option>
+                                @endforeach
                             </select>
+                            @error('store_location_id')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
                         </div>
                         <div class="col-12">
                             <label class="form-label">Dia chi giao hang</label>
@@ -144,22 +147,21 @@
                                     <td>
                                         <select class="form-select form-select-sm" name="items[0][product_id]">
                                             <option value="">-- Chon SP --</option>
-                                            <option value="1">Banh kem dau tay</option>
-                                            <option value="2">Banh mousse socola</option>
+                                            @if(isset($products))
+                                                @foreach($products as $product)
+                                                    <option value="{{ $product->id }}">{{ $product->name }}</option>
+                                                @endforeach
+                                            @endif
                                         </select>
                                     </td>
                                     <td>
                                         <select class="form-select form-select-sm" name="items[0][cake_size_id]">
                                             <option value="">-- Size --</option>
-                                            <option value="1">16cm</option>
-                                            <option value="2">20cm</option>
                                         </select>
                                     </td>
                                     <td>
                                         <select class="form-select form-select-sm" name="items[0][cake_base_id]">
                                             <option value="">-- Cot --</option>
-                                            <option value="1">Bong lan trung</option>
-                                            <option value="2">Bong lan socola</option>
                                         </select>
                                     </td>
                                     <td><input type="number" class="form-control form-control-sm" name="items[0][quantity]" value="1" min="1"></td>

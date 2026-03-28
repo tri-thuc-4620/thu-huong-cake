@@ -16,6 +16,16 @@
 <form action="{{ route('admin.products.store') }}" method="POST" enctype="multipart/form-data">
     @csrf
 
+    @if($errors->any())
+    <div class="alert alert-danger mb-4">
+        <ul class="mb-0">
+            @foreach($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+    @endif
+
     <div class="row g-4">
         {{-- ================================================================ --}}
         {{-- LEFT COLUMN --}}
@@ -24,7 +34,8 @@
 
             {{-- 1. Ten san pham (no card, like WP) --}}
             <div class="mb-4">
-                <input type="text" class="form-control form-control-lg" name="name" placeholder="Ten san pham" required style="font-size:1.3rem;padding:0.6rem 0.8rem;border-radius:4px;border:1px solid #dcdcde">
+                <input type="text" class="form-control form-control-lg @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" placeholder="Ten san pham" required style="font-size:1.3rem;padding:0.6rem 0.8rem;border-radius:4px;border:1px solid #dcdcde">
+                @error('name') <div class="invalid-feedback">{{ $message }}</div> @enderror
                 <div class="mt-1" style="font-size:0.8rem;color:#646970">
                     Duong dan: <span style="color:var(--pink)">thuhuongcake.wuaze.com/san-pham/<strong>ten-san-pham</strong>/</span>
                 </div>
@@ -34,7 +45,8 @@
             <div class="card mb-4">
                 <div class="card-header py-2"><h6 class="mb-0" style="font-size:0.9rem">Mo ta san pham</h6></div>
                 <div class="card-body p-0">
-                    <textarea class="form-control" name="description" rows="12" placeholder="Nhap mo ta chi tiet san pham..." style="border:none;border-radius:0;resize:vertical"></textarea>
+                    <textarea class="form-control @error('description') is-invalid @enderror" name="description" rows="12" placeholder="Nhap mo ta chi tiet san pham..." style="border:none;border-radius:0;resize:vertical">{{ old('description') }}</textarea>
+                    @error('description') <div class="invalid-feedback">{{ $message }}</div> @enderror
                 </div>
                 <div class="card-footer py-1" style="background:#f8fafc;border-top:1px solid #f0e4e9">
                     <span class="text-muted" style="font-size:0.75rem"><i class="bi bi-info-circle me-1"></i>Rich editor se duoc tich hop</span>
@@ -617,7 +629,8 @@
             <div class="card mb-4">
                 <div class="card-header py-2"><h6 class="mb-0" style="font-size:0.9rem">Mo ta ngan cua san pham</h6></div>
                 <div class="card-body p-0">
-                    <textarea class="form-control" name="short_description" rows="6" placeholder="Nhap mo ta ngan gon hien thi tren trang san pham..." style="border:none;border-radius:0;resize:vertical"></textarea>
+                    <textarea class="form-control @error('short_description') is-invalid @enderror" name="short_description" rows="6" placeholder="Nhap mo ta ngan gon hien thi tren trang san pham..." style="border:none;border-radius:0;resize:vertical">{{ old('short_description') }}</textarea>
+                    @error('short_description') <div class="invalid-feedback">{{ $message }}</div> @enderror
                 </div>
                 <div class="card-footer py-1" style="background:#f8fafc;border-top:1px solid #f0e4e9">
                     <span class="text-muted" style="font-size:0.75rem"><i class="bi bi-info-circle me-1"></i>Rich editor se duoc tich hop</span>
@@ -725,40 +738,20 @@
                     </ul>
                     <div class="tab-content">
                         <div class="tab-pane fade show active p-3" id="catTab-all" style="max-height:200px;overflow-y:auto">
-                            <div class="form-check mb-2">
-                                <input class="form-check-input" type="checkbox" id="cat1" name="categories[]" value="1" checked>
-                                <label class="form-check-label" for="cat1" style="font-size:0.85rem">Banh sinh nhat</label>
+                            @foreach($categories as $cat)
+                            <div class="form-check mb-2{{ $cat->parent_id ? ' ms-3' : '' }}">
+                                <input class="form-check-input" type="checkbox" id="cat{{ $cat->id }}" name="categories[]" value="{{ $cat->id }}" {{ in_array($cat->id, old('categories', [])) ? 'checked' : '' }}>
+                                <label class="form-check-label" for="cat{{ $cat->id }}" style="font-size:0.85rem">{{ $cat->name }}</label>
                             </div>
-                            <div class="form-check mb-2 ms-3">
-                                <input class="form-check-input" type="checkbox" id="cat2" name="categories[]" value="2">
-                                <label class="form-check-label" for="cat2" style="font-size:0.85rem">Banh sinh nhat mini</label>
-                            </div>
-                            <div class="form-check mb-2 ms-3">
-                                <input class="form-check-input" type="checkbox" id="cat3" name="categories[]" value="3" checked>
-                                <label class="form-check-label" for="cat3" style="font-size:0.85rem">Banh sinh nhat hoa qua</label>
-                            </div>
-                            <div class="form-check mb-2">
-                                <input class="form-check-input" type="checkbox" id="cat4" name="categories[]" value="4">
-                                <label class="form-check-label" for="cat4" style="font-size:0.85rem">Set qua tang</label>
-                            </div>
-                            <div class="form-check mb-2">
-                                <input class="form-check-input" type="checkbox" id="cat5" name="categories[]" value="5">
-                                <label class="form-check-label" for="cat5" style="font-size:0.85rem">Banh bong lan trung muoi</label>
-                            </div>
-                            <div class="form-check mb-2">
-                                <input class="form-check-input" type="checkbox" id="cat6" name="categories[]" value="6">
-                                <label class="form-check-label" for="cat6" style="font-size:0.85rem">Banh dac biet</label>
-                            </div>
+                            @endforeach
                         </div>
                         <div class="tab-pane fade p-3" id="catTab-popular" style="max-height:200px;overflow-y:auto">
+                            @foreach($categories->take(5) as $cat)
                             <div class="form-check mb-2">
-                                <input class="form-check-input" type="checkbox" checked>
-                                <label class="form-check-label" style="font-size:0.85rem">Banh sinh nhat</label>
+                                <input class="form-check-input" type="checkbox" name="categories[]" value="{{ $cat->id }}" {{ in_array($cat->id, old('categories', [])) ? 'checked' : '' }}>
+                                <label class="form-check-label" style="font-size:0.85rem">{{ $cat->name }}</label>
                             </div>
-                            <div class="form-check mb-2">
-                                <input class="form-check-input" type="checkbox">
-                                <label class="form-check-label" style="font-size:0.85rem">Banh dac biet</label>
-                            </div>
+                            @endforeach
                         </div>
                     </div>
                     <div class="px-3 pb-3">
@@ -837,21 +830,21 @@
                 <div class="card-header"><h6 class="mb-0"><i class="bi bi-stars me-2 text-muted"></i>Hien thi</h6></div>
                 <div class="card-body">
                     <div class="form-check form-switch mb-2">
-                        <input class="form-check-input" type="checkbox" id="is_featured" name="is_featured">
+                        <input class="form-check-input" type="checkbox" id="is_featured" name="is_featured" value="1" {{ old('is_featured') ? 'checked' : '' }}>
                         <label class="form-check-label" for="is_featured" style="font-size:0.85rem">San pham noi bat</label>
                     </div>
                     <div class="form-check form-switch mb-2">
-                        <input class="form-check-input" type="checkbox" id="is_hot" name="is_hot">
+                        <input class="form-check-input" type="checkbox" id="is_hot" name="is_hot" value="1" {{ old('is_hot') ? 'checked' : '' }}>
                         <label class="form-check-label" for="is_hot" style="font-size:0.85rem">San pham Hot</label>
                     </div>
                     <div class="form-check form-switch mb-2">
-                        <input class="form-check-input" type="checkbox" id="is_new" name="is_new" checked>
+                        <input class="form-check-input" type="checkbox" id="is_new" name="is_new" value="1" {{ old('is_new', true) ? 'checked' : '' }}>
                         <label class="form-check-label" for="is_new" style="font-size:0.85rem">San pham Moi</label>
                     </div>
                     <hr>
                     <div>
                         <label class="form-label" style="font-size:0.85rem">Thu tu hien thi</label>
-                        <input type="number" class="form-control form-control-sm" name="sort_order" value="0">
+                        <input type="number" class="form-control form-control-sm" name="sort_order" value="{{ old('sort_order', 0) }}">
                     </div>
                 </div>
             </div>

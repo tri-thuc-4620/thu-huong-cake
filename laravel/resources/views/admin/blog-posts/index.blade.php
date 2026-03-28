@@ -19,9 +19,6 @@
         <label class="form-label">Danh muc</label>
         <select class="form-select form-select-sm" style="min-width:150px">
             <option value="">Tat ca danh muc</option>
-            <option>Huong dan</option>
-            <option>Tin tuc</option>
-            <option>Cong thuc</option>
         </select>
     </div>
     <div>
@@ -36,10 +33,17 @@
     <button class="btn btn-soft btn-sm"><i class="bi bi-arrow-counterclockwise me-1"></i> Xoa loc</button>
 </div>
 
+@if(session('success'))
+    <div class="alert alert-success alert-dismissible fade show mt-3">
+        {{ session('success') }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+@endif
+
 {{-- Table --}}
 <div class="card table-card mt-3">
     <div class="card-header d-flex justify-content-between align-items-center">
-        <span style="font-size:0.85rem"><strong>5</strong> bai viet</span>
+        <span style="font-size:0.85rem"><strong>{{ $posts->total() }}</strong> bai viet</span>
     </div>
     <div class="table-responsive">
         <table class="table">
@@ -57,110 +61,59 @@
                 </tr>
             </thead>
             <tbody>
+                @forelse($posts as $post)
                 <tr>
                     <td><input type="checkbox" class="form-check-input"></td>
-                    <td><img src="https://placehold.co/48x48/fff0f6/e84393?text=📝" class="rounded-3" width="48" height="48" style="object-fit:cover"></td>
                     <td>
-                        <a href="{{ route('admin.blog-posts.edit', 1) }}" style="font-weight:600;color:#0f172a;text-decoration:none">Cach chon banh sinh nhat dep</a>
+                        @if($post->featured_image)
+                            <img src="{{ Storage::url($post->featured_image) }}" class="rounded-3" width="48" height="48" style="object-fit:cover">
+                        @else
+                            <img src="https://placehold.co/48x48/fff0f6/e84393?text=No" class="rounded-3" width="48" height="48" style="object-fit:cover">
+                        @endif
                     </td>
-                    <td><span class="badge badge-soft-info">Huong dan</span></td>
-                    <td class="text-muted" style="font-size:0.85rem">Admin</td>
-                    <td><i class="bi bi-check-circle-fill text-success"></i></td>
-                    <td class="text-muted">1,250</td>
-                    <td class="text-muted" style="font-size:0.8rem">20/03/2026</td>
+                    <td>
+                        <a href="{{ route('admin.blog-posts.edit', $post) }}" style="font-weight:600;color:#0f172a;text-decoration:none">{{ $post->title }}</a>
+                    </td>
+                    <td>
+                        @if($post->category)
+                            <span class="badge badge-soft-info">{{ $post->category->name }}</span>
+                        @else
+                            <span class="text-muted">--</span>
+                        @endif
+                    </td>
+                    <td class="text-muted" style="font-size:0.85rem">{{ $post->author?->name ?? '--' }}</td>
+                    <td>
+                        @if($post->is_published)
+                            <i class="bi bi-check-circle-fill text-success"></i>
+                        @else
+                            <i class="bi bi-x-circle-fill text-muted"></i>
+                        @endif
+                    </td>
+                    <td class="text-muted">{{ number_format($post->views ?? 0) }}</td>
+                    <td class="text-muted" style="font-size:0.8rem">{{ $post->published_at?->format('d/m/Y') ?? '—' }}</td>
                     <td>
                         <div class="d-flex gap-1">
-                            <a href="{{ route('admin.blog-posts.edit', 1) }}" class="action-btn edit" title="Sua"><i class="bi bi-pencil"></i></a>
-                            <button class="action-btn delete" title="Xoa"><i class="bi bi-trash"></i></button>
+                            <a href="{{ route('admin.blog-posts.edit', $post) }}" class="action-btn edit" title="Sua"><i class="bi bi-pencil"></i></a>
+                            <form action="{{ route('admin.blog-posts.destroy', $post) }}" method="POST" onsubmit="return confirm('Ban co chac chan muon xoa?')">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="action-btn delete" title="Xoa"><i class="bi bi-trash"></i></button>
+                            </form>
                         </div>
                     </td>
                 </tr>
+                @empty
                 <tr>
-                    <td><input type="checkbox" class="form-check-input"></td>
-                    <td><img src="https://placehold.co/48x48/fdf2f8/e84393?text=🎂" class="rounded-3" width="48" height="48" style="object-fit:cover"></td>
-                    <td>
-                        <a href="{{ route('admin.blog-posts.edit', 2) }}" style="font-weight:600;color:#0f172a;text-decoration:none">Xu huong banh kem 2026</a>
-                    </td>
-                    <td><span class="badge badge-soft-warning">Tin tuc</span></td>
-                    <td class="text-muted" style="font-size:0.85rem">Admin</td>
-                    <td><i class="bi bi-check-circle-fill text-success"></i></td>
-                    <td class="text-muted">980</td>
-                    <td class="text-muted" style="font-size:0.8rem">18/03/2026</td>
-                    <td>
-                        <div class="d-flex gap-1">
-                            <a href="{{ route('admin.blog-posts.edit', 2) }}" class="action-btn edit" title="Sua"><i class="bi bi-pencil"></i></a>
-                            <button class="action-btn delete" title="Xoa"><i class="bi bi-trash"></i></button>
-                        </div>
-                    </td>
+                    <td colspan="9" class="text-center text-muted py-4">Chua co bai viet nao.</td>
                 </tr>
-                <tr>
-                    <td><input type="checkbox" class="form-check-input"></td>
-                    <td><img src="https://placehold.co/48x48/f0fdf4/10b981?text=🍰" class="rounded-3" width="48" height="48" style="object-fit:cover"></td>
-                    <td>
-                        <a href="{{ route('admin.blog-posts.edit', 3) }}" style="font-weight:600;color:#0f172a;text-decoration:none">Bao quan banh kem dung cach</a>
-                    </td>
-                    <td><span class="badge badge-soft-info">Huong dan</span></td>
-                    <td class="text-muted" style="font-size:0.85rem">Admin</td>
-                    <td><i class="bi bi-check-circle-fill text-success"></i></td>
-                    <td class="text-muted">750</td>
-                    <td class="text-muted" style="font-size:0.8rem">15/03/2026</td>
-                    <td>
-                        <div class="d-flex gap-1">
-                            <a href="{{ route('admin.blog-posts.edit', 3) }}" class="action-btn edit" title="Sua"><i class="bi bi-pencil"></i></a>
-                            <button class="action-btn delete" title="Xoa"><i class="bi bi-trash"></i></button>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td><input type="checkbox" class="form-check-input"></td>
-                    <td><img src="https://placehold.co/48x48/f1f5f9/94a3b8?text=📰" class="rounded-3" width="48" height="48" style="object-fit:cover"></td>
-                    <td>
-                        <a href="{{ route('admin.blog-posts.edit', 4) }}" style="font-weight:600;color:#0f172a;text-decoration:none">Khai truong chi nhanh moi tai Quan 7</a>
-                    </td>
-                    <td><span class="badge badge-soft-warning">Tin tuc</span></td>
-                    <td class="text-muted" style="font-size:0.85rem">Admin</td>
-                    <td><i class="bi bi-x-circle-fill text-muted"></i></td>
-                    <td class="text-muted">0</td>
-                    <td class="text-muted" style="font-size:0.8rem">—</td>
-                    <td>
-                        <div class="d-flex gap-1">
-                            <a href="{{ route('admin.blog-posts.edit', 4) }}" class="action-btn edit" title="Sua"><i class="bi bi-pencil"></i></a>
-                            <button class="action-btn delete" title="Xoa"><i class="bi bi-trash"></i></button>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td><input type="checkbox" class="form-check-input"></td>
-                    <td><img src="https://placehold.co/48x48/fef3c7/f59e0b?text=🧁" class="rounded-3" width="48" height="48" style="object-fit:cover"></td>
-                    <td>
-                        <a href="{{ route('admin.blog-posts.edit', 5) }}" style="font-weight:600;color:#0f172a;text-decoration:none">Cong thuc lam banh bong lan tai nha</a>
-                    </td>
-                    <td><span class="badge badge-soft-pink">Cong thuc</span></td>
-                    <td class="text-muted" style="font-size:0.85rem">Admin</td>
-                    <td><i class="bi bi-check-circle-fill text-success"></i></td>
-                    <td class="text-muted">2,100</td>
-                    <td class="text-muted" style="font-size:0.8rem">10/03/2026</td>
-                    <td>
-                        <div class="d-flex gap-1">
-                            <a href="{{ route('admin.blog-posts.edit', 5) }}" class="action-btn edit" title="Sua"><i class="bi bi-pencil"></i></a>
-                            <button class="action-btn delete" title="Xoa"><i class="bi bi-trash"></i></button>
-                        </div>
-                    </td>
-                </tr>
+                @endforelse
             </tbody>
         </table>
     </div>
 </div>
 
 {{-- Pagination --}}
-<div class="d-flex justify-content-between align-items-center mt-3">
-    <span class="text-muted" style="font-size:0.85rem">Hien thi <strong>1-5</strong> / <strong>5</strong> bai viet</span>
-    <nav>
-        <ul class="pagination pagination-sm mb-0">
-            <li class="page-item disabled"><a class="page-link" href="#">&laquo;</a></li>
-            <li class="page-item active"><a class="page-link" href="#">1</a></li>
-            <li class="page-item disabled"><a class="page-link" href="#">&raquo;</a></li>
-        </ul>
-    </nav>
+<div class="d-flex justify-content-center mt-3">
+    {{ $posts->links('pagination::bootstrap-5') }}
 </div>
 @endsection

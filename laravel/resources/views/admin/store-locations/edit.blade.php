@@ -10,7 +10,7 @@
     </a>
 </div>
 
-<form action="{{ route('admin.store-locations.update', $storeLocation ?? 1) }}" method="POST">
+<form action="{{ route('admin.store-locations.update', $location) }}" method="POST">
     @csrf
     @method('PUT')
 
@@ -23,12 +23,12 @@
             <div class="row">
                 <div class="col-md-6 mb-3">
                     <label for="name" class="form-label">Ten cua hang</label>
-                    <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" value="{{ old('name', $storeLocation->name ?? 'Thu Huong - Doi Can') }}">
+                    <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" value="{{ old('name', $location->name) }}">
                     @error('name') <div class="invalid-feedback">{{ $message }}</div> @enderror
                 </div>
                 <div class="col-md-6 mb-3">
                     <label for="short_name" class="form-label">Ten ngan</label>
-                    <input type="text" class="form-control @error('short_name') is-invalid @enderror" id="short_name" name="short_name" value="{{ old('short_name', $storeLocation->short_name ?? 'Doi Can') }}">
+                    <input type="text" class="form-control @error('short_name') is-invalid @enderror" id="short_name" name="short_name" value="{{ old('short_name', $location->short_name) }}">
                     @error('short_name') <div class="invalid-feedback">{{ $message }}</div> @enderror
                 </div>
             </div>
@@ -36,16 +36,12 @@
             <div class="row">
                 <div class="col-md-6 mb-3">
                     <label for="address" class="form-label">Dia chi</label>
-                    <input type="text" class="form-control @error('address') is-invalid @enderror" id="address" name="address" value="{{ old('address', $storeLocation->address ?? '15 Doi Can, Ba Dinh') }}">
+                    <input type="text" class="form-control @error('address') is-invalid @enderror" id="address" name="address" value="{{ old('address', $location->address) }}">
                     @error('address') <div class="invalid-feedback">{{ $message }}</div> @enderror
                 </div>
                 <div class="col-md-6 mb-3">
                     <label for="city" class="form-label">Thanh pho</label>
-                    <select class="form-select @error('city') is-invalid @enderror" id="city" name="city">
-                        <option value="">-- Chon thanh pho --</option>
-                        <option value="ha_noi" {{ old('city', $storeLocation->city ?? '') == 'ha_noi' ? 'selected' : '' }}>Ha Noi</option>
-                        <option value="hcm" {{ old('city', $storeLocation->city ?? '') == 'hcm' ? 'selected' : '' }}>TP HCM</option>
-                    </select>
+                    <input type="text" class="form-control @error('city') is-invalid @enderror" id="city" name="city" value="{{ old('city', $location->city) }}">
                     @error('city') <div class="invalid-feedback">{{ $message }}</div> @enderror
                 </div>
             </div>
@@ -53,12 +49,12 @@
             <div class="row">
                 <div class="col-md-6 mb-3">
                     <label for="district" class="form-label">Quan/Huyen</label>
-                    <input type="text" class="form-control @error('district') is-invalid @enderror" id="district" name="district" value="{{ old('district', $storeLocation->district ?? 'Ba Dinh') }}">
+                    <input type="text" class="form-control @error('district') is-invalid @enderror" id="district" name="district" value="{{ old('district', $location->district) }}">
                     @error('district') <div class="invalid-feedback">{{ $message }}</div> @enderror
                 </div>
                 <div class="col-md-6 mb-3">
                     <label for="phone" class="form-label">So dien thoai</label>
-                    <input type="text" class="form-control @error('phone') is-invalid @enderror" id="phone" name="phone" value="{{ old('phone', $storeLocation->phone ?? '0243 123 4567') }}">
+                    <input type="text" class="form-control @error('phone') is-invalid @enderror" id="phone" name="phone" value="{{ old('phone', $location->phone) }}">
                     @error('phone') <div class="invalid-feedback">{{ $message }}</div> @enderror
                 </div>
             </div>
@@ -74,18 +70,18 @@
             <div class="row">
                 <div class="col-md-6 mb-3">
                     <label for="latitude" class="form-label">Latitude</label>
-                    <input type="text" class="form-control @error('latitude') is-invalid @enderror" id="latitude" name="latitude" value="{{ old('latitude', $storeLocation->latitude ?? '21.0285') }}">
+                    <input type="text" class="form-control @error('latitude') is-invalid @enderror" id="latitude" name="latitude" value="{{ old('latitude', $location->latitude) }}">
                     @error('latitude') <div class="invalid-feedback">{{ $message }}</div> @enderror
                 </div>
                 <div class="col-md-6 mb-3">
                     <label for="longitude" class="form-label">Longitude</label>
-                    <input type="text" class="form-control @error('longitude') is-invalid @enderror" id="longitude" name="longitude" value="{{ old('longitude', $storeLocation->longitude ?? '105.8542') }}">
+                    <input type="text" class="form-control @error('longitude') is-invalid @enderror" id="longitude" name="longitude" value="{{ old('longitude', $location->longitude) }}">
                     @error('longitude') <div class="invalid-feedback">{{ $message }}</div> @enderror
                 </div>
             </div>
             <div class="mb-3">
                 <label for="google_maps_url" class="form-label">Google Maps URL</label>
-                <input type="text" class="form-control @error('google_maps_url') is-invalid @enderror" id="google_maps_url" name="google_maps_url" value="{{ old('google_maps_url', $storeLocation->google_maps_url ?? '') }}" placeholder="https://maps.google.com/...">
+                <input type="text" class="form-control @error('google_maps_url') is-invalid @enderror" id="google_maps_url" name="google_maps_url" value="{{ old('google_maps_url', $location->google_maps_url) }}" placeholder="https://maps.google.com/...">
                 @error('google_maps_url') <div class="invalid-feedback">{{ $message }}</div> @enderror
             </div>
         </div>
@@ -100,13 +96,13 @@
             <div class="row">
                 <div class="col-md-6 mb-3">
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" id="is_active" name="is_active" value="1" {{ old('is_active', $storeLocation->is_active ?? true) ? 'checked' : '' }}>
+                        <input class="form-check-input" type="checkbox" id="is_active" name="is_active" value="1" {{ old('is_active', $location->is_active) ? 'checked' : '' }}>
                         <label class="form-check-label" for="is_active">Hoat dong</label>
                     </div>
                 </div>
                 <div class="col-md-6 mb-3">
                     <label for="sort_order" class="form-label">Thu tu</label>
-                    <input type="number" class="form-control @error('sort_order') is-invalid @enderror" id="sort_order" name="sort_order" value="{{ old('sort_order', $storeLocation->sort_order ?? 0) }}">
+                    <input type="number" class="form-control @error('sort_order') is-invalid @enderror" id="sort_order" name="sort_order" value="{{ old('sort_order', $location->sort_order) }}">
                     @error('sort_order') <div class="invalid-feedback">{{ $message }}</div> @enderror
                 </div>
             </div>

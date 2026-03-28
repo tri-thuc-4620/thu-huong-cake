@@ -36,10 +36,17 @@
     <button class="btn btn-soft btn-sm"><i class="bi bi-arrow-counterclockwise me-1"></i> Xoa loc</button>
 </div>
 
+@if(session('success'))
+    <div class="alert alert-success alert-dismissible fade show mt-3">
+        {{ session('success') }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+@endif
+
 {{-- Table --}}
 <div class="card table-card mt-3">
     <div class="card-header d-flex justify-content-between align-items-center">
-        <span style="font-size:0.85rem"><strong>3</strong> banner</span>
+        <span style="font-size:0.85rem"><strong>{{ $banners->total() }}</strong> banner</span>
     </div>
     <div class="table-responsive">
         <table class="table">
@@ -55,62 +62,55 @@
                 </tr>
             </thead>
             <tbody>
+                @forelse($banners as $banner)
                 <tr>
                     <td><input type="checkbox" class="form-check-input"></td>
-                    <td><img src="https://placehold.co/80x45/fff0f6/e84393?text=Banner+1" class="rounded-3" style="width:80px;height:45px;object-fit:cover"></td>
-                    <td style="font-weight:600;color:#0f172a">Khuyen mai thang 3</td>
-                    <td><span class="badge badge-soft-info">Trang chu</span></td>
-                    <td><i class="bi bi-check-circle-fill text-success"></i></td>
-                    <td class="text-muted">1</td>
+                    <td>
+                        @if($banner->image)
+                            <img src="{{ Storage::url($banner->image) }}" class="rounded-3" style="width:80px;height:45px;object-fit:cover">
+                        @else
+                            <img src="https://placehold.co/80x45/fff0f6/e84393?text=No" class="rounded-3" style="width:80px;height:45px;object-fit:cover">
+                        @endif
+                    </td>
+                    <td style="font-weight:600;color:#0f172a">{{ $banner->title ?? '--' }}</td>
+                    <td>
+                        @if($banner->position)
+                            <span class="badge badge-soft-info">{{ $banner->position }}</span>
+                        @else
+                            <span class="text-muted">--</span>
+                        @endif
+                    </td>
+                    <td>
+                        @if($banner->is_active)
+                            <i class="bi bi-check-circle-fill text-success"></i>
+                        @else
+                            <i class="bi bi-x-circle-fill text-muted"></i>
+                        @endif
+                    </td>
+                    <td class="text-muted">{{ $banner->sort_order }}</td>
                     <td>
                         <div class="d-flex gap-1">
-                            <a href="{{ route('admin.banners.edit', 1) }}" class="action-btn edit" title="Sua"><i class="bi bi-pencil"></i></a>
-                            <button class="action-btn delete" title="Xoa"><i class="bi bi-trash"></i></button>
+                            <a href="{{ route('admin.banners.edit', $banner) }}" class="action-btn edit" title="Sua"><i class="bi bi-pencil"></i></a>
+                            <form action="{{ route('admin.banners.destroy', $banner) }}" method="POST" onsubmit="return confirm('Ban co chac chan muon xoa?')">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="action-btn delete" title="Xoa"><i class="bi bi-trash"></i></button>
+                            </form>
                         </div>
                     </td>
                 </tr>
+                @empty
                 <tr>
-                    <td><input type="checkbox" class="form-check-input"></td>
-                    <td><img src="https://placehold.co/80x45/fdf2f8/e84393?text=Banner+2" class="rounded-3" style="width:80px;height:45px;object-fit:cover"></td>
-                    <td style="font-weight:600;color:#0f172a">Sidebar quang cao</td>
-                    <td><span class="badge badge-soft-pink">Sidebar</span></td>
-                    <td><i class="bi bi-check-circle-fill text-success"></i></td>
-                    <td class="text-muted">2</td>
-                    <td>
-                        <div class="d-flex gap-1">
-                            <a href="{{ route('admin.banners.edit', 2) }}" class="action-btn edit" title="Sua"><i class="bi bi-pencil"></i></a>
-                            <button class="action-btn delete" title="Xoa"><i class="bi bi-trash"></i></button>
-                        </div>
-                    </td>
+                    <td colspan="7" class="text-center text-muted py-4">Chua co banner nao.</td>
                 </tr>
-                <tr>
-                    <td><input type="checkbox" class="form-check-input"></td>
-                    <td><img src="https://placehold.co/80x45/f1f5f9/94a3b8?text=Banner+3" class="rounded-3" style="width:80px;height:45px;object-fit:cover"></td>
-                    <td style="font-weight:600;color:#0f172a">Popup chao mung</td>
-                    <td><span class="badge badge-soft-warning">Popup</span></td>
-                    <td><i class="bi bi-x-circle-fill text-muted"></i></td>
-                    <td class="text-muted">3</td>
-                    <td>
-                        <div class="d-flex gap-1">
-                            <a href="{{ route('admin.banners.edit', 3) }}" class="action-btn edit" title="Sua"><i class="bi bi-pencil"></i></a>
-                            <button class="action-btn delete" title="Xoa"><i class="bi bi-trash"></i></button>
-                        </div>
-                    </td>
-                </tr>
+                @endforelse
             </tbody>
         </table>
     </div>
 </div>
 
 {{-- Pagination --}}
-<div class="d-flex justify-content-between align-items-center mt-3">
-    <span class="text-muted" style="font-size:0.85rem">Hien thi <strong>1-3</strong> / <strong>3</strong> banner</span>
-    <nav>
-        <ul class="pagination pagination-sm mb-0">
-            <li class="page-item disabled"><a class="page-link" href="#">&laquo;</a></li>
-            <li class="page-item active"><a class="page-link" href="#">1</a></li>
-            <li class="page-item disabled"><a class="page-link" href="#">&raquo;</a></li>
-        </ul>
-    </nav>
+<div class="d-flex justify-content-center mt-3">
+    {{ $banners->links('pagination::bootstrap-5') }}
 </div>
 @endsection

@@ -22,12 +22,6 @@
             </div>
 
             <div class="mb-3">
-                <label for="slug" class="form-label">Slug</label>
-                <input type="text" class="form-control @error('slug') is-invalid @enderror" id="slug" name="slug" value="{{ old('slug') }}" placeholder="tu-dong-tao-tu-tieu-de">
-                @error('slug') <div class="invalid-feedback">{{ $message }}</div> @enderror
-            </div>
-
-            <div class="mb-3">
                 <label for="content" class="form-label">Noi dung</label>
                 <textarea class="form-control @error('content') is-invalid @enderror" id="content" name="content" rows="10">{{ old('content') }}</textarea>
                 <div class="form-text">Rich editor se duoc tich hop sau.</div>

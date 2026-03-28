@@ -20,28 +20,40 @@
                     @csrf
                     <div class="mb-3">
                         <label class="form-label">Ten thuoc tinh <span class="text-danger">*</span></label>
-                        <input type="text" class="form-control" name="name" placeholder="VD: Kich thuoc" required>
+                        <input type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" placeholder="VD: Kich thuoc" required>
+                        @error('name')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Slug</label>
-                        <input type="text" class="form-control" name="slug" placeholder="Tu dong tao tu ten">
+                        <input type="text" class="form-control @error('slug') is-invalid @enderror" name="slug" value="{{ old('slug') }}" placeholder="Tu dong tao tu ten">
                         <div class="form-text">Dung trong URL va he thong</div>
+                        @error('slug')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Kieu hien thi</label>
-                        <select class="form-select" name="display_type">
-                            <option value="select">Dropdown (Select)</option>
-                            <option value="button">Nut bam (Buttons)</option>
-                            <option value="color">Mau sac (Color swatches)</option>
-                            <option value="image">Hinh anh</option>
+                        <select class="form-select @error('display_type') is-invalid @enderror" name="display_type">
+                            <option value="select" {{ old('display_type') == 'select' ? 'selected' : '' }}>Dropdown (Select)</option>
+                            <option value="button" {{ old('display_type') == 'button' ? 'selected' : '' }}>Nut bam (Buttons)</option>
+                            <option value="color" {{ old('display_type') == 'color' ? 'selected' : '' }}>Mau sac (Color swatches)</option>
+                            <option value="image" {{ old('display_type') == 'image' ? 'selected' : '' }}>Hinh anh</option>
                         </select>
+                        @error('display_type')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Thu tu</label>
-                        <input type="number" class="form-control" name="sort_order" value="0">
+                        <input type="number" class="form-control @error('sort_order') is-invalid @enderror" name="sort_order" value="{{ old('sort_order', 0) }}">
+                        @error('sort_order')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
                     </div>
                     <div class="form-check form-switch mb-3">
-                        <input class="form-check-input" type="checkbox" id="isFilterable" name="is_filterable" checked>
+                        <input class="form-check-input" type="checkbox" id="isFilterable" name="is_filterable" {{ old('is_filterable', '1') ? 'checked' : '' }}>
                         <label class="form-check-label" for="isFilterable" style="font-size:0.85rem">Cho phep loc tren trang san pham</label>
                     </div>
                     <button type="submit" class="btn btn-pink w-100">
@@ -56,7 +68,7 @@
     <div class="col-lg-8">
         <div class="card table-card">
             <div class="card-header d-flex justify-content-between align-items-center">
-                <span style="font-size:0.85rem"><strong>6</strong> thuoc tinh</span>
+                <span style="font-size:0.85rem"><strong>{{ $attributes->count() }}</strong> thuoc tinh</span>
             </div>
             <div class="table-responsive">
                 <table class="table">
@@ -71,98 +83,50 @@
                         </tr>
                     </thead>
                     <tbody>
+                        @forelse($attributes as $attribute)
                         <tr>
                             <td>
-                                <a href="{{ route('admin.attributes.values', 1) }}" style="font-weight:600;color:#0f172a;text-decoration:none">Kich thuoc</a>
+                                <a href="{{ route('admin.attributes.values', $attribute->id) }}" style="font-weight:600;color:#0f172a;text-decoration:none">{{ $attribute->name }}</a>
                             </td>
-                            <td class="text-muted">kich-thuoc</td>
-                            <td><span class="badge badge-soft-info">Nut bam</span></td>
+                            <td class="text-muted">{{ $attribute->slug }}</td>
                             <td>
-                                <a href="{{ route('admin.attributes.values', 1) }}" style="color:var(--pink);text-decoration:none;font-weight:500">6 gia tri</a>
+                                @php
+                                    $badgeClass = match($attribute->display_type) {
+                                        'button' => 'badge-soft-info',
+                                        'color' => 'badge-soft-success',
+                                        'image' => 'badge-soft-primary',
+                                        default => 'badge-soft-warning',
+                                    };
+                                    $badgeLabel = match($attribute->display_type) {
+                                        'button' => 'Nut bam',
+                                        'color' => 'Mau sac',
+                                        'image' => 'Hinh anh',
+                                        default => 'Dropdown',
+                                    };
+                                @endphp
+                                <span class="badge {{ $badgeClass }}">{{ $badgeLabel }}</span>
                             </td>
-                            <td>0</td>
+                            <td>
+                                <a href="{{ route('admin.attributes.values', $attribute->id) }}" style="color:var(--pink);text-decoration:none;font-weight:500">{{ $attribute->values_count }} gia tri</a>
+                            </td>
+                            <td>{{ $attribute->sort_order }}</td>
                             <td>
                                 <div class="d-flex gap-1">
-                                    <a href="{{ route('admin.attributes.values', 1) }}" class="action-btn view" title="Quan ly gia tri"><i class="bi bi-list-ul"></i></a>
-                                    <a href="{{ route('admin.attributes.edit', 1) }}" class="action-btn edit" title="Sua"><i class="bi bi-pencil"></i></a>
-                                    <button class="action-btn delete" title="Xoa"><i class="bi bi-trash"></i></button>
+                                    <a href="{{ route('admin.attributes.values', $attribute->id) }}" class="action-btn view" title="Quan ly gia tri"><i class="bi bi-list-ul"></i></a>
+                                    <a href="{{ route('admin.attributes.edit', $attribute->id) }}" class="action-btn edit" title="Sua"><i class="bi bi-pencil"></i></a>
+                                    <form action="{{ route('admin.attributes.destroy', $attribute->id) }}" method="POST" onsubmit="return confirm('Ban co chac chan muon xoa thuoc tinh nay?')">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="action-btn delete" title="Xoa"><i class="bi bi-trash"></i></button>
+                                    </form>
                                 </div>
                             </td>
                         </tr>
+                        @empty
                         <tr>
-                            <td>
-                                <a href="{{ route('admin.attributes.values', 2) }}" style="font-weight:600;color:#0f172a;text-decoration:none">Cot banh</a>
-                            </td>
-                            <td class="text-muted">cot-banh</td>
-                            <td><span class="badge badge-soft-info">Nut bam</span></td>
-                            <td>
-                                <a href="{{ route('admin.attributes.values', 2) }}" style="color:var(--pink);text-decoration:none;font-weight:500">5 gia tri</a>
-                            </td>
-                            <td>1</td>
-                            <td>
-                                <div class="d-flex gap-1">
-                                    <a href="{{ route('admin.attributes.values', 2) }}" class="action-btn view"><i class="bi bi-list-ul"></i></a>
-                                    <a href="{{ route('admin.attributes.edit', 2) }}" class="action-btn edit"><i class="bi bi-pencil"></i></a>
-                                    <button class="action-btn delete"><i class="bi bi-trash"></i></button>
-                                </div>
-                            </td>
+                            <td colspan="6" class="text-center text-muted py-4">Chua co thuoc tinh nao.</td>
                         </tr>
-                        <tr>
-                            <td><span style="font-weight:600">Mau sac</span></td>
-                            <td class="text-muted">mau-sac</td>
-                            <td><span class="badge badge-soft-success">Mau sac</span></td>
-                            <td><span style="color:var(--pink);font-weight:500">8 gia tri</span></td>
-                            <td>2</td>
-                            <td>
-                                <div class="d-flex gap-1">
-                                    <a href="{{ route('admin.attributes.values', 3) }}" class="action-btn view"><i class="bi bi-list-ul"></i></a>
-                                    <a href="{{ route('admin.attributes.edit', 3) }}" class="action-btn edit"><i class="bi bi-pencil"></i></a>
-                                    <button class="action-btn delete"><i class="bi bi-trash"></i></button>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><span style="font-weight:600">Huong vi</span></td>
-                            <td class="text-muted">huong-vi</td>
-                            <td><span class="badge badge-soft-warning">Dropdown</span></td>
-                            <td><span style="color:var(--pink);font-weight:500">4 gia tri</span></td>
-                            <td>3</td>
-                            <td>
-                                <div class="d-flex gap-1">
-                                    <a href="{{ route('admin.attributes.values', 4) }}" class="action-btn view"><i class="bi bi-list-ul"></i></a>
-                                    <a href="{{ route('admin.attributes.edit', 4) }}" class="action-btn edit"><i class="bi bi-pencil"></i></a>
-                                    <button class="action-btn delete"><i class="bi bi-trash"></i></button>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><span style="font-weight:600">Lop banh</span></td>
-                            <td class="text-muted">lop-banh</td>
-                            <td><span class="badge badge-soft-warning">Dropdown</span></td>
-                            <td><span style="color:var(--pink);font-weight:500">3 gia tri</span></td>
-                            <td>4</td>
-                            <td>
-                                <div class="d-flex gap-1">
-                                    <a href="{{ route('admin.attributes.values', 5) }}" class="action-btn view"><i class="bi bi-list-ul"></i></a>
-                                    <a href="{{ route('admin.attributes.edit', 5) }}" class="action-btn edit"><i class="bi bi-pencil"></i></a>
-                                    <button class="action-btn delete"><i class="bi bi-trash"></i></button>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><span style="font-weight:600">Trang tri</span></td>
-                            <td class="text-muted">trang-tri</td>
-                            <td><span class="badge badge-soft-primary">Hinh anh</span></td>
-                            <td><span style="color:var(--pink);font-weight:500">6 gia tri</span></td>
-                            <td>5</td>
-                            <td>
-                                <div class="d-flex gap-1">
-                                    <a href="{{ route('admin.attributes.values', 6) }}" class="action-btn view"><i class="bi bi-list-ul"></i></a>
-                                    <a href="{{ route('admin.attributes.edit', 6) }}" class="action-btn edit"><i class="bi bi-pencil"></i></a>
-                                    <button class="action-btn delete"><i class="bi bi-trash"></i></button>
-                                </div>
-                            </td>
-                        </tr>
+                        @endforelse
                     </tbody>
                 </table>
             </div>

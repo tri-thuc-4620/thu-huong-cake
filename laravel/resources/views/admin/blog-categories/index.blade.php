@@ -33,79 +33,43 @@
                     </tr>
                 </thead>
                 <tbody>
+                    @forelse($categories as $category)
                     <tr>
-                        <td>1</td>
-                        <td>Huong dan</td>
-                        <td><code>huong-dan</code></td>
-                        <td>12</td>
-                        <td><span class="badge bg-success">Hien thi</span></td>
-                        <td>1</td>
+                        <td>{{ $category->id }}</td>
+                        <td>{{ $category->name }}</td>
+                        <td><code>{{ $category->slug }}</code></td>
+                        <td>{{ $category->posts_count }}</td>
+                        <td>
+                            @if($category->is_visible)
+                                <span class="badge bg-success">Hien thi</span>
+                            @else
+                                <span class="badge bg-secondary">An</span>
+                            @endif
+                        </td>
+                        <td>{{ $category->sort_order }}</td>
                         <td class="text-end">
                             <div class="d-flex gap-1 justify-content-end">
-                                <a href="{{ route('admin.blog-categories.edit', 1) }}" class="action-btn edit" title="Sua"><i class="bi bi-pencil"></i></a>
-                                <button class="action-btn delete" title="Xoa"><i class="bi bi-trash"></i></button>
+                                <a href="{{ route('admin.blog-categories.edit', $category) }}" class="action-btn edit" title="Sua"><i class="bi bi-pencil"></i></a>
+                                <form action="{{ route('admin.blog-categories.destroy', $category) }}" method="POST" onsubmit="return confirm('Ban co chac chan muon xoa?')">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="action-btn delete" title="Xoa"><i class="bi bi-trash"></i></button>
+                                </form>
                             </div>
                         </td>
                     </tr>
+                    @empty
                     <tr>
-                        <td>2</td>
-                        <td>Tin tuc</td>
-                        <td><code>tin-tuc</code></td>
-                        <td>8</td>
-                        <td><span class="badge bg-success">Hien thi</span></td>
-                        <td>2</td>
-                        <td class="text-end">
-                            <div class="d-flex gap-1 justify-content-end">
-                                <a href="{{ route('admin.blog-categories.edit', 2) }}" class="action-btn edit" title="Sua"><i class="bi bi-pencil"></i></a>
-                                <button class="action-btn delete" title="Xoa"><i class="bi bi-trash"></i></button>
-                            </div>
-                        </td>
+                        <td colspan="7" class="text-center text-muted py-4">Chua co danh muc nao.</td>
                     </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>Cong thuc</td>
-                        <td><code>cong-thuc</code></td>
-                        <td>5</td>
-                        <td><span class="badge bg-success">Hien thi</span></td>
-                        <td>3</td>
-                        <td class="text-end">
-                            <div class="d-flex gap-1 justify-content-end">
-                                <a href="{{ route('admin.blog-categories.edit', 3) }}" class="action-btn edit" title="Sua"><i class="bi bi-pencil"></i></a>
-                                <button class="action-btn delete" title="Xoa"><i class="bi bi-trash"></i></button>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>4</td>
-                        <td>Khuyen mai</td>
-                        <td><code>khuyen-mai</code></td>
-                        <td>3</td>
-                        <td><span class="badge bg-success">Hien thi</span></td>
-                        <td>4</td>
-                        <td class="text-end">
-                            <div class="d-flex gap-1 justify-content-end">
-                                <a href="{{ route('admin.blog-categories.edit', 4) }}" class="action-btn edit" title="Sua"><i class="bi bi-pencil"></i></a>
-                                <button class="action-btn delete" title="Xoa"><i class="bi bi-trash"></i></button>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>5</td>
-                        <td>Su kien</td>
-                        <td><code>su-kien</code></td>
-                        <td>0</td>
-                        <td><span class="badge bg-secondary">An</span></td>
-                        <td>5</td>
-                        <td class="text-end">
-                            <div class="d-flex gap-1 justify-content-end">
-                                <a href="{{ route('admin.blog-categories.edit', 5) }}" class="action-btn edit" title="Sua"><i class="bi bi-pencil"></i></a>
-                                <button class="action-btn delete" title="Xoa"><i class="bi bi-trash"></i></button>
-                            </div>
-                        </td>
-                    </tr>
+                    @endforelse
                 </tbody>
             </table>
         </div>
     </div>
+</div>
+
+<div class="d-flex justify-content-center mt-3">
+    {{ $categories->links('pagination::bootstrap-5') }}
 </div>
 @endsection

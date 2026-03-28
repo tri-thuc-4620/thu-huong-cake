@@ -25,7 +25,7 @@
                 </div>
                 <div class="flex-grow-1">
                     <div class="stat-label">Tong san pham</div>
-                    <div class="stat-value">156</div>
+                    <div class="stat-value">{{ number_format($totalProducts) }}</div>
                 </div>
                 <div class="stat-change text-success">
                     <i class="bi bi-arrow-up"></i> 12%
@@ -41,7 +41,7 @@
                 </div>
                 <div class="flex-grow-1">
                     <div class="stat-label">Tong don hang</div>
-                    <div class="stat-value">1,234</div>
+                    <div class="stat-value">{{ number_format($totalOrders) }}</div>
                 </div>
                 <div class="stat-change text-success">
                     <i class="bi bi-arrow-up"></i> 5%
@@ -57,7 +57,7 @@
                 </div>
                 <div class="flex-grow-1">
                     <div class="stat-label">Cho xu ly</div>
-                    <div class="stat-value">23</div>
+                    <div class="stat-value">{{ number_format($pendingOrders) }}</div>
                 </div>
                 <div class="stat-change text-danger">
                     <i class="bi bi-arrow-up"></i> 3
@@ -73,7 +73,7 @@
                 </div>
                 <div class="flex-grow-1">
                     <div class="stat-label">Doanh thu hom nay</div>
-                    <div class="stat-value" style="font-size:1.25rem">12.5M &#273;</div>
+                    <div class="stat-value" style="font-size:1.25rem">{{ number_format($todayRevenue) }} &#273;</div>
                 </div>
                 <div class="stat-change text-success">
                     <i class="bi bi-arrow-up"></i> 8%
@@ -130,71 +130,45 @@
                         </tr>
                     </thead>
                     <tbody>
+                        @forelse($latestOrders as $order)
                         <tr>
-                            <td><span class="fw-600" style="font-weight:600">#THC-0034</span></td>
+                            <td><span style="font-weight:600">#{{ $order->order_number }}</span></td>
                             <td>
                                 <div class="d-flex align-items-center gap-2">
-                                    <div class="user-avatar" style="width:30px;height:30px;font-size:0.65rem;border-radius:8px">NA</div>
-                                    Nguyen Van A
+                                    <div class="user-avatar" style="width:30px;height:30px;font-size:0.65rem;border-radius:8px">{{ mb_substr($order->customer_name, 0, 1) }}</div>
+                                    {{ $order->customer_name }}
                                 </div>
                             </td>
-                            <td class="fw-500" style="font-weight:500">350,000 &#273;</td>
-                            <td><span class="badge badge-soft-warning">Cho xu ly</span></td>
-                            <td class="text-muted" style="font-size:0.8rem">5 phut truoc</td>
-                            <td><a href="#" class="action-btn view"><i class="bi bi-eye"></i></a></td>
-                        </tr>
-                        <tr>
-                            <td><span style="font-weight:600">#THC-0033</span></td>
+                            <td style="font-weight:500">{{ number_format($order->total) }} &#273;</td>
                             <td>
-                                <div class="d-flex align-items-center gap-2">
-                                    <div class="user-avatar" style="width:30px;height:30px;font-size:0.65rem;border-radius:8px">TB</div>
-                                    Tran Thi B
-                                </div>
+                                @switch($order->status)
+                                    @case('pending')
+                                        <span class="badge badge-soft-warning">Cho xu ly</span>
+                                        @break
+                                    @case('processing')
+                                        <span class="badge badge-soft-primary">Dang lam banh</span>
+                                        @break
+                                    @case('shipping')
+                                        <span class="badge badge-soft-info">Dang giao</span>
+                                        @break
+                                    @case('completed')
+                                        <span class="badge badge-soft-success">Hoan thanh</span>
+                                        @break
+                                    @case('cancelled')
+                                        <span class="badge badge-soft-danger">Da huy</span>
+                                        @break
+                                    @default
+                                        <span class="badge badge-soft-secondary">{{ $order->status }}</span>
+                                @endswitch
                             </td>
-                            <td style="font-weight:500">520,000 &#273;</td>
-                            <td><span class="badge badge-soft-info">Dang giao</span></td>
-                            <td class="text-muted" style="font-size:0.8rem">1 gio truoc</td>
-                            <td><a href="#" class="action-btn view"><i class="bi bi-eye"></i></a></td>
+                            <td class="text-muted" style="font-size:0.8rem">{{ $order->created_at->diffForHumans() }}</td>
+                            <td><a href="{{ route('admin.orders.show', $order->id) }}" class="action-btn view"><i class="bi bi-eye"></i></a></td>
                         </tr>
+                        @empty
                         <tr>
-                            <td><span style="font-weight:600">#THC-0032</span></td>
-                            <td>
-                                <div class="d-flex align-items-center gap-2">
-                                    <div class="user-avatar" style="width:30px;height:30px;font-size:0.65rem;border-radius:8px">LC</div>
-                                    Le Van C
-                                </div>
-                            </td>
-                            <td style="font-weight:500">180,000 &#273;</td>
-                            <td><span class="badge badge-soft-primary">Dang lam banh</span></td>
-                            <td class="text-muted" style="font-size:0.8rem">2 gio truoc</td>
-                            <td><a href="#" class="action-btn view"><i class="bi bi-eye"></i></a></td>
+                            <td colspan="6" class="text-center text-muted py-4">Chua co don hang nao</td>
                         </tr>
-                        <tr>
-                            <td><span style="font-weight:600">#THC-0031</span></td>
-                            <td>
-                                <div class="d-flex align-items-center gap-2">
-                                    <div class="user-avatar" style="width:30px;height:30px;font-size:0.65rem;border-radius:8px">PD</div>
-                                    Pham Thi D
-                                </div>
-                            </td>
-                            <td style="font-weight:500">750,000 &#273;</td>
-                            <td><span class="badge badge-soft-success">Hoan thanh</span></td>
-                            <td class="text-muted" style="font-size:0.8rem">3 gio truoc</td>
-                            <td><a href="#" class="action-btn view"><i class="bi bi-eye"></i></a></td>
-                        </tr>
-                        <tr>
-                            <td><span style="font-weight:600">#THC-0030</span></td>
-                            <td>
-                                <div class="d-flex align-items-center gap-2">
-                                    <div class="user-avatar" style="width:30px;height:30px;font-size:0.65rem;border-radius:8px">HE</div>
-                                    Hoang Van E
-                                </div>
-                            </td>
-                            <td style="font-weight:500">420,000 &#273;</td>
-                            <td><span class="badge badge-soft-danger">Da huy</span></td>
-                            <td class="text-muted" style="font-size:0.8rem">Hom qua</td>
-                            <td><a href="#" class="action-btn view"><i class="bi bi-eye"></i></a></td>
-                        </tr>
+                        @endforelse
                     </tbody>
                 </table>
             </div>

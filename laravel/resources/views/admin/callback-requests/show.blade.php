@@ -21,15 +21,19 @@
                 <table class="table table-borderless mb-0">
                     <tr>
                         <th style="width:120px" class="text-muted">Ho ten</th>
-                        <td>{{ $callbackRequest->name ?? 'Nguyen Thi F' }}</td>
+                        <td>{{ $callbackRequest->name }}</td>
                     </tr>
                     <tr>
                         <th class="text-muted">SDT</th>
-                        <td>{{ $callbackRequest->phone ?? '0912 111 222' }}</td>
+                        <td>{{ $callbackRequest->phone }}</td>
                     </tr>
                     <tr>
                         <th class="text-muted">Ghi chu</th>
-                        <td>{{ $callbackRequest->note ?? 'Muon hoi ve banh cuoi' }}</td>
+                        <td>{{ $callbackRequest->note ?? '--' }}</td>
+                    </tr>
+                    <tr>
+                        <th class="text-muted">Ngay gui</th>
+                        <td>{{ $callbackRequest->created_at->format('d/m/Y H:i') }}</td>
                     </tr>
                 </table>
             </div>
@@ -47,7 +51,7 @@
                     <tr>
                         <th style="width:120px" class="text-muted">Da xu ly</th>
                         <td>
-                            @if(($callbackRequest->is_handled ?? true))
+                            @if($callbackRequest->is_handled)
                                 <span class="badge bg-success">Da xu ly</span>
                             @else
                                 <span class="badge bg-warning text-dark">Chua xu ly</span>
@@ -56,11 +60,23 @@
                     </tr>
                     <tr>
                         <th class="text-muted">Xu ly luc</th>
-                        <td>{{ $callbackRequest->handled_at ?? '27/03/2026 14:00' }}</td>
+                        <td>{{ $callbackRequest->handled_at?->format('d/m/Y H:i') ?? '--' }}</td>
                     </tr>
                 </table>
             </div>
         </div>
     </div>
 </div>
+
+@if(!$callbackRequest->is_handled)
+<div class="d-flex gap-2">
+    <form action="{{ route('admin.callback-requests.update', $callbackRequest) }}" method="POST">
+        @csrf
+        @method('PUT')
+        <button type="submit" class="btn btn-success">
+            <i class="bi bi-check2-circle"></i> Danh dau da xu ly
+        </button>
+    </form>
+</div>
+@endif
 @endsection

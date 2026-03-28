@@ -40,11 +40,7 @@
                 </div>
                 <div class="col-md-6 mb-3">
                     <label for="city" class="form-label">Thanh pho</label>
-                    <select class="form-select @error('city') is-invalid @enderror" id="city" name="city">
-                        <option value="">-- Chon thanh pho --</option>
-                        <option value="ha_noi" {{ old('city') == 'ha_noi' ? 'selected' : '' }}>Ha Noi</option>
-                        <option value="hcm" {{ old('city') == 'hcm' ? 'selected' : '' }}>TP HCM</option>
-                    </select>
+                    <input type="text" class="form-control @error('city') is-invalid @enderror" id="city" name="city" value="{{ old('city') }}">
                     @error('city') <div class="invalid-feedback">{{ $message }}</div> @enderror
                 </div>
             </div>

@@ -27,14 +27,6 @@
                     </div>
 
                     <div class="mb-3">
-                        <label for="slug" class="form-label">Slug</label>
-                        <input type="text" class="form-control @error('slug') is-invalid @enderror" id="slug" name="slug" value="{{ old('slug') }}">
-                        @error('slug')
-                            <div class="invalid-feedback">{{ $message }}</div>
-                        @enderror
-                    </div>
-
-                    <div class="mb-3">
                         <label for="excerpt" class="form-label">Tom tat</label>
                         <textarea class="form-control @error('excerpt') is-invalid @enderror" id="excerpt" name="excerpt" rows="3">{{ old('excerpt') }}</textarea>
                         @error('excerpt')
@@ -85,22 +77,11 @@
                         <label for="blog_category_id" class="form-label">Danh muc</label>
                         <select class="form-select @error('blog_category_id') is-invalid @enderror" id="blog_category_id" name="blog_category_id">
                             <option value="">-- Chon danh muc --</option>
-                            <option value="1">Huong dan</option>
-                            <option value="2">Tin tuc</option>
-                            <option value="3">Cong thuc</option>
+                            @foreach($categories as $category)
+                                <option value="{{ $category->id }}" {{ old('blog_category_id') == $category->id ? 'selected' : '' }}>{{ $category->name }}</option>
+                            @endforeach
                         </select>
                         @error('blog_category_id')
-                            <div class="invalid-feedback">{{ $message }}</div>
-                        @enderror
-                    </div>
-
-                    <div class="mb-3">
-                        <label for="author_id" class="form-label">Tac gia</label>
-                        <select class="form-select @error('author_id') is-invalid @enderror" id="author_id" name="author_id">
-                            <option value="">-- Chon tac gia --</option>
-                            <option value="1">Admin</option>
-                        </select>
-                        @error('author_id')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
                     </div>

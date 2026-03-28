@@ -27,10 +27,17 @@
     <button class="btn btn-soft btn-sm"><i class="bi bi-arrow-counterclockwise me-1"></i> Xoa loc</button>
 </div>
 
+@if(session('success'))
+    <div class="alert alert-success alert-dismissible fade show mt-3">
+        {{ session('success') }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+@endif
+
 {{-- Table --}}
 <div class="card table-card mt-3">
     <div class="card-header d-flex justify-content-between align-items-center">
-        <span style="font-size:0.85rem"><strong>3</strong> slider</span>
+        <span style="font-size:0.85rem"><strong>{{ $slides->total() }}</strong> slider</span>
     </div>
     <div class="table-responsive">
         <table class="table">
@@ -46,62 +53,55 @@
                 </tr>
             </thead>
             <tbody>
+                @forelse($slides as $slide)
                 <tr>
                     <td><input type="checkbox" class="form-check-input"></td>
-                    <td><img src="https://placehold.co/80x45/fff0f6/e84393?text=Slide+1" class="rounded-3" style="width:80px;height:45px;object-fit:cover"></td>
-                    <td><span class="badge badge-soft-success">Moi</span></td>
-                    <td style="font-weight:600;color:#0f172a">Banh sinh nhat tuyet dep</td>
-                    <td><i class="bi bi-check-circle-fill text-success"></i></td>
-                    <td class="text-muted">1</td>
+                    <td>
+                        @if($slide->image)
+                            <img src="{{ Storage::url($slide->image) }}" class="rounded-3" style="width:80px;height:45px;object-fit:cover">
+                        @else
+                            <img src="https://placehold.co/80x45/fff0f6/e84393?text=No" class="rounded-3" style="width:80px;height:45px;object-fit:cover">
+                        @endif
+                    </td>
+                    <td>
+                        @if($slide->badge_text)
+                            <span class="badge badge-soft-success">{{ $slide->badge_text }}</span>
+                        @else
+                            <span class="text-muted">--</span>
+                        @endif
+                    </td>
+                    <td style="font-weight:600;color:#0f172a">{{ $slide->title_line_1 }} {{ $slide->title_line_2 }}</td>
+                    <td>
+                        @if($slide->is_active)
+                            <i class="bi bi-check-circle-fill text-success"></i>
+                        @else
+                            <i class="bi bi-x-circle-fill text-muted"></i>
+                        @endif
+                    </td>
+                    <td class="text-muted">{{ $slide->sort_order }}</td>
                     <td>
                         <div class="d-flex gap-1">
-                            <a href="{{ route('admin.hero-slides.edit', 1) }}" class="action-btn edit" title="Sua"><i class="bi bi-pencil"></i></a>
-                            <button class="action-btn delete" title="Xoa"><i class="bi bi-trash"></i></button>
+                            <a href="{{ route('admin.hero-slides.edit', $slide) }}" class="action-btn edit" title="Sua"><i class="bi bi-pencil"></i></a>
+                            <form action="{{ route('admin.hero-slides.destroy', $slide) }}" method="POST" onsubmit="return confirm('Ban co chac chan muon xoa?')">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="action-btn delete" title="Xoa"><i class="bi bi-trash"></i></button>
+                            </form>
                         </div>
                     </td>
                 </tr>
+                @empty
                 <tr>
-                    <td><input type="checkbox" class="form-check-input"></td>
-                    <td><img src="https://placehold.co/80x45/fce7f3/e84393?text=Slide+2" class="rounded-3" style="width:80px;height:45px;object-fit:cover"></td>
-                    <td><span class="badge badge-soft-danger">Hot</span></td>
-                    <td style="font-weight:600;color:#0f172a">Khuyen mai mua he</td>
-                    <td><i class="bi bi-check-circle-fill text-success"></i></td>
-                    <td class="text-muted">2</td>
-                    <td>
-                        <div class="d-flex gap-1">
-                            <a href="{{ route('admin.hero-slides.edit', 2) }}" class="action-btn edit" title="Sua"><i class="bi bi-pencil"></i></a>
-                            <button class="action-btn delete" title="Xoa"><i class="bi bi-trash"></i></button>
-                        </div>
-                    </td>
+                    <td colspan="7" class="text-center text-muted py-4">Chua co slider nao.</td>
                 </tr>
-                <tr>
-                    <td><input type="checkbox" class="form-check-input"></td>
-                    <td><img src="https://placehold.co/80x45/f1f5f9/94a3b8?text=Slide+3" class="rounded-3" style="width:80px;height:45px;object-fit:cover"></td>
-                    <td><span class="badge badge-soft-warning">Sale</span></td>
-                    <td style="font-weight:600;color:#0f172a">Giam gia 20% tat ca</td>
-                    <td><i class="bi bi-x-circle-fill text-muted"></i></td>
-                    <td class="text-muted">3</td>
-                    <td>
-                        <div class="d-flex gap-1">
-                            <a href="{{ route('admin.hero-slides.edit', 3) }}" class="action-btn edit" title="Sua"><i class="bi bi-pencil"></i></a>
-                            <button class="action-btn delete" title="Xoa"><i class="bi bi-trash"></i></button>
-                        </div>
-                    </td>
-                </tr>
+                @endforelse
             </tbody>
         </table>
     </div>
 </div>
 
 {{-- Pagination --}}
-<div class="d-flex justify-content-between align-items-center mt-3">
-    <span class="text-muted" style="font-size:0.85rem">Hien thi <strong>1-3</strong> / <strong>3</strong> slider</span>
-    <nav>
-        <ul class="pagination pagination-sm mb-0">
-            <li class="page-item disabled"><a class="page-link" href="#">&laquo;</a></li>
-            <li class="page-item active"><a class="page-link" href="#">1</a></li>
-            <li class="page-item disabled"><a class="page-link" href="#">&raquo;</a></li>
-        </ul>
-    </nav>
+<div class="d-flex justify-content-center mt-3">
+    {{ $slides->links('pagination::bootstrap-5') }}
 </div>
 @endsection

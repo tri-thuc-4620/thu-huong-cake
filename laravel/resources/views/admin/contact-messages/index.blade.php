@@ -24,10 +24,17 @@
     <button class="btn btn-soft btn-sm"><i class="bi bi-arrow-counterclockwise me-1"></i> Xoa loc</button>
 </div>
 
+@if(session('success'))
+    <div class="alert alert-success alert-dismissible fade show mt-3">
+        {{ session('success') }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+@endif
+
 {{-- Table --}}
 <div class="card table-card mt-3">
     <div class="card-header d-flex justify-content-between align-items-center">
-        <span style="font-size:0.85rem"><strong>5</strong> tin nhan</span>
+        <span style="font-size:0.85rem"><strong>{{ $messages->total() }}</strong> tin nhan</span>
     </div>
     <div class="table-responsive">
         <table class="table">
@@ -44,95 +51,40 @@
                 </tr>
             </thead>
             <tbody>
+                @forelse($messages as $msg)
                 <tr>
                     <td><input type="checkbox" class="form-check-input"></td>
-                    <td style="font-weight:600;color:#0f172a">Nguyen Van A</td>
-                    <td class="text-muted" style="font-size:0.85rem">0912 345 678</td>
-                    <td class="text-muted" style="font-size:0.85rem">nguyenvana@email.com</td>
-                    <td class="text-muted" style="font-size:0.85rem">Toi muon dat banh sinh nhat cho...</td>
-                    <td><i class="bi bi-check-circle-fill text-success"></i></td>
-                    <td class="text-muted" style="font-size:0.8rem">27/03/2026</td>
+                    <td style="font-weight:600;color:#0f172a">{{ $msg->name }}</td>
+                    <td class="text-muted" style="font-size:0.85rem">{{ $msg->phone ?? '--' }}</td>
+                    <td class="text-muted" style="font-size:0.85rem">{{ $msg->email ?? '--' }}</td>
+                    <td class="text-muted" style="font-size:0.85rem">{{ Str::limit($msg->content, 40) }}</td>
+                    <td>
+                        @if($msg->is_read)
+                            <i class="bi bi-check-circle-fill text-success"></i>
+                        @else
+                            <span class="badge badge-soft-warning">Chua doc</span>
+                        @endif
+                    </td>
+                    <td class="text-muted" style="font-size:0.8rem">{{ $msg->created_at->format('d/m/Y') }}</td>
                     <td>
                         <div class="d-flex gap-1">
-                            <a href="{{ route('admin.contact-messages.show', 1) }}" class="action-btn view" title="Xem"><i class="bi bi-eye"></i></a>
-                            <a href="{{ route('admin.contact-messages.edit', 1) }}" class="action-btn edit" title="Tra loi"><i class="bi bi-pencil"></i></a>
+                            <a href="{{ route('admin.contact-messages.show', $msg) }}" class="action-btn view" title="Xem"><i class="bi bi-eye"></i></a>
+                            <a href="{{ route('admin.contact-messages.edit', $msg) }}" class="action-btn edit" title="Tra loi"><i class="bi bi-pencil"></i></a>
                         </div>
                     </td>
                 </tr>
+                @empty
                 <tr>
-                    <td><input type="checkbox" class="form-check-input"></td>
-                    <td style="font-weight:600;color:#0f172a">Tran Thi B</td>
-                    <td class="text-muted" style="font-size:0.85rem">0987 654 321</td>
-                    <td class="text-muted" style="font-size:0.85rem">tranthib@email.com</td>
-                    <td class="text-muted" style="font-size:0.85rem">Cho toi hoi ve gia banh kem 3...</td>
-                    <td><span class="badge badge-soft-warning">Chua doc</span></td>
-                    <td class="text-muted" style="font-size:0.8rem">26/03/2026</td>
-                    <td>
-                        <div class="d-flex gap-1">
-                            <a href="{{ route('admin.contact-messages.show', 2) }}" class="action-btn view" title="Xem"><i class="bi bi-eye"></i></a>
-                            <a href="{{ route('admin.contact-messages.edit', 2) }}" class="action-btn edit" title="Tra loi"><i class="bi bi-pencil"></i></a>
-                        </div>
-                    </td>
+                    <td colspan="8" class="text-center text-muted py-4">Chua co tin nhan nao.</td>
                 </tr>
-                <tr>
-                    <td><input type="checkbox" class="form-check-input"></td>
-                    <td style="font-weight:600;color:#0f172a">Le Van C</td>
-                    <td class="text-muted" style="font-size:0.85rem">0901 234 567</td>
-                    <td class="text-muted" style="font-size:0.85rem">levanc@email.com</td>
-                    <td class="text-muted" style="font-size:0.85rem">Cua hang co giao hang tan noi...</td>
-                    <td><i class="bi bi-check-circle-fill text-success"></i></td>
-                    <td class="text-muted" style="font-size:0.8rem">25/03/2026</td>
-                    <td>
-                        <div class="d-flex gap-1">
-                            <a href="{{ route('admin.contact-messages.show', 3) }}" class="action-btn view" title="Xem"><i class="bi bi-eye"></i></a>
-                            <a href="{{ route('admin.contact-messages.edit', 3) }}" class="action-btn edit" title="Tra loi"><i class="bi bi-pencil"></i></a>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td><input type="checkbox" class="form-check-input"></td>
-                    <td style="font-weight:600;color:#0f172a">Pham Thi D</td>
-                    <td class="text-muted" style="font-size:0.85rem">0976 543 210</td>
-                    <td class="text-muted" style="font-size:0.85rem">phamthid@email.com</td>
-                    <td class="text-muted" style="font-size:0.85rem">Toi muon hop tac kinh doanh voi...</td>
-                    <td><span class="badge badge-soft-warning">Chua doc</span></td>
-                    <td class="text-muted" style="font-size:0.8rem">24/03/2026</td>
-                    <td>
-                        <div class="d-flex gap-1">
-                            <a href="{{ route('admin.contact-messages.show', 4) }}" class="action-btn view" title="Xem"><i class="bi bi-eye"></i></a>
-                            <a href="{{ route('admin.contact-messages.edit', 4) }}" class="action-btn edit" title="Tra loi"><i class="bi bi-pencil"></i></a>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td><input type="checkbox" class="form-check-input"></td>
-                    <td style="font-weight:600;color:#0f172a">Hoang Van E</td>
-                    <td class="text-muted" style="font-size:0.85rem">0934 567 890</td>
-                    <td class="text-muted" style="font-size:0.85rem">hoangvane@email.com</td>
-                    <td class="text-muted" style="font-size:0.85rem">Bao gia banh cuoi cho 200 khach...</td>
-                    <td><span class="badge badge-soft-warning">Chua doc</span></td>
-                    <td class="text-muted" style="font-size:0.8rem">23/03/2026</td>
-                    <td>
-                        <div class="d-flex gap-1">
-                            <a href="{{ route('admin.contact-messages.show', 5) }}" class="action-btn view" title="Xem"><i class="bi bi-eye"></i></a>
-                            <a href="{{ route('admin.contact-messages.edit', 5) }}" class="action-btn edit" title="Tra loi"><i class="bi bi-pencil"></i></a>
-                        </div>
-                    </td>
-                </tr>
+                @endforelse
             </tbody>
         </table>
     </div>
 </div>
 
 {{-- Pagination --}}
-<div class="d-flex justify-content-between align-items-center mt-3">
-    <span class="text-muted" style="font-size:0.85rem">Hien thi <strong>1-5</strong> / <strong>5</strong> tin nhan</span>
-    <nav>
-        <ul class="pagination pagination-sm mb-0">
-            <li class="page-item disabled"><a class="page-link" href="#">&laquo;</a></li>
-            <li class="page-item active"><a class="page-link" href="#">1</a></li>
-            <li class="page-item disabled"><a class="page-link" href="#">&raquo;</a></li>
-        </ul>
-    </nav>
+<div class="d-flex justify-content-center mt-3">
+    {{ $messages->links('pagination::bootstrap-5') }}
 </div>
 @endsection

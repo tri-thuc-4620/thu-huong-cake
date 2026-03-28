@@ -12,21 +12,21 @@
 
 <div class="card">
     <div class="card-body">
-        <form action="{{ route('admin.banners.update', $banner ?? 1) }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ route('admin.banners.update', $banner) }}" method="POST" enctype="multipart/form-data">
             @csrf
             @method('PUT')
 
             <div class="mb-3">
                 <label for="title" class="form-label">Tieu de</label>
-                <input type="text" class="form-control @error('title') is-invalid @enderror" id="title" name="title" value="{{ old('title', $banner->title ?? 'Khuyen mai thang 3') }}">
+                <input type="text" class="form-control @error('title') is-invalid @enderror" id="title" name="title" value="{{ old('title', $banner->title) }}">
                 @error('title') <div class="invalid-feedback">{{ $message }}</div> @enderror
             </div>
 
             <div class="mb-3">
                 <label for="image" class="form-label">Hinh anh</label>
-                @if(isset($banner) && $banner->image)
+                @if($banner->image)
                     <div class="mb-2">
-                        <img src="{{ asset('storage/' . $banner->image) }}" class="rounded" style="max-height:120px">
+                        <img src="{{ Storage::url($banner->image) }}" class="rounded" style="max-height:120px">
                     </div>
                 @endif
                 <input type="file" class="form-control @error('image') is-invalid @enderror" id="image" name="image" accept="image/*">
@@ -36,7 +36,7 @@
 
             <div class="mb-3">
                 <label for="url" class="form-label">URL lien ket</label>
-                <input type="text" class="form-control @error('url') is-invalid @enderror" id="url" name="url" value="{{ old('url', $banner->url ?? '') }}" placeholder="https://...">
+                <input type="text" class="form-control @error('url') is-invalid @enderror" id="url" name="url" value="{{ old('url', $banner->url) }}" placeholder="https://...">
                 @error('url') <div class="invalid-feedback">{{ $message }}</div> @enderror
             </div>
 
@@ -44,9 +44,9 @@
                 <label for="position" class="form-label">Vi tri</label>
                 <select class="form-select @error('position') is-invalid @enderror" id="position" name="position">
                     <option value="">-- Chon vi tri --</option>
-                    <option value="home" {{ old('position', $banner->position ?? '') == 'home' ? 'selected' : '' }}>Trang chu</option>
-                    <option value="sidebar" {{ old('position', $banner->position ?? '') == 'sidebar' ? 'selected' : '' }}>Sidebar</option>
-                    <option value="popup" {{ old('position', $banner->position ?? '') == 'popup' ? 'selected' : '' }}>Popup</option>
+                    <option value="home" {{ old('position', $banner->position) == 'home' ? 'selected' : '' }}>Trang chu</option>
+                    <option value="sidebar" {{ old('position', $banner->position) == 'sidebar' ? 'selected' : '' }}>Sidebar</option>
+                    <option value="popup" {{ old('position', $banner->position) == 'popup' ? 'selected' : '' }}>Popup</option>
                 </select>
                 @error('position') <div class="invalid-feedback">{{ $message }}</div> @enderror
             </div>
@@ -54,13 +54,13 @@
             <div class="row">
                 <div class="col-md-6 mb-3">
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" id="is_active" name="is_active" value="1" {{ old('is_active', $banner->is_active ?? true) ? 'checked' : '' }}>
+                        <input class="form-check-input" type="checkbox" id="is_active" name="is_active" value="1" {{ old('is_active', $banner->is_active) ? 'checked' : '' }}>
                         <label class="form-check-label" for="is_active">Hoat dong</label>
                     </div>
                 </div>
                 <div class="col-md-6 mb-3">
                     <label for="sort_order" class="form-label">Thu tu</label>
-                    <input type="number" class="form-control @error('sort_order') is-invalid @enderror" id="sort_order" name="sort_order" value="{{ old('sort_order', $banner->sort_order ?? 0) }}">
+                    <input type="number" class="form-control @error('sort_order') is-invalid @enderror" id="sort_order" name="sort_order" value="{{ old('sort_order', $banner->sort_order) }}">
                     @error('sort_order') <div class="invalid-feedback">{{ $message }}</div> @enderror
                 </div>
             </div>
