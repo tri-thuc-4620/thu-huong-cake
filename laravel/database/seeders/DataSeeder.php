@@ -92,16 +92,16 @@ class DataSeeder extends Seeder
 
         // === Products (10 sample) ===
         $productData = [
-            ['name' => 'Banh kem dau tay Premium', 'price' => 350000, 'sale_price' => 300000, 'cat' => 'banh-sinh-nhat-mini', 'is_hot' => true, 'type' => 'variable', 'vs' => $miniSet->id],
-            ['name' => 'Banh mousse socola', 'price' => 280000, 'cat' => 'banh-dac-biet', 'type' => 'variable', 'vs' => $specialSet->id],
-            ['name' => 'Set qua tang banh mix vi', 'price' => 90000, 'cat' => 'set-qua-tang', 'type' => 'simple'],
-            ['name' => 'Banh bong lan trung muoi truyen thong', 'price' => 180000, 'sale_price' => 150000, 'cat' => 'banh-bong-lan-trung-muoi', 'is_hot' => true, 'type' => 'simple'],
-            ['name' => 'Banh kem viet quat tuoi mat', 'price' => 250000, 'cat' => 'banh-sinh-nhat-hoa-qua', 'is_new' => true, 'type' => 'variable', 'vs' => $miniSet->id],
-            ['name' => 'Banh sinh nhat trai tim hong', 'price' => 320000, 'cat' => 'banh-sinh-nhat-trai-tim', 'type' => 'variable', 'vs' => $heartSet->id],
-            ['name' => 'Banh kem mini mau hong', 'price' => 120000, 'cat' => 'banh-sinh-nhat-mini', 'is_featured' => true, 'type' => 'simple'],
-            ['name' => 'Banh sinh nhat kem chay tone hong', 'price' => 450000, 'cat' => 'banh-dac-biet', 'type' => 'variable', 'vs' => $specialSet->id],
-            ['name' => 'Sweet box mix vi trai tim', 'price' => 135000, 'cat' => 'set-qua-tang', 'type' => 'simple'],
-            ['name' => 'Banh kem su kien cong ty', 'price' => 800000, 'cat' => 'banh-kem-su-kien', 'is_featured' => true, 'type' => 'variable', 'vs' => $specialSet->id],
+            ['name' => 'Banh kem dau tay Premium', 'price' => 350000, 'sale_price' => 300000, 'cat' => 'banh-sinh-nhat-mini', 'is_hot' => true, 'is_new' => true, 'type' => 'variable', 'vs' => $miniSet->id],
+            ['name' => 'Banh mousse socola', 'price' => 280000, 'cat' => 'banh-dac-biet', 'is_hot' => true, 'is_new' => true, 'type' => 'variable', 'vs' => $specialSet->id],
+            ['name' => 'Set qua tang banh mix vi', 'price' => 90000, 'cat' => 'set-qua-tang', 'is_featured' => true, 'is_new' => true, 'type' => 'simple'],
+            ['name' => 'Banh bong lan trung muoi truyen thong', 'price' => 180000, 'sale_price' => 150000, 'cat' => 'banh-bong-lan-trung-muoi', 'is_hot' => true, 'is_featured' => true, 'is_new' => true, 'type' => 'simple'],
+            ['name' => 'Banh kem viet quat tuoi mat', 'price' => 250000, 'cat' => 'banh-sinh-nhat-hoa-qua', 'is_new' => true, 'is_featured' => true, 'type' => 'variable', 'vs' => $miniSet->id],
+            ['name' => 'Banh sinh nhat trai tim hong', 'price' => 320000, 'cat' => 'banh-sinh-nhat-trai-tim', 'is_hot' => true, 'is_featured' => true, 'type' => 'variable', 'vs' => $heartSet->id],
+            ['name' => 'Banh kem mini mau hong', 'price' => 120000, 'cat' => 'banh-sinh-nhat-mini', 'is_featured' => true, 'is_hot' => true, 'type' => 'simple'],
+            ['name' => 'Banh sinh nhat kem chay tone hong', 'price' => 450000, 'cat' => 'banh-dac-biet', 'is_hot' => true, 'is_featured' => true, 'type' => 'variable', 'vs' => $specialSet->id],
+            ['name' => 'Sweet box mix vi trai tim', 'price' => 135000, 'cat' => 'set-qua-tang', 'is_new' => true, 'type' => 'simple'],
+            ['name' => 'Banh kem su kien cong ty', 'price' => 800000, 'cat' => 'banh-kem-su-kien', 'is_featured' => true, 'is_new' => true, 'is_hot' => true, 'type' => 'variable', 'vs' => $specialSet->id],
         ];
 
         foreach ($productData as $pd) {
