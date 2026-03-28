@@ -38,4 +38,8 @@ Route::middleware('admin')->group(function () {
     Route::get('settings', [App\Http\Controllers\Admin\SettingController::class, 'index'])->name('settings.index')->middleware('can:settings.view');
     Route::post('settings', [App\Http\Controllers\Admin\SettingController::class, 'update'])->name('settings.update')->middleware('can:settings.edit');
 
+    // Cache
+    Route::post('cache/clear', [App\Http\Controllers\Admin\CacheController::class, 'clear'])->name('cache.clear')->middleware('can:settings.edit');
+    Route::post('cache/clear-frontend', [App\Http\Controllers\Admin\CacheController::class, 'clearFrontend'])->name('cache.clear-frontend')->middleware('can:settings.edit');
+
 }); // end admin middleware

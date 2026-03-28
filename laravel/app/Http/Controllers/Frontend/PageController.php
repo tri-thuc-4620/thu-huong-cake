@@ -14,38 +14,47 @@ use App\Models\Page;
 use App\Models\Setting;
 use App\Models\ContactMessage;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 
 class PageController extends Controller
 {
     public function home()
     {
-        $slides = HeroSlide::where('is_active', true)->orderBy('sort_order')->get();
-        $banners = Banner::where('is_active', true)->where('position', 'homepage')->orderBy('sort_order')->get();
-        $categories = Category::where('is_visible', true)->where('show_in_menu', true)->orderBy('sort_order')->get();
+        $slides = Cache::remember('home_slides', 3600, fn() =>
+            HeroSlide::where('is_active', true)->orderBy('sort_order')->get()
+        );
 
-        $featuredProducts = Product::with('primaryImage', 'category')
-            ->where('is_visible', true)
-            ->where('is_featured', true)
-            ->take(10)->get();
+        $banners = Cache::remember('home_banners', 3600, fn() =>
+            Banner::where('is_active', true)->where('position', 'homepage')->orderBy('sort_order')->get()
+        );
 
-        $hotProducts = Product::with('primaryImage', 'category')
-            ->where('is_visible', true)
-            ->where('is_hot', true)
-            ->take(10)->get();
+        $categories = Cache::remember('menu_categories', 3600, fn() =>
+            Category::where('is_visible', true)->where('show_in_menu', true)->orderBy('sort_order')->get()
+        );
 
-        $newProducts = Product::with('primaryImage', 'category')
-            ->where('is_visible', true)
-            ->where('is_new', true)
-            ->take(10)->get();
+        $featuredProducts = Cache::remember('home_featured', 1800, fn() =>
+            Product::with('primaryImage', 'category')
+                ->where('is_visible', true)->where('is_featured', true)->take(10)->get()
+        );
 
-        $latestProducts = Product::with('primaryImage', 'category')
-            ->where('is_visible', true)
-            ->latest()
-            ->take(10)->get();
+        $hotProducts = Cache::remember('home_hot', 1800, fn() =>
+            Product::with('primaryImage', 'category')
+                ->where('is_visible', true)->where('is_hot', true)->take(10)->get()
+        );
 
-        $blogPosts = BlogPost::where('is_published', true)
-            ->latest('published_at')
-            ->take(3)->get();
+        $newProducts = Cache::remember('home_new', 1800, fn() =>
+            Product::with('primaryImage', 'category')
+                ->where('is_visible', true)->where('is_new', true)->take(10)->get()
+        );
+
+        $latestProducts = Cache::remember('home_latest', 1800, fn() =>
+            Product::with('primaryImage', 'category')
+                ->where('is_visible', true)->latest()->take(10)->get()
+        );
+
+        $blogPosts = Cache::remember('home_blog', 3600, fn() =>
+            BlogPost::where('is_published', true)->latest('published_at')->take(3)->get()
+        );
 
         return view('frontend.home', compact(
             'slides', 'banners', 'categories',
@@ -132,7 +141,9 @@ class PageController extends Controller
 
     public function stores()
     {
-        $stores = StoreLocation::where('is_active', true)->orderBy('sort_order')->get();
+        $stores = Cache::remember('all_stores', 3600, fn() =>
+            StoreLocation::where('is_active', true)->orderBy('sort_order')->get()
+        );
 
         return view('frontend.stores', compact('stores'));
     }

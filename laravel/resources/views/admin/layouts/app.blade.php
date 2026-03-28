@@ -699,6 +699,30 @@
                 <a href="/" target="_blank" class="topbar-btn" title="Xem trang chu">
                     <i class="bi bi-box-arrow-up-right"></i>
                 </a>
+                <div class="dropdown">
+                    <button class="topbar-btn" data-bs-toggle="dropdown" title="Xoa cache">
+                        <i class="bi bi-arrow-repeat"></i>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end mt-2" style="border-radius:12px;border:1px solid #e2e8f0;box-shadow:0 10px 25px rgba(0,0,0,0.08);min-width:220px">
+                        <li class="px-3 py-2" style="font-size:0.75rem;color:#94a3b8;font-weight:600;text-transform:uppercase;letter-spacing:0.5px">Quan ly Cache</li>
+                        <li>
+                            <form method="POST" action="{{ route('admin.cache.clear-frontend') }}">
+                                @csrf
+                                <button type="submit" class="dropdown-item py-2" style="font-size:0.85rem">
+                                    <i class="bi bi-globe me-2 text-muted"></i>Xoa cache trang ngoai
+                                </button>
+                            </form>
+                        </li>
+                        <li>
+                            <form method="POST" action="{{ route('admin.cache.clear') }}">
+                                @csrf
+                                <button type="submit" class="dropdown-item py-2" style="font-size:0.85rem">
+                                    <i class="bi bi-trash me-2 text-danger"></i>Xoa toan bo cache
+                                </button>
+                            </form>
+                        </li>
+                    </ul>
+                </div>
                 <div class="topbar-btn">
                     <i class="bi bi-bell"></i>
                     <span class="badge-dot"></span>
