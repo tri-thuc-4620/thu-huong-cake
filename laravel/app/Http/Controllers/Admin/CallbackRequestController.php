@@ -3,26 +3,42 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\CallbackRequest;
+use Illuminate\Http\Request;
 
 class CallbackRequestController extends Controller
 {
     public function index()
     {
-        return view('admin.callback-requests.index');
+        $requests = CallbackRequest::latest()->paginate(15);
+
+        return view('admin.callback-requests.index', compact('requests'));
     }
 
     public function show($id)
     {
-        return view('admin.callback-requests.show', compact('id'));
+        $callbackRequest = CallbackRequest::findOrFail($id);
+
+        return view('admin.callback-requests.show', compact('callbackRequest'));
     }
 
     public function edit($id)
     {
-        return view('admin.callback-requests.edit', compact('id'));
+        $callbackRequest = CallbackRequest::findOrFail($id);
+
+        return view('admin.callback-requests.edit', compact('callbackRequest'));
     }
 
-    public function update($id)
+    public function update(Request $request, $id)
     {
-        return redirect()->back()->with('success', 'Yêu cầu gọi lại đã được cập nhật thành công.');
+        $callbackRequest = CallbackRequest::findOrFail($id);
+
+        $callbackRequest->update([
+            'is_handled' => true,
+            'handled_at' => now(),
+        ]);
+
+        return redirect()->route('admin.callback-requests.index')
+            ->with('success', 'Yeu cau goi lai da duoc cap nhat thanh cong.');
     }
 }

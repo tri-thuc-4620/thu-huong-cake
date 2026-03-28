@@ -3,12 +3,17 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Page;
+use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class PageController extends Controller
 {
     public function index()
     {
-        return view('admin.pages.index');
+        $pages = Page::latest()->paginate(15);
+
+        return view('admin.pages.index', compact('pages'));
     }
 
     public function create()
@@ -16,28 +21,66 @@ class PageController extends Controller
         return view('admin.pages.create');
     }
 
-    public function store()
+    public function store(Request $request)
     {
-        return redirect()->back()->with('success', 'Trang đã được tạo thành công.');
+        $validated = $request->validate([
+            'title'            => 'required|string|max:255',
+            'content'          => 'nullable|string',
+            'layout'           => 'nullable|string|max:50',
+            'is_published'     => 'nullable|boolean',
+            'meta_title'       => 'nullable|string|max:255',
+            'meta_description' => 'nullable|string',
+        ]);
+
+        $validated['slug'] = Str::slug($validated['title']);
+
+        Page::create($validated);
+
+        return redirect()->route('admin.pages.index')
+            ->with('success', 'Trang da duoc tao thanh cong.');
     }
 
     public function show($id)
     {
-        return view('admin.pages.show', compact('id'));
+        $page = Page::findOrFail($id);
+
+        return view('admin.pages.show', compact('page'));
     }
 
     public function edit($id)
     {
-        return view('admin.pages.edit', compact('id'));
+        $page = Page::findOrFail($id);
+
+        return view('admin.pages.edit', compact('page'));
     }
 
-    public function update($id)
+    public function update(Request $request, $id)
     {
-        return redirect()->back()->with('success', 'Trang đã được cập nhật thành công.');
+        $page = Page::findOrFail($id);
+
+        $validated = $request->validate([
+            'title'            => 'required|string|max:255',
+            'content'          => 'nullable|string',
+            'layout'           => 'nullable|string|max:50',
+            'is_published'     => 'nullable|boolean',
+            'meta_title'       => 'nullable|string|max:255',
+            'meta_description' => 'nullable|string',
+        ]);
+
+        $validated['slug'] = Str::slug($validated['title']);
+
+        $page->update($validated);
+
+        return redirect()->route('admin.pages.index')
+            ->with('success', 'Trang da duoc cap nhat thanh cong.');
     }
 
     public function destroy($id)
     {
-        return redirect()->back()->with('success', 'Trang đã được xóa thành công.');
+        $page = Page::findOrFail($id);
+        $page->delete();
+
+        return redirect()->route('admin.pages.index')
+            ->with('success', 'Trang da duoc xoa thanh cong.');
     }
 }

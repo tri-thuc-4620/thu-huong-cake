@@ -3,36 +3,37 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Attribute;
+use App\Models\Product;
+use Illuminate\Http\Request;
 
 class PriceTableController extends Controller
 {
     public function index()
     {
-        return view('admin.price-tables.index');
+        $products = Product::with('variations.attributeValues.attribute', 'category')
+            ->where('type', 'variable')
+            ->has('variations')
+            ->latest()
+            ->paginate(15);
+
+        return view('admin.price-tables.index', compact('products'));
     }
 
     public function create()
     {
-        return view('admin.price-tables.create');
-    }
+        $products = Product::where('type', 'variable')->orderBy('name')->get();
+        $attributes = Attribute::with('values')->get();
 
-    public function store()
-    {
-        return redirect()->route('admin.price-tables.index')->with('success', 'Da tao bang gia thanh cong!');
+        return view('admin.price-tables.create', compact('products', 'attributes'));
     }
 
     public function edit($id)
     {
-        return view('admin.price-tables.edit');
-    }
+        $product = Product::with('variations.attributeValues.attribute', 'variationSet.values.attribute')
+            ->findOrFail($id);
+        $attributes = Attribute::with('values')->get();
 
-    public function update($id)
-    {
-        return redirect()->route('admin.price-tables.index')->with('success', 'Da cap nhat bang gia!');
-    }
-
-    public function destroy($id)
-    {
-        return redirect()->route('admin.price-tables.index')->with('success', 'Da xoa bang gia!');
+        return view('admin.price-tables.edit', compact('product', 'attributes'));
     }
 }
