@@ -288,7 +288,8 @@
                 </div>
             </div>
 
-            {{-- 4. Du lieu san pham (WooCommerce vertical tabs) --}}
+            {{-- 4. Du lieu san pham (WooCommerce vertical tabs) - TAM COMMENT --}}
+            @if(false)
             <div class="card mb-4">
                 <div class="card-header d-flex flex-wrap justify-content-between align-items-center gap-2 py-2">
                     <div class="d-flex align-items-center gap-2">
@@ -609,6 +610,8 @@
                     </div>
                 </div>
             </div>
+
+            @endif
 
             {{-- 5. Mo ta ngan cua san pham --}}
             <div class="card mb-4">
