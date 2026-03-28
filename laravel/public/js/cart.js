@@ -110,7 +110,7 @@ const Cart = {
 
         drawerItems.innerHTML = items.map(item => {
             const price = item.sale_price || item.price;
-            const imgSrc = item.image || 'https://placehold.co/80x80/fff0f6/e84393?text=🎂';
+            const imgSrc = (item.image && item.image !== '' && !item.image.endsWith('/')) ? item.image : 'https://placehold.co/80x80/fff0f6/e84393?text=%F0%9F%8E%82';
             return `
                 <div class="cart-drawer-item" data-key="${item.key}">
                     <div class="cart-item-img">
@@ -184,29 +184,69 @@ const Cart = {
             }
         });
 
-        // Product detail page - add to cart button
-        document.addEventListener('click', (e) => {
-            const btn = e.target.closest('#addToCartBtn, .btn-add-cart');
-            if (!btn) return;
+        // Product detail page: handled by inline script in product-detail.blade.php
+        // (to avoid duplicate add-to-cart events)
+    }
+};
 
-            e.preventDefault();
+/**
+ * Recently Viewed - sessionStorage
+ * Luu san pham vua xem, tu xoa khi dong trinh duyet
+ */
+const RecentlyViewed = {
+    KEY: 'thu_huong_recently_viewed',
+    MAX: 10,
 
-            const id = btn.dataset.productId;
-            const name = btn.dataset.productName || document.querySelector('.product-detail-name, .product-title')?.textContent?.trim();
-            const price = parseInt(btn.dataset.productPrice) || 0;
-            const salePrice = parseInt(btn.dataset.productSalePrice) || null;
-            const image = btn.dataset.productImage || '';
-            const variationId = btn.dataset.variationId || null;
-            const variationLabel = btn.dataset.variationLabel || '';
-            const qtyInput = document.querySelector('#productQuantity, .product-qty input');
-            const quantity = parseInt(qtyInput?.value) || 1;
+    getItems() {
+        try { return JSON.parse(sessionStorage.getItem(this.KEY)) || []; }
+        catch { return []; }
+    },
 
-            if (id) {
-                this.add({ id, name, price, sale_price: salePrice, image, quantity, variation_id: variationId, variation_label: variationLabel });
-            }
-        });
+    add(product) {
+        // product: { id, name, price, sale_price, image, url }
+        if (!product.id) return;
+        let items = this.getItems().filter(i => i.id !== product.id);
+        items.unshift(product);
+        if (items.length > this.MAX) items = items.slice(0, this.MAX);
+        sessionStorage.setItem(this.KEY, JSON.stringify(items));
+        this.renderAll();
+    },
+
+    renderAll() {
+        document.querySelectorAll('.recently-viewed-list').forEach(el => this.render(el));
+    },
+
+    render(container) {
+        if (!container) return;
+        const items = this.getItems();
+        if (items.length === 0) {
+            container.innerHTML = '<p style="color:#94a3b8;font-size:0.85rem;padding:8px 0">Chua co san pham nao.</p>';
+            return;
+        }
+        container.innerHTML = items.map(item => {
+            const imgSrc = (item.image && item.image !== '') ? item.image : 'https://placehold.co/60x60/fff0f6/e84393?text=%F0%9F%8E%82';
+            const price = item.sale_price || item.price;
+            return `
+                <div class="recently-item" style="display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid #f1f5f9">
+                    <a href="${item.url}" style="flex-shrink:0">
+                        <img src="${imgSrc}" alt="${item.name}" style="width:50px;height:50px;border-radius:8px;object-fit:cover">
+                    </a>
+                    <div style="flex:1;min-width:0">
+                        <a href="${item.url}" style="font-size:0.8rem;font-weight:500;color:#0f172a;text-decoration:none;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${item.name}</a>
+                        <span style="font-size:0.8rem;color:#e84393;font-weight:600">${new Intl.NumberFormat('vi-VN').format(price)}đ</span>
+                    </div>
+                </div>
+            `;
+        }).join('');
+    },
+
+    init() {
+        this.renderAll();
     }
 };
 
 // Init on page load
-document.addEventListener('DOMContentLoaded', () => Cart.init());
+document.addEventListener('DOMContentLoaded', () => {
+    Cart.init();
+    RecentlyViewed.init();
+});

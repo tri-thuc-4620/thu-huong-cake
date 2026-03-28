@@ -46,7 +46,7 @@
                     <!-- San pham vua xem -->
                     <div class="sidebar-box detail-recently">
                         <h3 class="sidebar-title">Sản Phẩm Vừa Xem</h3>
-                        <p style="color:#999;font-size:13px;padding:10px 0">Chưa có sản phẩm nào</p>
+                        <div class="recently-viewed-list"></div>
                     </div>
                 </div>
 
@@ -60,12 +60,12 @@
                         <span>Trạng thái: <strong class="text-green">{{ $product->stock_status === 'in_stock' ? 'Còn bánh' : 'Hết bánh' }}</strong></span>
                     </div>
 
-                    <div class="detail-price">
+                    <div class="detail-price" id="productPrice">
                         @if($product->sale_price)
-                        Giá: <span style="text-decoration:line-through;color:#999;font-size:16px;margin-right:8px">{{ number_format($product->price) }} đ</span>
-                        <span>{{ number_format($product->sale_price) }} đ</span>
+                        Giá: <span style="text-decoration:line-through;color:#999;font-size:16px;margin-right:8px" id="priceOriginal">{{ number_format($product->price) }} đ</span>
+                        <span id="priceDisplay">{{ number_format($product->sale_price) }} đ</span>
                         @else
-                        Giá: <span>{{ number_format($product->price) }} đ</span>
+                        Giá: <span id="priceDisplay">{{ number_format($product->price) }} đ</span>
                         @endif
                     </div>
 
@@ -116,7 +116,7 @@
                         data-product-name="{{ $product->name }}"
                         data-product-price="{{ $product->price }}"
                         data-product-sale-price="{{ $product->sale_price }}"
-                        data-product-image="{{ $product->primaryImage ? Storage::url($product->primaryImage->image) : '' }}"
+                        data-product-image="{{ $product->primaryImage && Storage::disk('public')->exists($product->primaryImage->image) ? Storage::url($product->primaryImage->image) : asset('frontend/image_san_pham/Banh-kem-viet-quat-tuoi-mat-7.webp') }}"
                         style="width:100%;padding:14px;border:none;border-radius:12px;background:linear-gradient(135deg,#e84393,#fd79a8);color:#fff;font-weight:700;font-size:1rem;cursor:pointer;margin-bottom:10px;transition:all 0.3s">
                         <i class="fas fa-shopping-cart" style="margin-right:8px"></i> Them Vao Gio Hang
                     </button>
@@ -207,6 +207,16 @@
 
 @push('scripts')
 <script>
+    // Luu san pham vua xem (sessionStorage)
+    RecentlyViewed.add({
+        id: {{ $product->id }},
+        name: @json($product->name),
+        price: {{ $product->price }},
+        sale_price: {{ $product->sale_price ?? 'null' }},
+        image: @json($product->primaryImage && Storage::disk('public')->exists($product->primaryImage->image) ? Storage::url($product->primaryImage->image) : asset('frontend/image_san_pham/Banh-kem-viet-quat-tuoi-mat-7.webp')),
+        url: @json(route('product.detail', $product->id)),
+    });
+
     // Gallery image switch
     function changeImage(thumb, src) {
         document.getElementById('mainImage').src = src;
@@ -224,15 +234,120 @@
         input.value = parseInt(input.value) + 1;
     });
 
-    // Option buttons - chon thuoc tinh
+    // Variations data tu DB
+    @php
+        $variationsData = $product->variations->map(function($v) {
+            return [
+                'id' => $v->id,
+                'sku' => $v->sku,
+                'price' => $v->price,
+                'sale_price' => $v->sale_price,
+                'stock_status' => $v->stock_status,
+                'stock_quantity' => $v->stock_quantity,
+                'value_ids' => $v->attributeValues->pluck('id')->sort()->values()->toArray(),
+            ];
+        });
+    @endphp
+    const variations = @json($variationsData);
+
+    const basePrice = {{ $product->price }};
+    const baseSalePrice = {{ $product->sale_price ?? 0 }};
+
+    function formatVND(n) {
+        return new Intl.NumberFormat('vi-VN').format(n) + ' đ';
+    }
+
+    function findMatchingVariation() {
+        const selectedIds = [];
+        document.querySelectorAll('.option-buttons').forEach(group => {
+            const active = group.querySelector('.option-btn.active');
+            if (active && active.dataset.value) {
+                selectedIds.push(parseInt(active.dataset.value));
+            }
+        });
+
+        if (selectedIds.length === 0) return null;
+        selectedIds.sort((a, b) => a - b);
+
+        return variations.find(v => {
+            if (v.value_ids.length !== selectedIds.length) return false;
+            return v.value_ids.every((id, i) => id === selectedIds[i]);
+        });
+    }
+
+    function updatePrice() {
+        const variation = findMatchingVariation();
+        const priceDisplay = document.getElementById('priceDisplay');
+        const priceOriginal = document.getElementById('priceOriginal');
+        const addBtn = document.getElementById('addToCartBtn');
+
+        if (variation) {
+            const price = variation.sale_price || variation.price;
+            if (variation.sale_price && variation.sale_price < variation.price) {
+                if (priceOriginal) {
+                    priceOriginal.textContent = formatVND(variation.price);
+                    priceOriginal.style.display = '';
+                }
+                priceDisplay.textContent = formatVND(variation.sale_price);
+            } else {
+                if (priceOriginal) priceOriginal.style.display = 'none';
+                priceDisplay.textContent = formatVND(variation.price);
+            }
+
+            // Update add to cart button data
+            if (addBtn) {
+                addBtn.dataset.productPrice = variation.price;
+                addBtn.dataset.productSalePrice = variation.sale_price || '';
+                addBtn.dataset.variationId = variation.id;
+            }
+
+            // Update stock status
+            const stockEl = document.querySelector('.text-green, .text-red');
+            if (stockEl) {
+                if (variation.stock_status === 'in_stock') {
+                    stockEl.textContent = 'Còn bánh';
+                    stockEl.className = 'text-green';
+                } else if (variation.stock_status === 'out_of_stock') {
+                    stockEl.textContent = 'Hết bánh';
+                    stockEl.className = 'text-red';
+                } else {
+                    stockEl.textContent = 'Đặt trước';
+                    stockEl.className = 'text-orange';
+                }
+            }
+        } else {
+            // Reset ve gia goc
+            if (priceOriginal) {
+                if (baseSalePrice > 0) {
+                    priceOriginal.textContent = formatVND(basePrice);
+                    priceOriginal.style.display = '';
+                    priceDisplay.textContent = formatVND(baseSalePrice);
+                } else {
+                    if (priceOriginal) priceOriginal.style.display = 'none';
+                    priceDisplay.textContent = formatVND(basePrice);
+                }
+            }
+            if (addBtn) {
+                addBtn.dataset.productPrice = basePrice;
+                addBtn.dataset.productSalePrice = baseSalePrice || '';
+                addBtn.dataset.variationId = '';
+            }
+        }
+    }
+
+    // Option buttons - chon thuoc tinh + cap nhat gia
     document.querySelectorAll('.option-buttons').forEach(group => {
         group.querySelectorAll('.option-btn').forEach(btn => {
             btn.addEventListener('click', () => {
                 group.querySelectorAll('.option-btn').forEach(b => b.classList.remove('active'));
                 btn.classList.add('active');
+                updatePrice();
             });
         });
     });
+
+    // Init price on load
+    updatePrice();
 
     // Add to cart - lay thuoc tinh da chon
     document.getElementById('addToCartBtn')?.addEventListener('click', function(e) {

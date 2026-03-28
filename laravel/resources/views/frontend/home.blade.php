@@ -122,7 +122,7 @@
                 <a href="{{ route('product.detail', $product->id) }}" class="product-card" data-product-id="{{ $product->id }}">
                     <div class="product-image">
                         @if($product->primaryImage)
-                            <img src="{{ Storage::url($product->primaryImage->image) }}" alt="{{ $product->name }}">
+                            <img src="{{ Storage::url($product->primaryImage->image) }}" alt="{{ $product->name }}" onerror="this.src='{{ asset('frontend/image_san_pham/Banh-kem-viet-quat-tuoi-mat-7.webp') }}'">
                         @else
                             <img src="{{ asset('frontend/image_san_pham/Banh-kem-viet-quat-tuoi-mat-7.webp') }}" alt="{{ $product->name }}">
                         @endif
@@ -165,7 +165,7 @@
                 <a href="{{ route('product.detail', $product->id) }}" class="product-card" data-product-id="{{ $product->id }}">
                     <div class="product-image">
                         @if($product->primaryImage)
-                            <img src="{{ Storage::url($product->primaryImage->image) }}" alt="{{ $product->name }}">
+                            <img src="{{ Storage::url($product->primaryImage->image) }}" alt="{{ $product->name }}" onerror="this.src='{{ asset('frontend/image_san_pham/Banh-kem-viet-quat-tuoi-mat-7.webp') }}'">
                         @else
                             <img src="{{ asset('frontend/image_san_pham/Banh-kem-viet-quat-tuoi-mat-7.webp') }}" alt="{{ $product->name }}">
                         @endif
@@ -208,7 +208,7 @@
                 <a href="{{ route('product.detail', $product->id) }}" class="product-card" data-product-id="{{ $product->id }}">
                     <div class="product-image">
                         @if($product->primaryImage)
-                            <img src="{{ Storage::url($product->primaryImage->image) }}" alt="{{ $product->name }}">
+                            <img src="{{ Storage::url($product->primaryImage->image) }}" alt="{{ $product->name }}" onerror="this.src='{{ asset('frontend/image_san_pham/Banh-kem-viet-quat-tuoi-mat-7.webp') }}'">
                         @else
                             <img src="{{ asset('frontend/image_san_pham/Banh-kem-viet-quat-tuoi-mat-7.webp') }}" alt="{{ $product->name }}">
                         @endif
@@ -253,7 +253,7 @@
                 <a href="{{ route('product.detail', $product->id) }}" class="product-card" data-product-id="{{ $product->id }}">
                     <div class="product-image">
                         @if($product->primaryImage)
-                            <img src="{{ Storage::url($product->primaryImage->image) }}" alt="{{ $product->name }}">
+                            <img src="{{ Storage::url($product->primaryImage->image) }}" alt="{{ $product->name }}" onerror="this.src='{{ asset('frontend/image_san_pham/Banh-kem-viet-quat-tuoi-mat-7.webp') }}'">
                         @else
                             <img src="{{ asset('frontend/image_san_pham/Banh-kem-viet-quat-tuoi-mat-7.webp') }}" alt="{{ $product->name }}">
                         @endif

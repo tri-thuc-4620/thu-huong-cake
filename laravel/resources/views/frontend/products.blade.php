@@ -52,7 +52,7 @@
                     <!-- San pham vua xem -->
                     <div class="sidebar-box">
                         <h3 class="sidebar-title">Sản Phẩm Vừa Xem</h3>
-                        <p style="color:#999;font-size:13px;padding:10px 0">Chưa có sản phẩm nào</p>
+                        <div class="recently-viewed-list"></div>
                     </div>
                 </aside>
 
@@ -87,7 +87,7 @@
                         <a href="{{ route('product.detail', $product->id) }}" class="product-card" data-product-id="{{ $product->id }}">
                             <div class="product-image">
                                 @if($product->primaryImage)
-                                    <img src="{{ Storage::url($product->primaryImage->image) }}" alt="{{ $product->name }}">
+                                    <img src="{{ Storage::url($product->primaryImage->image) }}" alt="{{ $product->name }}" onerror="this.src='{{ asset('frontend/image_san_pham/Banh-kem-viet-quat-tuoi-mat-7.webp') }}'">
                                 @else
                                     <img src="{{ asset('frontend/image_san_pham/Banh-kem-viet-quat-tuoi-mat-7.webp') }}" alt="{{ $product->name }}">
                                 @endif
