@@ -215,16 +215,16 @@
     }
 
     // Quantity
-    document.getElementById('qtyMinus').addEventListener('click', () => {
+    document.getElementById('qtyMinus')?.addEventListener('click', () => {
         const input = document.getElementById('qtyInput');
         if (input.value > 1) input.value = parseInt(input.value) - 1;
     });
-    document.getElementById('qtyPlus').addEventListener('click', () => {
+    document.getElementById('qtyPlus')?.addEventListener('click', () => {
         const input = document.getElementById('qtyInput');
         input.value = parseInt(input.value) + 1;
     });
 
-    // Option buttons
+    // Option buttons - chon thuoc tinh
     document.querySelectorAll('.option-buttons').forEach(group => {
         group.querySelectorAll('.option-btn').forEach(btn => {
             btn.addEventListener('click', () => {
@@ -232,6 +232,51 @@
                 btn.classList.add('active');
             });
         });
+    });
+
+    // Add to cart - lay thuoc tinh da chon
+    document.getElementById('addToCartBtn')?.addEventListener('click', function(e) {
+        e.preventDefault();
+
+        const btn = this;
+        const id = btn.dataset.productId;
+        const name = btn.dataset.productName;
+        const price = parseInt(btn.dataset.productPrice) || 0;
+        const salePrice = parseInt(btn.dataset.productSalePrice) || null;
+        const image = btn.dataset.productImage || '';
+        const quantity = parseInt(document.getElementById('qtyInput')?.value) || 1;
+
+        // Lay tat ca thuoc tinh da chon
+        const selectedAttrs = [];
+        document.querySelectorAll('.option-buttons').forEach(group => {
+            const activeBtn = group.querySelector('.option-btn.active');
+            if (activeBtn) {
+                const attrName = activeBtn.dataset.attribute || '';
+                const attrValue = activeBtn.textContent.trim();
+                selectedAttrs.push({ name: attrName, value: attrValue, id: activeBtn.dataset.value });
+            }
+        });
+
+        // Tao variation label (VD: "16cm - Gato Vani")
+        const variationLabel = selectedAttrs.map(a => a.value).join(' - ');
+        // Tao variation ID tu cac attribute value IDs
+        const variationId = selectedAttrs.map(a => a.id).sort().join('-') || null;
+
+        Cart.add({
+            id: id,
+            name: name,
+            price: price,
+            sale_price: salePrice,
+            image: image,
+            quantity: quantity,
+            variation_id: variationId,
+            variation_label: variationLabel,
+        });
+
+        // Mo cart drawer
+        if (typeof openCart === 'function') {
+            openCart();
+        }
     });
 </script>
 @endpush
