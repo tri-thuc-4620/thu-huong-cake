@@ -119,7 +119,7 @@
             </div>
             <div class="products-grid">
                 @foreach($newProductsList as $product)
-                <a href="{{ route('product.detail', $product->id) }}" class="product-card">
+                <a href="{{ route('product.detail', $product->id) }}" class="product-card" data-product-id="{{ $product->id }}">
                     <div class="product-image">
                         @if($product->primaryImage)
                             <img src="{{ Storage::url($product->primaryImage->image) }}" alt="{{ $product->name }}">
@@ -162,7 +162,7 @@
             </div>
             <div class="products-grid">
                 @foreach($hotProducts as $product)
-                <a href="{{ route('product.detail', $product->id) }}" class="product-card">
+                <a href="{{ route('product.detail', $product->id) }}" class="product-card" data-product-id="{{ $product->id }}">
                     <div class="product-image">
                         @if($product->primaryImage)
                             <img src="{{ Storage::url($product->primaryImage->image) }}" alt="{{ $product->name }}">
@@ -205,7 +205,7 @@
             </div>
             <div class="products-grid">
                 @foreach($featuredProducts as $product)
-                <a href="{{ route('product.detail', $product->id) }}" class="product-card">
+                <a href="{{ route('product.detail', $product->id) }}" class="product-card" data-product-id="{{ $product->id }}">
                     <div class="product-image">
                         @if($product->primaryImage)
                             <img src="{{ Storage::url($product->primaryImage->image) }}" alt="{{ $product->name }}">
@@ -250,7 +250,7 @@
             </div>
             <div class="products-grid">
                 @foreach($homeCat->homeProducts as $product)
-                <a href="{{ route('product.detail', $product->id) }}" class="product-card">
+                <a href="{{ route('product.detail', $product->id) }}" class="product-card" data-product-id="{{ $product->id }}">
                     <div class="product-image">
                         @if($product->primaryImage)
                             <img src="{{ Storage::url($product->primaryImage->image) }}" alt="{{ $product->name }}">

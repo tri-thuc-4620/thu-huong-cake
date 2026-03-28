@@ -84,7 +84,7 @@
                     <!-- Products Grid -->
                     <div class="catalog-grid">
                         @forelse($products as $product)
-                        <a href="{{ route('product.detail', $product->id) }}" class="product-card">
+                        <a href="{{ route('product.detail', $product->id) }}" class="product-card" data-product-id="{{ $product->id }}">
                             <div class="product-image">
                                 @if($product->primaryImage)
                                     <img src="{{ Storage::url($product->primaryImage->image) }}" alt="{{ $product->name }}">

@@ -42,27 +42,20 @@
         <h3>Giỏ Hàng</h3>
         <button class="cart-drawer-close" onclick="closeCart()"><i class="fas fa-times"></i></button>
     </div>
-    <div class="cart-drawer-count">Bạn đang có <strong>1</strong> sản phẩm trong giỏ hàng.</div>
-    <div class="cart-drawer-items">
-        <div class="cart-drawer-item">
-            <div class="cart-item-img">
-                <img src="{{ asset('frontend/image_san_pham/Banh-kem-mini-mau-hong-dep-nhat-5.jpg') }}" alt="Banh kem">
-            </div>
-            <div class="cart-item-info">
-                <h4>Bánh Kem Sinh Nhật Dâu Tây Premium</h4>
-                <p class="cart-item-variant">16cm - Gato Vani Viet Quat</p>
-                <span class="cart-item-price">450.000d</span> <span class="cart-item-qty">x 1</span>
-                <br><button class="cart-item-remove">Xóa</button>
-            </div>
+    <div class="cart-drawer-count" id="cartDrawerCount">Gio hang trong.</div>
+    <div class="cart-drawer-items" id="cartDrawerItems">
+        <div class="text-center py-4" style="color:#94a3b8">
+            <i class="fas fa-shopping-bag" style="font-size:2rem;display:block;margin-bottom:8px"></i>
+            Gio hang trong
         </div>
     </div>
     <div class="cart-drawer-footer">
         <div class="cart-total-row">
             <span>Tổng tiền tạm tính:</span>
-            <span>450.000d</span>
+            <span id="cartDrawerTotal">0đ</span>
         </div>
-        <a href="#" class="btn-cart-checkout">Tiến Hành Đặt Hàng</a>
-        <a href="/products" class="cart-detail-link">Xem chi tiết giỏ hàng <i class="fas fa-arrow-right"></i></a>
+        <a href="{{ route('checkout') }}" class="btn-cart-checkout">Tiến Hành Đặt Hàng</a>
+        <button onclick="Cart.clear()" class="cart-detail-link" style="background:none;border:none;color:var(--primary);cursor:pointer;width:100%;text-align:center;margin-top:8px;font-size:0.85rem">Xóa giỏ hàng</button>
     </div>
 </div>
 

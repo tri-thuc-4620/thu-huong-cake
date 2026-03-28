@@ -30,6 +30,7 @@
     </button>
 
     <script src="{{ asset('frontend/script.js') }}"></script>
+    <script src="{{ asset('js/cart.js') }}"></script>
     @stack('scripts')
 </body>
 </html>

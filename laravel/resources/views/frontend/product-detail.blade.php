@@ -110,8 +110,19 @@
                         <button class="qty-btn" id="qtyPlus">+</button>
                     </div>
 
+                    <!-- Them vao gio hang -->
+                    <button type="button" class="btn-add-cart" id="addToCartBtn"
+                        data-product-id="{{ $product->id }}"
+                        data-product-name="{{ $product->name }}"
+                        data-product-price="{{ $product->price }}"
+                        data-product-sale-price="{{ $product->sale_price }}"
+                        data-product-image="{{ $product->primaryImage ? Storage::url($product->primaryImage->image) : '' }}"
+                        style="width:100%;padding:14px;border:none;border-radius:12px;background:linear-gradient(135deg,#e84393,#fd79a8);color:#fff;font-weight:700;font-size:1rem;cursor:pointer;margin-bottom:10px;transition:all 0.3s">
+                        <i class="fas fa-shopping-cart" style="margin-right:8px"></i> Them Vao Gio Hang
+                    </button>
+
                     <!-- Dat banh -->
-                    <a href="/checkout" class="btn-order">
+                    <a href="{{ route('checkout') }}" class="btn-order">
                         <span class="btn-order-main">Đặt Bánh Ngay</span>
                         <span class="btn-order-sub">Freeship dưới 3km cho đơn hàng từ 300K</span>
                     </a>
