@@ -59,7 +59,7 @@
                 <!-- Main Content -->
                 <div class="catalog-main">
                     <div class="catalog-header">
-                        <h1>{{ $categories->firstWhere('id', request('category'))?->name ?? 'Tất cả sản phẩm' }}</h1>
+                        <h1>{{ $categories->firstWhere('slug', request('category'))?->name ?? 'Tất cả sản phẩm' }}</h1>
                     </div>
 
                     <!-- Category Intro -->
