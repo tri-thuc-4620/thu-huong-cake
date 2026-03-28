@@ -26,10 +26,10 @@
                         <ul class="sidebar-categories">
                             @foreach($categories as $cat)
                             <li>
-                                <a href="{{ route('products', ['category' => $cat->id]) }}" class="{{ request('category') == $cat->id ? 'active' : '' }}">
+                                <a href="{{ route('products', ['category' => $cat->slug]) }}" class="{{ request('category') == $cat->slug ? 'active' : '' }}">
                                     <i class="fas fa-chevron-right"></i> {{ $cat->name }}
-                                    @if($cat->products_count > 0)
-                                    <span class="cat-count">({{ $cat->products_count }})</span>
+                                    @if($cat->total_products > 0)
+                                    <span class="cat-count">({{ $cat->total_products }})</span>
                                     @endif
                                 </a>
                             </li>

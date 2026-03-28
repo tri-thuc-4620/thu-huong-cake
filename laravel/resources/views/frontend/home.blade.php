@@ -115,7 +115,7 @@
                     <span class="section-label">Mới Nhất</span>
                     <h2 class="section-title">Sản Phẩm Mới</h2>
                 </div>
-                <a href="{{ route('products') }}" class="view-all-btn">Xem toàn bộ <i class="fas fa-arrow-right"></i></a>
+                <a href="{{ route('products', ['sort' => 'newest']) }}" class="view-all-btn">Xem toàn bộ <i class="fas fa-arrow-right"></i></a>
             </div>
             <div class="products-grid">
                 @foreach($newProductsList as $product)

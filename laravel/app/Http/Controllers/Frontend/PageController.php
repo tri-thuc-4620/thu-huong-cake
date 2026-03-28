@@ -83,7 +83,13 @@ class PageController extends Controller
             ->where('is_visible', true);
 
         if ($request->filled('category')) {
-            $query->whereHas('category', fn($q) => $q->where('slug', $request->category));
+            $cat = Category::where('slug', $request->category)->first();
+            if ($cat) {
+                // Lọc cả sản phẩm thuộc danh mục con
+                $childIds = Category::where('parent_id', $cat->id)->pluck('id')->toArray();
+                $allIds = array_merge([$cat->id], $childIds);
+                $query->whereIn('category_id', $allIds);
+            }
         }
 
         if ($request->filled('sort')) {
@@ -99,7 +105,12 @@ class PageController extends Controller
         }
 
         $products = $query->paginate(12);
-        $categories = Category::where('is_visible', true)->withCount('products')->orderBy('sort_order')->get();
+        $categories = Category::where('is_visible', true)->orderBy('sort_order')->get()->map(function ($cat) {
+            $childIds = Category::where('parent_id', $cat->id)->pluck('id')->toArray();
+            $allIds = array_merge([$cat->id], $childIds);
+            $cat->total_products = Product::where('is_visible', true)->whereIn('category_id', $allIds)->count();
+            return $cat;
+        });
         $stores = StoreLocation::where('is_active', true)->get();
 
         return view('frontend.products', compact('products', 'categories', 'stores'));
