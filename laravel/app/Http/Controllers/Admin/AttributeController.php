@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\AttributeRequest;
+use App\Http\Requests\Admin\AttributeValueRequest;
 use App\Models\Attribute;
 use App\Models\AttributeValue;
 use Illuminate\Http\Request;
@@ -22,18 +24,11 @@ class AttributeController extends Controller
         return view('admin.attributes.create');
     }
 
-    public function store(Request $request)
+    public function store(AttributeRequest $request)
     {
-        $validated = $request->validate([
-            'name'          => 'required|string|max:255',
-            'display_type'  => 'nullable|string|max:50',
-            'sort_order'    => 'nullable|integer',
-            'is_filterable' => 'nullable|boolean',
-        ]);
+        $data = $request->validated();
 
-        $validated['slug'] = Str::slug($validated['name']);
-
-        Attribute::create($validated);
+        Attribute::create($data);
 
         return redirect()->route('admin.attributes.index')
             ->with('success', 'Da them thuoc tinh thanh cong!');
@@ -46,20 +41,13 @@ class AttributeController extends Controller
         return view('admin.attributes.edit', compact('attribute'));
     }
 
-    public function update(Request $request, $id)
+    public function update(AttributeRequest $request, $id)
     {
         $attribute = Attribute::findOrFail($id);
 
-        $validated = $request->validate([
-            'name'          => 'required|string|max:255',
-            'display_type'  => 'nullable|string|max:50',
-            'sort_order'    => 'nullable|integer',
-            'is_filterable' => 'nullable|boolean',
-        ]);
+        $data = $request->validated();
 
-        $validated['slug'] = Str::slug($validated['name']);
-
-        $attribute->update($validated);
+        $attribute->update($data);
 
         return redirect()->route('admin.attributes.index')
             ->with('success', 'Da cap nhat thuoc tinh!');
@@ -82,21 +70,14 @@ class AttributeController extends Controller
         return view('admin.attributes.values', compact('attribute', 'values'));
     }
 
-    public function storeValue(Request $request, $id)
+    public function storeValue(AttributeValueRequest $request, $id)
     {
         $attribute = Attribute::findOrFail($id);
 
-        $validated = $request->validate([
-            'name'          => 'required|string|max:255',
-            'description'   => 'nullable|string',
-            'display_value' => 'nullable|string|max:255',
-            'sort_order'    => 'nullable|integer',
-        ]);
+        $data = $request->validated();
+        $data['attribute_id'] = $attribute->id;
 
-        $validated['slug'] = Str::slug($validated['name']);
-        $validated['attribute_id'] = $attribute->id;
-
-        AttributeValue::create($validated);
+        AttributeValue::create($data);
 
         return redirect()->route('admin.attributes.values', $id)
             ->with('success', 'Da them gia tri!');

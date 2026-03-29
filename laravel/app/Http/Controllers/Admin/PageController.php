@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\PageRequest;
 use App\Models\Page;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -21,20 +22,13 @@ class PageController extends Controller
         return view('admin.pages.create');
     }
 
-    public function store(Request $request)
+    public function store(PageRequest $request)
     {
-        $validated = $request->validate([
-            'title'            => 'required|string|max:255',
-            'content'          => 'nullable|string',
-            'layout'           => 'nullable|string|max:50',
-            'is_published'     => 'nullable|boolean',
-            'meta_title'       => 'nullable|string|max:255',
-            'meta_description' => 'nullable|string',
-        ]);
+        $data = $request->validated();
 
-        $validated['slug'] = Str::slug($validated['title']);
+        $data['slug'] = Str::slug($data['title']);
 
-        Page::create($validated);
+        Page::create($data);
 
         return redirect()->route('admin.pages.index')
             ->with('success', 'Trang da duoc tao thanh cong.');
@@ -54,22 +48,15 @@ class PageController extends Controller
         return view('admin.pages.edit', compact('page'));
     }
 
-    public function update(Request $request, $id)
+    public function update(PageRequest $request, $id)
     {
         $page = Page::findOrFail($id);
 
-        $validated = $request->validate([
-            'title'            => 'required|string|max:255',
-            'content'          => 'nullable|string',
-            'layout'           => 'nullable|string|max:50',
-            'is_published'     => 'nullable|boolean',
-            'meta_title'       => 'nullable|string|max:255',
-            'meta_description' => 'nullable|string',
-        ]);
+        $data = $request->validated();
 
-        $validated['slug'] = Str::slug($validated['title']);
+        $data['slug'] = Str::slug($data['title']);
 
-        $page->update($validated);
+        $page->update($data);
 
         return redirect()->route('admin.pages.index')
             ->with('success', 'Trang da duoc cap nhat thanh cong.');

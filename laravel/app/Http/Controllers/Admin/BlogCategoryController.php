@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\BlogCategoryRequest;
 use App\Models\BlogCategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -23,18 +24,11 @@ class BlogCategoryController extends Controller
         return view('admin.blog-categories.create');
     }
 
-    public function store(Request $request)
+    public function store(BlogCategoryRequest $request)
     {
-        $validated = $request->validate([
-            'name'        => 'required|string|max:255',
-            'description' => 'nullable|string',
-            'sort_order'  => 'nullable|integer',
-            'is_visible'  => 'nullable|boolean',
-        ]);
+        $data = $request->validated();
 
-        $validated['slug'] = Str::slug($validated['name']);
-
-        BlogCategory::create($validated);
+        BlogCategory::create($data);
 
         return redirect()->route('admin.blog-categories.index')
             ->with('success', 'Danh muc blog da duoc tao thanh cong.');
@@ -54,20 +48,13 @@ class BlogCategoryController extends Controller
         return view('admin.blog-categories.edit', compact('category'));
     }
 
-    public function update(Request $request, $id)
+    public function update(BlogCategoryRequest $request, $id)
     {
         $category = BlogCategory::findOrFail($id);
 
-        $validated = $request->validate([
-            'name'        => 'required|string|max:255',
-            'description' => 'nullable|string',
-            'sort_order'  => 'nullable|integer',
-            'is_visible'  => 'nullable|boolean',
-        ]);
+        $data = $request->validated();
 
-        $validated['slug'] = Str::slug($validated['name']);
-
-        $category->update($validated);
+        $category->update($data);
 
         return redirect()->route('admin.blog-categories.index')
             ->with('success', 'Danh muc blog da duoc cap nhat thanh cong.');

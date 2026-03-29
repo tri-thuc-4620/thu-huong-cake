@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\ContactMessageRequest;
 use App\Models\ContactMessage;
 use Illuminate\Http\Request;
 
@@ -36,16 +37,14 @@ class ContactMessageController extends Controller
         return view('admin.contact-messages.edit', compact('message'));
     }
 
-    public function update(Request $request, $id)
+    public function update(ContactMessageRequest $request, $id)
     {
         $message = ContactMessage::findOrFail($id);
 
-        $validated = $request->validate([
-            'admin_reply' => 'nullable|string',
-        ]);
+        $data = $request->validated();
 
         $message->update([
-            'admin_reply' => $validated['admin_reply'],
+            'admin_reply' => $data['admin_reply'] ?? null,
             'is_read'     => true,
             'read_at'     => $message->read_at ?? now(),
         ]);

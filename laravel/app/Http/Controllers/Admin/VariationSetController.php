@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\VariationSetRequest;
 use App\Models\Attribute;
 use App\Models\VariationSet;
 use Illuminate\Http\Request;
@@ -22,23 +23,19 @@ class VariationSetController extends Controller
         return view('admin.variation-sets.create', compact('attributes'));
     }
 
-    public function store(Request $request)
+    public function store(VariationSetRequest $request)
     {
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'attribute_value_ids' => 'nullable|array',
-            'attribute_value_ids.*' => 'exists:attribute_values,id',
-        ]);
+        $data = $request->validated();
 
         $variationSet = VariationSet::create([
-            'name' => $request->name,
-            'slug' => $request->slug ?? Str::slug($request->name),
-            'description' => $request->description,
-            'is_active' => $request->boolean('is_active', true),
+            'name' => $data['name'],
+            'slug' => $data['slug'] ?? Str::slug($data['name']),
+            'description' => $data['description'] ?? null,
+            'is_active' => $data['is_active'] ?? true,
         ]);
 
-        if ($request->filled('attribute_value_ids')) {
-            $variationSet->values()->sync($request->attribute_value_ids);
+        if (!empty($data['attribute_value_ids'])) {
+            $variationSet->values()->sync($data['attribute_value_ids']);
         }
 
         return redirect()->route('admin.variation-sets.index')->with('success', 'Da tao bo bien the!');
@@ -51,24 +48,20 @@ class VariationSetController extends Controller
         return view('admin.variation-sets.edit', compact('variationSet', 'attributes'));
     }
 
-    public function update(Request $request, $id)
+    public function update(VariationSetRequest $request, $id)
     {
         $variationSet = VariationSet::findOrFail($id);
 
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'attribute_value_ids' => 'nullable|array',
-            'attribute_value_ids.*' => 'exists:attribute_values,id',
-        ]);
+        $data = $request->validated();
 
         $variationSet->update([
-            'name' => $request->name,
-            'slug' => $request->slug ?? Str::slug($request->name),
-            'description' => $request->description,
-            'is_active' => $request->boolean('is_active', true),
+            'name' => $data['name'],
+            'slug' => $data['slug'] ?? Str::slug($data['name']),
+            'description' => $data['description'] ?? null,
+            'is_active' => $data['is_active'] ?? true,
         ]);
 
-        $variationSet->values()->sync($request->input('attribute_value_ids', []));
+        $variationSet->values()->sync($data['attribute_value_ids'] ?? []);
 
         return redirect()->route('admin.variation-sets.index')->with('success', 'Da cap nhat bo bien the!');
     }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\OrderRequest;
 use App\Models\Order;
 use App\Models\OrderItem;
 use App\Models\Product;
@@ -53,15 +54,9 @@ class OrderController extends Controller
         return view('admin.orders.create', compact('stores', 'products'));
     }
 
-    public function store(Request $request)
+    public function store(OrderRequest $request)
     {
-        $request->validate([
-            'customer_name' => 'required|string|max:255',
-            'customer_phone' => 'required|string|max:20',
-            'items' => 'required|array|min:1',
-            'items.*.product_id' => 'required|exists:products,id',
-            'items.*.quantity' => 'required|integer|min:1',
-        ]);
+        // validated by OrderRequest
 
         DB::beginTransaction();
         try {
@@ -138,14 +133,11 @@ class OrderController extends Controller
         return view('admin.orders.edit', compact('order', 'stores', 'products'));
     }
 
-    public function update(Request $request, $id)
+    public function update(OrderRequest $request, $id)
     {
         $order = Order::findOrFail($id);
 
-        $request->validate([
-            'customer_name' => 'required|string|max:255',
-            'customer_phone' => 'required|string|max:20',
-        ]);
+        // validated by OrderRequest
 
         DB::beginTransaction();
         try {

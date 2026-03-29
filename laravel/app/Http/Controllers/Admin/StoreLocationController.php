@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\StoreLocationRequest;
 use App\Models\StoreLocation;
 use Illuminate\Http\Request;
 
@@ -20,21 +21,9 @@ class StoreLocationController extends Controller
         return view('admin.store-locations.create');
     }
 
-    public function store(Request $request)
+    public function store(StoreLocationRequest $request)
     {
-        $validated = $request->validate([
-            'name'            => 'required|string|max:255',
-            'short_name'      => 'nullable|string|max:100',
-            'address'         => 'required|string|max:500',
-            'city'            => 'nullable|string|max:100',
-            'district'        => 'nullable|string|max:100',
-            'phone'           => 'nullable|string|max:20',
-            'latitude'        => 'nullable|numeric',
-            'longitude'       => 'nullable|numeric',
-            'google_maps_url' => 'nullable|url|max:500',
-            'is_active'       => 'nullable|boolean',
-            'sort_order'      => 'nullable|integer',
-        ]);
+        $validated = $request->validated();
 
         StoreLocation::create($validated);
 
@@ -56,23 +45,11 @@ class StoreLocationController extends Controller
         return view('admin.store-locations.edit', compact('location'));
     }
 
-    public function update(Request $request, $id)
+    public function update(StoreLocationRequest $request, $id)
     {
         $location = StoreLocation::findOrFail($id);
 
-        $validated = $request->validate([
-            'name'            => 'required|string|max:255',
-            'short_name'      => 'nullable|string|max:100',
-            'address'         => 'required|string|max:500',
-            'city'            => 'nullable|string|max:100',
-            'district'        => 'nullable|string|max:100',
-            'phone'           => 'nullable|string|max:20',
-            'latitude'        => 'nullable|numeric',
-            'longitude'       => 'nullable|numeric',
-            'google_maps_url' => 'nullable|url|max:500',
-            'is_active'       => 'nullable|boolean',
-            'sort_order'      => 'nullable|integer',
-        ]);
+        $validated = $request->validated();
 
         $location->update($validated);
 

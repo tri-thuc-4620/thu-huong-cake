@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\ProductRequest;
 use App\Models\Product;
 use App\Models\Category;
 use App\Models\VariationSet;
@@ -50,16 +51,12 @@ class ProductController extends Controller
         return view('admin.products.create', compact('categories', 'variationSets'));
     }
 
-    public function store(Request $request)
+    public function store(ProductRequest $request)
     {
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'price' => 'required|numeric|min:0',
-        ]);
-
         DB::beginTransaction();
         try {
-            $data = $request->except(['images', 'tags', 'variation_type', 'cake_base', 'cake_size']);
+            $data = $request->validated();
+            $data = collect($data)->except(['images', 'tags', 'variation_type', 'cake_base', 'cake_size'])->toArray();
             $data['slug'] = $data['slug'] ?? Str::slug($request->name);
 
             $product = Product::create($data);
@@ -128,17 +125,14 @@ class ProductController extends Controller
         return view('admin.products.edit', compact('product', 'categories', 'variationSets'));
     }
 
-    public function update(Request $request, $id)
+    public function update(ProductRequest $request, $id)
     {
         $product = Product::findOrFail($id);
 
-        $request->validate([
-            'name' => 'required|string|max:255',
-        ]);
-
         DB::beginTransaction();
         try {
-            $data = $request->except(['images', 'tags', 'featured_image', '_token', '_method']);
+            $data = $request->validated();
+            $data = collect($data)->except(['images', 'tags', 'featured_image', '_token', '_method'])->toArray();
             $data['slug'] = $data['slug'] ?? Str::slug($request->name);
 
             $product->update($data);

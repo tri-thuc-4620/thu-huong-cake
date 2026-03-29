@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\BlogPostRequest;
 use App\Models\BlogCategory;
 use App\Models\BlogPost;
 use Illuminate\Http\Request;
@@ -27,29 +28,18 @@ class BlogPostController extends Controller
         return view('admin.blog-posts.create', compact('categories'));
     }
 
-    public function store(Request $request)
+    public function store(BlogPostRequest $request)
     {
-        $validated = $request->validate([
-            'title'             => 'required|string|max:255',
-            'blog_category_id'  => 'nullable|exists:blog_categories,id',
-            'featured_image'    => 'nullable|image|max:2048',
-            'excerpt'           => 'nullable|string',
-            'content'           => 'nullable|string',
-            'is_published'      => 'nullable|boolean',
-            'published_at'      => 'nullable|date',
-            'meta_title'        => 'nullable|string|max:255',
-            'meta_description'  => 'nullable|string',
-        ]);
+        $data = $request->validated();
 
-        $validated['slug'] = Str::slug($validated['title']);
-        $validated['author_id'] = auth()->id();
+        $data['author_id'] = auth()->id();
 
         if ($request->hasFile('featured_image')) {
-            $validated['featured_image'] = $request->file('featured_image')
+            $data['featured_image'] = $request->file('featured_image')
                 ->store('blog-posts', 'public');
         }
 
-        BlogPost::create($validated);
+        BlogPost::create($data);
 
         return redirect()->route('admin.blog-posts.index')
             ->with('success', 'Bai viet da duoc tao thanh cong.');
@@ -70,33 +60,21 @@ class BlogPostController extends Controller
         return view('admin.blog-posts.edit', compact('post', 'categories'));
     }
 
-    public function update(Request $request, $id)
+    public function update(BlogPostRequest $request, $id)
     {
         $post = BlogPost::findOrFail($id);
 
-        $validated = $request->validate([
-            'title'             => 'required|string|max:255',
-            'blog_category_id'  => 'nullable|exists:blog_categories,id',
-            'featured_image'    => 'nullable|image|max:2048',
-            'excerpt'           => 'nullable|string',
-            'content'           => 'nullable|string',
-            'is_published'      => 'nullable|boolean',
-            'published_at'      => 'nullable|date',
-            'meta_title'        => 'nullable|string|max:255',
-            'meta_description'  => 'nullable|string',
-        ]);
-
-        $validated['slug'] = Str::slug($validated['title']);
+        $data = $request->validated();
 
         if ($request->hasFile('featured_image')) {
             if ($post->featured_image) {
                 Storage::disk('public')->delete($post->featured_image);
             }
-            $validated['featured_image'] = $request->file('featured_image')
+            $data['featured_image'] = $request->file('featured_image')
                 ->store('blog-posts', 'public');
         }
 
-        $post->update($validated);
+        $post->update($data);
 
         return redirect()->route('admin.blog-posts.index')
             ->with('success', 'Bai viet da duoc cap nhat thanh cong.');

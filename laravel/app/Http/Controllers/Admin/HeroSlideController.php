@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\HeroSlideRequest;
 use App\Models\HeroSlide;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -21,27 +22,15 @@ class HeroSlideController extends Controller
         return view('admin.hero-slides.create');
     }
 
-    public function store(Request $request)
+    public function store(HeroSlideRequest $request)
     {
-        $validated = $request->validate([
-            'badge_text'    => 'nullable|string|max:100',
-            'title_line_1'  => 'nullable|string|max:255',
-            'title_line_2'  => 'nullable|string|max:255',
-            'description'   => 'nullable|string',
-            'button_1_text' => 'nullable|string|max:100',
-            'button_1_url'  => 'nullable|string|max:500',
-            'button_2_text' => 'nullable|string|max:100',
-            'button_2_url'  => 'nullable|string|max:500',
-            'image'         => 'required|image|max:2048',
-            'is_active'     => 'nullable|boolean',
-            'sort_order'    => 'nullable|integer',
-        ]);
+        $data = $request->validated();
 
         if ($request->hasFile('image')) {
-            $validated['image'] = $request->file('image')->store('hero-slides', 'public');
+            $data['image'] = $request->file('image')->store('hero-slides', 'public');
         }
 
-        HeroSlide::create($validated);
+        HeroSlide::create($data);
 
         return redirect()->route('admin.hero-slides.index')
             ->with('success', 'Slide da duoc tao thanh cong.');
@@ -61,32 +50,20 @@ class HeroSlideController extends Controller
         return view('admin.hero-slides.edit', compact('slide'));
     }
 
-    public function update(Request $request, $id)
+    public function update(HeroSlideRequest $request, $id)
     {
         $slide = HeroSlide::findOrFail($id);
 
-        $validated = $request->validate([
-            'badge_text'    => 'nullable|string|max:100',
-            'title_line_1'  => 'nullable|string|max:255',
-            'title_line_2'  => 'nullable|string|max:255',
-            'description'   => 'nullable|string',
-            'button_1_text' => 'nullable|string|max:100',
-            'button_1_url'  => 'nullable|string|max:500',
-            'button_2_text' => 'nullable|string|max:100',
-            'button_2_url'  => 'nullable|string|max:500',
-            'image'         => 'nullable|image|max:2048',
-            'is_active'     => 'nullable|boolean',
-            'sort_order'    => 'nullable|integer',
-        ]);
+        $data = $request->validated();
 
         if ($request->hasFile('image')) {
             if ($slide->image) {
                 Storage::disk('public')->delete($slide->image);
             }
-            $validated['image'] = $request->file('image')->store('hero-slides', 'public');
+            $data['image'] = $request->file('image')->store('hero-slides', 'public');
         }
 
-        $slide->update($validated);
+        $slide->update($data);
 
         return redirect()->route('admin.hero-slides.index')
             ->with('success', 'Slide da duoc cap nhat thanh cong.');

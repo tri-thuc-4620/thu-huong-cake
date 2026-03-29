@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\RoleRequest;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
@@ -23,13 +24,9 @@ class RoleController extends Controller
         return view('admin.roles.create', compact('permissions'));
     }
 
-    public function store(Request $request)
+    public function store(RoleRequest $request)
     {
-        $validated = $request->validate([
-            'name'          => 'required|string|max:255|unique:roles,name',
-            'permissions'   => 'nullable|array',
-            'permissions.*' => 'exists:permissions,id',
-        ]);
+        $validated = $request->validated();
 
         $role = Role::create(['name' => $validated['name']]);
 
@@ -49,15 +46,11 @@ class RoleController extends Controller
         return view('admin.roles.edit', compact('role', 'permissions'));
     }
 
-    public function update(Request $request, $id)
+    public function update(RoleRequest $request, $id)
     {
         $role = Role::findOrFail($id);
 
-        $validated = $request->validate([
-            'name'          => 'required|string|max:255|unique:roles,name,' . $role->id,
-            'permissions'   => 'nullable|array',
-            'permissions.*' => 'exists:permissions,id',
-        ]);
+        $validated = $request->validated();
 
         $role->update(['name' => $validated['name']]);
         $role->syncPermissions($validated['permissions'] ?? []);

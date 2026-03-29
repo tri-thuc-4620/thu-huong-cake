@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\BannerRequest;
 use App\Models\Banner;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -21,22 +22,15 @@ class BannerController extends Controller
         return view('admin.banners.create');
     }
 
-    public function store(Request $request)
+    public function store(BannerRequest $request)
     {
-        $validated = $request->validate([
-            'title'      => 'nullable|string|max:255',
-            'image'      => 'required|image|max:2048',
-            'url'        => 'nullable|string|max:500',
-            'position'   => 'nullable|string|max:50',
-            'is_active'  => 'nullable|boolean',
-            'sort_order' => 'nullable|integer',
-        ]);
+        $data = $request->validated();
 
         if ($request->hasFile('image')) {
-            $validated['image'] = $request->file('image')->store('banners', 'public');
+            $data['image'] = $request->file('image')->store('banners', 'public');
         }
 
-        Banner::create($validated);
+        Banner::create($data);
 
         return redirect()->route('admin.banners.index')
             ->with('success', 'Banner da duoc tao thanh cong.');
@@ -56,27 +50,20 @@ class BannerController extends Controller
         return view('admin.banners.edit', compact('banner'));
     }
 
-    public function update(Request $request, $id)
+    public function update(BannerRequest $request, $id)
     {
         $banner = Banner::findOrFail($id);
 
-        $validated = $request->validate([
-            'title'      => 'nullable|string|max:255',
-            'image'      => 'nullable|image|max:2048',
-            'url'        => 'nullable|string|max:500',
-            'position'   => 'nullable|string|max:50',
-            'is_active'  => 'nullable|boolean',
-            'sort_order' => 'nullable|integer',
-        ]);
+        $data = $request->validated();
 
         if ($request->hasFile('image')) {
             if ($banner->image) {
                 Storage::disk('public')->delete($banner->image);
             }
-            $validated['image'] = $request->file('image')->store('banners', 'public');
+            $data['image'] = $request->file('image')->store('banners', 'public');
         }
 
-        $banner->update($validated);
+        $banner->update($data);
 
         return redirect()->route('admin.banners.index')
             ->with('success', 'Banner da duoc cap nhat thanh cong.');
