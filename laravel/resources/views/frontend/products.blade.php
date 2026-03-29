@@ -24,7 +24,7 @@
                     <div class="sidebar-box">
                         <h3 class="sidebar-title">Danh Mục Sản Phẩm</h3>
                         <ul class="sidebar-categories">
-                            @foreach($categories as $cat)
+                            @foreach($categories->whereNull('parent_id') as $cat)
                             <li>
                                 <a href="{{ route('products', ['category' => $cat->slug]) }}" class="{{ request('category') == $cat->slug ? 'active' : '' }}">
                                     <i class="fas fa-chevron-right"></i> {{ $cat->name }}
@@ -32,6 +32,21 @@
                                     <span class="cat-count">({{ $cat->total_products }})</span>
                                     @endif
                                 </a>
+                                @php $children = $categories->where('parent_id', $cat->id); @endphp
+                                @if($children->count() > 0)
+                                <ul style="padding-left:20px;list-style:none;margin:0">
+                                    @foreach($children as $child)
+                                    <li>
+                                        <a href="{{ route('products', ['category' => $child->slug]) }}" class="{{ request('category') == $child->slug ? 'active' : '' }}">
+                                            <i class="fas fa-chevron-right"></i> {{ $child->name }}
+                                            @if($child->total_products > 0)
+                                            <span class="cat-count">({{ $child->total_products }})</span>
+                                            @endif
+                                        </a>
+                                    </li>
+                                    @endforeach
+                                </ul>
+                                @endif
                             </li>
                             @endforeach
                         </ul>

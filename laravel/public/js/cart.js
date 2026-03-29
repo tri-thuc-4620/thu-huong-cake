@@ -110,7 +110,7 @@ const Cart = {
 
         drawerItems.innerHTML = items.map(item => {
             const price = item.sale_price || item.price;
-            const imgSrc = (item.image && item.image !== '' && !item.image.endsWith('/')) ? item.image : 'https://placehold.co/80x80/fff0f6/e84393?text=%F0%9F%8E%82';
+            const imgSrc = (item.image && item.image !== '' && !item.image.endsWith('/')) ? item.image : 'https://placehold.co/80x80/f0fdf4/10b981?text=%F0%9F%8E%82';
             return `
                 <div class="cart-drawer-item" data-key="${item.key}">
                     <div class="cart-item-img">
@@ -224,7 +224,7 @@ const RecentlyViewed = {
             return;
         }
         container.innerHTML = items.map(item => {
-            const imgSrc = (item.image && item.image !== '') ? item.image : 'https://placehold.co/60x60/fff0f6/e84393?text=%F0%9F%8E%82';
+            const imgSrc = (item.image && item.image !== '') ? item.image : 'https://placehold.co/60x60/f0fdf4/10b981?text=%F0%9F%8E%82';
             const price = item.sale_price || item.price;
             return `
                 <div class="recently-item" style="display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid #f1f5f9">
@@ -233,7 +233,7 @@ const RecentlyViewed = {
                     </a>
                     <div style="flex:1;min-width:0">
                         <a href="${item.url}" style="font-size:0.8rem;font-weight:500;color:#0f172a;text-decoration:none;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${item.name}</a>
-                        <span style="font-size:0.8rem;color:#e84393;font-weight:600">${new Intl.NumberFormat('vi-VN').format(price)}đ</span>
+                        <span style="font-size:0.8rem;color:#10b981;font-weight:600">${new Intl.NumberFormat('vi-VN').format(price)}đ</span>
                     </div>
                 </div>
             `;

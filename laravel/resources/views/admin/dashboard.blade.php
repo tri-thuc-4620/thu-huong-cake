@@ -36,7 +36,7 @@
     <div class="col-xl-3 col-sm-6">
         <div class="card stat-card">
             <div class="d-flex align-items-center gap-3">
-                <div class="stat-icon" style="background:rgba(232,67,147,0.1);color:#e84393">
+                <div class="stat-icon" style="background:rgba(16,185,129,0.1);color:#10b981">
                     <i class="bi bi-receipt"></i>
                 </div>
                 <div class="flex-grow-1">
@@ -186,13 +186,13 @@
             </div>
             <div class="card-body">
                 <div class="d-flex align-items-end gap-1" style="height:120px">
-                    <div style="flex:1;background:rgba(232,67,147,0.15);border-radius:6px 6px 0 0;height:40%"></div>
-                    <div style="flex:1;background:rgba(232,67,147,0.2);border-radius:6px 6px 0 0;height:60%"></div>
-                    <div style="flex:1;background:rgba(232,67,147,0.15);border-radius:6px 6px 0 0;height:35%"></div>
-                    <div style="flex:1;background:rgba(232,67,147,0.25);border-radius:6px 6px 0 0;height:75%"></div>
-                    <div style="flex:1;background:rgba(232,67,147,0.3);border-radius:6px 6px 0 0;height:90%"></div>
-                    <div style="flex:1;background:rgba(232,67,147,0.2);border-radius:6px 6px 0 0;height:55%"></div>
-                    <div style="flex:1;background:linear-gradient(to top, #e84393, #fd79a8);border-radius:6px 6px 0 0;height:100%"></div>
+                    <div style="flex:1;background:rgba(16,185,129,0.15);border-radius:6px 6px 0 0;height:40%"></div>
+                    <div style="flex:1;background:rgba(16,185,129,0.2);border-radius:6px 6px 0 0;height:60%"></div>
+                    <div style="flex:1;background:rgba(16,185,129,0.15);border-radius:6px 6px 0 0;height:35%"></div>
+                    <div style="flex:1;background:rgba(16,185,129,0.25);border-radius:6px 6px 0 0;height:75%"></div>
+                    <div style="flex:1;background:rgba(16,185,129,0.3);border-radius:6px 6px 0 0;height:90%"></div>
+                    <div style="flex:1;background:rgba(16,185,129,0.2);border-radius:6px 6px 0 0;height:55%"></div>
+                    <div style="flex:1;background:linear-gradient(to top, #10b981, #34d399);border-radius:6px 6px 0 0;height:100%"></div>
                 </div>
                 <div class="d-flex justify-content-between mt-2" style="font-size:0.7rem;color:#94a3b8">
                     <span>T2</span><span>T3</span><span>T4</span><span>T5</span><span>T6</span><span>T7</span><span>CN</span>
@@ -217,7 +217,7 @@
             <div class="card-body p-0">
                 <div class="d-flex align-items-center gap-3 p-3 border-bottom" style="border-color:#f1f5f9!important">
                     <div style="width:44px;height:44px;border-radius:10px;background:#fce7f3;display:flex;align-items:center;justify-content:center">
-                        <i class="bi bi-cake2" style="color:#e84393"></i>
+                        <i class="bi bi-cake2" style="color:#10b981"></i>
                     </div>
                     <div class="flex-grow-1">
                         <div style="font-size:0.85rem;font-weight:600">Banh kem dau</div>

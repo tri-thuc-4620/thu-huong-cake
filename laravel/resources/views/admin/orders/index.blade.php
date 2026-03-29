@@ -45,7 +45,7 @@
         <div class="card" style="min-width:140px">
             <div class="card-body py-2 px-3 d-flex align-items-center gap-2">
                 <div style="width:36px;height:36px;border-radius:10px;background:#fce7f3;display:flex;align-items:center;justify-content:center">
-                    <i class="bi bi-truck" style="color:#e84393"></i>
+                    <i class="bi bi-truck" style="color:#10b981"></i>
                 </div>
                 <div>
                     <div style="font-size:0.7rem;color:#94a3b8">Dang giao</div>

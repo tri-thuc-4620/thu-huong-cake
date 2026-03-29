@@ -8,7 +8,7 @@
     <p>Day la trang tai khoan cua ban. Chuc nang se duoc cap nhat som.</p>
     <form method="POST" action="{{ route('logout') }}">
         @csrf
-        <button type="submit" style="background:#e84393;color:#fff;border:none;padding:10px 24px;border-radius:8px;cursor:pointer;font-weight:600;">Dang xuat</button>
+        <button type="submit" style="background:#10b981;color:#fff;border:none;padding:10px 24px;border-radius:8px;cursor:pointer;font-weight:600;">Dang xuat</button>
     </form>
 </div>
 @endsection

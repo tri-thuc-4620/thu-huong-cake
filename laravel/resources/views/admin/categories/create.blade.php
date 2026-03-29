@@ -134,3 +134,35 @@
     </div>
 </form>
 @endsection
+
+@push('scripts')
+<script>
+    (function(){
+        const nameInput = document.getElementById('name');
+        const slugInput = document.getElementById('slug');
+        if (!nameInput || !slugInput) return;
+
+        let isSlugEdited = slugInput.value.trim() !== '';
+
+        function slugify(text) {
+            return text.toString().toLowerCase()
+                .normalize('NFD') // split accented letters
+                .replace(/[\u0300-\u036f]/g, '') // remove diacritics
+                .replace(/[^a-z0-9\s-]/g, '')
+                .trim()
+                .replace(/\s+/g, '-')
+                .replace(/-+/g, '-');
+        }
+
+        nameInput.addEventListener('input', function(){
+            if (!isSlugEdited) {
+                slugInput.value = slugify(this.value);
+            }
+        });
+
+        slugInput.addEventListener('input', function(){
+            isSlugEdited = this.value.trim() !== '';
+        });
+    })();
+</script>
+@endpush

@@ -27,7 +27,7 @@
 @endif
 
 @php
-    $roleColors = ['#e84393', '#6366f1', '#f59e0b', '#10b981', '#3b82f6', '#94a3b8'];
+    $roleColors = ['#10b981', '#6366f1', '#f59e0b', '#10b981', '#3b82f6', '#94a3b8'];
 @endphp
 
 {{-- Danh sach vai tro --}}

@@ -60,6 +60,50 @@
                 </div>
             </div>
         </div>
+            @push('scripts')
+            <script>
+                (function(){
+                    const nameInput = document.getElementById('name');
+                    const slugInput = document.getElementById('slug');
+                    const seoSlug = document.getElementById('seoSlug');
+                    const seoPreviewUrl = document.getElementById('seoPreviewUrl');
+                    const seoPreviewTitle = document.getElementById('seoPreviewTitle');
+                    if (!nameInput) return;
+
+                    let isSlugEdited = slugInput && slugInput.value.trim() !== '';
+
+                    function slugify(text) {
+                        return text.toString().toLowerCase()
+                            .normalize('NFD')
+                            .replace(/[\u0300-\u036f]/g, '')
+                            .replace(/[^a-z0-9\s-]/g, '')
+                            .trim()
+                            .replace(/\s+/g, '-')
+                            .replace(/-+/g, '-');
+                    }
+
+                    function updateAll(s) {
+                        if (slugInput && !isSlugEdited) slugInput.value = s;
+                        if (seoSlug) seoSlug.value = slugInput ? slugInput.value.trim() || s : s;
+                        if (seoPreviewUrl) seoPreviewUrl.textContent = 'thuhuongcake.vn/san-pham/' + (slugInput ? (slugInput.value.trim() || s) : s);
+                        if (seoPreviewTitle) seoPreviewTitle.textContent = (nameInput.value.trim() || 'Tieu de san pham') + ' - Thu Huong Cake';
+                    }
+
+                    nameInput.addEventListener('input', function(){
+                        const s = slugify(this.value);
+                        updateAll(s);
+                    });
+
+                    if (slugInput) {
+                        slugInput.addEventListener('input', function(){
+                            isSlugEdited = this.value.trim() !== '';
+                            if (seoSlug) seoSlug.value = this.value.trim();
+                            if (seoPreviewUrl) seoPreviewUrl.textContent = 'thuhuongcake.vn/san-pham/' + (this.value.trim() || slugify(nameInput.value || ''));
+                        });
+                    }
+                })();
+            </script>
+            @endpush
     </div>
 
     {{-- Section 2: Gia & Kho hang --}}

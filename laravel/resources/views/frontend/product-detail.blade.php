@@ -117,7 +117,7 @@
                         data-product-price="{{ $product->price }}"
                         data-product-sale-price="{{ $product->sale_price }}"
                         data-product-image="{{ $product->primaryImage && Storage::disk('public')->exists($product->primaryImage->image) ? Storage::url($product->primaryImage->image) : asset('frontend/image_san_pham/Banh-kem-viet-quat-tuoi-mat-7.webp') }}"
-                        style="width:100%;padding:14px;border:none;border-radius:12px;background:linear-gradient(135deg,#e84393,#fd79a8);color:#fff;font-weight:700;font-size:1rem;cursor:pointer;margin-bottom:10px;transition:all 0.3s">
+                        style="width:100%;padding:14px;border:none;border-radius:12px;background:linear-gradient(135deg,#10b981,#34d399);color:#fff;font-weight:700;font-size:1rem;cursor:pointer;margin-bottom:10px;transition:all 0.3s">
                         <i class="fas fa-shopping-cart" style="margin-right:8px"></i> Them Vao Gio Hang
                     </button>
 

@@ -9,9 +9,17 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Category extends Model
 {
     protected $fillable = [
-        'name', 'slug', 'parent_id', 'description', 'image',
-        'sort_order', 'is_visible', 'show_in_menu', 'show_on_home',
-        'meta_title', 'meta_description',
+        'name', 
+        'slug', 
+        'parent_id', 
+        'description', 
+        'image',
+        'sort_order', 
+        'is_visible', 
+        'show_in_menu', 
+        'show_on_home',
+        'meta_title', 
+        'meta_description',
     ];
 
     protected $casts = [

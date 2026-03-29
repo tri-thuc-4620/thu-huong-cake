@@ -61,9 +61,11 @@ class PageController extends Controller
             Category::where('show_on_home', true)->where('is_visible', true)
                 ->orderBy('sort_order')->get()
                 ->map(function ($cat) {
+                    $childIds = Category::where('parent_id', $cat->id)->pluck('id')->toArray();
+                    $allIds = array_merge([$cat->id], $childIds);
                     $cat->homeProducts = Product::with('primaryImage')
                         ->where('is_visible', true)
-                        ->where('category_id', $cat->id)
+                        ->whereIn('category_id', $allIds)
                         ->orderBy('sort_order')
                         ->take(10)->get();
                     return $cat;

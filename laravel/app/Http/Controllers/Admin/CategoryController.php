@@ -3,9 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\CategoryRequest;
 use App\Models\Category;
 use Illuminate\Http\Request;
-use Illuminate\Support\Str;
 
 class CategoryController extends Controller
 {
@@ -26,23 +26,12 @@ class CategoryController extends Controller
         return view('admin.categories.create', compact('categories'));
     }
 
-    public function store(Request $request)
+    public function store(CategoryRequest $request)
     {
-        $validated = $request->validate([
-            'name'             => 'required|string|max:255',
-            'parent_id'        => 'nullable|exists:categories,id',
-            'description'      => 'nullable|string',
-            'image'            => 'nullable|string',
-            'sort_order'       => 'nullable|integer',
-            'is_visible'       => 'nullable|boolean',
-            'show_in_menu'     => 'nullable|boolean',
-            'meta_title'       => 'nullable|string|max:255',
-            'meta_description' => 'nullable|string',
-        ]);
+        // Lấy dữ liệu đã được validate và chuẩn hóa từ CategoryRequest
+        $data = $request->validated();
 
-        $validated['slug'] = Str::slug($validated['name']);
-
-        Category::create($validated);
+        Category::create($data);
 
         return redirect()->route('admin.categories.index')
             ->with('success', 'Danh muc da duoc tao thanh cong.');
@@ -63,25 +52,14 @@ class CategoryController extends Controller
         return view('admin.categories.edit', compact('category', 'categories'));
     }
 
-    public function update(Request $request, $id)
+    public function update(CategoryRequest $request, $id)
     {
         $category = Category::findOrFail($id);
 
-        $validated = $request->validate([
-            'name'             => 'required|string|max:255',
-            'parent_id'        => 'nullable|exists:categories,id',
-            'description'      => 'nullable|string',
-            'image'            => 'nullable|string',
-            'sort_order'       => 'nullable|integer',
-            'is_visible'       => 'nullable|boolean',
-            'show_in_menu'     => 'nullable|boolean',
-            'meta_title'       => 'nullable|string|max:255',
-            'meta_description' => 'nullable|string',
-        ]);
+        // Lấy dữ liệu đã được validate và chuẩn hóa từ CategoryRequest
+        $data = $request->validated();
 
-        $validated['slug'] = Str::slug($validated['name']);
-
-        $category->update($validated);
+        $category->update($data);
 
         return redirect()->route('admin.categories.index')
             ->with('success', 'Danh muc da duoc cap nhat thanh cong.');

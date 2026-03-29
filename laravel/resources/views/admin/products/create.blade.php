@@ -34,7 +34,7 @@
 
             {{-- 1. Ten san pham (no card, like WP) --}}
             <div class="mb-4">
-                <input type="text" class="form-control form-control-lg @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" placeholder="Ten san pham" required style="font-size:1.3rem;padding:0.6rem 0.8rem;border-radius:4px;border:1px solid #dcdcde">
+                <input id="name" type="text" class="form-control form-control-lg @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" placeholder="Ten san pham" required style="font-size:1.3rem;padding:0.6rem 0.8rem;border-radius:4px;border:1px solid #dcdcde">
                 @error('name') <div class="invalid-feedback">{{ $message }}</div> @enderror
                 <div class="mt-1" style="font-size:0.8rem;color:#646970">
                     Duong dan: <span style="color:var(--pink)">thuhuongcake.wuaze.com/san-pham/<strong>ten-san-pham</strong>/</span>
@@ -639,6 +639,51 @@
 
             {{-- 6. SEO Analyzer --}}
             @include('admin.partials.seo-analyzer')
+
+            @push('scripts')
+            <script>
+                (function(){
+                    const nameInput = document.getElementById('name');
+                    const slugInput = document.getElementById('slug'); // may not exist in create view
+                    const seoSlug = document.getElementById('seoSlug');
+                    const seoPreviewUrl = document.getElementById('seoPreviewUrl');
+                    const seoPreviewTitle = document.getElementById('seoPreviewTitle');
+                    if (!nameInput) return;
+
+                    let isSlugEdited = false;
+
+                    function slugify(text) {
+                        return text.toString().toLowerCase()
+                            .normalize('NFD')
+                            .replace(/[\u0300-\u036f]/g, '')
+                            .replace(/[^a-z0-9\s-]/g, '')
+                            .trim()
+                            .replace(/\s+/g, '-')
+                            .replace(/-+/g, '-');
+                    }
+
+                    function updateAll(s) {
+                        if (slugInput && !isSlugEdited) slugInput.value = s;
+                        if (seoSlug) seoSlug.value = s;
+                        if (seoPreviewUrl) seoPreviewUrl.textContent = 'thuhuongcake.vn/san-pham/' + (s || 'slug-san-pham');
+                        if (seoPreviewTitle) seoPreviewTitle.textContent = (nameInput.value.trim() || 'Tieu de san pham') + ' - Thu Huong Cake';
+                    }
+
+                    nameInput.addEventListener('input', function(){
+                        const s = slugify(this.value);
+                        updateAll(s);
+                    });
+
+                    if (slugInput) {
+                        slugInput.addEventListener('input', function(){
+                            isSlugEdited = this.value.trim() !== '';
+                            if (seoSlug) seoSlug.value = this.value.trim();
+                            if (seoPreviewUrl) seoPreviewUrl.textContent = 'thuhuongcake.vn/san-pham/' + (this.value.trim() || slugify(nameInput.value || ''));
+                        });
+                    }
+                })();
+            </script>
+            @endpush
 
         </div>
 

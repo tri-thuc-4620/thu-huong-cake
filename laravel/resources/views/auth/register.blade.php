@@ -13,7 +13,7 @@
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
             min-height: 100vh;
             margin: 0;
-            background: linear-gradient(135deg, #fff0f6 0%, #fdf2f8 50%, #fce7f3 100%);
+            background: linear-gradient(135deg, #f0fdf4 0%, #ecfdf5 50%, #d1fae5 100%);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -23,18 +23,18 @@
         .login-brand { text-align: center; margin-bottom: 2rem; }
         .login-brand-icon {
             width: 64px; height: 64px;
-            background: linear-gradient(135deg, #e84393, #fd79a8);
+            background: linear-gradient(135deg, #10b981, #34d399);
             border-radius: 20px;
             display: inline-flex; align-items: center; justify-content: center;
             font-size: 1.8rem; color: #fff; margin-bottom: 1rem;
-            box-shadow: 0 8px 24px rgba(232, 67, 147, 0.3);
+            box-shadow: 0 8px 24px rgba(16, 185, 129, 0.3);
         }
         .login-brand h1 { font-size: 1.5rem; font-weight: 700; color: #0f172a; margin: 0; }
         .login-brand p { color: #94a3b8; font-size: 0.9rem; margin: 0.25rem 0 0; }
         .login-card {
             background: #fff; border-radius: 20px; padding: 2.5rem 2rem;
             box-shadow: 0 4px 24px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
-            border: 1px solid rgba(232, 67, 147, 0.08);
+            border: 1px solid rgba(16, 185, 129, 0.08);
         }
         .login-card h2 { font-size: 1.25rem; font-weight: 700; color: #0f172a; margin-bottom: 0.25rem; }
         .login-card .subtitle { color: #94a3b8; font-size: 0.85rem; margin-bottom: 1.75rem; }
@@ -43,26 +43,26 @@
             border-radius: 12px; border: 1px solid #e2e8f0; padding: 0.7rem 1rem;
             font-size: 0.9rem; transition: all 0.3s ease;
         }
-        .form-control:focus { border-color: #e84393; box-shadow: 0 0 0 3px rgba(232, 67, 147, 0.1); }
+        .form-control:focus { border-color: #10b981; box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1); }
         .input-group-text {
             border-radius: 12px 0 0 12px; border: 1px solid #e2e8f0; border-right: none;
             background: #f8fafc; color: #94a3b8;
         }
         .input-group .form-control { border-radius: 0 12px 12px 0; }
-        .input-group:focus-within .input-group-text { border-color: #e84393; color: #e84393; }
+        .input-group:focus-within .input-group-text { border-color: #10b981; color: #10b981; }
         .password-toggle {
             position: absolute; right: 12px; top: 50%; transform: translateY(-50%);
             background: none; border: none; color: #94a3b8; cursor: pointer; z-index: 5; padding: 4px;
         }
-        .password-toggle:hover { color: #e84393; }
+        .password-toggle:hover { color: #10b981; }
         .btn-login {
             width: 100%; padding: 0.75rem; border-radius: 12px; border: none;
-            background: linear-gradient(135deg, #e84393, #fd79a8); color: #fff;
+            background: linear-gradient(135deg, #10b981, #34d399); color: #fff;
             font-weight: 600; font-size: 0.95rem; cursor: pointer; transition: all 0.3s ease; margin-top: 0.5rem;
         }
         .btn-login:hover {
-            background: linear-gradient(135deg, #c0336e, #e84393);
-            transform: translateY(-1px); box-shadow: 0 6px 20px rgba(232, 67, 147, 0.35);
+            background: linear-gradient(135deg, #059669, #10b981);
+            transform: translateY(-1px); box-shadow: 0 6px 20px rgba(16, 185, 129, 0.35);
         }
         .login-divider {
             display: flex; align-items: center; gap: 1rem; margin: 1.5rem 0;
@@ -75,9 +75,9 @@
             cursor: pointer; transition: all 0.3s ease; display: flex;
             align-items: center; justify-content: center; gap: 8px; text-decoration: none;
         }
-        .btn-register:hover { background: #fdf2f8; border-color: #f9a8d4; color: #e84393; }
+        .btn-register:hover { background: #ecfdf5; border-color: #6ee7b7; color: #10b981; }
         .bottom-text { text-align: center; margin-top: 1.5rem; font-size: 0.8rem; color: #94a3b8; }
-        .bottom-text a { color: #e84393; text-decoration: none; font-weight: 500; }
+        .bottom-text a { color: #10b981; text-decoration: none; font-weight: 500; }
         .alert { border-radius: 12px; border: none; font-size: 0.85rem; }
         .invalid-feedback { font-size: 0.8rem; }
         @media (max-width: 480px) { .login-card { padding: 2rem 1.5rem; } }
